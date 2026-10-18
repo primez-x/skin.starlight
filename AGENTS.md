@@ -118,3 +118,43 @@
 - Run the configured tests before a publish.
 - Preserve the shared publish validator. Run `python3 .githooks/publish_check.py check` against a commit.
 - The hook checks committed exports. A working-tree test run does not replace the hook.
+
+## Step 4 player contracts
+
+- `MusicVisualisation.xml` owns the fixed music stage. Back opens Music. Down opens queue window 11104.
+- MusicOSD keeps native transport controls in one capsule. More opens modal window 11105 above a 35% dim.
+- `MyPlaylist.xml` redirects Kodi's MusicPlaylist entry to window 11104. Up and Back return to the music stage.
+- Queue rows 510 and 520 belong to the skin's Python adapter. No XML content source competes for either row.
+- Queue reads use 200-record pages. Notifications refresh metadata. A one-second player-state check detects track and shuffle changes.
+- Queue activation checks the selected native position against the current file before `Player.Open`. The adapter never rebuilds a playlist.
+- Repeat all wraps the Up next row. Played shows preceding queue records, newest first, rather than a separate playback history.
+- Queue properties belong to window 11104: `Starlight.Queue.Request`, `Ready`, `Error`, `Count`, and `NextCount`.
+- `resources/player.py` owns `Window(home).Property(Starlight.Player.Blurred)` and `Starlight.Player.Monitor`.
+- The passive next-track pill reads only the documented `Starlight.NextTrack.*` properties from `script.starlight`.
+- The pill pads countdown seconds, measures native auto-width label 601, and resizes group 600, background 602, and progress 603.
+- The capsule stays at y=832, height 90. The pill starts at y=972. The gap is 50 pixels.
+- Optional `script.starlight` supplies next-track data and music provider actions. No dependency entry is required.
+- Without that helper, the pill, heart, and More hide. Native transport, the music stage, and the skin-owned queue remain available.
+- Spotify heart state reads `Spotify.CurrentTrackLiked`. `RunScript(script.starlight,spotify.like)` sends the contract's toggle notification.
+- Spotify More commands: `spotify.playlist`, `spotify.radio`, `music.artist`, `music.album`, and `spotify.follow`.
+- Non-Spotify More shows only `music.artist` and `music.album`. The helper resolves local library identities.
+- Visualisation control 2 occupies `(600,22,720,720)`. The centre is `(960,382)`. Album art occupies `(800,222,320,320)`.
+- The separate visualisation add-on supplies the live spectrum. Kodi's selected visualisation runs inside control 2.
+- `Skin.HasSetting(Player.Visualiser.Disabled)` stores the inverse of the Visualiser preference. Empty means enabled.
+- Step 6 must place include `PlayerVisualiserSetting` in the settings page. Parameters: `id`, `x`, `y`, `width`, `up`, and `down`.
+- String 31231 supplies the Visualiser help text. Disabled, paused, or unavailable visualisation states show the static dotted ring.
+- Ambient effects never disable the playhead glow or busy feedback. The music stage has no idle animation.
+- `tools/textures_player.py` owns new player assets. The shared builder calls that module once.
+- `tools/render_player.py` expands the actual player XML. The preview spectrum is sample data and never ships as a skin texture.
+- Render: `python3 tools/render_player.py --art /home/user/task-scratch/starlight-design/art --output /tmp/starlight-step4`.
+- Tests: `python3 -m unittest discover -s tests -p test_step4_player.py`.
+- Kodi 21.3 source: `xbmc/music/windows/GUIWindowVisualisation.cpp` requires visualisation control 2.
+- Native playlist source: `xbmc/music/windows/GUIWindowMusicPlaylist.cpp` loads `MyPlaylist.xml`.
+- Native label width source: `xbmc/guilib/GUILabelControl.cpp:173`; Python wrapper reads width in `xbmc/interfaces/legacy/Window.cpp:332`.
+- Real Kodi checks remain required: remote navigation, seek focus, playlist notifications, stale selection, shuffle, repeat, and empty/error queues.
+- Also check pill width, long text, countdown pause/seek/stop cleanup, Spotify account actions, local artist/album routes, and spectrum placement.
+- Verify native video OSD, seek feedback, full-screen info, process info, and buffering feedback during playback.
+- Audio and subtitle OSD buttons use native `DialogSettings.xml`. Step 6 owns that shared settings dialog.
+- `VideoOSDBookmarks.xml` provides native list 11 and Add bookmark 2. Kodi supplies chapters and bookmark actions.
+- The queue reuses `HomePlayCapsule` for Play actions, as the global play-card rule requires.
+- `DefaultAlbumCover.png` supplies Kodi’s native missing-art fallback. Menu album icons use a separate texture.

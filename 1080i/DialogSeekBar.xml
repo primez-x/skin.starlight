@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<window>
+  <controls>
+    <control type="group">
+      <left>0</left>
+      <top>0</top>
+      <width>1920</width>
+      <height>1080</height>
+      <visible>!Window.IsVisible(videoosd) + !Window.IsVisible(musicosd) + !Window.IsActive(visualisation)</visible>
+      <control type="image">
+        <left>0</left>
+        <top>0</top>
+        <width>1920</width>
+        <height>1080</height>
+        <texture>player/video_shade.png</texture>
+      </control>
+      <include content="PlayerSeek">
+        <param name="x" value="80" />
+        <param name="y" value="976" />
+        <param name="width" value="1760" />
+        <param name="id" value="401" />
+        <param name="barleft" value="0" />
+        <param name="barright" value="0" />
+        <param name="labely" value="22" />
+        <param name="tracky" value="0" />
+        <param name="slidery" value="-28" />
+        <param name="endlabel" value="$INFO[Player.TimeRemaining,−,]" />
+      </include>
+      <control type="label">
+        <left>80</left>
+        <top>886</top>
+        <width>600</width>
+        <height>40</height>
+        <label>$INFO[Player.SeekOffset]</label>
+        <font>font_body</font>
+        <textcolor>gold</textcolor>
+      </control>
+    </control>
+    <include content="PlayerBuffering" />
+  </controls>
+  <visible>Player.Seeking | Player.DisplayAfterSeek | Player.Paused | Player.Caching</visible>
+</window>

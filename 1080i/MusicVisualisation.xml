@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<window>
+  <defaultcontrol always="true">900</defaultcontrol>
+  <controls>
+    <include content="PlayerBackground" />
+    <include content="InfoClock" />
+    <control type="image">
+      <left>660</left>
+      <top>82</top>
+      <width>600</width>
+      <height>600</height>
+      <texture>player/halo.png</texture>
+    </control>
+    <control type="visualisation" id="2">
+      <left>600</left>
+      <top>22</top>
+      <width>720</width>
+      <height>720</height>
+      <visible>!Skin.HasSetting(Player.Visualiser.Disabled) + !Player.Paused + Visualisation.Enabled</visible>
+    </control>
+    <control type="image">
+      <left>660</left>
+      <top>82</top>
+      <width>600</width>
+      <height>600</height>
+      <texture>player/dotted_ring.png</texture>
+      <visible>Skin.HasSetting(Player.Visualiser.Disabled) | Player.Paused | !Visualisation.Enabled</visible>
+    </control>
+    <control type="image">
+      <left>800</left>
+      <top>222</top>
+      <width>320</width>
+      <height>320</height>
+      <texture diffuse="circle_mask.png">$VAR[PlayerAlbum]</texture>
+    </control>
+    <control type="image">
+      <left>798</left>
+      <top>220</top>
+      <width>324</width>
+      <height>324</height>
+      <texture>player/cover_rim.png</texture>
+    </control>
+    <control type="label">
+      <left>240</left>
+      <top>644</top>
+      <width>1440</width>
+      <height>80</height>
+      <label>$INFO[MusicPlayer.Title]</label>
+      <font>font_player_title</font>
+      <textcolor>frost</textcolor>
+      <align>center</align>
+    </control>
+    <control type="label">
+      <left>240</left>
+      <top>730</top>
+      <width>1440</width>
+      <height>40</height>
+      <label>$INFO[MusicPlayer.Artist]$INFO[MusicPlayer.Album, · ,]</label>
+      <font>font_body_large</font>
+      <textcolor>mist</textcolor>
+      <align>center</align>
+    </control>
+    <control type="group">
+      <visible>!Window.IsVisible(musicosd)</visible>
+      <include content="PlayerSeek">
+        <param name="y" value="764" />
+        <param name="interactive" value="false" />
+      </include>
+    </control>
+    <control type="group">
+      <left>860</left>
+      <top>982</top>
+      <width>200</width>
+      <height>60</height>
+      <visible>![System.HasAddon(script.starlight) + String.IsEqual(Window(home).Property(Starlight.NextTrack.Active),true)]</visible>
+      <control type="image">
+        <left>84</left>
+        <top>0</top>
+        <width>32</width>
+        <height>32</height>
+        <texture>player/down.png</texture>
+        <colordiffuse>80FFFFFF</colordiffuse>
+      </control>
+      <control type="label">
+        <left>0</left>
+        <top>30</top>
+        <width>200</width>
+        <height>28</height>
+        <label>$LOCALIZE[31209]</label>
+        <font>font_label_small</font>
+        <textcolor>mist</textcolor>
+        <align>center</align>
+      </control>
+    </control>
+    <include content="PlayerNextPill" />
+    <include content="PlayerBuffering" />
+    <control type="button" id="900">
+      <left>0</left>
+      <top>0</top>
+      <width>1920</width>
+      <height>1080</height>
+      <label />
+      <onclick>ActivateWindow(musicosd)</onclick>
+      <onup>ActivateWindow(musicosd)</onup>
+      <ondown>RunScript(special://skin/resources/player.py,open-queue)</ondown>
+      <onleft>Action(StepBack)</onleft>
+      <onright>Action(StepForward)</onright>
+      <onback>ActivateWindow(Music)</onback>
+      <texturefocus />
+      <texturenofocus />
+    </control>
+  </controls>
+  <onload>RunScript(special://skin/resources/player.py,monitor)</onload>
+</window>

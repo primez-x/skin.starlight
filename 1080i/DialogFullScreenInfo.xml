@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<window>
+  <controls>
+    <control type="image">
+      <left>0</left>
+      <top>0</top>
+      <width>1920</width>
+      <height>1080</height>
+      <texture>player/video_shade.png</texture>
+    </control>
+    <include content="PlayerVideoHeader" />
+    <control type="label">
+      <left>80</left>
+      <top>694</top>
+      <width>1300</width>
+      <height>76</height>
+      <label>$VAR[PlayerVideoTitle]</label>
+      <font>font_heading_large</font>
+      <textcolor>frost</textcolor>
+    </control>
+    <control type="label">
+      <left>80</left>
+      <top>778</top>
+      <width>1400</width>
+      <height>42</height>
+      <label>$INFO[VideoPlayer.Genre]$INFO[VideoPlayer.Director, · ,]</label>
+      <font>font_body_large</font>
+      <textcolor>mist</textcolor>
+    </control>
+    <control type="textbox">
+      <left>80</left>
+      <top>840</top>
+      <width>1320</width>
+      <height>120</height>
+      <label>$INFO[VideoPlayer.Plot]</label>
+      <font>font_body</font>
+      <textcolor>frost</textcolor>
+      <autoscroll>false</autoscroll>
+    </control>
+  </controls>
+</window>
