@@ -333,3 +333,139 @@ msgstr ""
 msgctxt "#31085"
 msgid "season"
 msgstr ""
+
+msgctxt "#31200"
+msgid "Player"
+msgstr ""
+
+msgctxt "#31201"
+msgid "Play"
+msgstr ""
+
+msgctxt "#31202"
+msgid "Pause"
+msgstr ""
+
+msgctxt "#31203"
+msgid "Shuffle"
+msgstr ""
+
+msgctxt "#31204"
+msgid "Previous track"
+msgstr ""
+
+msgctxt "#31205"
+msgid "Next track"
+msgstr ""
+
+msgctxt "#31206"
+msgid "Repeat"
+msgstr ""
+
+msgctxt "#31207"
+msgid "Like"
+msgstr ""
+
+msgctxt "#31208"
+msgid "More"
+msgstr ""
+
+msgctxt "#31209"
+msgid "Up next"
+msgstr ""
+
+msgctxt "#31210"
+msgid "Played"
+msgstr ""
+
+msgctxt "#31211"
+msgid "Add to playlist"
+msgstr ""
+
+msgctxt "#31212"
+msgid "Go to song radio"
+msgstr ""
+
+msgctxt "#31213"
+msgid "Go to artist"
+msgstr ""
+
+msgctxt "#31214"
+msgid "Visualiser"
+msgstr ""
+
+msgctxt "#31215"
+msgid "Ends at"
+msgstr ""
+
+msgctxt "#31216"
+msgid "of"
+msgstr ""
+
+msgctxt "#31217"
+msgid "No tracks up next"
+msgstr ""
+
+msgctxt "#31218"
+msgid "The queue changed. Select the track again."
+msgstr ""
+
+msgctxt "#31219"
+msgid "Queue unavailable"
+msgstr ""
+
+msgctxt "#31220"
+msgid "Subtitles"
+msgstr ""
+
+msgctxt "#31221"
+msgid "Seek back"
+msgstr ""
+
+msgctxt "#31222"
+msgid "Seek forward"
+msgstr ""
+
+msgctxt "#31223"
+msgid "Audio"
+msgstr ""
+
+msgctxt "#31224"
+msgid "Bookmarks and chapters"
+msgstr ""
+
+msgctxt "#31225"
+msgid "Go to album"
+msgstr ""
+
+msgctxt "#31226"
+msgid "Follow"
+msgstr ""
+
+msgctxt "#31227"
+msgid "Player process information"
+msgstr ""
+
+msgctxt "#31228"
+msgid "Video"
+msgstr ""
+
+msgctxt "#31229"
+msgid "Audio"
+msgstr ""
+
+msgctxt "#31230"
+msgid "Player"
+msgstr ""
+
+msgctxt "#31231"
+msgid "Show the audio spectrum around the album cover. When disabled or paused, show a dotted ring."
+msgstr ""
+
+msgctxt "#31232"
+msgid "Add bookmark"
+msgstr ""
+
+msgctxt "#31233"
+msgid "No bookmarks or chapters"
+msgstr ""

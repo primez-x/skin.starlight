@@ -59,7 +59,7 @@ class WindowTests(unittest.TestCase):
 
     def test_native_window_names_resolve(self):
         # xbmc/input/WindowTranslator.cpp:79,82,121,126,162 (21.3-Omega).
-        names = {'volumebar','notification','movieinformation','textviewer','extendedprogressdialog'}
+        names = {'volumebar','notification','movieinformation','textviewer','extendedprogressdialog','videoosd','musicosd'}
         paths = [ROOT / 'resources/info.py', *(ROOT / '1080i').glob('Dialog*.xml')]
         for path in paths:
             for name in re.findall(r'(?:Window.IsVisible|Dialog.Close)\(([a-zA-Z0-9_]+)\)', path.read_text()):

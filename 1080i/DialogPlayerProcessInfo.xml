@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<window>
+  <controls>
+    <control type="image">
+      <left>0</left>
+      <top>0</top>
+      <width>1920</width>
+      <height>1080</height>
+      <texture>player/video_shade.png</texture>
+    </control>
+    <control type="label">
+      <left>112</left>
+      <top>196</top>
+      <width>1056</width>
+      <height>64</height>
+      <label>$LOCALIZE[31227]</label>
+      <font>font_heading</font>
+      <textcolor>frost</textcolor>
+    </control>
+    <control type="label">
+      <left>112</left>
+      <top>280</top>
+      <width>180</width>
+      <height>64</height>
+      <label>$LOCALIZE[31228]</label>
+      <font>font_label_large</font>
+      <textcolor>gold</textcolor>
+    </control>
+    <control type="label">
+      <left>312</left>
+      <top>280</top>
+      <width>840</width>
+      <height>64</height>
+      <label>$INFO[Player.Process(videodecoder)] · $INFO[Player.Process(videowidth)] × $INFO[Player.Process(videoheight)] · $INFO[Player.Process(videofps)] fps</label>
+      <font>font_body</font>
+      <textcolor>frost</textcolor>
+    </control>
+    <control type="label">
+      <left>112</left>
+      <top>360</top>
+      <width>180</width>
+      <height>64</height>
+      <label>$LOCALIZE[31229]</label>
+      <font>font_label_large</font>
+      <textcolor>gold</textcolor>
+    </control>
+    <control type="label">
+      <left>312</left>
+      <top>360</top>
+      <width>840</width>
+      <height>64</height>
+      <label>$INFO[Player.Process(audiodecoder)] · $INFO[Player.Process(audiochannels)] · $INFO[Player.Process(audiosamplerate)] Hz</label>
+      <font>font_body</font>
+      <textcolor>frost</textcolor>
+    </control>
+    <control type="label">
+      <left>112</left>
+      <top>440</top>
+      <width>180</width>
+      <height>64</height>
+      <label>$LOCALIZE[31230]</label>
+      <font>font_label_large</font>
+      <textcolor>gold</textcolor>
+    </control>
+    <control type="label">
+      <left>312</left>
+      <top>440</top>
+      <width>840</width>
+      <height>64</height>
+      <label>$INFO[Player.Time] / $INFO[Player.Duration]</label>
+      <font>font_body</font>
+      <textcolor>frost</textcolor>
+    </control>
+  </controls>
+</window>

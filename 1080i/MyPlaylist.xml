@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<window>
+  <defaultcontrol always="true">900</defaultcontrol>
+  <controls>
+    <control type="button" id="900">
+      <left>0</left>
+      <top>0</top>
+      <width>1920</width>
+      <height>1080</height>
+      <label />
+      <onclick>ReplaceWindow(11104)</onclick>
+      <onback>ActivateWindow(visualisation)</onback>
+      <texturefocus />
+      <texturenofocus />
+    </control>
+  </controls>
+  <onload>ReplaceWindow(11104)</onload>
+</window>

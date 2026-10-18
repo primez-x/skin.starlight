@@ -1,0 +1,292 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<window id="1104">
+  <defaultcontrol always="true">510</defaultcontrol>
+  <controls>
+    <include content="PlayerBackground" />
+    <include content="InfoClock" />
+    <control type="image">
+      <left>118</left>
+      <top>68</top>
+      <width>154</width>
+      <height>154</height>
+      <texture>player/cover_rim.png</texture>
+    </control>
+    <control type="image">
+      <left>120</left>
+      <top>70</top>
+      <width>150</width>
+      <height>150</height>
+      <texture diffuse="circle_mask.png">$VAR[PlayerAlbum]</texture>
+    </control>
+    <control type="label">
+      <left>304</left>
+      <top>74</top>
+      <width>1050</width>
+      <height>65</height>
+      <label>$INFO[MusicPlayer.Title]</label>
+      <font>font_heading_large</font>
+      <textcolor>frost</textcolor>
+    </control>
+    <control type="label">
+      <left>304</left>
+      <top>144</top>
+      <width>1100</width>
+      <height>40</height>
+      <label>$INFO[MusicPlayer.Artist]$INFO[MusicPlayer.Album, · ,]</label>
+      <font>font_body_large</font>
+      <textcolor>mist</textcolor>
+    </control>
+    <include content="PlayerSeek">
+      <param name="x" value="304" />
+      <param name="y" value="178" />
+      <param name="width" value="1096" />
+      <param name="id" value="401" />
+    </include>
+    <control type="grouplist">
+      <left>120</left>
+      <top>280</top>
+      <width>1120</width>
+      <height>40</height>
+      <orientation>horizontal</orientation>
+      <itemgap>16</itemgap>
+      <control type="label">
+        <width min="1" max="400">auto</width>
+        <height>40</height>
+        <font>font_heading_small</font>
+        <textcolor>frost</textcolor>
+        <label>$LOCALIZE[31209]</label>
+      </control>
+      <control type="label">
+        <width min="1" max="400">auto</width>
+        <height>40</height>
+        <font>font_label</font>
+        <textcolor>mist</textcolor>
+        <label>$INFO[Container(510).CurrentItem] $LOCALIZE[31216] $INFO[Window.Property(Starlight.Queue.NextCount)]</label>
+      </control>
+    </control>
+    <control type="label">
+      <left>120</left>
+      <top>692</top>
+      <width>1120</width>
+      <height>40</height>
+      <label>$LOCALIZE[31210]</label>
+      <font>font_heading_small</font>
+      <textcolor>frost</textcolor>
+    </control>
+    <control type="fixedlist" id="510">
+      <left>120</left>
+      <top>360</top>
+      <width>1800</width>
+      <height>322</height>
+      <orientation>horizontal</orientation>
+      <focusposition>0</focusposition>
+      <scrolltime>220</scrolltime>
+      <onup>ActivateWindow(visualisation)</onup>
+      <onback>ActivateWindow(visualisation)</onback>
+      <ondown>520</ondown>
+      <onclick>RunScript(special://skin/resources/player.py,queue-play,510)</onclick>
+      <itemlayout width="264" height="322">
+        <include content="QueueCard">
+          <param name="size" value="230" />
+          <param name="focus" value="false" />
+          <param name="row" value="510" />
+        </include>
+      </itemlayout>
+      <focusedlayout width="264" height="322">
+        <include content="QueueCard">
+          <param name="size" value="230" />
+          <param name="focus" value="true" />
+          <param name="row" value="510" />
+        </include>
+      </focusedlayout>
+    </control>
+    <control type="fixedlist" id="520">
+      <left>120</left>
+      <top>772</top>
+      <width>1800</width>
+      <height>246</height>
+      <orientation>horizontal</orientation>
+      <focusposition>0</focusposition>
+      <scrolltime>220</scrolltime>
+      <onup>ActivateWindow(visualisation)</onup>
+      <onback>ActivateWindow(visualisation)</onback>
+      <ondown>510</ondown>
+      <onclick>RunScript(special://skin/resources/player.py,queue-play,520)</onclick>
+      <itemlayout width="204" height="246">
+        <control type="group">
+          <left>0</left>
+          <top>0</top>
+          <width>170</width>
+          <height>246</height>
+          <animation effect="fade" start="100" end="40" time="180" condition="!Control.HasFocus(520)">Conditional</animation>
+          <animation effect="zoom" start="100" end="110" center="85,170" time="180" condition="false + Control.HasFocus(520)">Conditional</animation>
+          <control type="image">
+            <left>-48</left>
+            <top>-48</top>
+            <width>266</width>
+            <height>266</height>
+            <texture border="card_glow_border">focus_card_glow.png</texture>
+            <visible>false + Control.HasFocus(520)</visible>
+          </control>
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>170</width>
+            <height>170</height>
+            <texture diffuse="home_square_mask.png">$INFO[ListItem.Art(thumb)]</texture>
+          </control>
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>170</width>
+            <height>170</height>
+            <texture border="card_border">focus_card.png</texture>
+            <visible>false + Control.HasFocus(520)</visible>
+          </control>
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>170</width>
+            <height>170</height>
+            <texture diffuse="home_square_mask.png">card_shade.png</texture>
+            <visible>Control.HasFocus(520) + false</visible>
+          </control>
+          <include content="HomePlayCapsule">
+            <param name="id" value="520" />
+            <param name="x" value="12" />
+            <param name="y" value="66" />
+            <param name="width" value="146" />
+            <param name="selected" value="false" />
+            <param name="compact" value="true" />
+          </include>
+          <control type="label">
+            <left>0</left>
+            <top>184</top>
+            <width>170</width>
+            <height>31</height>
+            <label>$INFO[ListItem.Label]</label>
+            <font>font_label_semibold</font>
+            <textcolor>frost</textcolor>
+          </control>
+          <control type="label">
+            <left>0</left>
+            <top>215</top>
+            <width>170</width>
+            <height>28</height>
+            <label>$INFO[ListItem.Label2]</label>
+            <font>font_label_small</font>
+            <textcolor>mist</textcolor>
+          </control>
+        </control>
+      </itemlayout>
+      <focusedlayout width="204" height="246">
+        <control type="group">
+          <left>0</left>
+          <top>0</top>
+          <width>170</width>
+          <height>246</height>
+          <animation effect="fade" start="100" end="40" time="180" condition="!Control.HasFocus(520)">Conditional</animation>
+          <animation effect="zoom" start="100" end="110" center="85,170" time="180" condition="true + Control.HasFocus(520)">Conditional</animation>
+          <control type="image">
+            <left>-48</left>
+            <top>-48</top>
+            <width>266</width>
+            <height>266</height>
+            <texture border="card_glow_border">focus_card_glow.png</texture>
+            <visible>true + Control.HasFocus(520)</visible>
+          </control>
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>170</width>
+            <height>170</height>
+            <texture diffuse="home_square_mask.png">$INFO[ListItem.Art(thumb)]</texture>
+          </control>
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>170</width>
+            <height>170</height>
+            <texture border="card_border">focus_card.png</texture>
+            <visible>true + Control.HasFocus(520)</visible>
+          </control>
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>170</width>
+            <height>170</height>
+            <texture diffuse="home_square_mask.png">card_shade.png</texture>
+            <visible>Control.HasFocus(520) + true</visible>
+          </control>
+          <include content="HomePlayCapsule">
+            <param name="id" value="520" />
+            <param name="x" value="12" />
+            <param name="y" value="66" />
+            <param name="width" value="146" />
+            <param name="selected" value="true" />
+            <param name="compact" value="true" />
+          </include>
+          <control type="label">
+            <left>0</left>
+            <top>184</top>
+            <width>170</width>
+            <height>31</height>
+            <label>$INFO[ListItem.Label]</label>
+            <font>font_label_semibold</font>
+            <textcolor>frost</textcolor>
+          </control>
+          <control type="label">
+            <left>0</left>
+            <top>215</top>
+            <width>170</width>
+            <height>28</height>
+            <label>$INFO[ListItem.Label2]</label>
+            <font>font_label_small</font>
+            <textcolor>mist</textcolor>
+          </control>
+        </control>
+      </focusedlayout>
+    </control>
+    <control type="group">
+      <left>0</left>
+      <top>0</top>
+      <width>1920</width>
+      <height>1080</height>
+      <visible>String.IsEqual(Window.Property(Starlight.Queue.Ready),true) + Integer.IsEqual(Container(510).NumItems,0)</visible>
+      <control type="image">
+        <left>900</left>
+        <top>400</top>
+        <width>120</width>
+        <height>120</height>
+        <texture>busy_horizon.png</texture>
+      </control>
+      <control type="label">
+        <left>420</left>
+        <top>528</top>
+        <width>1080</width>
+        <height>70</height>
+        <label>$VAR[PlayerQueueEmpty]</label>
+        <font>font_body_large</font>
+        <textcolor>mist</textcolor>
+        <align>center</align>
+      </control>
+    </control>
+    <control type="button" id="900">
+      <left>120</left>
+      <top>280</top>
+      <width>1400</width>
+      <height>52</height>
+      <label />
+      <visible>Integer.IsEqual(Container(510).NumItems,0)</visible>
+      <onclick>ActivateWindow(visualisation)</onclick>
+      <onup>ActivateWindow(visualisation)</onup>
+      <onback>ActivateWindow(visualisation)</onback>
+      <ondown>SetFocus(520)</ondown>
+      <texturefocus />
+      <texturenofocus />
+    </control>
+  </controls>
+  <onload>RunScript(special://skin/resources/player.py,queue)</onload>
+  <onunload>ClearProperty(Starlight.Queue.Request,11104)</onunload>
+  <onload>RunScript(special://skin/resources/player.py,monitor)</onload>
+</window>

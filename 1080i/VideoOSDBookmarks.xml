@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<window>
+  <defaultcontrol always="true">11</defaultcontrol>
+  <controls>
+    <include content="DialogDim">
+      <param name="soft" value="true" />
+    </include>
+    <control type="group">
+      <left>520</left>
+      <top>230</top>
+      <width>880</width>
+      <height>620</height>
+      <include content="DialogSheet">
+        <param name="width" value="880" />
+        <param name="height" value="620" />
+      </include>
+      <control type="label">
+        <left>32</left>
+        <top>20</top>
+        <width>816</width>
+        <height>56</height>
+        <font>font_heading</font>
+        <label>$LOCALIZE[31224]</label>
+      </control>
+      <control type="list" id="11">
+        <left>28</left>
+        <top>102</top>
+        <width>824</width>
+        <height>384</height>
+        <orientation>vertical</orientation>
+        <onup>2</onup>
+        <ondown>2</ondown>
+        <itemlayout width="824" height="64">
+          <include content="DialogListLayout">
+            <param name="width" value="824" />
+            <param name="selected" value="false" />
+          </include>
+          <control type="label">
+            <left>632</left>
+            <top>0</top>
+            <width>160</width>
+            <height>64</height>
+            <label>$INFO[ListItem.Label2]</label>
+            <font>font_label</font>
+            <textcolor>mist</textcolor>
+            <align>right</align>
+          </control>
+        </itemlayout>
+        <focusedlayout width="824" height="64">
+          <include content="DialogListLayout">
+            <param name="width" value="824" />
+            <param name="selected" value="true" />
+          </include>
+          <control type="label">
+            <left>632</left>
+            <top>0</top>
+            <width>160</width>
+            <height>64</height>
+            <label>$INFO[ListItem.Label2]</label>
+            <font>font_label</font>
+            <textcolor>mist</textcolor>
+            <align>right</align>
+          </control>
+        </focusedlayout>
+      </control>
+      <control type="button" id="2">
+        <left>28</left>
+        <top>520</top>
+        <width>824</width>
+        <height>64</height>
+        <label>$LOCALIZE[31232]</label>
+        <onup>11</onup>
+        <ondown>11</ondown>
+        <texturenofocus border="capsule_border">glass_capsule.png</texturenofocus>
+      </control>
+      <control type="label">
+        <left>28</left>
+        <top>228</top>
+        <width>824</width>
+        <height>64</height>
+        <label>$LOCALIZE[31233]</label>
+        <font>font_body_large</font>
+        <align>center</align>
+        <textcolor>mist</textcolor>
+        <visible>Integer.IsEqual(Container(11).NumItems,0)</visible>
+      </control>
+    </control>
+  </controls>
+</window>

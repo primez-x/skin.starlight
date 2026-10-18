@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<window>
+  <defaultcontrol always="true">413</defaultcontrol>
+  <controls>
+    <control type="image">
+      <left>0</left>
+      <top>0</top>
+      <width>1920</width>
+      <height>1080</height>
+      <texture>player/video_shade.png</texture>
+    </control>
+    <include content="PlayerVideoHeader" />
+    <include content="PlayerSeek">
+      <param name="x" value="80" />
+      <param name="y" value="856" />
+      <param name="width" value="1760" />
+      <param name="id" value="401" />
+      <param name="interactive" value="Player.SeekEnabled" />
+      <param name="up" value="413" />
+      <param name="down" value="413" />
+      <param name="barleft" value="0" />
+      <param name="barright" value="0" />
+      <param name="labely" value="22" />
+      <param name="tracky" value="0" />
+      <param name="slidery" value="-28" />
+      <param name="endlabel" value="$INFO[Player.TimeRemaining,−,]" />
+    </include>
+    <control type="group" id="400">
+      <left>722</left>
+      <top>932</top>
+      <width>476</width>
+      <height>92</height>
+      <control type="image">
+        <left>0</left>
+        <top>0</top>
+        <width>476</width>
+        <height>92</height>
+        <texture border="capsule_border">glass_capsule.png</texture>
+      </control>
+      <control type="group">
+        <left>8</left>
+        <top>8</top>
+        <width>66</width>
+        <height>76</height>
+        <include content="PlayerButton">
+          <param name="id" value="410" />
+          <param name="icon" value="player/subtitles.png" />
+          <param name="label" value="$LOCALIZE[31220]" />
+          <param name="left" value="416" />
+          <param name="right" value="411" />
+          <param name="up" value="401" />
+          <param name="down" value="410" />
+          <param name="action" value="ActivateWindow(osdsubtitlesettings)" />
+        </include>
+      </control>
+      <control type="group">
+        <left>86</left>
+        <top>8</top>
+        <width>66</width>
+        <height>76</height>
+        <include content="PlayerButton">
+          <param name="id" value="411" />
+          <param name="icon" value="player/rewind.png" />
+          <param name="label" value="$LOCALIZE[31221]" />
+          <param name="left" value="410" />
+          <param name="right" value="413" />
+          <param name="up" value="401" />
+          <param name="down" value="411" />
+          <param name="action" value="Action(StepBack)" />
+        </include>
+      </control>
+      <control type="group">
+        <left>164</left>
+        <top>8</top>
+        <width>66</width>
+        <height>76</height>
+        <include content="PlayerButton">
+          <param name="id" value="413" />
+          <param name="icon" value="$VAR[PlayerPlayIcon]" />
+          <param name="label" value="$VAR[PlayerPlayLabel]" />
+          <param name="left" value="411" />
+          <param name="right" value="414" />
+          <param name="up" value="401" />
+          <param name="down" value="413" />
+          <param name="action" value="PlayerControl(Play)" />
+        </include>
+      </control>
+      <control type="group">
+        <left>242</left>
+        <top>8</top>
+        <width>66</width>
+        <height>76</height>
+        <include content="PlayerButton">
+          <param name="id" value="414" />
+          <param name="icon" value="player/forward.png" />
+          <param name="label" value="$LOCALIZE[31222]" />
+          <param name="left" value="413" />
+          <param name="right" value="415" />
+          <param name="up" value="401" />
+          <param name="down" value="414" />
+          <param name="action" value="Action(StepForward)" />
+        </include>
+      </control>
+      <control type="group">
+        <left>320</left>
+        <top>8</top>
+        <width>66</width>
+        <height>76</height>
+        <include content="PlayerButton">
+          <param name="id" value="415" />
+          <param name="icon" value="icons/speaker.png" />
+          <param name="label" value="$LOCALIZE[31223]" />
+          <param name="left" value="414" />
+          <param name="right" value="416" />
+          <param name="up" value="401" />
+          <param name="down" value="415" />
+          <param name="action" value="ActivateWindow(osdaudiosettings)" />
+        </include>
+      </control>
+      <control type="group">
+        <left>398</left>
+        <top>8</top>
+        <width>66</width>
+        <height>76</height>
+        <include content="PlayerButton">
+          <param name="id" value="416" />
+          <param name="icon" value="player/chapters.png" />
+          <param name="label" value="$LOCALIZE[31224]" />
+          <param name="left" value="415" />
+          <param name="right" value="410" />
+          <param name="up" value="401" />
+          <param name="down" value="416" />
+          <param name="action" value="ActivateWindow(videobookmarks)" />
+        </include>
+      </control>
+    </control>
+    <include content="PlayerBuffering" />
+  </controls>
+</window>

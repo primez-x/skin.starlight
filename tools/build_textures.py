@@ -292,6 +292,7 @@ def build(output):
     textures['card_demo.png'] = card.resize((300, 168), Image.Resampling.LANCZOS)
     for frame in range(24):
         textures[f'busy/frame_{frame:02d}.png'] = busy_frame(frame)
+    textures.update(__import__('textures_player').player_textures())
     for name, texture in sorted(textures.items()):
         target = output / name
         target.parent.mkdir(parents=True, exist_ok=True)

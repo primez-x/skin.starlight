@@ -105,5 +105,18 @@
       <size>72</size>
       <linespacing>1.15</linespacing>
     </font>
+    <font>
+      <name>font_player_title</name>
+      <filename>manrope-bold.ttf</filename>
+      <size>54</size>
+      <linespacing>1.15</linespacing>
+    </font>
+    <font>
+      <name>font_player_kicker</name>
+      <filename>manrope-bold.ttf</filename>
+      <size>13</size>
+      <style>uppercase</style>
+      <linespacing>1.15</linespacing>
+    </font>
   </fontset>
 </fonts>

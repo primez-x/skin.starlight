@@ -1,0 +1,608 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<includes>
+  <variable name="PlayerAlbum">
+    <value condition="!String.IsEmpty(MusicPlayer.Cover)">$INFO[MusicPlayer.Cover]</value>
+    <value>player/album_placeholder.png</value>
+  </variable>
+  <variable name="PlayerPlayIcon">
+    <value condition="Player.Paused">icons/play.png</value>
+    <value>player/pause.png</value>
+  </variable>
+  <variable name="PlayerPlayLabel">
+    <value condition="Player.Paused">$LOCALIZE[31201]</value>
+    <value>$LOCALIZE[31202]</value>
+  </variable>
+  <variable name="PlayerShuffleColor">
+    <value condition="Playlist.IsRandom">gold</value>
+    <value>frost</value>
+  </variable>
+  <variable name="PlayerRepeatColor">
+    <value condition="Playlist.IsRepeat | Playlist.IsRepeatOne">gold</value>
+    <value>frost</value>
+  </variable>
+  <variable name="PlayerRepeatIcon">
+    <value condition="Playlist.IsRepeatOne">player/repeat_one.png</value>
+    <value>player/repeat.png</value>
+  </variable>
+  <variable name="PlayerHeartIcon">
+    <value condition="String.IsEqual(Window(home).Property(Spotify.CurrentTrackLiked),true)">player/heart_filled.png</value>
+    <value>player/heart.png</value>
+  </variable>
+  <variable name="PlayerHeartColor">
+    <value condition="String.IsEqual(Window(home).Property(Spotify.CurrentTrackLiked),true)">gold</value>
+    <value>frost</value>
+  </variable>
+  <variable name="PlayerCountdown">
+    <value condition="Integer.IsLess(Window(home).Property(Starlight.NextTrack.Remaining),10)">0:0$INFO[Window(home).Property(Starlight.NextTrack.Remaining)]</value>
+    <value>0:$INFO[Window(home).Property(Starlight.NextTrack.Remaining)]</value>
+  </variable>
+  <variable name="PlayerNextArt">
+    <value condition="!String.IsEmpty(Window(home).Property(Starlight.NextTrack.Art))">$INFO[Window(home).Property(Starlight.NextTrack.Art)]</value>
+    <value>player/album_placeholder.png</value>
+  </variable>
+  <variable name="PlayerQueueEmpty">
+    <value condition="String.IsEqual(Window.Property(Starlight.Queue.Error),true)">$LOCALIZE[31219]</value>
+    <value>$LOCALIZE[31217]</value>
+  </variable>
+  <variable name="PlayerVideoLogo">
+    <value condition="!String.IsEmpty(Player.Art(clearlogo))">$INFO[Player.Art(clearlogo)]</value>
+    <value>$INFO[Player.Art(tvshow.clearlogo)]</value>
+  </variable>
+  <variable name="PlayerVideoTitle">
+    <value condition="!String.IsEmpty(VideoPlayer.TVShowTitle)">$INFO[VideoPlayer.TVShowTitle] · $INFO[VideoPlayer.Title]</value>
+    <value>$INFO[VideoPlayer.Title]</value>
+  </variable>
+  <variable name="PlayerTime">
+    <value condition="Player.Seeking">$INFO[Player.SeekTime]</value>
+    <value>$INFO[Player.Time]</value>
+  </variable>
+  <include name="PlayerBackground">
+    <definition>
+      <control type="image">
+        <left>0</left>
+        <top>0</top>
+        <width>1920</width>
+        <height>1080</height>
+        <texture>background_void.png</texture>
+      </control>
+      <control type="image">
+        <left>-192</left>
+        <top>-108</top>
+        <width>2304</width>
+        <height>1296</height>
+        <texture>$INFO[Window(home).Property(Starlight.Player.Blurred)]</texture>
+        <colordiffuse>FF888888</colordiffuse>
+      </control>
+      <control type="image">
+        <left>0</left>
+        <top>0</top>
+        <width>1920</width>
+        <height>1080</height>
+        <texture>home_shade.png</texture>
+      </control>
+    </definition>
+  </include>
+  <include name="PlayerButton">
+    <param name="id" default="410" />
+    <param name="icon" default="icons/play.png" />
+    <param name="label" default="" />
+    <param name="left" default="410" />
+    <param name="right" default="410" />
+    <param name="up" default="401" />
+    <param name="down" default="410" />
+    <param name="action" default="PlayerControl(Play)" />
+    <param name="color" default="frost" />
+    <param name="visible" default="true" />
+    <definition>
+      <control type="group">
+        <left>0</left>
+        <top>0</top>
+        <width>66</width>
+        <height>76</height>
+        <visible>$PARAM[visible]</visible>
+        <control type="image">
+          <left>-48</left>
+          <top>-48</top>
+          <width>162</width>
+          <height>172</height>
+          <texture border="focus_glow_border">focus_glow.png</texture>
+          <visible>Control.HasFocus($PARAM[id])</visible>
+        </control>
+        <control type="button" id="$PARAM[id]">
+          <left>0</left>
+          <top>0</top>
+          <width>66</width>
+          <height>76</height>
+          <label />
+          <onleft>$PARAM[left]</onleft>
+          <onright>$PARAM[right]</onright>
+          <onup>$PARAM[up]</onup>
+          <ondown>$PARAM[down]</ondown>
+          <onclick>$PARAM[action]</onclick>
+          <texturefocus border="focus_border">focus_button.png</texturefocus>
+          <texturenofocus />
+          <description>$PARAM[label]</description>
+        </control>
+        <control type="image">
+          <left>17</left>
+          <top>22</top>
+          <width>32</width>
+          <height>32</height>
+          <texture>$PARAM[icon]</texture>
+          <colordiffuse>$PARAM[color]</colordiffuse>
+        </control>
+        <control type="image">
+          <left>-16</left>
+          <top>68</top>
+          <width>96</width>
+          <height>16</height>
+          <texture>landing_glint.png</texture>
+          <visible>Control.HasFocus($PARAM[id]) + !Skin.HasSetting(AmbientEffects.Disabled)</visible>
+          <animation effect="slide" start="-28,0" end="28,0" time="400">WindowOpen</animation>
+          <animation effect="fade" start="80" end="0" time="400">WindowOpen</animation>
+        </control>
+      </control>
+    </definition>
+  </include>
+  <include name="PlayerSeek">
+    <param name="x" default="380" />
+    <param name="y" default="764" />
+    <param name="width" default="1160" />
+    <param name="id" default="401" />
+    <param name="up" default="900" />
+    <param name="down" default="900" />
+    <param name="interactive" default="false" />
+    <definition>
+      <control type="group">
+        <left>$PARAM[x]</left>
+        <top>$PARAM[y]</top>
+        <width>$PARAM[width]</width>
+        <height>64</height>
+        <control type="label">
+          <left>0</left>
+          <top>$PARAM[labely]</top>
+          <width>68</width>
+          <height>40</height>
+          <label>$VAR[PlayerTime]</label>
+          <font>font_label</font>
+          <textcolor>mist</textcolor>
+        </control>
+        <control type="label">
+          <left>0</left>
+          <top>$PARAM[labely]</top>
+          <width>$PARAM[width]</width>
+          <height>40</height>
+          <label>$PARAM[endlabel]</label>
+          <font>font_label</font>
+          <textcolor>mist</textcolor>
+          <align>right</align>
+          <right>0</right>
+        </control>
+        <control type="progress">
+          <left>$PARAM[barleft]</left>
+          <top>$PARAM[tracky]</top>
+          <height>8</height>
+          <info>Player.Progress</info>
+          <right>$PARAM[barright]</right>
+          <texturebg border="progress_border">progress_track.png</texturebg>
+          <midtexture border="progress_border">progress_gold.png</midtexture>
+          <lefttexture />
+          <righttexture />
+        </control>
+        <control type="slider" id="$PARAM[id]">
+          <left>$PARAM[barleft]</left>
+          <top>$PARAM[slidery]</top>
+          <height>64</height>
+          <orientation>horizontal</orientation>
+          <action>seek</action>
+          <info>Player.Progress</info>
+          <enable>$PARAM[interactive]</enable>
+          <onup>$PARAM[up]</onup>
+          <ondown>$PARAM[down]</ondown>
+          <right>$PARAM[barright]</right>
+          <texturesliderbar>player/slider_track.png</texturesliderbar>
+          <texturesliderbarfocus>player/slider_track.png</texturesliderbarfocus>
+          <texturesliderbardisabled>player/slider_track.png</texturesliderbardisabled>
+          <textureslidernib>playhead_glow.png</textureslidernib>
+          <textureslidernibfocus>playhead_glow.png</textureslidernibfocus>
+          <textureslidernibdisabled>playhead_glow.png</textureslidernibdisabled>
+        </control>
+      </control>
+    </definition>
+    <param name="barleft" default="72" />
+    <param name="barright" default="72" />
+    <param name="labely" default="12" />
+    <param name="tracky" default="28" />
+    <param name="slidery" default="0" />
+    <param name="endlabel" default="$INFO[Player.Duration]" />
+  </include>
+  <include name="MusicActions">
+    <definition>
+      <control type="group" id="400">
+        <left>668</left>
+        <top>832</top>
+        <width>584</width>
+        <height>90</height>
+        <animation effect="fade" start="0" end="100" time="180">WindowOpen</animation>
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>584</width>
+          <height>90</height>
+          <texture border="capsule_border">glass_capsule.png</texture>
+          <visible>System.HasAddon(script.starlight) + !String.IsEmpty(Window(home).Property(Spotify.CurrentTrackId))</visible>
+        </control>
+        <control type="image">
+          <left>51</left>
+          <top>0</top>
+          <width>482</width>
+          <height>90</height>
+          <texture border="capsule_border">glass_capsule.png</texture>
+          <visible>System.HasAddon(script.starlight) + String.IsEmpty(Window(home).Property(Spotify.CurrentTrackId))</visible>
+        </control>
+        <control type="image">
+          <left>94</left>
+          <top>0</top>
+          <width>396</width>
+          <height>90</height>
+          <texture border="capsule_border">glass_capsule.png</texture>
+          <visible>!System.HasAddon(script.starlight)</visible>
+        </control>
+        <control type="grouplist">
+          <left>8</left>
+          <top>7</top>
+          <width>568</width>
+          <height>76</height>
+          <orientation>horizontal</orientation>
+          <itemgap>10</itemgap>
+          <align>center</align>
+          <include content="PlayerButton">
+            <param name="id" value="410" />
+            <param name="icon" value="$VAR[PlayerHeartIcon]" />
+            <param name="label" value="$LOCALIZE[31207]" />
+            <param name="left" value="416" />
+            <param name="right" value="411" />
+            <param name="up" value="401" />
+            <param name="down" value="RunScript(special://skin/resources/player.py,open-queue)" />
+            <param name="action" value="RunScript(script.starlight,spotify.like)" />
+            <param name="visible" value="System.HasAddon(script.starlight) + !String.IsEmpty(Window(home).Property(Spotify.CurrentTrackId))" />
+            <param name="color" value="$VAR[PlayerHeartColor]" />
+          </include>
+          <control type="group">
+            <left>0</left>
+            <top>0</top>
+            <width>12</width>
+            <height>76</height>
+            <visible>System.HasAddon(script.starlight) + !String.IsEmpty(Window(home).Property(Spotify.CurrentTrackId))</visible>
+            <control type="image">
+              <left>5</left>
+              <top>12</top>
+              <width>1</width>
+              <height>52</height>
+              <texture>progress_frost.png</texture>
+              <colordiffuse>29FFFFFF</colordiffuse>
+            </control>
+          </control>
+          <include content="PlayerButton">
+            <param name="id" value="411" />
+            <param name="icon" value="icons/shuffle.png" />
+            <param name="label" value="$LOCALIZE[31203]" />
+            <param name="left" value="410" />
+            <param name="right" value="412" />
+            <param name="up" value="401" />
+            <param name="down" value="RunScript(special://skin/resources/player.py,open-queue)" />
+            <param name="action" value="PlayerControl(Random)" />
+            <param name="color" value="$VAR[PlayerShuffleColor]" />
+          </include>
+          <include content="PlayerButton">
+            <param name="id" value="412" />
+            <param name="icon" value="player/previous.png" />
+            <param name="label" value="$LOCALIZE[31204]" />
+            <param name="left" value="411" />
+            <param name="right" value="413" />
+            <param name="up" value="401" />
+            <param name="down" value="RunScript(special://skin/resources/player.py,open-queue)" />
+            <param name="action" value="PlayerControl(Previous)" />
+            <param name="color" value="frost" />
+          </include>
+          <include content="PlayerButton">
+            <param name="id" value="413" />
+            <param name="icon" value="$VAR[PlayerPlayIcon]" />
+            <param name="label" value="$VAR[PlayerPlayLabel]" />
+            <param name="left" value="412" />
+            <param name="right" value="414" />
+            <param name="up" value="401" />
+            <param name="down" value="RunScript(special://skin/resources/player.py,open-queue)" />
+            <param name="action" value="PlayerControl(Play)" />
+            <param name="color" value="frost" />
+          </include>
+          <include content="PlayerButton">
+            <param name="id" value="414" />
+            <param name="icon" value="player/next.png" />
+            <param name="label" value="$LOCALIZE[31205]" />
+            <param name="left" value="413" />
+            <param name="right" value="415" />
+            <param name="up" value="401" />
+            <param name="down" value="RunScript(special://skin/resources/player.py,open-queue)" />
+            <param name="action" value="PlayerControl(Next)" />
+            <param name="color" value="frost" />
+          </include>
+          <include content="PlayerButton">
+            <param name="id" value="415" />
+            <param name="icon" value="$VAR[PlayerRepeatIcon]" />
+            <param name="label" value="$LOCALIZE[31206]" />
+            <param name="left" value="414" />
+            <param name="right" value="416" />
+            <param name="up" value="401" />
+            <param name="down" value="RunScript(special://skin/resources/player.py,open-queue)" />
+            <param name="action" value="PlayerControl(Repeat)" />
+            <param name="color" value="$VAR[PlayerRepeatColor]" />
+          </include>
+          <control type="group">
+            <left>0</left>
+            <top>0</top>
+            <width>12</width>
+            <height>76</height>
+            <visible>System.HasAddon(script.starlight)</visible>
+            <control type="image">
+              <left>5</left>
+              <top>12</top>
+              <width>1</width>
+              <height>52</height>
+              <texture>progress_frost.png</texture>
+              <colordiffuse>29FFFFFF</colordiffuse>
+            </control>
+          </control>
+          <include content="PlayerButton">
+            <param name="id" value="416" />
+            <param name="icon" value="icons/more.png" />
+            <param name="label" value="$LOCALIZE[31208]" />
+            <param name="left" value="415" />
+            <param name="right" value="410" />
+            <param name="up" value="401" />
+            <param name="down" value="RunScript(special://skin/resources/player.py,open-queue)" />
+            <param name="action" value="ActivateWindow(11105)" />
+            <param name="visible" value="System.HasAddon(script.starlight)" />
+          </include>
+        </control>
+      </control>
+    </definition>
+  </include>
+  <include name="PlayerNextPill">
+    <definition>
+      <control type="group" id="600">
+        <left>738</left>
+        <top>972</top>
+        <width>444</width>
+        <height>80</height>
+        <visible>System.HasAddon(script.starlight) + String.IsEqual(Window(home).Property(Starlight.NextTrack.Active),true)</visible>
+        <control type="image" id="602">
+          <left>0</left>
+          <top>0</top>
+          <width>444</width>
+          <height>80</height>
+          <texture border="capsule_border">glass_capsule.png</texture>
+        </control>
+        <control type="image">
+          <left>10</left>
+          <top>10</top>
+          <width>60</width>
+          <height>60</height>
+          <texture diffuse="home_square_mask.png">$VAR[PlayerNextArt]</texture>
+        </control>
+        <control type="label">
+          <left>86</left>
+          <top>7</top>
+          <width>1000</width>
+          <height>19</height>
+          <label>$LOCALIZE[31209] · $VAR[PlayerCountdown]</label>
+          <font>font_player_kicker</font>
+          <textcolor>gold</textcolor>
+        </control>
+        <control type="label" id="601">
+          <left>86</left>
+          <top>25</top>
+          <width min="300" max="1000">auto</width>
+          <height>31</height>
+          <label>[B]$INFO[Window(home).Property(Starlight.NextTrack.Title)][/B][COLOR mist]$INFO[Window(home).Property(Starlight.NextTrack.Artist), · ,][/COLOR]</label>
+          <font>font_body</font>
+          <textcolor>frost</textcolor>
+        </control>
+        <control type="progress" id="603">
+          <left>86</left>
+          <top>61</top>
+          <width>300</width>
+          <height>4</height>
+          <info>Window(home).Property(Starlight.NextTrack.Progress)</info>
+          <texturebg border="progress_border">progress_track.png</texturebg>
+          <midtexture border="progress_border">progress_gold.png</midtexture>
+          <lefttexture />
+          <righttexture />
+        </control>
+      </control>
+    </definition>
+  </include>
+  <include name="PlayerVisualiserSetting">
+    <param name="id" default="480" />
+    <param name="x" default="0" />
+    <param name="y" default="0" />
+    <param name="width" default="800" />
+    <param name="up" default="480" />
+    <param name="down" default="480" />
+    <definition>
+      <control type="radiobutton" id="$PARAM[id]">
+        <left>$PARAM[x]</left>
+        <top>$PARAM[y]</top>
+        <width>$PARAM[width]</width>
+        <height>64</height>
+        <label>$LOCALIZE[31214]</label>
+        <selected>!Skin.HasSetting(Player.Visualiser.Disabled)</selected>
+        <onclick>Skin.ToggleSetting(Player.Visualiser.Disabled)</onclick>
+        <onup>$PARAM[up]</onup>
+        <ondown>$PARAM[down]</ondown>
+        <texturenofocus border="capsule_border">glass_capsule.png</texturenofocus>
+        <texturefocus border="focus_border">focus_button.png</texturefocus>
+        <textureradioonfocus>player/toggle_on.png</textureradioonfocus>
+        <textureradioonnofocus>player/toggle_on.png</textureradioonnofocus>
+        <textureradioofffocus>player/toggle_off.png</textureradioofffocus>
+        <textureradiooffnofocus>player/toggle_off.png</textureradiooffnofocus>
+      </control>
+    </definition>
+  </include>
+  <include name="PlayerVideoHeader">
+    <definition>
+      <control type="image">
+        <left>80</left>
+        <top>56</top>
+        <width>320</width>
+        <height>70</height>
+        <texture>$VAR[PlayerVideoLogo]</texture>
+        <visible>!String.IsEmpty(Player.Art(clearlogo)) | !String.IsEmpty(Player.Art(tvshow.clearlogo))</visible>
+      </control>
+      <control type="label">
+        <left>80</left>
+        <top>56</top>
+        <width>1100</width>
+        <height>70</height>
+        <label>$VAR[PlayerVideoTitle]</label>
+        <font>font_heading_large</font>
+        <textcolor>frost</textcolor>
+        <visible>String.IsEmpty(Player.Art(clearlogo)) + String.IsEmpty(Player.Art(tvshow.clearlogo))</visible>
+      </control>
+      <control type="label">
+        <left>430</left>
+        <top>56</top>
+        <width>700</width>
+        <height>70</height>
+        <label>$INFO[VideoPlayer.Year]$INFO[VideoPlayer.VideoVersionName, · ,]</label>
+        <font>font_body</font>
+        <textcolor>mist</textcolor>
+      </control>
+      <control type="label">
+        <left>1450</left>
+        <top>48</top>
+        <width>390</width>
+        <height>60</height>
+        <label>$INFO[System.Time]</label>
+        <font>font_clock</font>
+        <textcolor>frost</textcolor>
+        <align>right</align>
+      </control>
+      <control type="label">
+        <left>1400</left>
+        <top>106</top>
+        <width>440</width>
+        <height>30</height>
+        <label>$LOCALIZE[31215] $INFO[Player.FinishTime]</label>
+        <font>font_label</font>
+        <textcolor>mist</textcolor>
+        <align>right</align>
+      </control>
+    </definition>
+  </include>
+  <include name="PlayerBuffering">
+    <definition>
+      <control type="group">
+        <left>0</left>
+        <top>0</top>
+        <width>1920</width>
+        <height>1080</height>
+        <visible>Player.Caching</visible>
+        <include content="BusyPill" />
+      </control>
+    </definition>
+  </include>
+  <include name="QueueCard">
+    <param name="size" default="230" />
+    <param name="focus" default="false" />
+    <param name="row" default="510" />
+    <definition>
+      <control type="group">
+        <left>0</left>
+        <top>0</top>
+        <width>$PARAM[size]</width>
+        <height>$PARAM[size]</height>
+        <animation effect="zoom" start="100" end="110" center="115,230" time="180" condition="$PARAM[focus] + Control.HasFocus($PARAM[row])">Conditional</animation>
+        <animation effect="fade" start="100" end="40" time="180" condition="!Control.HasFocus($PARAM[row]) + !$PARAM[focus]">Conditional</animation>
+        <animation effect="fade" start="100" end="80" time="180" condition="!Control.HasFocus($PARAM[row]) + $PARAM[focus]">Conditional</animation>
+        <control type="image">
+          <left>-48</left>
+          <top>-48</top>
+          <width>326</width>
+          <height>326</height>
+          <texture border="card_glow_border">focus_card_glow.png</texture>
+          <visible>$PARAM[focus] + Control.HasFocus($PARAM[row])</visible>
+        </control>
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>$PARAM[size]</width>
+          <height>$PARAM[size]</height>
+          <texture diffuse="home_square_mask.png">$INFO[ListItem.Art(thumb)]</texture>
+        </control>
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>$PARAM[size]</width>
+          <height>$PARAM[size]</height>
+          <texture border="card_border">focus_card.png</texture>
+          <visible>$PARAM[focus] + Control.HasFocus($PARAM[row])</visible>
+        </control>
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>230</width>
+          <height>230</height>
+          <texture diffuse="home_square_mask.png">card_shade.png</texture>
+          <visible>$PARAM[focus] + Control.HasFocus($PARAM[row])</visible>
+        </control>
+        <include content="HomePlayCapsule">
+          <param name="id" value="$PARAM[row]" />
+          <param name="x" value="12" />
+          <param name="y" value="168" />
+          <param name="selected" value="$PARAM[focus]" />
+          <param name="compact" value="false" />
+        </include>
+        <control type="image">
+          <left>-16</left>
+          <top>222</top>
+          <width>96</width>
+          <height>16</height>
+          <texture>landing_glint.png</texture>
+          <visible>$PARAM[focus] + Control.HasFocus($PARAM[row]) + !Skin.HasSetting(AmbientEffects.Disabled)</visible>
+          <animation effect="slide" start="-28,0" end="28,0" time="400">WindowOpen</animation>
+          <animation effect="fade" start="80" end="0" time="400">WindowOpen</animation>
+        </control>
+        <control type="label">
+          <left>146</left>
+          <top>168</top>
+          <width>60</width>
+          <height>50</height>
+          <font>font_label_semibold</font>
+          <label>$INFO[ListItem.Property(Starlight.Time)]</label>
+          <visible>$PARAM[focus] + Control.HasFocus($PARAM[row])</visible>
+        </control>
+      </control>
+      <control type="label">
+        <left>0</left>
+        <top>244</top>
+        <width>$PARAM[size]</width>
+        <height>31</height>
+        <label>$INFO[ListItem.Label]</label>
+        <font>font_label_semibold</font>
+        <textcolor>frost</textcolor>
+        <animation effect="fade" start="100" end="40" time="180" condition="!Control.HasFocus($PARAM[row])">Conditional</animation>
+      </control>
+      <control type="label">
+        <left>0</left>
+        <top>275</top>
+        <width>$PARAM[size]</width>
+        <height>28</height>
+        <label>$INFO[ListItem.Label2]</label>
+        <font>font_label_small</font>
+        <textcolor>mist</textcolor>
+        <animation effect="fade" start="100" end="40" time="180" condition="!Control.HasFocus($PARAM[row])">Conditional</animation>
+      </control>
+    </definition>
+  </include>
+</includes>

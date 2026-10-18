@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<window>
+  <defaultcontrol always="true">413</defaultcontrol>
+  <controls>
+    <include content="MusicActions" />
+    <include content="PlayerSeek">
+      <param name="id" value="401" />
+      <param name="y" value="764" />
+      <param name="interactive" value="Player.SeekEnabled" />
+      <param name="up" value="413" />
+      <param name="down" value="413" />
+    </include>
+  </controls>
+</window>

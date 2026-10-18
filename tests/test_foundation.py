@@ -91,7 +91,7 @@ class FoundationTests(unittest.TestCase):
         for path in (ROOT / '1080i').glob('*.xml'):
             for match in pattern.finditer(path.read_text()):
                 with self.subTest(path=path.name, argument=match[1]):
-                    self.assertRegex(match[1], r'^(?:ListItem\.|Container\(|Window(?:\(|\.)|Skin\.String\(|Control\.|System\.|Player\.|Weather\.)')
+                    self.assertRegex(match[1], r'^(?:ListItem\.|Container\(|Window(?:\(|\.)|Skin\.String\(|Control\.|System\.|Player\.|MusicPlayer\.|VideoPlayer\.|Weather\.)')
 
     def test_item_layouts_use_fixed_controls(self):
         import sys
