@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <defaultcontrol always="true">95</defaultcontrol>
+  <onload>SetProperty(Starlight.Hub,settings,home)</onload>
+  <controls>
+    <include content="SettingsBackdrop" />
+    <include content="HubRail">
+      <param name="return" value="95" />
+      <param name="sidefocus" value="907" />
+      <param name="topfocus" value="917" />
+    </include>
+    <control type="group" id="8050">
+      <include content="InfoContentMotion" />
+      <include content="SettingsHeading">
+        <param name="title" value="$LOCALIZE[31624]" />
+      </include>
+      <control type="button" id="95">
+        <left>196</left>
+        <top>210</top>
+        <width>220</width>
+        <height>64</height>
+        <label>$LOCALIZE[31660]</label>
+        <onclick />
+        <onleft>94</onleft>
+        <onright>94</onright>
+        <ondown>9000</ondown>
+        <onup>9000</onup>
+      </control>
+      <control type="button" id="94">
+        <left>428</left>
+        <top>210</top>
+        <width>220</width>
+        <height>64</height>
+        <label>$LOCALIZE[31661]</label>
+        <onclick />
+        <onleft>95</onleft>
+        <onright>96</onright>
+        <ondown>9000</ondown>
+        <onup>9000</onup>
+      </control>
+      <control type="button" id="96">
+        <left>660</left>
+        <top>210</top>
+        <width>220</width>
+        <height>64</height>
+        <label>$LOCALIZE[31662]</label>
+        <onclick />
+        <onleft>94</onleft>
+        <onright>97</onright>
+        <ondown>9000</ondown>
+        <onup>9000</onup>
+      </control>
+      <control type="button" id="97">
+        <left>892</left>
+        <top>210</top>
+        <width>220</width>
+        <height>64</height>
+        <label>$LOCALIZE[31663]</label>
+        <onclick />
+        <onleft>96</onleft>
+        <onright>98</onright>
+        <ondown>9000</ondown>
+        <onup>9000</onup>
+      </control>
+      <control type="button" id="98">
+        <left>1124</left>
+        <top>210</top>
+        <width>220</width>
+        <height>64</height>
+        <label>$LOCALIZE[31664]</label>
+        <onclick />
+        <onleft>97</onleft>
+        <onright>99</onright>
+        <ondown>9000</ondown>
+        <onup>9000</onup>
+      </control>
+      <control type="button" id="99">
+        <left>1356</left>
+        <top>210</top>
+        <width>220</width>
+        <height>64</height>
+        <label>$LOCALIZE[31665]</label>
+        <onclick />
+        <onleft>98</onleft>
+        <onright>100</onright>
+        <ondown>9000</ondown>
+        <onup>9000</onup>
+      </control>
+      <control type="button" id="100">
+        <left>1588</left>
+        <top>210</top>
+        <width>220</width>
+        <height>64</height>
+        <label>$LOCALIZE[31666]</label>
+        <onclick />
+        <onleft>99</onleft>
+        <onright>95</onright>
+        <ondown>9000</ondown>
+        <onup>9000</onup>
+      </control>
+      <control type="label" id="2">
+        <left>220</left>
+        <top>320</top>
+        <width>1560</width>
+        <height>44</height>
+        <font>font_body</font>
+        <textcolor>frost</textcolor>
+        <label />
+      </control>
+      <control type="label" id="3">
+        <left>220</left>
+        <top>368</top>
+        <width>1560</width>
+        <height>44</height>
+        <font>font_body</font>
+        <textcolor>frost</textcolor>
+        <label />
+      </control>
+      <control type="label" id="4">
+        <left>220</left>
+        <top>416</top>
+        <width>1560</width>
+        <height>44</height>
+        <font>font_body</font>
+        <textcolor>frost</textcolor>
+        <label />
+      </control>
+      <control type="label" id="5">
+        <left>220</left>
+        <top>464</top>
+        <width>1560</width>
+        <height>44</height>
+        <font>font_body</font>
+        <textcolor>frost</textcolor>
+        <label />
+      </control>
+      <control type="label" id="6">
+        <left>220</left>
+        <top>512</top>
+        <width>1560</width>
+        <height>44</height>
+        <font>font_body</font>
+        <textcolor>frost</textcolor>
+        <label />
+      </control>
+      <control type="label" id="7">
+        <left>220</left>
+        <top>560</top>
+        <width>1560</width>
+        <height>44</height>
+        <font>font_body</font>
+        <textcolor>frost</textcolor>
+        <label />
+      </control>
+      <control type="label" id="8">
+        <left>220</left>
+        <top>608</top>
+        <width>1560</width>
+        <height>44</height>
+        <font>font_body</font>
+        <textcolor>frost</textcolor>
+        <label />
+      </control>
+      <control type="label" id="9">
+        <left>220</left>
+        <top>656</top>
+        <width>1560</width>
+        <height>44</height>
+        <font>font_body</font>
+        <textcolor>frost</textcolor>
+        <label />
+      </control>
+      <control type="label" id="10">
+        <left>220</left>
+        <top>704</top>
+        <width>1560</width>
+        <height>44</height>
+        <font>font_body</font>
+        <textcolor>frost</textcolor>
+        <label />
+      </control>
+      <control type="label" id="11">
+        <left>220</left>
+        <top>752</top>
+        <width>1560</width>
+        <height>44</height>
+        <font>font_body</font>
+        <textcolor>frost</textcolor>
+        <label />
+      </control>
+      <control type="label" id="12">
+        <left>220</left>
+        <top>800</top>
+        <width>1560</width>
+        <height>44</height>
+        <font>font_body</font>
+        <textcolor>frost</textcolor>
+        <label />
+      </control>
+      <control type="label" id="13">
+        <left>220</left>
+        <top>848</top>
+        <width>1560</width>
+        <height>44</height>
+        <font>font_body</font>
+        <textcolor>frost</textcolor>
+        <label />
+      </control>
+      <control type="textbox" id="30">
+        <left>220</left>
+        <top>310</top>
+        <width>1572</width>
+        <height>640</height>
+        <font>font_body</font>
+      </control>
+    </control>
+  </controls>
+</window>

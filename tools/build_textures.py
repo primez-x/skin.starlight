@@ -296,6 +296,7 @@ def build(output):
         target = output / name
         target.parent.mkdir(parents=True, exist_ok=True)
         texture.save(target, format='PNG', optimize=False, compress_level=9)
+    __import__('textures_settings').build(output)
     print(f'Rendered {len(textures)} PNGs to {output}')
 
 

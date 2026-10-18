@@ -27,4 +27,6 @@
   <constant name="board_card_height">189</constant>
   <constant name="play_capsule_border">25</constant>
   <constant name="rail_border">34</constant>
+  <constant name="guide_now_border">8</constant>
+  <constant name="guide_cell_border">16</constant>
 </includes>

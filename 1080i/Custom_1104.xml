@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window type="dialog" id="1104">
+  <defaultcontrol always="true">610</defaultcontrol>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Hub.Navigation)">SetFocus(610)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Continue.Layout)">SetFocus(611)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Movies.Layout)">SetFocus(612)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Next.Layout)">SetFocus(613)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Episodes.Layout)">SetFocus(614)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Art.Mode)">SetFocus(615)</onload>
+  <controls>
+    <control type="image">
+      <left>0</left>
+      <top>0</top>
+      <width>1920</width>
+      <height>1080</height>
+      <texture>dim_modal.png</texture>
+    </control>
+    <control type="image">
+      <left>580</left>
+      <top>240</top>
+      <width>760</width>
+      <height>620</height>
+      <texture border="panel_border">glass_panel.png</texture>
+    </control>
+    <control type="label">
+      <left>614</left>
+      <top>280</top>
+      <width>692</width>
+      <height>60</height>
+      <font>font_heading</font>
+      <textcolor>frost</textcolor>
+      <label>$INFO[Window(home).Property(Starlight.Settings.Title)]</label>
+    </control>
+    <control type="list" id="610">
+      <left>614</left>
+      <top>370</top>
+      <width>692</width>
+      <height>304</height>
+      <orientation>vertical</orientation>
+      <visible>String.IsEqual(Window(home).Property(Starlight.Settings.Key),Hub.Navigation)</visible>
+      <itemlayout width="692" height="76">
+        <control type="label">
+          <left>24</left>
+          <top>0</top>
+          <width>644</width>
+          <height>70</height>
+          <font>font_body_large</font>
+          <textcolor>frost</textcolor>
+          <label>$INFO[ListItem.Label]</label>
+        </control>
+      </itemlayout>
+      <focusedlayout width="692" height="76">
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>692</width>
+          <height>70</height>
+          <texture border="focus_border">focus_button.png</texture>
+        </control>
+        <control type="label">
+          <left>24</left>
+          <top>0</top>
+          <width>644</width>
+          <height>70</height>
+          <font>font_body_large</font>
+          <textcolor>frost</textcolor>
+          <label>$INFO[ListItem.Label]</label>
+        </control>
+      </focusedlayout>
+      <content>
+        <item>
+          <label>$LOCALIZE[31632]</label>
+          <onclick>Skin.SetString(Hub.Navigation,rail)</onclick>
+          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>ReloadSkin()</onclick>
+        </item>
+        <item>
+          <label>$LOCALIZE[31633]</label>
+          <onclick>Skin.SetString(Hub.Navigation,icons)</onclick>
+          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>ReloadSkin()</onclick>
+        </item>
+        <item>
+          <label>$LOCALIZE[31634]</label>
+          <onclick>Skin.SetString(Hub.Navigation,top_left)</onclick>
+          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>ReloadSkin()</onclick>
+        </item>
+        <item>
+          <label>$LOCALIZE[31635]</label>
+          <onclick>Skin.SetString(Hub.Navigation,top_centre)</onclick>
+          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>ReloadSkin()</onclick>
+        </item>
+      </content>
+    </control>
+    <control type="list" id="611">
+      <left>614</left>
+      <top>370</top>
+      <width>692</width>
+      <height>380</height>
+      <orientation>vertical</orientation>
+      <visible>String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Continue.Layout)</visible>
+      <itemlayout width="692" height="76">
+        <control type="label">
+          <left>24</left>
+          <top>0</top>
+          <width>644</width>
+          <height>70</height>
+          <font>font_body_large</font>
+          <textcolor>frost</textcolor>
+          <label>$INFO[ListItem.Label]</label>
+        </control>
+      </itemlayout>
+      <focusedlayout width="692" height="76">
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>692</width>
+          <height>70</height>
+          <texture border="focus_border">focus_button.png</texture>
+        </control>
+        <control type="label">
+          <left>24</left>
+          <top>0</top>
+          <width>644</width>
+          <height>70</height>
+          <font>font_body_large</font>
+          <textcolor>frost</textcolor>
+          <label>$INFO[ListItem.Label]</label>
+        </control>
+      </focusedlayout>
+      <content>
+        <item>
+          <label>$LOCALIZE[31638]</label>
+          <onclick>Skin.SetString(Home.Continue.Layout,board)</onclick>
+          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>ReloadSkin()</onclick>
+        </item>
+        <item>
+          <label>$LOCALIZE[31639]</label>
+          <onclick>Skin.SetString(Home.Continue.Layout,hero)</onclick>
+          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>ReloadSkin()</onclick>
+        </item>
+        <item>
+          <label>$LOCALIZE[31640]</label>
+          <onclick>Skin.SetString(Home.Continue.Layout,landscape)</onclick>
+          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>ReloadSkin()</onclick>
+        </item>
+        <item>
+          <label>$LOCALIZE[31641]</label>
+          <onclick>Skin.SetString(Home.Continue.Layout,poster)</onclick>
+          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>ReloadSkin()</onclick>
+        </item>
+        <item>
+          <label>$LOCALIZE[31642]</label>
+          <onclick>Skin.SetString(Home.Continue.Layout,square)</onclick>
+          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>ReloadSkin()</onclick>
+        </item>
+      </content>
+    </control>
+    <control type="list" id="612">
+      <left>614</left>
+      <top>370</top>
+      <width>692</width>
+      <height>380</height>
+      <orientation>vertical</orientation>
+      <visible>String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Movies.Layout)</visible>
+      <itemlayout width="692" height="76">
+        <control type="label">
+          <left>24</left>
+          <top>0</top>
+          <width>644</width>
+          <height>70</height>
+          <font>font_body_large</font>
+          <textcolor>frost</textcolor>
+          <label>$INFO[ListItem.Label]</label>
+        </control>
+      </itemlayout>
+      <focusedlayout width="692" height="76">
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>692</width>
+          <height>70</height>
+          <texture border="focus_border">focus_button.png</texture>
+        </control>
+        <control type="label">
+          <left>24</left>
+          <top>0</top>
+          <width>644</width>
+          <height>70</height>
+          <font>font_body_large</font>
+          <textcolor>frost</textcolor>
+          <label>$INFO[ListItem.Label]</label>
+        </control>
+      </focusedlayout>
+      <content>
+        <item>
+          <label>$LOCALIZE[31638]</label>
+          <onclick>Skin.SetString(Home.Movies.Layout,board)</onclick>
+          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>ReloadSkin()</onclick>
+        </item>
+        <item>
+          <label>$LOCALIZE[31639]</label>
+          <onclick>Skin.SetString(Home.Movies.Layout,hero)</onclick>
+          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>ReloadSkin()</onclick>
+        </item>
+        <item>
+          <label>$LOCALIZE[31640]</label>
+          <onclick>Skin.SetString(Home.Movies.Layout,landscape)</onclick>
+          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>ReloadSkin()</onclick>
+        </item>
+        <item>
+          <label>$LOCALIZE[31641]</label>
+          <onclick>Skin.SetString(Home.Movies.Layout,poster)</onclick>
+          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>ReloadSkin()</onclick>
+        </item>
+        <item>
+          <label>$LOCALIZE[31642]</label>
+          <onclick>Skin.SetString(Home.Movies.Layout,square)</onclick>
+          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>ReloadSkin()</onclick>
+        </item>
+      </content>
+    </control>
+    <control type="list" id="613">
+      <left>614</left>
+      <top>370</top>
+      <width>692</width>
+      <height>380</height>
+      <orientation>vertical</orientation>
+      <visible>String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Next.Layout)</visible>
+      <itemlayout width="692" height="76">
+        <control type="label">
+          <left>24</left>
+          <top>0</top>
+          <width>644</width>
+          <height>70</height>
+          <font>font_body_large</font>
+          <textcolor>frost</textcolor>
+          <label>$INFO[ListItem.Label]</label>
+        </control>
+      </itemlayout>
+      <focusedlayout width="692" height="76">
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>692</width>
+          <height>70</height>
+          <texture border="focus_border">focus_button.png</texture>
+        </control>
+        <control type="label">
+          <left>24</left>
+          <top>0</top>
+          <width>644</width>
+          <height>70</height>
+          <font>font_body_large</font>
+          <textcolor>frost</textcolor>
+          <label>$INFO[ListItem.Label]</label>
+        </control>
+      </focusedlayout>
+      <content>
+        <item>
+          <label>$LOCALIZE[31638]</label>
+          <onclick>Skin.SetString(Home.Next.Layout,board)</onclick>
+          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>ReloadSkin()</onclick>
+        </item>
+        <item>
+          <label>$LOCALIZE[31639]</label>
+          <onclick>Skin.SetString(Home.Next.Layout,hero)</onclick>
+          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>ReloadSkin()</onclick>
+        </item>
+        <item>
+          <label>$LOCALIZE[31640]</label>
+          <onclick>Skin.SetString(Home.Next.Layout,landscape)</onclick>
+          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>ReloadSkin()</onclick>
+        </item>
+        <item>
+          <label>$LOCALIZE[31641]</label>
+          <onclick>Skin.SetString(Home.Next.Layout,poster)</onclick>
+          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>ReloadSkin()</onclick>
+        </item>
+        <item>
+          <label>$LOCALIZE[31642]</label>
+          <onclick>Skin.SetString(Home.Next.Layout,square)</onclick>
+          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>ReloadSkin()</onclick>
+        </item>
+      </content>
+    </control>
+    <control type="list" id="614">
+      <left>614</left>
+      <top>370</top>
+      <width>692</width>
+      <height>380</height>
+      <orientation>vertical</orientation>
+      <visible>String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Episodes.Layout)</visible>
+      <itemlayout width="692" height="76">
+        <control type="label">
+          <left>24</left>
+          <top>0</top>
+          <width>644</width>
+          <height>70</height>
+          <font>font_body_large</font>
+          <textcolor>frost</textcolor>
+          <label>$INFO[ListItem.Label]</label>
+        </control>
+      </itemlayout>
+      <focusedlayout width="692" height="76">
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>692</width>
+          <height>70</height>
+          <texture border="focus_border">focus_button.png</texture>
+        </control>
+        <control type="label">
+          <left>24</left>
+          <top>0</top>
+          <width>644</width>
+          <height>70</height>
+          <font>font_body_large</font>
+          <textcolor>frost</textcolor>
+          <label>$INFO[ListItem.Label]</label>
+        </control>
+      </focusedlayout>
+      <content>
+        <item>
+          <label>$LOCALIZE[31638]</label>
+          <onclick>Skin.SetString(Home.Episodes.Layout,board)</onclick>
+          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>ReloadSkin()</onclick>
+        </item>
+        <item>
+          <label>$LOCALIZE[31639]</label>
+          <onclick>Skin.SetString(Home.Episodes.Layout,hero)</onclick>
+          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>ReloadSkin()</onclick>
+        </item>
+        <item>
+          <label>$LOCALIZE[31640]</label>
+          <onclick>Skin.SetString(Home.Episodes.Layout,landscape)</onclick>
+          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>ReloadSkin()</onclick>
+        </item>
+        <item>
+          <label>$LOCALIZE[31641]</label>
+          <onclick>Skin.SetString(Home.Episodes.Layout,poster)</onclick>
+          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>ReloadSkin()</onclick>
+        </item>
+        <item>
+          <label>$LOCALIZE[31642]</label>
+          <onclick>Skin.SetString(Home.Episodes.Layout,square)</onclick>
+          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>ReloadSkin()</onclick>
+        </item>
+      </content>
+    </control>
+    <control type="list" id="615">
+      <left>614</left>
+      <top>370</top>
+      <width>692</width>
+      <height>152</height>
+      <orientation>vertical</orientation>
+      <visible>String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Art.Mode)</visible>
+      <itemlayout width="692" height="76">
+        <control type="label">
+          <left>24</left>
+          <top>0</top>
+          <width>644</width>
+          <height>70</height>
+          <font>font_body_large</font>
+          <textcolor>frost</textcolor>
+          <label>$INFO[ListItem.Label]</label>
+        </control>
+      </itemlayout>
+      <focusedlayout width="692" height="76">
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>692</width>
+          <height>70</height>
+          <texture border="focus_border">focus_button.png</texture>
+        </control>
+        <control type="label">
+          <left>24</left>
+          <top>0</top>
+          <width>644</width>
+          <height>70</height>
+          <font>font_body_large</font>
+          <textcolor>frost</textcolor>
+          <label>$INFO[ListItem.Label]</label>
+        </control>
+      </focusedlayout>
+      <content>
+        <item>
+          <label>$LOCALIZE[31651]</label>
+          <onclick>Skin.SetString(Home.Art.Mode,blurred)</onclick>
+          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>ReloadSkin()</onclick>
+        </item>
+        <item>
+          <label>$LOCALIZE[31652]</label>
+          <onclick>Skin.SetString(Home.Art.Mode,bound)</onclick>
+          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>ReloadSkin()</onclick>
+        </item>
+      </content>
+    </control>
+  </controls>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Hub.Navigation) + Skin.String(Hub.Navigation,rail)">SetFocus(610,0,absolute)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Hub.Navigation) + Skin.String(Hub.Navigation,icons)">SetFocus(610,1,absolute)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Hub.Navigation) + Skin.String(Hub.Navigation,top_left)">SetFocus(610,2,absolute)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Hub.Navigation) + Skin.String(Hub.Navigation,top_centre)">SetFocus(610,3,absolute)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Continue.Layout) + Skin.String(Home.Continue.Layout,board)">SetFocus(611,0,absolute)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Continue.Layout) + Skin.String(Home.Continue.Layout,hero)">SetFocus(611,1,absolute)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Continue.Layout) + Skin.String(Home.Continue.Layout,landscape)">SetFocus(611,2,absolute)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Continue.Layout) + Skin.String(Home.Continue.Layout,poster)">SetFocus(611,3,absolute)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Continue.Layout) + Skin.String(Home.Continue.Layout,square)">SetFocus(611,4,absolute)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Movies.Layout) + Skin.String(Home.Movies.Layout,board)">SetFocus(612,0,absolute)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Movies.Layout) + Skin.String(Home.Movies.Layout,hero)">SetFocus(612,1,absolute)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Movies.Layout) + Skin.String(Home.Movies.Layout,landscape)">SetFocus(612,2,absolute)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Movies.Layout) + Skin.String(Home.Movies.Layout,poster)">SetFocus(612,3,absolute)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Movies.Layout) + Skin.String(Home.Movies.Layout,square)">SetFocus(612,4,absolute)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Next.Layout) + Skin.String(Home.Next.Layout,board)">SetFocus(613,0,absolute)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Next.Layout) + Skin.String(Home.Next.Layout,hero)">SetFocus(613,1,absolute)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Next.Layout) + Skin.String(Home.Next.Layout,landscape)">SetFocus(613,2,absolute)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Next.Layout) + Skin.String(Home.Next.Layout,poster)">SetFocus(613,3,absolute)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Next.Layout) + Skin.String(Home.Next.Layout,square)">SetFocus(613,4,absolute)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Episodes.Layout) + Skin.String(Home.Episodes.Layout,board)">SetFocus(614,0,absolute)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Episodes.Layout) + Skin.String(Home.Episodes.Layout,hero)">SetFocus(614,1,absolute)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Episodes.Layout) + Skin.String(Home.Episodes.Layout,landscape)">SetFocus(614,2,absolute)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Episodes.Layout) + Skin.String(Home.Episodes.Layout,poster)">SetFocus(614,3,absolute)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Episodes.Layout) + Skin.String(Home.Episodes.Layout,square)">SetFocus(614,4,absolute)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Art.Mode) + Skin.String(Home.Art.Mode,blurred)">SetFocus(615,0,absolute)</onload>
+  <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Art.Mode) + Skin.String(Home.Art.Mode,bound)">SetFocus(615,1,absolute)</onload>
+</window>

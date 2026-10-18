@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window id="1105">
+  <defaultcontrol always="true">610</defaultcontrol>
+  <onload>SetProperty(Starlight.Hub,livetv,home)</onload>
+  <onload condition="Integer.IsEqual(Container(610).NumItems,0)">SetFocus(600)</onload>
+  <controls>
+    <include content="SettingsBackdrop" />
+    <include content="HubRail">
+      <param name="return" value="600" />
+      <param name="sidefocus" value="908" />
+      <param name="topfocus" value="918" />
+    </include>
+    <control type="group" id="8050">
+      <include content="InfoContentMotion" />
+      <include content="SettingsHeading">
+        <param name="title" value="$LOCALIZE[31665]" />
+      </include>
+      <control type="button" id="600">
+        <left>196</left>
+        <top>210</top>
+        <width>280</width>
+        <height>64</height>
+        <label>$LOCALIZE[31703]</label>
+        <onclick>ActivateWindow(TVGuide)</onclick>
+        <onup>9000</onup>
+        <ondown>610</ondown>
+        <onleft>9000</onleft>
+        <onright>601</onright>
+      </control>
+      <control type="button" id="601">
+        <left>496</left>
+        <top>210</top>
+        <width>280</width>
+        <height>64</height>
+        <label>$LOCALIZE[31701]</label>
+        <onclick>ActivateWindow(TVChannels)</onclick>
+        <onup>9000</onup>
+        <ondown>610</ondown>
+        <onleft>600</onleft>
+        <onright>602</onright>
+      </control>
+      <control type="button" id="602">
+        <left>796</left>
+        <top>210</top>
+        <width>280</width>
+        <height>64</height>
+        <label>$LOCALIZE[31691]</label>
+        <onclick>ActivateWindow(TVRecordings)</onclick>
+        <onup>9000</onup>
+        <ondown>610</ondown>
+        <onleft>601</onleft>
+        <onright>603</onright>
+      </control>
+      <control type="button" id="603">
+        <left>1096</left>
+        <top>210</top>
+        <width>280</width>
+        <height>64</height>
+        <label>$LOCALIZE[31692]</label>
+        <onclick>ActivateWindow(TVTimers)</onclick>
+        <onup>9000</onup>
+        <ondown>610</ondown>
+        <onleft>602</onleft>
+        <onright>600</onright>
+      </control>
+      <control type="label">
+        <left>196</left>
+        <top>306</top>
+        <width>1200</width>
+        <height>50</height>
+        <font>font_heading</font>
+        <textcolor>frost</textcolor>
+        <label>$LOCALIZE[31689]</label>
+      </control>
+      <include content="LiveTVRecentRow" />
+      <control type="label">
+        <left>196</left>
+        <top>682</top>
+        <width>1200</width>
+        <height>50</height>
+        <font>font_heading</font>
+        <textcolor>frost</textcolor>
+        <label>$LOCALIZE[31704]</label>
+      </control>
+      <control type="list" id="620">
+        <left>196</left>
+        <top>756</top>
+        <width>1644</width>
+        <height>280</height>
+        <orientation>horizontal</orientation>
+        <onup>610</onup>
+        <ondown>600</ondown>
+        <onleft>9000</onleft>
+        <onright>620</onright>
+        <visible>System.HasAddon(plugin.video.smarttube)</visible>
+        <include content="LiveTVTileLayouts">
+          <param name="id" value="620" />
+          <param name="native" value="false" />
+        </include>
+        <content limit="10">plugin://plugin.video.smarttube/live_now</content>
+        <onfocus>SetProperty(Starlight.Container,620,home)</onfocus>
+      </control>
+      <control type="image">
+        <left>830</left>
+        <top>428</top>
+        <width>100</width>
+        <height>100</height>
+        <texture>busy_horizon.png</texture>
+        <visible>Integer.IsEqual(Container(610).NumItems,0)</visible>
+      </control>
+      <control type="label">
+        <left>560</left>
+        <top>540</top>
+        <width>900</width>
+        <height>48</height>
+        <font>font_body</font>
+        <textcolor>mist</textcolor>
+        <label>$LOCALIZE[31705]</label>
+        <visible>Integer.IsEqual(Container(610).NumItems,0)</visible>
+      </control>
+      <control type="button" id="621">
+        <left>1510</left>
+        <top>690</top>
+        <width>330</width>
+        <height>64</height>
+        <label>$LOCALIZE[31706]</label>
+        <onclick>Addon.OpenSettings(plugin.video.smarttube)</onclick>
+        <visible>System.HasAddon(plugin.video.smarttube)</visible>
+        <onup>610</onup>
+        <ondown>620</ondown>
+        <onleft>610</onleft>
+        <onright>600</onright>
+      </control>
+      <control type="label">
+        <left>196</left>
+        <top>798</top>
+        <width>1500</width>
+        <height>70</height>
+        <font>font_body</font>
+        <textcolor>mist</textcolor>
+        <label>$LOCALIZE[31707]</label>
+        <visible>!System.HasAddon(plugin.video.smarttube)</visible>
+      </control>
+      <control type="label">
+        <left>196</left>
+        <top>890</top>
+        <width>1300</width>
+        <height>48</height>
+        <font>font_body</font>
+        <textcolor>mist</textcolor>
+        <label>$LOCALIZE[31708]</label>
+        <visible>System.HasAddon(plugin.video.smarttube) + Integer.IsEqual(Container(620).NumItems,0)</visible>
+      </control>
+    </control>
+    <control type="button" id="5502">
+      <left>0</left>
+      <top>0</top>
+      <width>1</width>
+      <height>1</height>
+      <visible>false</visible>
+      <label>$VAR[LiveTVContextPosition]</label>
+    </control>
+  </controls>
+</window>

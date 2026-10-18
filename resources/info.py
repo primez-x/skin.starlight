@@ -271,9 +271,10 @@ def context():
 def context_anchor(window):
     focused = window.getFocusId()
     window_id = xbmcgui.getCurrentWindowId()
-    home = window_id == 10000 and focused in {510, 511, 512, 520, 521, 522, 530, 531, 532, 540, 541, 542}
+    home = window_id == 10000 and focused in {510, 511, 512, 520, 521, 522, 530, 531, 532, 540, 541, 542, 570}
     person = window_id == PERSON and focused in {700, 710, 720}
-    if not (home or person):
+    live = window_id == 11105 and focused in {610, 620}
+    if not (home or person or live):
         return None
     directory = Path(__file__).resolve().parents[1] / '1080i'
     includes, constants = {}, {}
@@ -290,9 +291,9 @@ def context_anchor(window):
         expression = expression.replace('Window.Property(', f'Window({window_id}).Property(')
         return xbmc.getCondVisibility(expression)
 
-    tree = expand(ET.parse(directory / ('Home.xml' if home else 'Custom_1103.xml')).getroot(), includes, condition)
+    tree = expand(ET.parse(directory / ('Home.xml' if home else 'Custom_1105.xml' if live else 'Custom_1103.xml')).getroot(), includes, condition)
     scroll = int(window.getControl(5501).getLabel().split('/')[0] or 0) if home else 0
-    cursor = int(window.getControl(5502).getLabel() or 0) if home else 0
+    cursor = int(window.getControl(5502).getLabel() or 0) if home or live else 0
     return card_rect(tree, focused, cursor, scroll, constants, condition)
 
 

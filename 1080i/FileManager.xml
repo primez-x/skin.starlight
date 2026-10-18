@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <defaultcontrol>20</defaultcontrol>
+  <onload>SetProperty(Starlight.Hub,settings,home)</onload>
+  <controls>
+    <include content="HubRail">
+      <param name="return" value="20" />
+      <param name="sidefocus" value="907" />
+      <param name="topfocus" value="917" />
+    </include>
+    <control type="group" id="8050">
+      <include content="InfoContentMotion" />
+      <include>SettingsBackdrop</include>
+      <include content="SettingsHeading">
+        <param name="title" value="$LOCALIZE[31620]" />
+      </include>
+      <control type="label" id="101">
+        <left>196</left>
+        <top>220</top>
+        <width>800</width>
+        <height>54</height>
+        <font>font_body_large</font>
+        <label />
+      </control>
+      <control type="list" id="20">
+        <left>196</left>
+        <top>300</top>
+        <width>800</width>
+        <height>650</height>
+        <orientation>vertical</orientation>
+        <onup>21</onup>
+        <ondown>21</ondown>
+        <onleft>21</onleft>
+        <onright>21</onright>
+        <include content="SettingsDirectoryLayouts">
+          <param name="width" value="800" />
+          <param name="id" value="20" />
+        </include>
+      </control>
+      <control type="label" id="12">
+        <left>196</left>
+        <top>978</top>
+        <width>800</width>
+        <height>50</height>
+        <font>font_body_large</font>
+        <label />
+      </control>
+      <control type="label" id="102">
+        <left>1040</left>
+        <top>220</top>
+        <width>800</width>
+        <height>54</height>
+        <font>font_body_large</font>
+        <label />
+      </control>
+      <control type="list" id="21">
+        <left>1040</left>
+        <top>300</top>
+        <width>800</width>
+        <height>650</height>
+        <orientation>vertical</orientation>
+        <onup>20</onup>
+        <ondown>20</ondown>
+        <onleft>20</onleft>
+        <onright>20</onright>
+        <include content="SettingsDirectoryLayouts">
+          <param name="width" value="800" />
+          <param name="id" value="21" />
+        </include>
+      </control>
+      <control type="label" id="13">
+        <left>1040</left>
+        <top>978</top>
+        <width>800</width>
+        <height>50</height>
+        <font>font_body_large</font>
+        <label />
+      </control>
+    </control>
+  </controls>
+</window>

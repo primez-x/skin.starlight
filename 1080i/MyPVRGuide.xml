@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <defaultcontrol always="true">50</defaultcontrol>
+  <views>50</views>
+  <onload>SetProperty(Starlight.Hub,livetv,home)</onload>
+  <onload>RunScript(special://skin/resources/settings.py,guide)</onload>
+  <controls>
+    <include content="SettingsBackdrop" />
+    <include content="LiveTVGroups" />
+    <include content="HubRail">
+      <param name="return" value="50" />
+      <param name="sidefocus" value="908" />
+      <param name="topfocus" value="918" />
+    </include>
+    <control type="group" id="8050">
+      <include content="InfoContentMotion" />
+      <control type="image">
+        <left>196</left>
+        <top>118</top>
+        <width>96</width>
+        <height>54</height>
+        <texture>$INFO[Container(50).ListItem.Icon]</texture>
+      </control>
+      <control type="label">
+        <left>312</left>
+        <top>118</top>
+        <width>940</width>
+        <height>54</height>
+        <font>font_body</font>
+        <textcolor>mist</textcolor>
+        <label>$INFO[Container(50).ListItem.ChannelNumberLabel]  $INFO[Container(50).ListItem.ChannelName]</label>
+      </control>
+      <control type="label">
+        <left>196</left>
+        <top>184</top>
+        <width>1110</width>
+        <height>82</height>
+        <font>font_pvr_title</font>
+        <textcolor>frost</textcolor>
+        <label>$INFO[Container(50).ListItem.Label]</label>
+      </control>
+      <control type="label">
+        <left>196</left>
+        <top>278</top>
+        <width>1100</width>
+        <height>42</height>
+        <font>font_body</font>
+        <textcolor>mist</textcolor>
+        <label>$INFO[Container(50).ListItem.StartTime] – $INFO[Container(50).ListItem.EndTime]   $INFO[Container(50).ListItem.Genre]   $INFO[Container(50).ListItem.EpisodeName]</label>
+      </control>
+      <control type="textbox">
+        <left>196</left>
+        <top>332</top>
+        <width>1080</width>
+        <height>70</height>
+        <font>font_body</font>
+        <textcolor>mist</textcolor>
+        <label>$INFO[Container(50).ListItem.Plot]</label>
+      </control>
+      <control type="progress">
+        <left>196</left>
+        <top>420</top>
+        <width>420</width>
+        <height>5</height>
+        <info>ListItem.Progress</info>
+        <texturebg border="progress_border">progress_track.png</texturebg>
+        <lefttexture />
+        <midtexture border="progress_border">progress_gold.png</midtexture>
+        <righttexture />
+        <overlaytexture />
+      </control>
+      <control type="image">
+        <left>1360</left>
+        <top>150</top>
+        <width>480</width>
+        <height>270</height>
+        <texture diffuse="home_landscape_mask.png">$VAR[PVRProgrammeArt]</texture>
+        <visible>!Player.HasVideo</visible>
+        <aspectratio>scale</aspectratio>
+      </control>
+      <control type="image">
+        <left>1380</left>
+        <top>350</top>
+        <width>120</width>
+        <height>52</height>
+        <texture>$INFO[ListItem.Icon]</texture>
+        <visible>!Player.HasVideo</visible>
+        <aspectratio>keep</aspectratio>
+        <aspectratio>keep</aspectratio>
+      </control>
+      <control type="label">
+        <left>1380</left>
+        <top>168</top>
+        <width>130</width>
+        <height>38</height>
+        <font>font_kicker</font>
+        <textcolor>gold</textcolor>
+        <label>$LOCALIZE[31687]</label>
+      </control>
+      <control type="videowindow">
+        <left>1360</left>
+        <top>150</top>
+        <width>480</width>
+        <height>270</height>
+        <visible>Player.HasVideo</visible>
+      </control>
+      <control type="epggrid" id="50">
+        <left>196</left>
+        <top>460</top>
+        <width>1644</width>
+        <height>540</height>
+        <orientation>vertical</orientation>
+        <timeblocks>36</timeblocks>
+        <rulerunit>6</rulerunit>
+        <scrolltime>220</scrolltime>
+        <pagecontrol>5506</pagecontrol>
+        <onup>11</onup>
+        <ondown>50</ondown>
+        <onleft>9000</onleft>
+        <onright>50</onright>
+        <progresstexture border="guide_now_border">settings/guide_now.png</progresstexture>
+        <rulerdatelayout width="250" height="40">
+          <control type="label">
+            <left>0</left>
+            <top>0</top>
+            <width>246</width>
+            <height>36</height>
+            <font>font_label</font>
+            <textcolor>mist</textcolor>
+            <label>$INFO[ListItem.Label]</label>
+          </control>
+        </rulerdatelayout>
+        <rulerlayout width="230" height="40">
+          <control type="label">
+            <left>12</left>
+            <top>0</top>
+            <width>214</width>
+            <height>36</height>
+            <font>font_label</font>
+            <textcolor>mist</textcolor>
+            <label>$INFO[ListItem.Label]</label>
+          </control>
+        </rulerlayout>
+        <channellayout width="250" height="80">
+          <control type="label">
+            <left>0</left>
+            <top>0</top>
+            <width>60</width>
+            <height>76</height>
+            <font>font_label</font>
+            <textcolor>mist</textcolor>
+            <label>$INFO[ListItem.ChannelNumberLabel]</label>
+          </control>
+          <control type="image">
+            <left>68</left>
+            <top>4</top>
+            <width>168</width>
+            <height>68</height>
+            <texture>$INFO[ListItem.Icon]</texture>
+            <aspectratio>keep</aspectratio>
+            <aspectratio>keep</aspectratio>
+          </control>
+        </channellayout>
+        <focusedchannellayout width="250" height="80">
+          <control type="label">
+            <left>0</left>
+            <top>0</top>
+            <width>60</width>
+            <height>76</height>
+            <font>font_label</font>
+            <textcolor>mist</textcolor>
+            <label>$INFO[ListItem.ChannelNumberLabel]</label>
+          </control>
+          <control type="image">
+            <left>68</left>
+            <top>4</top>
+            <width>168</width>
+            <height>68</height>
+            <texture>$INFO[ListItem.Icon]</texture>
+            <aspectratio>keep</aspectratio>
+            <aspectratio>keep</aspectratio>
+          </control>
+        </focusedchannellayout>
+        <itemlayout width="80" height="80">
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>76</width>
+            <height>76</height>
+            <texture border="guide_cell_border">settings/guide_cell.png</texture>
+          </control>
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>76</width>
+            <height>76</height>
+            <texture border="guide_cell_border">settings/guide_airing.png</texture>
+            <visible>ListItem.InProgress</visible>
+          </control>
+          <control type="label">
+            <left>14</left>
+            <top>6</top>
+            <width>48</width>
+            <height>34</height>
+            <font>font_label_semibold</font>
+            <textcolor>frost</textcolor>
+            <label>$INFO[ListItem.Label]</label>
+          </control>
+          <control type="label">
+            <left>14</left>
+            <top>40</top>
+            <width>48</width>
+            <height>28</height>
+            <font>font_label_small</font>
+            <textcolor>mist</textcolor>
+            <label>$INFO[ListItem.StartTime]</label>
+          </control>
+        </itemlayout>
+        <focusedlayout width="80" height="80">
+          <control type="image">
+            <left>-48</left>
+            <top>-48</top>
+            <width>172</width>
+            <height>172</height>
+            <texture border="card_glow_border">focus_card_glow.png</texture>
+          </control>
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>76</width>
+            <height>76</height>
+            <texture border="card_border">focus_card.png</texture>
+          </control>
+          <control type="label">
+            <left>14</left>
+            <top>6</top>
+            <width>48</width>
+            <height>34</height>
+            <font>font_label_semibold</font>
+            <textcolor>frost</textcolor>
+            <label>$INFO[ListItem.Label]</label>
+          </control>
+          <control type="label">
+            <left>14</left>
+            <top>40</top>
+            <width>48</width>
+            <height>28</height>
+            <font>font_label_small</font>
+            <textcolor>mist</textcolor>
+            <label>$INFO[ListItem.StartTime]</label>
+          </control>
+        </focusedlayout>
+      </control>
+      <control type="scrollbar" id="5506">
+        <left>1862</left>
+        <top>500</top>
+        <width>4</width>
+        <height>500</height>
+        <orientation>vertical</orientation>
+        <texturesliderbackground>progress_track.png</texturesliderbackground>
+        <texturesliderbar>progress_frost.png</texturesliderbar>
+        <texturesliderbarfocus>progress_gold.png</texturesliderbarfocus>
+        <textureslidernib />
+        <textureslidernibfocus />
+        <onleft>50</onleft>
+        <onright>50</onright>
+      </control>
+    </control>
+  </controls>
+</window>

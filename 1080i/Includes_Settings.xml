@@ -1,0 +1,1102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+  <include name="SettingsBackdrop">
+    <definition>
+      <include content="InfoBackground">
+        <param name="bound" value="false" />
+        <param name="blur" value="image://special%3A%2F%2Fskin%2Ffanart.jpg/?width=16&amp;height=9" />
+      </include>
+      <include content="InfoClock" />
+    </definition>
+  </include>
+  <include name="SettingsHeading">
+    <definition>
+      <control type="label">
+        <left>196</left>
+        <top>110</top>
+        <width>1420</width>
+        <height>76</height>
+        <font>font_title</font>
+        <textcolor>frost</textcolor>
+        <label>$PARAM[title]</label>
+      </control>
+    </definition>
+  </include>
+  <include name="SettingsRowStyle">
+    <definition>
+      <width>1644</width>
+      <height>76</height>
+      <font>font_body_large</font>
+      <textcolor>frost</textcolor>
+      <focusedcolor>frost</focusedcolor>
+      <disabledcolor>mist</disabledcolor>
+      <align>left</align>
+      <aligny>center</aligny>
+      <textoffsetx>24</textoffsetx>
+      <textoffsety>0</textoffsety>
+      <texturefocus border="focus_border">focus_button.png</texturefocus>
+      <texturenofocus border="capsule_border">$VAR[SettingsRowSurface]</texturenofocus>
+      <pulseonselect>false</pulseonselect>
+    </definition>
+  </include>
+  <include name="SettingsToggleStyle">
+    <definition>
+      <radioposx>1532</radioposx>
+      <radioposy>19</radioposy>
+      <radiowidth>68</radiowidth>
+      <radioheight>38</radioheight>
+      <textureradioonfocus>settings/toggle_on.png</textureradioonfocus>
+      <textureradioonnofocus>settings/toggle_on.png</textureradioonnofocus>
+      <textureradioofffocus>settings/toggle_off.png</textureradioofffocus>
+      <textureradiooffnofocus>settings/toggle_off.png</textureradiooffnofocus>
+    </definition>
+  </include>
+  <include name="SettingsSpinStyle">
+    <definition>
+      <spinposx>1460</spinposx>
+      <spinposy>20</spinposy>
+      <spinwidth>32</spinwidth>
+      <spinheight>36</spinheight>
+      <textureup>settings/arrow_right.png</textureup>
+      <texturedown>settings/arrow_left.png</texturedown>
+      <textureupfocus>settings/arrow_right.png</textureupfocus>
+      <texturedownfocus>settings/arrow_left.png</texturedownfocus>
+      <showonepage>true</showonepage>
+    </definition>
+  </include>
+  <include name="SettingsNativeBody">
+    <definition>
+      <control type="grouplist" id="3">
+        <left>196</left>
+        <top>210</top>
+        <width>1644</width>
+        <height>64</height>
+        <orientation>horizontal</orientation>
+        <itemgap>12</itemgap>
+        <onleft>9000</onleft>
+        <onright>3</onright>
+        <onup>20</onup>
+        <ondown>5</ondown>
+      </control>
+      <control type="grouplist" id="5">
+        <left>196</left>
+        <top>310</top>
+        <width>1644</width>
+        <height>560</height>
+        <orientation>vertical</orientation>
+        <itemgap>6</itemgap>
+        <onup>3</onup>
+        <ondown>28</ondown>
+        <onleft>3</onleft>
+        <onright>60</onright>
+        <pagecontrol>60</pagecontrol>
+      </control>
+      <control type="scrollbar" id="60">
+        <left>1860</left>
+        <top>310</top>
+        <width>6</width>
+        <height>560</height>
+        <orientation>vertical</orientation>
+        <texturesliderbackground>progress_track.png</texturesliderbackground>
+        <texturesliderbar>progress_frost.png</texturesliderbar>
+        <texturesliderbarfocus>progress_gold.png</texturesliderbarfocus>
+        <textureslidernib />
+        <textureslidernibfocus />
+        <onleft>5</onleft>
+        <onright>5</onright>
+      </control>
+      <control type="label" id="2">
+        <left>196</left>
+        <top>110</top>
+        <width>1400</width>
+        <height>76</height>
+        <font>font_title</font>
+        <textcolor>frost</textcolor>
+        <label />
+      </control>
+      <control type="textbox" id="6">
+        <left>220</left>
+        <top>898</top>
+        <width>1596</width>
+        <height>84</height>
+        <font>font_body</font>
+        <textcolor>mist</textcolor>
+      </control>
+      <control type="button" id="7">
+        <include>SettingsRowStyle</include>
+        <visible>false</visible>
+      </control>
+      <control type="radiobutton" id="8">
+        <include content="SettingsToggleStyle" />
+        <include>SettingsRowStyle</include>
+        <visible>false</visible>
+      </control>
+      <control type="spincontrolex" id="9">
+        <include content="SettingsSpinStyle" />
+        <include>SettingsRowStyle</include>
+        <visible>false</visible>
+      </control>
+      <control type="togglebutton" id="10">
+        <alttexturenofocus border="capsule_border">frost_fill.png</alttexturenofocus>
+        <texturenofocus border="capsule_border">$VAR[SettingsCategorySurface]</texturenofocus>
+        <alttexturefocus border="focus_border">$VAR[SettingsCategoryFocus]</alttexturefocus>
+        <texturefocus border="focus_border">$VAR[SettingsCategoryFocus]</texturefocus>
+        <width>240</width>
+        <height>64</height>
+        <align>center</align>
+        <textoffsetx>0</textoffsetx>
+        <ondown>5</ondown>
+        <include>SettingsRowStyle</include>
+        <visible>false</visible>
+      </control>
+      <control type="edit" id="12">
+        <include>SettingsRowStyle</include>
+        <visible>false</visible>
+      </control>
+      <control type="sliderex" id="13">
+        <sliderwidth>260</sliderwidth>
+        <sliderheight>8</sliderheight>
+        <texturesliderbar>progress_track.png</texturesliderbar>
+        <textureslidernib>palette_frost.png</textureslidernib>
+        <textureslidernibfocus>palette_gold.png</textureslidernibfocus>
+        <include>SettingsRowStyle</include>
+        <visible>false</visible>
+      </control>
+      <control type="colorbutton" id="15">
+        <colorboxwidth>60</colorboxwidth>
+        <colorboxheight>36</colorboxheight>
+        <include>SettingsRowStyle</include>
+        <visible>false</visible>
+      </control>
+      <control type="image" id="11">
+        <left>0</left>
+        <top>0</top>
+        <width>1644</width>
+        <height>2</height>
+        <texture>progress_track.png</texture>
+        <visible>false</visible>
+      </control>
+      <control type="label" id="14">
+        <left>24</left>
+        <top>0</top>
+        <width>1596</width>
+        <height>50</height>
+        <font>font_label_semibold</font>
+        <textcolor>mist</textcolor>
+        <label />
+        <visible>false</visible>
+      </control>
+      <control type="button" id="20">
+        <left>1540</left>
+        <top>115</top>
+        <width>300</width>
+        <height>64</height>
+        <label />
+        <onclick>Action(SettingsLevelChange)</onclick>
+        <onup>3</onup>
+        <ondown>3</ondown>
+        <onleft>3</onleft>
+      </control>
+      <control type="button" id="28">
+        <left>1480</left>
+        <top>994</top>
+        <width>240</width>
+        <height>64</height>
+        <label>$LOCALIZE[31600]</label>
+        <onup>5</onup>
+        <onleft>29</onleft>
+        <onright>28</onright>
+      </control>
+      <control type="button" id="29">
+        <left>1220</left>
+        <top>994</top>
+        <width>240</width>
+        <height>64</height>
+        <label>$LOCALIZE[31601]</label>
+        <onup>5</onup>
+        <onleft>29</onleft>
+        <onright>28</onright>
+      </control>
+      <control type="button" id="30">
+        <left>960</left>
+        <top>994</top>
+        <width>240</width>
+        <height>64</height>
+        <label />
+        <onclick />
+        <onup>5</onup>
+        <onleft>29</onleft>
+        <onright>28</onright>
+      </control>
+    </definition>
+  </include>
+  <include name="SettingsHome">
+    <definition>
+      <include content="SettingsBackdrop" />
+      <include content="HubRail">
+        <param name="return" value="510" />
+        <param name="sidefocus" value="907" />
+        <param name="topfocus" value="917" />
+      </include>
+      <control type="group" id="8050">
+        <include content="InfoContentMotion" />
+        <include content="SettingsHeading">
+          <param name="title" value="$LOCALIZE[31625]" />
+        </include>
+        <control type="panel" id="510">
+          <left>196</left>
+          <top>310</top>
+          <width>1644</width>
+          <height>718</height>
+          <onup>601</onup>
+          <onleft>9000</onleft>
+          <onright>510</onright>
+          <ondown>510</ondown>
+          <itemlayout width="548" height="178">
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>532</width>
+              <height>154</height>
+              <texture border="panel_border">glass_panel.png</texture>
+              <visible>Control.HasFocus($PARAM[id])</visible>
+            </control>
+            <control type="image">
+              <left>24</left>
+              <top>48</top>
+              <width>46</width>
+              <height>46</height>
+              <texture>$INFO[ListItem.Icon]</texture>
+              <aspectratio>keep</aspectratio>
+            </control>
+            <control type="label">
+              <left>90</left>
+              <top>30</top>
+              <width>420</width>
+              <height>45</height>
+              <font>font_heading_small</font>
+              <textcolor>frost</textcolor>
+              <label>$INFO[ListItem.Label]</label>
+            </control>
+            <control type="label">
+              <left>90</left>
+              <top>80</top>
+              <width>416</width>
+              <height>44</height>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+              <label>$INFO[ListItem.Label2]</label>
+            </control>
+          </itemlayout>
+          <focusedlayout width="548" height="178">
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>532</width>
+              <height>154</height>
+              <texture border="capsule_border">frost_fill.png</texture>
+              <visible>!Control.HasFocus($PARAM[id])</visible>
+            </control>
+            <control type="image">
+              <left>-48</left>
+              <top>-48</top>
+              <width>628</width>
+              <height>250</height>
+              <texture border="focus_glow_border">focus_glow.png</texture>
+              <visible>Control.HasFocus($PARAM[id])</visible>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>532</width>
+              <height>154</height>
+              <texture border="focus_border">focus_button.png</texture>
+              <visible>Control.HasFocus($PARAM[id])</visible>
+            </control>
+            <control type="image">
+              <left>24</left>
+              <top>48</top>
+              <width>46</width>
+              <height>46</height>
+              <texture>$INFO[ListItem.Icon]</texture>
+              <aspectratio>keep</aspectratio>
+            </control>
+            <control type="label">
+              <left>90</left>
+              <top>30</top>
+              <width>420</width>
+              <height>45</height>
+              <font>font_heading_small</font>
+              <textcolor>frost</textcolor>
+              <label>$INFO[ListItem.Label]</label>
+            </control>
+            <control type="label">
+              <left>90</left>
+              <top>80</top>
+              <width>416</width>
+              <height>44</height>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+              <label>$INFO[ListItem.Label2]</label>
+            </control>
+            <control type="image">
+              <left>26</left>
+              <top>146</top>
+              <width>96</width>
+              <height>16</height>
+              <texture>landing_glint.png</texture>
+              <visible>Control.HasFocus($PARAM[id]) + !Skin.HasSetting(AmbientEffects.Disabled)</visible>
+              <animation effect="slide" start="0,0" end="400,0" time="500" delay="180">WindowOpen</animation>
+              <animation effect="fade" start="100" end="0" time="100" delay="650">WindowOpen</animation>
+            </control>
+          </focusedlayout>
+          <content>
+            <item id="0">
+              <label>$LOCALIZE[31602]</label>
+              <label2>$LOCALIZE[31603]</label2>
+              <icon>icons/play.png</icon>
+              <onclick>ActivateWindow(PlayerSettings)</onclick>
+            </item>
+            <item id="1">
+              <label>$LOCALIZE[31604]</label>
+              <label2>$LOCALIZE[31605]</label2>
+              <icon>icons/movies.png</icon>
+              <onclick>ActivateWindow(MediaSettings)</onclick>
+            </item>
+            <item id="2">
+              <label>$LOCALIZE[31606]</label>
+              <label2>$LOCALIZE[31607]</label2>
+              <icon>icons/tv.png</icon>
+              <onclick>ActivateWindow(MediaSettings,videolibrary)</onclick>
+            </item>
+            <item id="3">
+              <label>$LOCALIZE[31608]</label>
+              <label2>$LOCALIZE[31609]</label2>
+              <icon>icons/tv.png</icon>
+              <onclick>ActivateWindow(PVRSettings)</onclick>
+            </item>
+            <item id="4">
+              <label>$LOCALIZE[31610]</label>
+              <label2>$LOCALIZE[31611]</label2>
+              <icon>icons/discover.png</icon>
+              <onclick>ActivateWindow(ServiceSettings)</onclick>
+            </item>
+            <item id="5">
+              <label>$LOCALIZE[31612]</label>
+              <label2>$LOCALIZE[31613]</label2>
+              <icon>icons/settings.png</icon>
+              <onclick>ActivateWindow(InterfaceSettings)</onclick>
+            </item>
+            <item id="6">
+              <label>$LOCALIZE[31614]</label>
+              <label2>$LOCALIZE[31615]</label2>
+              <icon>icons/settings.png</icon>
+              <onclick>ActivateWindow(SystemSettings)</onclick>
+            </item>
+            <item id="7">
+              <label>$LOCALIZE[31616]</label>
+              <label2>$LOCALIZE[31617]</label2>
+              <icon>icons/discover.png</icon>
+              <onclick>ActivateWindow(AddonBrowser)</onclick>
+            </item>
+            <item id="8">
+              <label>$LOCALIZE[31618]</label>
+              <label2>$LOCALIZE[31619]</label2>
+              <icon>icons/home.png</icon>
+              <onclick>ActivateWindow(Profiles)</onclick>
+            </item>
+            <item id="9">
+              <label>$LOCALIZE[31620]</label>
+              <label2>$LOCALIZE[31621]</label2>
+              <icon>icons/movies.png</icon>
+              <onclick>ActivateWindow(FileManager)</onclick>
+            </item>
+          </content>
+        </control>
+        <control type="group" id="600">
+          <control type="image">
+            <left>196</left>
+            <top>210</top>
+            <width>744</width>
+            <height>64</height>
+            <texture border="capsule_border">glass_capsule.png</texture>
+            <visible>ControlGroup(600).HasFocus</visible>
+          </control>
+          <control type="image">
+            <left>196</left>
+            <top>210</top>
+            <width>240</width>
+            <height>64</height>
+            <texture border="capsule_border">frost_fill.png</texture>
+            <visible>!ControlGroup(600).HasFocus</visible>
+          </control>
+          <control type="button" id="601">
+            <left>196</left>
+            <top>210</top>
+            <width>240</width>
+            <height>64</height>
+            <label>$LOCALIZE[31622]</label>
+            <onclick>SetFocus(510)</onclick>
+            <onup>9000</onup>
+            <ondown>510</ondown>
+            <onleft>9000</onleft>
+            <onright>602</onright>
+            <texturenofocus border="capsule_border" />
+          </control>
+          <control type="button" id="602">
+            <left>448</left>
+            <top>210</top>
+            <width>240</width>
+            <height>64</height>
+            <label>$LOCALIZE[31623]</label>
+            <onclick>ActivateWindow(SkinSettings)</onclick>
+            <onup>9000</onup>
+            <ondown>510</ondown>
+            <onleft>601</onleft>
+            <onright>603</onright>
+            <texturenofocus border="capsule_border" />
+          </control>
+          <control type="button" id="603">
+            <left>700</left>
+            <top>210</top>
+            <width>240</width>
+            <height>64</height>
+            <label>$LOCALIZE[31624]</label>
+            <onclick>ActivateWindow(SystemInfo)</onclick>
+            <onup>9000</onup>
+            <ondown>510</ondown>
+            <onleft>602</onleft>
+            <onright>601</onright>
+            <texturenofocus border="capsule_border" />
+          </control>
+        </control>
+      </control>
+    </definition>
+    <param name="id" default="510" />
+  </include>
+  <variable name="SettingValue0">
+    <value condition="Skin.String(Hub.Navigation,rail)">$LOCALIZE[31632]</value>
+    <value condition="Skin.String(Hub.Navigation,icons)">$LOCALIZE[31633]</value>
+    <value condition="Skin.String(Hub.Navigation,top_left)">$LOCALIZE[31634]</value>
+    <value condition="Skin.String(Hub.Navigation,top_centre)">$LOCALIZE[31635]</value>
+    <value>$LOCALIZE[31632]</value>
+  </variable>
+  <variable name="SettingValue1">
+    <value condition="Skin.String(Home.Continue.Layout,board)">$LOCALIZE[31638]</value>
+    <value condition="Skin.String(Home.Continue.Layout,hero)">$LOCALIZE[31639]</value>
+    <value condition="Skin.String(Home.Continue.Layout,landscape)">$LOCALIZE[31640]</value>
+    <value condition="Skin.String(Home.Continue.Layout,poster)">$LOCALIZE[31641]</value>
+    <value condition="Skin.String(Home.Continue.Layout,square)">$LOCALIZE[31642]</value>
+    <value>$LOCALIZE[31638]</value>
+  </variable>
+  <variable name="SettingValue2">
+    <value condition="Skin.String(Home.Movies.Layout,board)">$LOCALIZE[31638]</value>
+    <value condition="Skin.String(Home.Movies.Layout,hero)">$LOCALIZE[31639]</value>
+    <value condition="Skin.String(Home.Movies.Layout,landscape)">$LOCALIZE[31640]</value>
+    <value condition="Skin.String(Home.Movies.Layout,poster)">$LOCALIZE[31641]</value>
+    <value condition="Skin.String(Home.Movies.Layout,square)">$LOCALIZE[31642]</value>
+    <value>$LOCALIZE[31641]</value>
+  </variable>
+  <variable name="SettingValue3">
+    <value condition="Skin.String(Home.Next.Layout,board)">$LOCALIZE[31638]</value>
+    <value condition="Skin.String(Home.Next.Layout,hero)">$LOCALIZE[31639]</value>
+    <value condition="Skin.String(Home.Next.Layout,landscape)">$LOCALIZE[31640]</value>
+    <value condition="Skin.String(Home.Next.Layout,poster)">$LOCALIZE[31641]</value>
+    <value condition="Skin.String(Home.Next.Layout,square)">$LOCALIZE[31642]</value>
+    <value>$LOCALIZE[31640]</value>
+  </variable>
+  <variable name="SettingValue4">
+    <value condition="Skin.String(Home.Episodes.Layout,board)">$LOCALIZE[31638]</value>
+    <value condition="Skin.String(Home.Episodes.Layout,hero)">$LOCALIZE[31639]</value>
+    <value condition="Skin.String(Home.Episodes.Layout,landscape)">$LOCALIZE[31640]</value>
+    <value condition="Skin.String(Home.Episodes.Layout,poster)">$LOCALIZE[31641]</value>
+    <value condition="Skin.String(Home.Episodes.Layout,square)">$LOCALIZE[31642]</value>
+    <value>$LOCALIZE[31640]</value>
+  </variable>
+  <variable name="SettingValue5">
+    <value condition="Skin.String(Home.Art.Mode,blurred)">$LOCALIZE[31651]</value>
+    <value condition="Skin.String(Home.Art.Mode,bound)">$LOCALIZE[31652]</value>
+    <value>$LOCALIZE[31651]</value>
+  </variable>
+  <include name="SettingsDirectoryLayouts">
+    <param name="width" default="1644" />
+    <definition>
+      <itemlayout width="$PARAM[width]" height="104">
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>$PARAM[width]</width>
+          <height>98</height>
+          <texture border="capsule_border">glass_capsule.png</texture>
+          <visible>Control.HasFocus($PARAM[id])</visible>
+        </control>
+        <control type="image">
+          <left>20</left>
+          <top>14</top>
+          <width>90</width>
+          <height>68</height>
+          <texture>$INFO[ListItem.Icon]</texture>
+          <aspectratio>keep</aspectratio>
+          <aspectratio>keep</aspectratio>
+        </control>
+        <control type="label">
+          <left>134</left>
+          <top>9</top>
+          <width>1000</width>
+          <height>44</height>
+          <font>font_body_large</font>
+          <textcolor>frost</textcolor>
+          <label>$INFO[ListItem.Label]</label>
+          <right>24</right>
+        </control>
+        <control type="label">
+          <left>134</left>
+          <top>53</top>
+          <width>1000</width>
+          <height>36</height>
+          <font>font_label</font>
+          <textcolor>mist</textcolor>
+          <label>$INFO[ListItem.Label2]</label>
+          <right>24</right>
+        </control>
+      </itemlayout>
+      <focusedlayout width="$PARAM[width]" height="104">
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>$PARAM[width]</width>
+          <height>98</height>
+          <texture border="capsule_border">frost_fill.png</texture>
+          <visible>!Control.HasFocus($PARAM[id])</visible>
+        </control>
+        <control type="image">
+          <left>-48</left>
+          <top>-48</top>
+          <width>$PARAM[width]</width>
+          <height>194</height>
+          <texture border="focus_glow_border">focus_glow.png</texture>
+          <visible>Control.HasFocus($PARAM[id])</visible>
+          <right>-48</right>
+        </control>
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>$PARAM[width]</width>
+          <height>98</height>
+          <texture border="focus_border">focus_button.png</texture>
+          <visible>Control.HasFocus($PARAM[id])</visible>
+        </control>
+        <control type="image">
+          <left>20</left>
+          <top>14</top>
+          <width>90</width>
+          <height>68</height>
+          <texture>$INFO[ListItem.Icon]</texture>
+          <aspectratio>keep</aspectratio>
+          <aspectratio>keep</aspectratio>
+        </control>
+        <control type="label">
+          <left>134</left>
+          <top>9</top>
+          <width>1000</width>
+          <height>44</height>
+          <font>font_body_large</font>
+          <textcolor>frost</textcolor>
+          <label>$INFO[ListItem.Label]</label>
+          <right>24</right>
+        </control>
+        <control type="label">
+          <left>134</left>
+          <top>53</top>
+          <width>1000</width>
+          <height>36</height>
+          <font>font_label</font>
+          <textcolor>mist</textcolor>
+          <label>$INFO[ListItem.Label2]</label>
+          <right>24</right>
+        </control>
+      </focusedlayout>
+    </definition>
+    <param name="id" default="50" />
+  </include>
+  <variable name="PVRProgrammeArt">
+    <value condition="!String.IsEmpty(ListItem.EpgEventIcon)">$INFO[ListItem.EpgEventIcon]</value>
+    <value condition="!String.IsEmpty(ListItem.Art(thumb))">$INFO[ListItem.Art(thumb)]</value>
+    <value>special://skin/fanart.jpg</value>
+  </variable>
+  <variable name="PVRChannelTitle">
+    <value condition="!String.IsEmpty(ListItem.EpgEventTitle)">$INFO[ListItem.EpgEventTitle]</value>
+    <value>$INFO[ListItem.Label]</value>
+  </variable>
+  <include name="LiveTVGroups">
+    <definition>
+      <control type="list" id="11">
+        <left>196</left>
+        <top>45</top>
+        <width>1120</width>
+        <height>64</height>
+        <orientation>horizontal</orientation>
+        <onup>9000</onup>
+        <ondown>50</ondown>
+        <onleft>9000</onleft>
+        <onright>11</onright>
+        <itemlayout width="240" height="64">
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>232</width>
+            <height>64</height>
+            <texture border="capsule_border">frost_fill.png</texture>
+            <visible>ListItem.IsSelected</visible>
+          </control>
+          <control type="label">
+            <left>16</left>
+            <top>0</top>
+            <width>200</width>
+            <height>64</height>
+            <font>font_body</font>
+            <textcolor>frost</textcolor>
+            <label>$INFO[ListItem.Label]</label>
+          </control>
+        </itemlayout>
+        <focusedlayout width="240" height="64">
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>232</width>
+            <height>64</height>
+            <texture border="capsule_border">frost_fill.png</texture>
+            <visible>!Control.HasFocus(11)</visible>
+          </control>
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>232</width>
+            <height>64</height>
+            <texture border="focus_border">focus_button.png</texture>
+            <visible>Control.HasFocus(11)</visible>
+          </control>
+          <control type="label">
+            <left>16</left>
+            <top>0</top>
+            <width>200</width>
+            <height>64</height>
+            <font>font_body</font>
+            <textcolor>frost</textcolor>
+            <label>$INFO[ListItem.Label]</label>
+          </control>
+        </focusedlayout>
+      </control>
+    </definition>
+  </include>
+  <include name="LiveTVChannelLayouts">
+    <definition>
+      <itemlayout width="1040" height="128">
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>1030</width>
+          <height>118</height>
+          <texture border="capsule_border">glass_capsule.png</texture>
+          <visible>Control.HasFocus($PARAM[id])</visible>
+        </control>
+        <control type="label">
+          <left>18</left>
+          <top>0</top>
+          <width>60</width>
+          <height>112</height>
+          <font>font_label</font>
+          <textcolor>mist</textcolor>
+          <label>$INFO[ListItem.ChannelNumberLabel]</label>
+        </control>
+        <control type="image">
+          <left>88</left>
+          <top>18</top>
+          <width>120</width>
+          <height>72</height>
+          <texture>$INFO[ListItem.Icon]</texture>
+          <aspectratio>keep</aspectratio>
+        </control>
+        <control type="label">
+          <left>232</left>
+          <top>10</top>
+          <width>770</width>
+          <height>38</height>
+          <font>font_body_large</font>
+          <textcolor>frost</textcolor>
+          <label>$VAR[PVRChannelTitle]</label>
+        </control>
+        <control type="label">
+          <left>232</left>
+          <top>51</top>
+          <width>770</width>
+          <height>30</height>
+          <font>font_label</font>
+          <textcolor>mist</textcolor>
+          <label>$INFO[ListItem.StartTime] – $INFO[ListItem.EndTime]   $INFO[ListItem.ChannelName]</label>
+        </control>
+        <control type="label">
+          <left>232</left>
+          <top>82</top>
+          <width>770</width>
+          <height>28</height>
+          <font>font_label_small</font>
+          <textcolor>mist</textcolor>
+          <label>$INFO[ListItem.NextStartTime,Next · ,] $INFO[ListItem.NextTitle]</label>
+        </control>
+        <control type="progress">
+          <left>232</left>
+          <top>113</top>
+          <width>770</width>
+          <height>4</height>
+          <info>ListItem.Progress</info>
+          <texturebg border="progress_border">progress_track.png</texturebg>
+          <lefttexture />
+          <midtexture border="progress_border">progress_gold.png</midtexture>
+          <righttexture />
+          <overlaytexture />
+        </control>
+      </itemlayout>
+      <focusedlayout width="1040" height="128">
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>1030</width>
+          <height>118</height>
+          <texture border="capsule_border">frost_fill.png</texture>
+          <visible>!Control.HasFocus($PARAM[id])</visible>
+        </control>
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>1030</width>
+          <height>118</height>
+          <texture border="focus_border">focus_button.png</texture>
+          <visible>Control.HasFocus($PARAM[id])</visible>
+        </control>
+        <control type="label">
+          <left>18</left>
+          <top>0</top>
+          <width>60</width>
+          <height>112</height>
+          <font>font_label</font>
+          <textcolor>mist</textcolor>
+          <label>$INFO[ListItem.ChannelNumberLabel]</label>
+        </control>
+        <control type="image">
+          <left>88</left>
+          <top>18</top>
+          <width>120</width>
+          <height>72</height>
+          <texture>$INFO[ListItem.Icon]</texture>
+          <aspectratio>keep</aspectratio>
+        </control>
+        <control type="label">
+          <left>232</left>
+          <top>10</top>
+          <width>770</width>
+          <height>38</height>
+          <font>font_body_large</font>
+          <textcolor>frost</textcolor>
+          <label>$VAR[PVRChannelTitle]</label>
+        </control>
+        <control type="label">
+          <left>232</left>
+          <top>51</top>
+          <width>770</width>
+          <height>30</height>
+          <font>font_label</font>
+          <textcolor>mist</textcolor>
+          <label>$INFO[ListItem.StartTime] – $INFO[ListItem.EndTime]   $INFO[ListItem.ChannelName]</label>
+        </control>
+        <control type="label">
+          <left>232</left>
+          <top>82</top>
+          <width>770</width>
+          <height>28</height>
+          <font>font_label_small</font>
+          <textcolor>mist</textcolor>
+          <label>$INFO[ListItem.NextStartTime,Next · ,] $INFO[ListItem.NextTitle]</label>
+        </control>
+        <control type="progress">
+          <left>232</left>
+          <top>113</top>
+          <width>770</width>
+          <height>4</height>
+          <info>ListItem.Progress</info>
+          <texturebg border="progress_border">progress_track.png</texturebg>
+          <lefttexture />
+          <midtexture border="progress_border">progress_gold.png</midtexture>
+          <righttexture />
+          <overlaytexture />
+        </control>
+      </focusedlayout>
+    </definition>
+    <param name="id" default="50" />
+  </include>
+  <include name="LiveTVTileLayouts">
+    <param name="native" default="true" />
+    <definition>
+      <itemlayout width="334" height="274">
+        <control type="group">
+          <width>300</width>
+          <height>169</height>
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>300</width>
+            <height>169</height>
+            <texture diffuse="home_landscape_mask.png">$VAR[PVRProgrammeArt]</texture>
+            <aspectratio>scale</aspectratio>
+          </control>
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>300</width>
+            <height>169</height>
+            <texture>card_shade.png</texture>
+          </control>
+          <control type="image">
+            <left>14</left>
+            <top>96</top>
+            <width>110</width>
+            <height>46</height>
+            <texture>$INFO[ListItem.Icon]</texture>
+            <visible>$PARAM[native]</visible>
+            <aspectratio>keep</aspectratio>
+          </control>
+          <control type="label">
+            <left>14</left>
+            <top>8</top>
+            <width>80</width>
+            <height>35</height>
+            <font>font_label_small</font>
+            <textcolor>frost</textcolor>
+            <label>$INFO[ListItem.ChannelNumberLabel]</label>
+          </control>
+          <control type="progress">
+            <visible>$PARAM[native]</visible>
+            <left>16</left>
+            <top>151</top>
+            <width>268</width>
+            <height>4</height>
+            <info>ListItem.Progress</info>
+            <texturebg border="progress_border">progress_track.png</texturebg>
+            <lefttexture />
+            <midtexture border="progress_border">progress_gold.png</midtexture>
+            <righttexture />
+            <overlaytexture />
+          </control>
+          <control type="label">
+            <left>0</left>
+            <top>188</top>
+            <width>300</width>
+            <height>34</height>
+            <font>font_label_large</font>
+            <textcolor>frost</textcolor>
+            <label>$VAR[PVRChannelTitle]</label>
+          </control>
+          <control type="label">
+            <left>0</left>
+            <top>224</top>
+            <width>300</width>
+            <height>30</height>
+            <font>font_label_small</font>
+            <textcolor>mist</textcolor>
+            <label>$INFO[ListItem.ChannelName]$INFO[ListItem.Property(Starlight.Source)]</label>
+          </control>
+          <animation effect="fade" start="100" end="40" time="180" condition="!Control.HasFocus($PARAM[id])">Conditional</animation>
+        </control>
+      </itemlayout>
+      <focusedlayout width="334" height="274">
+        <control type="group">
+          <width>300</width>
+          <height>169</height>
+          <animation effect="zoom" start="100" end="110" center="150,169" time="180" condition="Control.HasFocus($PARAM[id])">Conditional</animation>
+          <control type="image">
+            <left>-48</left>
+            <top>-48</top>
+            <width>396</width>
+            <height>265</height>
+            <texture border="card_glow_border">focus_card_glow.png</texture>
+            <visible>Control.HasFocus($PARAM[id])</visible>
+          </control>
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>300</width>
+            <height>169</height>
+            <texture diffuse="home_landscape_mask.png">$VAR[PVRProgrammeArt]</texture>
+            <aspectratio>scale</aspectratio>
+          </control>
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>300</width>
+            <height>169</height>
+            <texture>card_shade.png</texture>
+          </control>
+          <control type="image">
+            <left>14</left>
+            <top>96</top>
+            <width>110</width>
+            <height>46</height>
+            <texture>$INFO[ListItem.Icon]</texture>
+            <visible>$PARAM[native]</visible>
+            <aspectratio>keep</aspectratio>
+          </control>
+          <control type="label">
+            <left>14</left>
+            <top>8</top>
+            <width>80</width>
+            <height>35</height>
+            <font>font_label_small</font>
+            <textcolor>frost</textcolor>
+            <label>$INFO[ListItem.ChannelNumberLabel]</label>
+          </control>
+          <control type="progress">
+            <visible>$PARAM[native]</visible>
+            <left>16</left>
+            <top>151</top>
+            <width>268</width>
+            <height>4</height>
+            <info>ListItem.Progress</info>
+            <texturebg border="progress_border">progress_track.png</texturebg>
+            <lefttexture />
+            <midtexture border="progress_border">progress_gold.png</midtexture>
+            <righttexture />
+            <overlaytexture />
+          </control>
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>300</width>
+            <height>169</height>
+            <texture border="card_border">focus_card.png</texture>
+            <visible>Control.HasFocus($PARAM[id])</visible>
+          </control>
+          <control type="label">
+            <left>0</left>
+            <top>188</top>
+            <width>300</width>
+            <height>34</height>
+            <font>font_label_large</font>
+            <textcolor>frost</textcolor>
+            <label>$VAR[PVRChannelTitle]</label>
+          </control>
+          <control type="label">
+            <left>0</left>
+            <top>224</top>
+            <width>300</width>
+            <height>30</height>
+            <font>font_label_small</font>
+            <textcolor>mist</textcolor>
+            <label>$INFO[ListItem.ChannelName]$INFO[ListItem.Property(Starlight.Source)]</label>
+          </control>
+          <animation effect="fade" start="100" end="80" time="180" condition="!Control.HasFocus($PARAM[id])">Conditional</animation>
+          <control type="image">
+            <left>26</left>
+            <top>161</top>
+            <width>96</width>
+            <height>16</height>
+            <texture>landing_glint.png</texture>
+            <visible>Control.HasFocus($PARAM[id]) + !Skin.HasSetting(AmbientEffects.Disabled)</visible>
+            <animation effect="slide" start="0,0" end="170,0" time="500" delay="180">WindowOpen</animation>
+            <animation effect="fade" start="100" end="0" time="100" delay="650">WindowOpen</animation>
+          </control>
+        </control>
+      </focusedlayout>
+    </definition>
+  </include>
+  <include name="LiveTVRecentRow">
+    <param name="id" default="610" />
+    <param name="x" default="196" />
+    <param name="y" default="386" />
+    <param name="up" default="600" />
+    <param name="down" default="620" />
+    <definition>
+      <control type="list" id="$PARAM[id]">
+        <left>$PARAM[x]</left>
+        <top>$PARAM[y]</top>
+        <width>1644</width>
+        <height>280</height>
+        <orientation>horizontal</orientation>
+        <onup>$PARAM[up]</onup>
+        <ondown>$PARAM[down]</ondown>
+        <onleft>9000</onleft>
+        <onright>$PARAM[id]</onright>
+        <include content="LiveTVTileLayouts">
+          <param name="id" value="$PARAM[id]" />
+        </include>
+        <content sortby="lastplayed" sortorder="descending" limit="10">pvr://channels/tv/All channels/?view=lastplayed</content>
+        <onfocus>SetProperty(Starlight.Container,$PARAM[id],home)</onfocus>
+      </control>
+    </definition>
+  </include>
+  <include name="LiveTVHomeWidget">
+    <definition>
+      <control type="group" id="1550">
+        <width>1740</width>
+        <height>380</height>
+        <control type="label">
+          <left>48</left>
+          <top>0</top>
+          <width>1200</width>
+          <height>56</height>
+          <font>font_heading</font>
+          <textcolor>frost</textcolor>
+          <label>$LOCALIZE[31689]</label>
+        </control>
+        <include content="LiveTVRecentRow">
+          <param name="id" value="570" />
+          <param name="x" value="48" />
+          <param name="y" value="96" />
+          <param name="up" value="1540" />
+          <param name="down" value="9000" />
+        </include>
+        <control type="image">
+          <left>48</left>
+          <top>96</top>
+          <width>88</width>
+          <height>88</height>
+          <texture>busy_horizon.png</texture>
+          <visible>Integer.IsEqual(Container(570).NumItems,0)</visible>
+        </control>
+        <control type="label">
+          <left>160</left>
+          <top>118</top>
+          <width>1350</width>
+          <height>54</height>
+          <font>font_body</font>
+          <textcolor>mist</textcolor>
+          <label>$LOCALIZE[31705]</label>
+          <visible>Integer.IsEqual(Container(570).NumItems,0)</visible>
+        </control>
+      </control>
+    </definition>
+  </include>
+  <variable name="SettingsRowSurface">
+    <value condition="ControlGroup(5).HasFocus | ControlGroup(700).HasFocus">glass_capsule.png</value>
+    <value />
+  </variable>
+  <variable name="SettingsCategoryFocus">
+    <value condition="ControlGroup(3).HasFocus">focus_button.png</value>
+    <value>frost_fill.png</value>
+  </variable>
+  <variable name="SettingsCategorySurface">
+    <value condition="ControlGroup(3).HasFocus">glass_capsule.png</value>
+    <value />
+  </variable>
+  <variable name="LiveTVContextPosition">
+    <value condition="String.IsEqual(Window(home).Property(Starlight.Container),620)">$INFO[Container(620).Position]</value>
+    <value>$INFO[Container(610).Position]</value>
+  </variable>
+  <variable name="FileBrowserArt">
+    <value condition="!String.IsEmpty(Container(450).ListItem.Thumb)">$INFO[Container(450).ListItem.Thumb]</value>
+    <value>$INFO[Container(450).ListItem.Icon]</value>
+  </variable>
+  <variable name="FileBrowserRowArt">
+    <value condition="!String.IsEmpty(ListItem.Thumb)">$INFO[ListItem.Thumb]</value>
+    <value>$INFO[ListItem.Icon]</value>
+  </variable>
+</includes>

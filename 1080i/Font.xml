@@ -105,5 +105,11 @@
       <size>72</size>
       <linespacing>1.15</linespacing>
     </font>
+    <font>
+      <name>font_pvr_title</name>
+      <filename>manrope-bold.ttf</filename>
+      <size>56</size>
+      <linespacing>1.15</linespacing>
+    </font>
   </fontset>
 </fonts>

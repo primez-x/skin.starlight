@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <defaultcontrol always="true">800</defaultcontrol>
+  <controls>
+    <include content="SettingsBackdrop" />
+    <include content="SettingsHeading">
+      <param name="title" value="$INFO[ListItem.Label]" />
+    </include>
+    <control type="image">
+      <left>196</left>
+      <top>240</top>
+      <width>580</width>
+      <height>326</height>
+      <texture diffuse="home_landscape_mask.png">$VAR[PVRProgrammeArt]</texture>
+      <aspectratio>scale</aspectratio>
+    </control>
+    <control type="image">
+      <left>220</left>
+      <top>484</top>
+      <width>140</width>
+      <height>58</height>
+      <texture>$INFO[ListItem.Icon]</texture>
+      <aspectratio>keep</aspectratio>
+    </control>
+    <control type="label">
+      <left>820</left>
+      <top>240</top>
+      <width>1000</width>
+      <height>50</height>
+      <font>font_heading_small</font>
+      <textcolor>frost</textcolor>
+      <label>$INFO[ListItem.ChannelNumberLabel]  $INFO[ListItem.ChannelName]</label>
+    </control>
+    <control type="label">
+      <left>820</left>
+      <top>308</top>
+      <width>1000</width>
+      <height>44</height>
+      <font>font_body</font>
+      <textcolor>mist</textcolor>
+      <label>$INFO[ListItem.StartDate]   $INFO[ListItem.StartTime] – $INFO[ListItem.EndTime]</label>
+    </control>
+    <control type="label">
+      <left>820</left>
+      <top>362</top>
+      <width>1000</width>
+      <height>44</height>
+      <font>font_body</font>
+      <textcolor>mist</textcolor>
+      <label>$INFO[ListItem.Genre]   $INFO[ListItem.EpisodeName]</label>
+    </control>
+    <control type="textbox">
+      <left>820</left>
+      <top>428</top>
+      <width>1000</width>
+      <height>152</height>
+      <font>font_body_large</font>
+      <label>$INFO[ListItem.Plot]</label>
+    </control>
+    <control type="grouplist" id="800">
+      <left>196</left>
+      <top>652</top>
+      <width>1644</width>
+      <height>320</height>
+      <orientation>vertical</orientation>
+      <itemgap>6</itemgap>
+      <control type="button" id="5">
+        <left>0</left>
+        <top>0</top>
+        <width>1644</width>
+        <height>64</height>
+        <label>$LOCALIZE[31693]</label>
+        <onclick />
+        <onup>800</onup>
+        <ondown>800</ondown>
+        <align>left</align>
+        <textoffsetx>24</textoffsetx>
+        <texturenofocus border="capsule_border">glass_capsule.png</texturenofocus>
+      </control>
+      <control type="button" id="8">
+        <left>0</left>
+        <top>0</top>
+        <width>1644</width>
+        <height>64</height>
+        <label>$LOCALIZE[31694]</label>
+        <onclick />
+        <onup>800</onup>
+        <ondown>800</ondown>
+        <align>left</align>
+        <textoffsetx>24</textoffsetx>
+        <texturenofocus border="capsule_border">glass_capsule.png</texturenofocus>
+      </control>
+      <control type="button" id="10">
+        <left>0</left>
+        <top>0</top>
+        <width>1644</width>
+        <height>64</height>
+        <label>$LOCALIZE[31695]</label>
+        <onclick />
+        <onup>800</onup>
+        <ondown>800</ondown>
+        <align>left</align>
+        <textoffsetx>24</textoffsetx>
+        <texturenofocus border="capsule_border">glass_capsule.png</texturenofocus>
+      </control>
+      <control type="button" id="6">
+        <left>0</left>
+        <top>0</top>
+        <width>1644</width>
+        <height>64</height>
+        <label>$LOCALIZE[31696]</label>
+        <onclick />
+        <onup>800</onup>
+        <ondown>800</ondown>
+        <align>left</align>
+        <textoffsetx>24</textoffsetx>
+        <texturenofocus border="capsule_border">glass_capsule.png</texturenofocus>
+      </control>
+      <control type="button" id="9">
+        <left>0</left>
+        <top>0</top>
+        <width>1644</width>
+        <height>64</height>
+        <label>$LOCALIZE[31697]</label>
+        <onclick />
+        <onup>800</onup>
+        <ondown>800</ondown>
+        <align>left</align>
+        <textoffsetx>24</textoffsetx>
+        <texturenofocus border="capsule_border">glass_capsule.png</texturenofocus>
+      </control>
+      <control type="button" id="11">
+        <left>0</left>
+        <top>0</top>
+        <width>1644</width>
+        <height>64</height>
+        <label>$LOCALIZE[31698]</label>
+        <onclick />
+        <onup>800</onup>
+        <ondown>800</ondown>
+        <align>left</align>
+        <textoffsetx>24</textoffsetx>
+        <texturenofocus border="capsule_border">glass_capsule.png</texturenofocus>
+      </control>
+      <control type="button" id="4">
+        <left>0</left>
+        <top>0</top>
+        <width>1644</width>
+        <height>64</height>
+        <label>$LOCALIZE[31699]</label>
+        <onclick />
+        <onup>800</onup>
+        <ondown>800</ondown>
+        <align>left</align>
+        <textoffsetx>24</textoffsetx>
+        <texturenofocus border="capsule_border">glass_capsule.png</texturenofocus>
+      </control>
+      <control type="button" id="7">
+        <left>0</left>
+        <top>0</top>
+        <width>1644</width>
+        <height>64</height>
+        <label>$LOCALIZE[31700]</label>
+        <onclick />
+        <onup>800</onup>
+        <ondown>800</ondown>
+        <align>left</align>
+        <textoffsetx>24</textoffsetx>
+        <texturenofocus border="capsule_border">glass_capsule.png</texturenofocus>
+      </control>
+    </control>
+  </controls>
+</window>
