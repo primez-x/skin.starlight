@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window>
-  <defaultcontrol always="true">506</defaultcontrol>
-  <views>500,501,502,503,504,505,506,507,508,510,511,512,513,514,515,517,518,520,521,522,523,524,526,527,528,529</views>
-  <onload>SetProperty(Starlight.Library.Container,506)</onload>
+  <defaultcontrol always="true">4212</defaultcontrol>
+  <views>4200,4201,4202,4203,4204,4205,4206,4207,4208,4209,4210,4211,4212,4213,4214,4215,4216,4217,4218,4219,4220,4221,4222,4223,4224,4225</views>
+  <onload>SetProperty(Starlight.Library.Container,4212)</onload>
   <onload>RunScript(special://skin/resources/library.py,library-monitor)</onload>
   <controls>
     <include content="LibraryWindowControls">
-      <param name="bound" value="Control.IsVisible(506) | Control.IsVisible(501) | Control.IsVisible(502) | Control.IsVisible(503) | Control.IsVisible(504) | Control.IsVisible(505) | Control.IsVisible(521) | Control.IsVisible(522) | Control.IsVisible(523) | Control.IsVisible(524)" />
+      <param name="bound" value="Control.IsVisible(4212) | Control.IsVisible(4207) | Control.IsVisible(4208) | Control.IsVisible(4209) | Control.IsVisible(4210) | Control.IsVisible(4211) | Control.IsVisible(4218) | Control.IsVisible(4219) | Control.IsVisible(4220) | Control.IsVisible(4221)" />
       <param name="sidefocus" value="903" />
       <param name="topfocus" value="913" />
     </include>

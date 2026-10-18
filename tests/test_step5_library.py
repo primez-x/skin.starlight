@@ -12,7 +12,7 @@ import xml.etree.ElementTree as ET
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'resources/lib'))
 sys.path.insert(0, str(ROOT / 'tools'))
-VIEWS = set(range(500, 509)) | set(range(510, 516)) | {517, 518} | set(range(520, 525)) | {526, 527, 528, 529}
+VIEWS = set(range(4200, 4226))
 
 
 class LibraryTests(unittest.TestCase):
@@ -33,6 +33,37 @@ class LibraryTests(unittest.TestCase):
                     self.assertIsNone(controls[identity].find('content'))
                     self.assertEqual(controls[identity].findtext('onleft'), '9000')
                 self.assertIn('resources/library.py,views', ET.tostring(tree, encoding='unicode'))
+
+    def test_view_registry_matches_runtime_and_preview(self):
+        from render_library import VIEW_IDS
+        self.assertEqual(tuple(VIEW_IDS), tuple(sorted(VIEWS)))
+        tree = ast.parse((ROOT / 'resources/library.py').read_text())
+        registry = next(node for node in tree.body if isinstance(node, ast.Assign)
+                        and any(isinstance(target, ast.Name) and target.id == 'VIEW_IDS'
+                                for target in node.targets))
+        self.assertEqual(eval(compile(ast.Expression(registry.value), '<registry>', 'eval')),
+                         tuple(sorted(VIEWS)))
+
+    def test_grid_masks_match_card_geometry(self):
+        from PIL import Image
+        expected = {'library/expanded_mask.png': (736, 312),
+                    'library/row-poster_mask.png': (216, 312),
+                    'library/row-landscape_mask.png': (416, 232),
+                    'home_wide_mask.png': (416, 232)}
+        for name, size in expected.items():
+            with Image.open(ROOT / 'media' / name) as image:
+                self.assertEqual(image.size, size, name)
+            self.assertTrue(all(value % 4 == 0 for value in size))
+        for filename in ('MyVideoNav.xml', 'MyMusicNav.xml', 'Home.xml', 'Custom_1101.xml'):
+            tree = self.expanded(filename)
+            parents = {child: node for node in tree.iter() for child in node}
+            for texture in tree.iter('texture'):
+                name = texture.get('diffuse')
+                if name not in expected:
+                    continue
+                card = parents[texture]
+                self.assertEqual(tuple(int(card.findtext(axis)) for axis in ('width', 'height')),
+                                 expected[name], (filename, name))
 
     def test_native_search_lists_and_explicit_window(self):
         tree = self.expanded('Custom_1100.xml')

@@ -251,7 +251,7 @@ def build(output):
     }
     textures['feature_mask.png'].putalpha(mask((880, 495), 26).resize((880, 495)))
     textures['keyboard_done.png'].putalpha(mask((132, 68), 28).resize((132, 68)))
-    for name, size in [('landscape', (335, 189)), ('poster', (160, 240)), ('wide', (410, 231)), ('square', (230, 230))]:
+    for name, size in [('landscape', (335, 189)), ('poster', (160, 240)), ('wide', (416, 232)), ('square', (230, 230))]:
         shape = Image.new('RGBA', size, (255, 255, 255, 255))
         shape.putalpha(mask(size, 16).resize(size, Image.Resampling.LANCZOS))
         textures['home_' + name + '_mask.png'] = shape

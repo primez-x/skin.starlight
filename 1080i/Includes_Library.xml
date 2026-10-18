@@ -342,9 +342,9 @@
         <height>72</height>
         <visible>Control.HasFocus(700)</visible>
         <texture border="capsule_border">glass_capsule.png</texture>
-        <animation effect="slide" start="0,0" end="0,-310" time="0" condition="Control.IsVisible(528) | Control.IsVisible(529)">Conditional</animation>
+        <animation effect="slide" start="0,0" end="0,-310" time="0" condition="Control.IsVisible(4224) | Control.IsVisible(4225)">Conditional</animation>
       </control>
-      <control type="fixedlist" id="500">
+      <control type="fixedlist" id="4206">
         <left>-24</left>
         <top>560</top>
         <width>1680</width>
@@ -355,7 +355,7 @@
         <focusposition>0</focusposition>
         <itemlayout width="266" height="352">
           <include content="LibraryCard">
-            <param name="id" value="500" />
+            <param name="id" value="4206" />
             <param name="selected" value="false" />
             <param name="width" value="230" />
             <param name="height" value="230" />
@@ -366,7 +366,7 @@
             <param name="glow_height" value="326" />
             <param name="label_y" value="286" />
             <param name="detail_y" value="316" />
-            <param name="active" value="Control.HasFocus(500)" />
+            <param name="active" value="Control.HasFocus(4206)" />
             <param name="center" value="115,230" />
             <param name="native_capsule_y" value="168" />
             <param name="native_capsule_width" value="206" />
@@ -376,7 +376,7 @@
         </itemlayout>
         <focusedlayout width="266" height="352">
           <include content="LibraryCard">
-            <param name="id" value="500" />
+            <param name="id" value="4206" />
             <param name="selected" value="true" />
             <param name="width" value="230" />
             <param name="height" value="230" />
@@ -387,7 +387,7 @@
             <param name="glow_height" value="326" />
             <param name="label_y" value="286" />
             <param name="detail_y" value="316" />
-            <param name="active" value="Control.HasFocus(500)" />
+            <param name="active" value="Control.HasFocus(4206)" />
             <param name="center" value="115,230" />
             <param name="native_capsule_y" value="168" />
             <param name="native_capsule_width" value="206" />
@@ -397,24 +397,24 @@
         </focusedlayout>
         <scrolltime>220</scrolltime>
         <onup>22</onup>
-        <ondown>500</ondown>
+        <ondown>4206</ondown>
         <onleft>9000</onleft>
-        <onright>500</onright>
-        <onfocus>SetProperty(Starlight.Library.Container,500)</onfocus>
+        <onright>4206</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,4206)</onfocus>
       </control>
       <include content="LibraryDetails">
-        <param name="id" value="500" />
+        <param name="id" value="4206" />
         <param name="x" value="0" />
         <param name="y" value="165" />
         <param name="width" value="900" />
-        <param name="title" value="$INFO[Container(500).ListItem.Label]" />
-        <param name="metadata" value="$INFO[Container(500).ListItem.Year,,   ]$INFO[Container(500).ListItem.Artist,,   ]$INFO[Container(500).ListItem.Duration]" />
+        <param name="title" value="$INFO[Container(4206).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(4206).ListItem.Year,,   ]$INFO[Container(4206).ListItem.Artist,,   ]$INFO[Container(4206).ListItem.Duration]" />
       </include>
       <include content="LibraryEmpty">
-        <param name="container" value="500" />
-        <param name="visible" value="Control.IsVisible(500)" />
+        <param name="container" value="4206" />
+        <param name="visible" value="Control.IsVisible(4206)" />
       </include>
-      <control type="fixedlist" id="501">
+      <control type="fixedlist" id="4207">
         <left>-24</left>
         <top>560</top>
         <width>1680</width>
@@ -423,68 +423,68 @@
         <viewtype label="$LOCALIZE[31406]">wrap</viewtype>
         <pagecontrol>60</pagecontrol>
         <focusposition>0</focusposition>
-        <itemlayout width="450" height="353">
+        <itemlayout width="456" height="354">
           <include content="LibraryCard">
-            <param name="id" value="501" />
+            <param name="id" value="4207" />
             <param name="selected" value="false" />
-            <param name="width" value="410" />
-            <param name="height" value="231" />
+            <param name="width" value="416" />
+            <param name="height" value="232" />
             <param name="mask" value="library/row-landscape_mask.png" />
             <param name="art" value="$VAR[LibraryLandscape]" />
             <param name="circle" value="false" />
-            <param name="glow_width" value="506" />
-            <param name="glow_height" value="327" />
-            <param name="label_y" value="287" />
-            <param name="detail_y" value="317" />
-            <param name="active" value="Control.HasFocus(501)" />
-            <param name="center" value="205,231" />
-            <param name="native_capsule_y" value="169" />
-            <param name="native_capsule_width" value="386" />
-            <param name="native_bar_width" value="330" />
+            <param name="glow_width" value="512" />
+            <param name="glow_height" value="328" />
+            <param name="label_y" value="288" />
+            <param name="detail_y" value="318" />
+            <param name="active" value="Control.HasFocus(4207)" />
+            <param name="center" value="208,232" />
+            <param name="native_capsule_y" value="170" />
+            <param name="native_capsule_width" value="392" />
+            <param name="native_bar_width" value="336" />
             <param name="show_native_time" value="true" />
           </include>
         </itemlayout>
-        <focusedlayout width="450" height="353">
+        <focusedlayout width="456" height="354">
           <include content="LibraryCard">
-            <param name="id" value="501" />
+            <param name="id" value="4207" />
             <param name="selected" value="true" />
-            <param name="width" value="410" />
-            <param name="height" value="231" />
+            <param name="width" value="416" />
+            <param name="height" value="232" />
             <param name="mask" value="library/row-landscape_mask.png" />
             <param name="art" value="$VAR[LibraryLandscape]" />
             <param name="circle" value="false" />
-            <param name="glow_width" value="506" />
-            <param name="glow_height" value="327" />
-            <param name="label_y" value="287" />
-            <param name="detail_y" value="317" />
-            <param name="active" value="Control.HasFocus(501)" />
-            <param name="center" value="205,231" />
-            <param name="native_capsule_y" value="169" />
-            <param name="native_capsule_width" value="386" />
-            <param name="native_bar_width" value="330" />
+            <param name="glow_width" value="512" />
+            <param name="glow_height" value="328" />
+            <param name="label_y" value="288" />
+            <param name="detail_y" value="318" />
+            <param name="active" value="Control.HasFocus(4207)" />
+            <param name="center" value="208,232" />
+            <param name="native_capsule_y" value="170" />
+            <param name="native_capsule_width" value="392" />
+            <param name="native_bar_width" value="336" />
             <param name="show_native_time" value="true" />
           </include>
         </focusedlayout>
         <scrolltime>220</scrolltime>
         <onup>22</onup>
-        <ondown>501</ondown>
+        <ondown>4207</ondown>
         <onleft>9000</onleft>
-        <onright>501</onright>
-        <onfocus>SetProperty(Starlight.Library.Container,501)</onfocus>
+        <onright>4207</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,4207)</onfocus>
       </control>
       <include content="LibraryDetails">
-        <param name="id" value="501" />
+        <param name="id" value="4207" />
         <param name="x" value="0" />
         <param name="y" value="165" />
         <param name="width" value="900" />
-        <param name="title" value="$INFO[Container(501).ListItem.Label]" />
-        <param name="metadata" value="$INFO[Container(501).ListItem.Year,,   ]$INFO[Container(501).ListItem.Artist,,   ]$INFO[Container(501).ListItem.Duration]" />
+        <param name="title" value="$INFO[Container(4207).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(4207).ListItem.Year,,   ]$INFO[Container(4207).ListItem.Artist,,   ]$INFO[Container(4207).ListItem.Duration]" />
       </include>
       <include content="LibraryEmpty">
-        <param name="container" value="501" />
-        <param name="visible" value="Control.IsVisible(501)" />
+        <param name="container" value="4207" />
+        <param name="visible" value="Control.IsVisible(4207)" />
       </include>
-      <control type="fixedlist" id="502">
+      <control type="fixedlist" id="4208">
         <left>-24</left>
         <top>560</top>
         <width>1680</width>
@@ -495,7 +495,7 @@
         <focusposition>0</focusposition>
         <itemlayout width="229" height="405">
           <include content="LibraryCard">
-            <param name="id" value="502" />
+            <param name="id" value="4208" />
             <param name="selected" value="false" />
             <param name="width" value="189" />
             <param name="height" value="283" />
@@ -506,7 +506,7 @@
             <param name="glow_height" value="379" />
             <param name="label_y" value="339" />
             <param name="detail_y" value="369" />
-            <param name="active" value="Control.HasFocus(502)" />
+            <param name="active" value="Control.HasFocus(4208)" />
             <param name="center" value="94.5,283" />
             <param name="native_capsule_y" value="221" />
             <param name="native_capsule_width" value="165" />
@@ -516,7 +516,7 @@
         </itemlayout>
         <focusedlayout width="229" height="405">
           <include content="LibraryCard">
-            <param name="id" value="502" />
+            <param name="id" value="4208" />
             <param name="selected" value="true" />
             <param name="width" value="189" />
             <param name="height" value="283" />
@@ -527,7 +527,7 @@
             <param name="glow_height" value="379" />
             <param name="label_y" value="339" />
             <param name="detail_y" value="369" />
-            <param name="active" value="Control.HasFocus(502)" />
+            <param name="active" value="Control.HasFocus(4208)" />
             <param name="center" value="94.5,283" />
             <param name="native_capsule_y" value="221" />
             <param name="native_capsule_width" value="165" />
@@ -537,24 +537,24 @@
         </focusedlayout>
         <scrolltime>220</scrolltime>
         <onup>22</onup>
-        <ondown>502</ondown>
+        <ondown>4208</ondown>
         <onleft>9000</onleft>
-        <onright>502</onright>
-        <onfocus>SetProperty(Starlight.Library.Container,502)</onfocus>
+        <onright>4208</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,4208)</onfocus>
       </control>
       <include content="LibraryDetails">
-        <param name="id" value="502" />
+        <param name="id" value="4208" />
         <param name="x" value="0" />
         <param name="y" value="165" />
         <param name="width" value="900" />
-        <param name="title" value="$INFO[Container(502).ListItem.Label]" />
-        <param name="metadata" value="$INFO[Container(502).ListItem.Year,,   ]$INFO[Container(502).ListItem.Artist,,   ]$INFO[Container(502).ListItem.Duration]" />
+        <param name="title" value="$INFO[Container(4208).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(4208).ListItem.Year,,   ]$INFO[Container(4208).ListItem.Artist,,   ]$INFO[Container(4208).ListItem.Duration]" />
       </include>
       <include content="LibraryEmpty">
-        <param name="container" value="502" />
-        <param name="visible" value="Control.IsVisible(502)" />
+        <param name="container" value="4208" />
+        <param name="visible" value="Control.IsVisible(4208)" />
       </include>
-      <control type="fixedlist" id="503">
+      <control type="fixedlist" id="4209">
         <left>-24</left>
         <top>560</top>
         <width>1680</width>
@@ -565,7 +565,7 @@
         <focusposition>0</focusposition>
         <itemlayout width="274" height="332">
           <include content="LibraryCard">
-            <param name="id" value="503" />
+            <param name="id" value="4209" />
             <param name="selected" value="false" />
             <param name="width" value="210" />
             <param name="height" value="210" />
@@ -576,7 +576,7 @@
             <param name="glow_height" value="306" />
             <param name="label_y" value="266" />
             <param name="detail_y" value="296" />
-            <param name="active" value="Control.HasFocus(503)" />
+            <param name="active" value="Control.HasFocus(4209)" />
             <param name="center" value="105,210" />
             <param name="native_capsule_y" value="148" />
             <param name="native_capsule_width" value="186" />
@@ -586,7 +586,7 @@
         </itemlayout>
         <focusedlayout width="274" height="332">
           <include content="LibraryCard">
-            <param name="id" value="503" />
+            <param name="id" value="4209" />
             <param name="selected" value="true" />
             <param name="width" value="210" />
             <param name="height" value="210" />
@@ -597,7 +597,7 @@
             <param name="glow_height" value="306" />
             <param name="label_y" value="266" />
             <param name="detail_y" value="296" />
-            <param name="active" value="Control.HasFocus(503)" />
+            <param name="active" value="Control.HasFocus(4209)" />
             <param name="center" value="105,210" />
             <param name="native_capsule_y" value="148" />
             <param name="native_capsule_width" value="186" />
@@ -607,24 +607,24 @@
         </focusedlayout>
         <scrolltime>220</scrolltime>
         <onup>22</onup>
-        <ondown>503</ondown>
+        <ondown>4209</ondown>
         <onleft>9000</onleft>
-        <onright>503</onright>
-        <onfocus>SetProperty(Starlight.Library.Container,503)</onfocus>
+        <onright>4209</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,4209)</onfocus>
       </control>
       <include content="LibraryDetails">
-        <param name="id" value="503" />
+        <param name="id" value="4209" />
         <param name="x" value="0" />
         <param name="y" value="165" />
         <param name="width" value="900" />
-        <param name="title" value="$INFO[Container(503).ListItem.Label]" />
-        <param name="metadata" value="$INFO[Container(503).ListItem.Year,,   ]$INFO[Container(503).ListItem.Artist,,   ]$INFO[Container(503).ListItem.Duration]" />
+        <param name="title" value="$INFO[Container(4209).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(4209).ListItem.Year,,   ]$INFO[Container(4209).ListItem.Artist,,   ]$INFO[Container(4209).ListItem.Duration]" />
       </include>
       <include content="LibraryEmpty">
-        <param name="container" value="503" />
-        <param name="visible" value="Control.IsVisible(503)" />
+        <param name="container" value="4209" />
+        <param name="visible" value="Control.IsVisible(4209)" />
       </include>
-      <control type="fixedlist" id="504">
+      <control type="fixedlist" id="4210">
         <left>-24</left>
         <top>560</top>
         <width>1680</width>
@@ -635,7 +635,7 @@
         <focusposition>0</focusposition>
         <itemlayout width="528" height="397">
           <include content="LibraryCard">
-            <param name="id" value="504" />
+            <param name="id" value="4210" />
             <param name="selected" value="false" />
             <param name="width" value="488" />
             <param name="height" value="275" />
@@ -646,7 +646,7 @@
             <param name="glow_height" value="371" />
             <param name="label_y" value="331" />
             <param name="detail_y" value="361" />
-            <param name="active" value="Control.HasFocus(504)" />
+            <param name="active" value="Control.HasFocus(4210)" />
             <param name="center" value="244,275" />
             <param name="native_capsule_y" value="213" />
             <param name="native_capsule_width" value="464" />
@@ -656,7 +656,7 @@
         </itemlayout>
         <focusedlayout width="528" height="397">
           <include content="LibraryCard">
-            <param name="id" value="504" />
+            <param name="id" value="4210" />
             <param name="selected" value="true" />
             <param name="width" value="488" />
             <param name="height" value="275" />
@@ -667,7 +667,7 @@
             <param name="glow_height" value="371" />
             <param name="label_y" value="331" />
             <param name="detail_y" value="361" />
-            <param name="active" value="Control.HasFocus(504)" />
+            <param name="active" value="Control.HasFocus(4210)" />
             <param name="center" value="244,275" />
             <param name="native_capsule_y" value="213" />
             <param name="native_capsule_width" value="464" />
@@ -677,24 +677,24 @@
         </focusedlayout>
         <scrolltime>220</scrolltime>
         <onup>22</onup>
-        <ondown>504</ondown>
+        <ondown>4210</ondown>
         <onleft>9000</onleft>
-        <onright>504</onright>
-        <onfocus>SetProperty(Starlight.Library.Container,504)</onfocus>
+        <onright>4210</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,4210)</onfocus>
       </control>
       <include content="LibraryDetails">
-        <param name="id" value="504" />
+        <param name="id" value="4210" />
         <param name="x" value="0" />
         <param name="y" value="165" />
         <param name="width" value="900" />
-        <param name="title" value="$INFO[Container(504).ListItem.Label]" />
-        <param name="metadata" value="$INFO[Container(504).ListItem.Year,,   ]$INFO[Container(504).ListItem.Artist,,   ]$INFO[Container(504).ListItem.Duration]" />
+        <param name="title" value="$INFO[Container(4210).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(4210).ListItem.Year,,   ]$INFO[Container(4210).ListItem.Artist,,   ]$INFO[Container(4210).ListItem.Duration]" />
       </include>
       <include content="LibraryEmpty">
-        <param name="container" value="504" />
-        <param name="visible" value="Control.IsVisible(504)" />
+        <param name="container" value="4210" />
+        <param name="visible" value="Control.IsVisible(4210)" />
       </include>
-      <control type="fixedlist" id="505">
+      <control type="fixedlist" id="4211">
         <left>-24</left>
         <top>560</top>
         <width>1680</width>
@@ -703,68 +703,68 @@
         <viewtype label="$LOCALIZE[31410]">wrap</viewtype>
         <pagecontrol>60</pagecontrol>
         <focusposition>0</focusposition>
-        <itemlayout width="247" height="432">
+        <itemlayout width="246" height="434">
           <include content="LibraryCard">
-            <param name="id" value="505" />
+            <param name="id" value="4211" />
             <param name="selected" value="false" />
-            <param name="width" value="217" />
-            <param name="height" value="310" />
+            <param name="width" value="216" />
+            <param name="height" value="312" />
             <param name="mask" value="library/row-poster_mask.png" />
             <param name="art" value="$VAR[LibraryPoster]" />
             <param name="circle" value="false" />
-            <param name="glow_width" value="313" />
-            <param name="glow_height" value="406" />
-            <param name="label_y" value="366" />
-            <param name="detail_y" value="396" />
-            <param name="active" value="Control.HasFocus(505)" />
-            <param name="center" value="108.5,310" />
-            <param name="native_capsule_y" value="248" />
-            <param name="native_capsule_width" value="193" />
-            <param name="native_bar_width" value="137" />
+            <param name="glow_width" value="312" />
+            <param name="glow_height" value="408" />
+            <param name="label_y" value="368" />
+            <param name="detail_y" value="398" />
+            <param name="active" value="Control.HasFocus(4211)" />
+            <param name="center" value="108,312" />
+            <param name="native_capsule_y" value="250" />
+            <param name="native_capsule_width" value="192" />
+            <param name="native_bar_width" value="136" />
             <param name="show_native_time" value="false" />
           </include>
         </itemlayout>
-        <focusedlayout width="771" height="432">
+        <focusedlayout width="776" height="434">
           <include content="LibraryCard">
-            <param name="id" value="505" />
+            <param name="id" value="4211" />
             <param name="selected" value="true" />
-            <param name="width" value="731" />
-            <param name="height" value="310" />
+            <param name="width" value="736" />
+            <param name="height" value="312" />
             <param name="mask" value="library/expanded_mask.png" />
             <param name="art" value="$VAR[LibraryLandscape]" />
             <param name="circle" value="false" />
-            <param name="glow_width" value="827" />
-            <param name="glow_height" value="406" />
-            <param name="label_y" value="366" />
-            <param name="detail_y" value="396" />
-            <param name="active" value="Control.HasFocus(505)" />
-            <param name="center" value="365.5,310" />
-            <param name="native_capsule_y" value="248" />
-            <param name="native_capsule_width" value="707" />
-            <param name="native_bar_width" value="651" />
+            <param name="glow_width" value="832" />
+            <param name="glow_height" value="408" />
+            <param name="label_y" value="368" />
+            <param name="detail_y" value="398" />
+            <param name="active" value="Control.HasFocus(4211)" />
+            <param name="center" value="368,312" />
+            <param name="native_capsule_y" value="250" />
+            <param name="native_capsule_width" value="712" />
+            <param name="native_bar_width" value="656" />
             <param name="show_native_time" value="true" />
           </include>
         </focusedlayout>
         <scrolltime>220</scrolltime>
         <onup>22</onup>
-        <ondown>505</ondown>
+        <ondown>4211</ondown>
         <onleft>9000</onleft>
-        <onright>505</onright>
-        <onfocus>SetProperty(Starlight.Library.Container,505)</onfocus>
+        <onright>4211</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,4211)</onfocus>
       </control>
       <include content="LibraryDetails">
-        <param name="id" value="505" />
+        <param name="id" value="4211" />
         <param name="x" value="0" />
         <param name="y" value="165" />
         <param name="width" value="900" />
-        <param name="title" value="$INFO[Container(505).ListItem.Label]" />
-        <param name="metadata" value="$INFO[Container(505).ListItem.Year,,   ]$INFO[Container(505).ListItem.Artist,,   ]$INFO[Container(505).ListItem.Duration]" />
+        <param name="title" value="$INFO[Container(4211).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(4211).ListItem.Year,,   ]$INFO[Container(4211).ListItem.Artist,,   ]$INFO[Container(4211).ListItem.Duration]" />
       </include>
       <include content="LibraryEmpty">
-        <param name="container" value="505" />
-        <param name="visible" value="Control.IsVisible(505)" />
+        <param name="container" value="4211" />
+        <param name="visible" value="Control.IsVisible(4211)" />
       </include>
-      <control type="list" id="506">
+      <control type="list" id="4212">
         <left>-16</left>
         <top>150</top>
         <width>670</width>
@@ -791,7 +791,7 @@
               <top>0</top>
               <width>670</width>
               <height>70</height>
-              <visible>Control.HasFocus(506)</visible>
+              <visible>Control.HasFocus(4212)</visible>
               <texture border="capsule_border">glass_capsule.png</texture>
             </control>
             <control type="image">
@@ -849,7 +849,7 @@
               <top>-48</top>
               <width>766</width>
               <height>166</height>
-              <visible>Control.HasFocus(506)</visible>
+              <visible>Control.HasFocus(4212)</visible>
               <texture border="focus_glow_border">focus_glow.png</texture>
             </control>
             <control type="image">
@@ -857,7 +857,7 @@
               <top>0</top>
               <width>670</width>
               <height>70</height>
-              <visible>Control.HasFocus(506)</visible>
+              <visible>Control.HasFocus(4212)</visible>
               <texture border="capsule_border">glass_capsule.png</texture>
             </control>
             <control type="image">
@@ -865,7 +865,7 @@
               <top>0</top>
               <width>670</width>
               <height>70</height>
-              <visible>!Control.HasFocus(506)</visible>
+              <visible>!Control.HasFocus(4212)</visible>
               <texture border="capsule_border">frost_fill.png</texture>
             </control>
             <control type="image">
@@ -873,7 +873,7 @@
               <top>0</top>
               <width>670</width>
               <height>70</height>
-              <visible>Control.HasFocus(506)</visible>
+              <visible>Control.HasFocus(4212)</visible>
               <texture border="focus_border">focus_button.png</texture>
             </control>
             <control type="image">
@@ -906,24 +906,24 @@
         </focusedlayout>
         <scrolltime>220</scrolltime>
         <onup>22</onup>
-        <ondown>506</ondown>
+        <ondown>4212</ondown>
         <onleft>9000</onleft>
-        <onright>506</onright>
-        <onfocus>SetProperty(Starlight.Library.Container,506)</onfocus>
+        <onright>4212</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,4212)</onfocus>
       </control>
       <include content="LibraryDetails">
-        <param name="id" value="506" />
+        <param name="id" value="4212" />
         <param name="x" value="784" />
         <param name="y" value="640" />
         <param name="width" value="860" />
-        <param name="title" value="$INFO[Container(506).ListItem.Label]" />
-        <param name="metadata" value="$INFO[Container(506).ListItem.Year,,   ]$INFO[Container(506).ListItem.Artist,,   ]$INFO[Container(506).ListItem.Duration]" />
+        <param name="title" value="$INFO[Container(4212).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(4212).ListItem.Year,,   ]$INFO[Container(4212).ListItem.Artist,,   ]$INFO[Container(4212).ListItem.Duration]" />
       </include>
       <include content="LibraryEmpty">
-        <param name="container" value="506" />
-        <param name="visible" value="Control.IsVisible(506)" />
+        <param name="container" value="4212" />
+        <param name="visible" value="Control.IsVisible(4212)" />
       </include>
-      <control type="list" id="507">
+      <control type="list" id="4213">
         <left>-16</left>
         <top>150</top>
         <width>1160</width>
@@ -950,7 +950,7 @@
               <top>0</top>
               <width>1160</width>
               <height>76</height>
-              <visible>Control.HasFocus(507)</visible>
+              <visible>Control.HasFocus(4213)</visible>
               <texture border="capsule_border">glass_capsule.png</texture>
             </control>
             <control type="image">
@@ -1026,7 +1026,7 @@
               <top>-48</top>
               <width>1256</width>
               <height>172</height>
-              <visible>Control.HasFocus(507)</visible>
+              <visible>Control.HasFocus(4213)</visible>
               <texture border="focus_glow_border">focus_glow.png</texture>
             </control>
             <control type="image">
@@ -1034,7 +1034,7 @@
               <top>0</top>
               <width>1160</width>
               <height>76</height>
-              <visible>Control.HasFocus(507)</visible>
+              <visible>Control.HasFocus(4213)</visible>
               <texture border="capsule_border">glass_capsule.png</texture>
             </control>
             <control type="image">
@@ -1042,7 +1042,7 @@
               <top>0</top>
               <width>1160</width>
               <height>76</height>
-              <visible>!Control.HasFocus(507)</visible>
+              <visible>!Control.HasFocus(4213)</visible>
               <texture border="capsule_border">frost_fill.png</texture>
             </control>
             <control type="image">
@@ -1050,7 +1050,7 @@
               <top>0</top>
               <width>1160</width>
               <height>76</height>
-              <visible>Control.HasFocus(507)</visible>
+              <visible>Control.HasFocus(4213)</visible>
               <texture border="focus_border">focus_button.png</texture>
             </control>
             <control type="image">
@@ -1101,30 +1101,30 @@
         </focusedlayout>
         <scrolltime>220</scrolltime>
         <onup>22</onup>
-        <ondown>507</ondown>
+        <ondown>4213</ondown>
         <onleft>9000</onleft>
-        <onright>507</onright>
-        <onfocus>SetProperty(Starlight.Library.Container,507)</onfocus>
+        <onright>4213</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,4213)</onfocus>
       </control>
       <include content="LibraryDetails">
-        <param name="id" value="507" />
+        <param name="id" value="4213" />
         <param name="x" value="1214" />
         <param name="y" value="610" />
         <param name="width" value="430" />
         <param name="poster" value="true" />
         <param name="square" value="true" />
         <param name="poster_y" value="150" />
-        <param name="title" value="$INFO[Container(507).ListItem.Album]" />
-        <param name="metadata" value="$INFO[Container(507).ListItem.Artist]" />
+        <param name="title" value="$INFO[Container(4213).ListItem.Album]" />
+        <param name="metadata" value="$INFO[Container(4213).ListItem.Artist]" />
         <param name="title_height" value="50" />
         <param name="meta_y" value="56" />
         <param name="title_font" value="font_heading_small" />
       </include>
       <include content="LibraryEmpty">
-        <param name="container" value="507" />
-        <param name="visible" value="Control.IsVisible(507)" />
+        <param name="container" value="4213" />
+        <param name="visible" value="Control.IsVisible(4213)" />
       </include>
-      <control type="list" id="508">
+      <control type="list" id="4215">
         <left>-16</left>
         <top>150</top>
         <width>1160</width>
@@ -1151,7 +1151,7 @@
               <top>0</top>
               <width>1160</width>
               <height>196</height>
-              <visible>Control.HasFocus(508)</visible>
+              <visible>Control.HasFocus(4215)</visible>
               <texture border="capsule_border">glass_capsule.png</texture>
             </control>
             <control type="image">
@@ -1218,7 +1218,7 @@
               <top>-48</top>
               <width>1256</width>
               <height>292</height>
-              <visible>Control.HasFocus(508)</visible>
+              <visible>Control.HasFocus(4215)</visible>
               <texture border="focus_glow_border">focus_glow.png</texture>
             </control>
             <control type="image">
@@ -1226,7 +1226,7 @@
               <top>0</top>
               <width>1160</width>
               <height>196</height>
-              <visible>Control.HasFocus(508)</visible>
+              <visible>Control.HasFocus(4215)</visible>
               <texture border="capsule_border">glass_capsule.png</texture>
             </control>
             <control type="image">
@@ -1234,7 +1234,7 @@
               <top>0</top>
               <width>1160</width>
               <height>196</height>
-              <visible>!Control.HasFocus(508)</visible>
+              <visible>!Control.HasFocus(4215)</visible>
               <texture border="capsule_border">frost_fill.png</texture>
             </control>
             <control type="image">
@@ -1242,7 +1242,7 @@
               <top>0</top>
               <width>1160</width>
               <height>196</height>
-              <visible>Control.HasFocus(508)</visible>
+              <visible>Control.HasFocus(4215)</visible>
               <texture border="focus_border">focus_button.png</texture>
             </control>
             <control type="image">
@@ -1284,27 +1284,27 @@
         </focusedlayout>
         <scrolltime>220</scrolltime>
         <onup>22</onup>
-        <ondown>508</ondown>
+        <ondown>4215</ondown>
         <onleft>9000</onleft>
-        <onright>508</onright>
-        <onfocus>SetProperty(Starlight.Library.Container,508)</onfocus>
+        <onright>4215</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,4215)</onfocus>
       </control>
       <include content="LibraryDetails">
-        <param name="id" value="508" />
+        <param name="id" value="4215" />
         <param name="x" value="1214" />
         <param name="y" value="780" />
         <param name="width" value="430" />
         <param name="poster" value="true" />
         <param name="square" value="false" />
         <param name="poster_y" value="150" />
-        <param name="title" value="$INFO[Container(508).ListItem.Label]" />
-        <param name="metadata" value="$INFO[Container(508).ListItem.Year,,   ]$INFO[Container(508).ListItem.Artist,,   ]$INFO[Container(508).ListItem.Duration]" />
+        <param name="title" value="$INFO[Container(4215).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(4215).ListItem.Year,,   ]$INFO[Container(4215).ListItem.Artist,,   ]$INFO[Container(4215).ListItem.Duration]" />
       </include>
       <include content="LibraryEmpty">
-        <param name="container" value="508" />
-        <param name="visible" value="Control.IsVisible(508)" />
+        <param name="container" value="4215" />
+        <param name="visible" value="Control.IsVisible(4215)" />
       </include>
-      <control type="panel" id="510">
+      <control type="panel" id="4200">
         <left>-24</left>
         <top>110</top>
         <width>1680</width>
@@ -1314,7 +1314,7 @@
         <pagecontrol>60</pagecontrol>
         <itemlayout width="266" height="352">
           <include content="LibraryCard">
-            <param name="id" value="510" />
+            <param name="id" value="4200" />
             <param name="selected" value="false" />
             <param name="width" value="230" />
             <param name="height" value="230" />
@@ -1325,7 +1325,7 @@
             <param name="glow_height" value="326" />
             <param name="label_y" value="286" />
             <param name="detail_y" value="316" />
-            <param name="active" value="Control.HasFocus(510)" />
+            <param name="active" value="Control.HasFocus(4200)" />
             <param name="center" value="115,230" />
             <param name="native_capsule_y" value="168" />
             <param name="native_capsule_width" value="206" />
@@ -1335,7 +1335,7 @@
         </itemlayout>
         <focusedlayout width="266" height="352">
           <include content="LibraryCard">
-            <param name="id" value="510" />
+            <param name="id" value="4200" />
             <param name="selected" value="true" />
             <param name="width" value="230" />
             <param name="height" value="230" />
@@ -1346,7 +1346,7 @@
             <param name="glow_height" value="326" />
             <param name="label_y" value="286" />
             <param name="detail_y" value="316" />
-            <param name="active" value="Control.HasFocus(510)" />
+            <param name="active" value="Control.HasFocus(4200)" />
             <param name="center" value="115,230" />
             <param name="native_capsule_y" value="168" />
             <param name="native_capsule_width" value="206" />
@@ -1356,16 +1356,16 @@
         </focusedlayout>
         <scrolltime>220</scrolltime>
         <onup>22</onup>
-        <ondown>510</ondown>
+        <ondown>4200</ondown>
         <onleft>9000</onleft>
-        <onright>510</onright>
-        <onfocus>SetProperty(Starlight.Library.Container,510)</onfocus>
+        <onright>4200</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,4200)</onfocus>
       </control>
       <include content="LibraryEmpty">
-        <param name="container" value="510" />
-        <param name="visible" value="Control.IsVisible(510)" />
+        <param name="container" value="4200" />
+        <param name="visible" value="Control.IsVisible(4200)" />
       </include>
-      <control type="panel" id="511">
+      <control type="panel" id="4201">
         <left>-24</left>
         <top>110</top>
         <width>1680</width>
@@ -1375,7 +1375,7 @@
         <pagecontrol>60</pagecontrol>
         <itemlayout width="420" height="336">
           <include content="LibraryCard">
-            <param name="id" value="511" />
+            <param name="id" value="4201" />
             <param name="selected" value="false" />
             <param name="width" value="380" />
             <param name="height" value="214" />
@@ -1386,7 +1386,7 @@
             <param name="glow_height" value="310" />
             <param name="label_y" value="270" />
             <param name="detail_y" value="300" />
-            <param name="active" value="Control.HasFocus(511)" />
+            <param name="active" value="Control.HasFocus(4201)" />
             <param name="center" value="190,214" />
             <param name="native_capsule_y" value="152" />
             <param name="native_capsule_width" value="356" />
@@ -1396,7 +1396,7 @@
         </itemlayout>
         <focusedlayout width="420" height="336">
           <include content="LibraryCard">
-            <param name="id" value="511" />
+            <param name="id" value="4201" />
             <param name="selected" value="true" />
             <param name="width" value="380" />
             <param name="height" value="214" />
@@ -1407,7 +1407,7 @@
             <param name="glow_height" value="310" />
             <param name="label_y" value="270" />
             <param name="detail_y" value="300" />
-            <param name="active" value="Control.HasFocus(511)" />
+            <param name="active" value="Control.HasFocus(4201)" />
             <param name="center" value="190,214" />
             <param name="native_capsule_y" value="152" />
             <param name="native_capsule_width" value="356" />
@@ -1417,16 +1417,16 @@
         </focusedlayout>
         <scrolltime>220</scrolltime>
         <onup>22</onup>
-        <ondown>511</ondown>
+        <ondown>4201</ondown>
         <onleft>9000</onleft>
-        <onright>511</onright>
-        <onfocus>SetProperty(Starlight.Library.Container,511)</onfocus>
+        <onright>4201</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,4201)</onfocus>
       </control>
       <include content="LibraryEmpty">
-        <param name="container" value="511" />
-        <param name="visible" value="Control.IsVisible(511)" />
+        <param name="container" value="4201" />
+        <param name="visible" value="Control.IsVisible(4201)" />
       </include>
-      <control type="panel" id="512">
+      <control type="panel" id="4202">
         <left>-24</left>
         <top>110</top>
         <width>1680</width>
@@ -1436,7 +1436,7 @@
         <pagecontrol>60</pagecontrol>
         <itemlayout width="229" height="405">
           <include content="LibraryCard">
-            <param name="id" value="512" />
+            <param name="id" value="4202" />
             <param name="selected" value="false" />
             <param name="width" value="189" />
             <param name="height" value="283" />
@@ -1447,7 +1447,7 @@
             <param name="glow_height" value="379" />
             <param name="label_y" value="339" />
             <param name="detail_y" value="369" />
-            <param name="active" value="Control.HasFocus(512)" />
+            <param name="active" value="Control.HasFocus(4202)" />
             <param name="center" value="94.5,283" />
             <param name="native_capsule_y" value="221" />
             <param name="native_capsule_width" value="165" />
@@ -1457,7 +1457,7 @@
         </itemlayout>
         <focusedlayout width="229" height="405">
           <include content="LibraryCard">
-            <param name="id" value="512" />
+            <param name="id" value="4202" />
             <param name="selected" value="true" />
             <param name="width" value="189" />
             <param name="height" value="283" />
@@ -1468,7 +1468,7 @@
             <param name="glow_height" value="379" />
             <param name="label_y" value="339" />
             <param name="detail_y" value="369" />
-            <param name="active" value="Control.HasFocus(512)" />
+            <param name="active" value="Control.HasFocus(4202)" />
             <param name="center" value="94.5,283" />
             <param name="native_capsule_y" value="221" />
             <param name="native_capsule_width" value="165" />
@@ -1478,16 +1478,16 @@
         </focusedlayout>
         <scrolltime>220</scrolltime>
         <onup>22</onup>
-        <ondown>512</ondown>
+        <ondown>4202</ondown>
         <onleft>9000</onleft>
-        <onright>512</onright>
-        <onfocus>SetProperty(Starlight.Library.Container,512)</onfocus>
+        <onright>4202</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,4202)</onfocus>
       </control>
       <include content="LibraryEmpty">
-        <param name="container" value="512" />
-        <param name="visible" value="Control.IsVisible(512)" />
+        <param name="container" value="4202" />
+        <param name="visible" value="Control.IsVisible(4202)" />
       </include>
-      <control type="panel" id="513">
+      <control type="panel" id="4203">
         <left>-24</left>
         <top>110</top>
         <width>1680</width>
@@ -1497,7 +1497,7 @@
         <pagecontrol>60</pagecontrol>
         <itemlayout width="274" height="332">
           <include content="LibraryCard">
-            <param name="id" value="513" />
+            <param name="id" value="4203" />
             <param name="selected" value="false" />
             <param name="width" value="210" />
             <param name="height" value="210" />
@@ -1508,7 +1508,7 @@
             <param name="glow_height" value="306" />
             <param name="label_y" value="266" />
             <param name="detail_y" value="296" />
-            <param name="active" value="Control.HasFocus(513)" />
+            <param name="active" value="Control.HasFocus(4203)" />
             <param name="center" value="105,210" />
             <param name="native_capsule_y" value="148" />
             <param name="native_capsule_width" value="186" />
@@ -1518,7 +1518,7 @@
         </itemlayout>
         <focusedlayout width="274" height="332">
           <include content="LibraryCard">
-            <param name="id" value="513" />
+            <param name="id" value="4203" />
             <param name="selected" value="true" />
             <param name="width" value="210" />
             <param name="height" value="210" />
@@ -1529,7 +1529,7 @@
             <param name="glow_height" value="306" />
             <param name="label_y" value="266" />
             <param name="detail_y" value="296" />
-            <param name="active" value="Control.HasFocus(513)" />
+            <param name="active" value="Control.HasFocus(4203)" />
             <param name="center" value="105,210" />
             <param name="native_capsule_y" value="148" />
             <param name="native_capsule_width" value="186" />
@@ -1539,16 +1539,16 @@
         </focusedlayout>
         <scrolltime>220</scrolltime>
         <onup>22</onup>
-        <ondown>513</ondown>
+        <ondown>4203</ondown>
         <onleft>9000</onleft>
-        <onright>513</onright>
-        <onfocus>SetProperty(Starlight.Library.Container,513)</onfocus>
+        <onright>4203</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,4203)</onfocus>
       </control>
       <include content="LibraryEmpty">
-        <param name="container" value="513" />
-        <param name="visible" value="Control.IsVisible(513)" />
+        <param name="container" value="4203" />
+        <param name="visible" value="Control.IsVisible(4203)" />
       </include>
-      <control type="panel" id="514">
+      <control type="panel" id="4204">
         <left>-24</left>
         <top>110</top>
         <width>1680</width>
@@ -1558,7 +1558,7 @@
         <pagecontrol>60</pagecontrol>
         <itemlayout width="560" height="415">
           <include content="LibraryCard">
-            <param name="id" value="514" />
+            <param name="id" value="4204" />
             <param name="selected" value="false" />
             <param name="width" value="520" />
             <param name="height" value="293" />
@@ -1569,7 +1569,7 @@
             <param name="glow_height" value="389" />
             <param name="label_y" value="349" />
             <param name="detail_y" value="379" />
-            <param name="active" value="Control.HasFocus(514)" />
+            <param name="active" value="Control.HasFocus(4204)" />
             <param name="center" value="260,293" />
             <param name="native_capsule_y" value="231" />
             <param name="native_capsule_width" value="496" />
@@ -1579,7 +1579,7 @@
         </itemlayout>
         <focusedlayout width="560" height="415">
           <include content="LibraryCard">
-            <param name="id" value="514" />
+            <param name="id" value="4204" />
             <param name="selected" value="true" />
             <param name="width" value="520" />
             <param name="height" value="293" />
@@ -1590,7 +1590,7 @@
             <param name="glow_height" value="389" />
             <param name="label_y" value="349" />
             <param name="detail_y" value="379" />
-            <param name="active" value="Control.HasFocus(514)" />
+            <param name="active" value="Control.HasFocus(4204)" />
             <param name="center" value="260,293" />
             <param name="native_capsule_y" value="231" />
             <param name="native_capsule_width" value="496" />
@@ -1600,16 +1600,16 @@
         </focusedlayout>
         <scrolltime>220</scrolltime>
         <onup>22</onup>
-        <ondown>514</ondown>
+        <ondown>4204</ondown>
         <onleft>9000</onleft>
-        <onright>514</onright>
-        <onfocus>SetProperty(Starlight.Library.Container,514)</onfocus>
+        <onright>4204</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,4204)</onfocus>
       </control>
       <include content="LibraryEmpty">
-        <param name="container" value="514" />
-        <param name="visible" value="Control.IsVisible(514)" />
+        <param name="container" value="4204" />
+        <param name="visible" value="Control.IsVisible(4204)" />
       </include>
-      <control type="panel" id="515">
+      <control type="panel" id="4205">
         <left>480</left>
         <top>110</top>
         <width>1176</width>
@@ -1619,18 +1619,18 @@
         <pagecontrol>60</pagecontrol>
         <itemlayout width="232" height="422">
           <include content="LibraryCard">
-            <param name="id" value="515" />
+            <param name="id" value="4205" />
             <param name="selected" value="false" />
             <param name="width" value="200" />
             <param name="height" value="300" />
-            <param name="mask" value="library/row-poster_mask.png" />
+            <param name="mask" value="library/poster_mask.png" />
             <param name="art" value="$VAR[LibraryPoster]" />
             <param name="circle" value="false" />
             <param name="glow_width" value="296" />
             <param name="glow_height" value="396" />
             <param name="label_y" value="356" />
             <param name="detail_y" value="386" />
-            <param name="active" value="Control.HasFocus(515)" />
+            <param name="active" value="Control.HasFocus(4205)" />
             <param name="center" value="100,300" />
             <param name="native_capsule_y" value="238" />
             <param name="native_capsule_width" value="176" />
@@ -1640,18 +1640,18 @@
         </itemlayout>
         <focusedlayout width="232" height="422">
           <include content="LibraryCard">
-            <param name="id" value="515" />
+            <param name="id" value="4205" />
             <param name="selected" value="true" />
             <param name="width" value="200" />
             <param name="height" value="300" />
-            <param name="mask" value="library/row-poster_mask.png" />
+            <param name="mask" value="library/poster_mask.png" />
             <param name="art" value="$VAR[LibraryPoster]" />
             <param name="circle" value="false" />
             <param name="glow_width" value="296" />
             <param name="glow_height" value="396" />
             <param name="label_y" value="356" />
             <param name="detail_y" value="386" />
-            <param name="active" value="Control.HasFocus(515)" />
+            <param name="active" value="Control.HasFocus(4205)" />
             <param name="center" value="100,300" />
             <param name="native_capsule_y" value="238" />
             <param name="native_capsule_width" value="176" />
@@ -1661,24 +1661,24 @@
         </focusedlayout>
         <scrolltime>220</scrolltime>
         <onup>22</onup>
-        <ondown>515</ondown>
+        <ondown>4205</ondown>
         <onleft>9000</onleft>
-        <onright>515</onright>
-        <onfocus>SetProperty(Starlight.Library.Container,515)</onfocus>
+        <onright>4205</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,4205)</onfocus>
       </control>
       <include content="LibraryDetails">
-        <param name="id" value="515" />
+        <param name="id" value="4205" />
         <param name="x" value="0" />
         <param name="y" value="150" />
         <param name="width" value="450" />
-        <param name="title" value="$INFO[Container(515).ListItem.Label]" />
-        <param name="metadata" value="$INFO[Container(515).ListItem.Year,,   ]$INFO[Container(515).ListItem.Artist,,   ]$INFO[Container(515).ListItem.Duration]" />
+        <param name="title" value="$INFO[Container(4205).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(4205).ListItem.Year,,   ]$INFO[Container(4205).ListItem.Artist,,   ]$INFO[Container(4205).ListItem.Duration]" />
       </include>
       <include content="LibraryEmpty">
-        <param name="container" value="515" />
-        <param name="visible" value="Control.IsVisible(515)" />
+        <param name="container" value="4205" />
+        <param name="visible" value="Control.IsVisible(4205)" />
       </include>
-      <control type="list" id="517">
+      <control type="list" id="4214">
         <left>-16</left>
         <top>150</top>
         <width>1660</width>
@@ -1705,7 +1705,7 @@
               <top>0</top>
               <width>1660</width>
               <height>76</height>
-              <visible>Control.HasFocus(517)</visible>
+              <visible>Control.HasFocus(4214)</visible>
               <texture border="capsule_border">glass_capsule.png</texture>
             </control>
             <control type="image">
@@ -1815,7 +1815,7 @@
               <top>-48</top>
               <width>1756</width>
               <height>172</height>
-              <visible>Control.HasFocus(517)</visible>
+              <visible>Control.HasFocus(4214)</visible>
               <texture border="focus_glow_border">focus_glow.png</texture>
             </control>
             <control type="image">
@@ -1823,7 +1823,7 @@
               <top>0</top>
               <width>1660</width>
               <height>76</height>
-              <visible>Control.HasFocus(517)</visible>
+              <visible>Control.HasFocus(4214)</visible>
               <texture border="capsule_border">glass_capsule.png</texture>
             </control>
             <control type="image">
@@ -1831,7 +1831,7 @@
               <top>0</top>
               <width>1660</width>
               <height>76</height>
-              <visible>!Control.HasFocus(517)</visible>
+              <visible>!Control.HasFocus(4214)</visible>
               <texture border="capsule_border">frost_fill.png</texture>
             </control>
             <control type="image">
@@ -1839,7 +1839,7 @@
               <top>0</top>
               <width>1660</width>
               <height>76</height>
-              <visible>Control.HasFocus(517)</visible>
+              <visible>Control.HasFocus(4214)</visible>
               <texture border="focus_border">focus_button.png</texture>
             </control>
             <control type="image">
@@ -1924,26 +1924,26 @@
         </focusedlayout>
         <scrolltime>220</scrolltime>
         <onup>22</onup>
-        <ondown>517</ondown>
+        <ondown>4214</ondown>
         <onleft>9000</onleft>
-        <onright>517</onright>
-        <onfocus>SetProperty(Starlight.Library.Container,517)</onfocus>
+        <onright>4214</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,4214)</onfocus>
       </control>
       <control type="textbox">
         <left>8</left>
         <top>950</top>
         <width>1600</width>
         <height>80</height>
-        <visible>Control.IsVisible(517)</visible>
-        <label>$INFO[Container(517).ListItem.Comment]</label>
+        <visible>Control.IsVisible(4214)</visible>
+        <label>$INFO[Container(4214).ListItem.Comment]</label>
         <font>font_body</font>
         <textcolor>mist</textcolor>
       </control>
       <include content="LibraryEmpty">
-        <param name="container" value="517" />
-        <param name="visible" value="Control.IsVisible(517)" />
+        <param name="container" value="4214" />
+        <param name="visible" value="Control.IsVisible(4214)" />
       </include>
-      <control type="list" id="518">
+      <control type="list" id="4216">
         <left>-16</left>
         <top>150</top>
         <width>1660</width>
@@ -1970,7 +1970,7 @@
               <top>0</top>
               <width>1660</width>
               <height>220</height>
-              <visible>Control.HasFocus(518)</visible>
+              <visible>Control.HasFocus(4216)</visible>
               <texture border="capsule_border">glass_capsule.png</texture>
             </control>
             <control type="image">
@@ -2037,7 +2037,7 @@
               <top>-48</top>
               <width>1756</width>
               <height>316</height>
-              <visible>Control.HasFocus(518)</visible>
+              <visible>Control.HasFocus(4216)</visible>
               <texture border="focus_glow_border">focus_glow.png</texture>
             </control>
             <control type="image">
@@ -2045,7 +2045,7 @@
               <top>0</top>
               <width>1660</width>
               <height>220</height>
-              <visible>Control.HasFocus(518)</visible>
+              <visible>Control.HasFocus(4216)</visible>
               <texture border="capsule_border">glass_capsule.png</texture>
             </control>
             <control type="image">
@@ -2053,7 +2053,7 @@
               <top>0</top>
               <width>1660</width>
               <height>220</height>
-              <visible>!Control.HasFocus(518)</visible>
+              <visible>!Control.HasFocus(4216)</visible>
               <texture border="capsule_border">frost_fill.png</texture>
             </control>
             <control type="image">
@@ -2061,7 +2061,7 @@
               <top>0</top>
               <width>1660</width>
               <height>220</height>
-              <visible>Control.HasFocus(518)</visible>
+              <visible>Control.HasFocus(4216)</visible>
               <texture border="focus_border">focus_button.png</texture>
             </control>
             <control type="image">
@@ -2103,16 +2103,16 @@
         </focusedlayout>
         <scrolltime>220</scrolltime>
         <onup>22</onup>
-        <ondown>518</ondown>
+        <ondown>4216</ondown>
         <onleft>9000</onleft>
-        <onright>518</onright>
-        <onfocus>SetProperty(Starlight.Library.Container,518)</onfocus>
+        <onright>4216</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,4216)</onfocus>
       </control>
       <include content="LibraryEmpty">
-        <param name="container" value="518" />
-        <param name="visible" value="Control.IsVisible(518)" />
+        <param name="container" value="4216" />
+        <param name="visible" value="Control.IsVisible(4216)" />
       </include>
-      <control type="fixedlist" id="520">
+      <control type="fixedlist" id="4217">
         <left>-24</left>
         <top>550</top>
         <width>1680</width>
@@ -2123,7 +2123,7 @@
         <focusposition>0</focusposition>
         <itemlayout width="266" height="352">
           <include content="LibraryCard">
-            <param name="id" value="520" />
+            <param name="id" value="4217" />
             <param name="selected" value="false" />
             <param name="width" value="230" />
             <param name="height" value="230" />
@@ -2134,7 +2134,7 @@
             <param name="glow_height" value="326" />
             <param name="label_y" value="286" />
             <param name="detail_y" value="316" />
-            <param name="active" value="Control.HasFocus(520)" />
+            <param name="active" value="Control.HasFocus(4217)" />
             <param name="center" value="115,230" />
             <param name="native_capsule_y" value="168" />
             <param name="native_capsule_width" value="206" />
@@ -2144,7 +2144,7 @@
         </itemlayout>
         <focusedlayout width="266" height="352">
           <include content="LibraryCard">
-            <param name="id" value="520" />
+            <param name="id" value="4217" />
             <param name="selected" value="true" />
             <param name="width" value="230" />
             <param name="height" value="230" />
@@ -2155,7 +2155,7 @@
             <param name="glow_height" value="326" />
             <param name="label_y" value="286" />
             <param name="detail_y" value="316" />
-            <param name="active" value="Control.HasFocus(520)" />
+            <param name="active" value="Control.HasFocus(4217)" />
             <param name="center" value="115,230" />
             <param name="native_capsule_y" value="168" />
             <param name="native_capsule_width" value="206" />
@@ -2165,24 +2165,24 @@
         </focusedlayout>
         <scrolltime>220</scrolltime>
         <onup>700</onup>
-        <ondown>520</ondown>
+        <ondown>4217</ondown>
         <onleft>9000</onleft>
-        <onright>520</onright>
-        <onfocus>SetProperty(Starlight.Library.Container,520)</onfocus>
+        <onright>4217</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,4217)</onfocus>
       </control>
       <include content="LibraryDetails">
-        <param name="id" value="520" />
+        <param name="id" value="4217" />
         <param name="x" value="0" />
         <param name="y" value="165" />
         <param name="width" value="900" />
-        <param name="title" value="$INFO[Container(520).ListItem.Label]" />
-        <param name="metadata" value="$INFO[Container(520).ListItem.Year,,   ]$INFO[Container(520).ListItem.Artist,,   ]$INFO[Container(520).ListItem.Duration]" />
+        <param name="title" value="$INFO[Container(4217).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(4217).ListItem.Year,,   ]$INFO[Container(4217).ListItem.Artist,,   ]$INFO[Container(4217).ListItem.Duration]" />
       </include>
       <include content="LibraryEmpty">
-        <param name="container" value="520" />
-        <param name="visible" value="Control.IsVisible(520)" />
+        <param name="container" value="4217" />
+        <param name="visible" value="Control.IsVisible(4217)" />
       </include>
-      <control type="fixedlist" id="521">
+      <control type="fixedlist" id="4218">
         <left>-24</left>
         <top>550</top>
         <width>1680</width>
@@ -2191,68 +2191,68 @@
         <viewtype label="$LOCALIZE[31423]">wrap</viewtype>
         <pagecontrol>60</pagecontrol>
         <focusposition>0</focusposition>
-        <itemlayout width="450" height="353">
+        <itemlayout width="456" height="354">
           <include content="LibraryCard">
-            <param name="id" value="521" />
+            <param name="id" value="4218" />
             <param name="selected" value="false" />
-            <param name="width" value="410" />
-            <param name="height" value="231" />
+            <param name="width" value="416" />
+            <param name="height" value="232" />
             <param name="mask" value="library/row-landscape_mask.png" />
             <param name="art" value="$VAR[LibraryLandscape]" />
             <param name="circle" value="false" />
-            <param name="glow_width" value="506" />
-            <param name="glow_height" value="327" />
-            <param name="label_y" value="287" />
-            <param name="detail_y" value="317" />
-            <param name="active" value="Control.HasFocus(521)" />
-            <param name="center" value="205,231" />
-            <param name="native_capsule_y" value="169" />
-            <param name="native_capsule_width" value="386" />
-            <param name="native_bar_width" value="330" />
+            <param name="glow_width" value="512" />
+            <param name="glow_height" value="328" />
+            <param name="label_y" value="288" />
+            <param name="detail_y" value="318" />
+            <param name="active" value="Control.HasFocus(4218)" />
+            <param name="center" value="208,232" />
+            <param name="native_capsule_y" value="170" />
+            <param name="native_capsule_width" value="392" />
+            <param name="native_bar_width" value="336" />
             <param name="show_native_time" value="true" />
           </include>
         </itemlayout>
-        <focusedlayout width="450" height="353">
+        <focusedlayout width="456" height="354">
           <include content="LibraryCard">
-            <param name="id" value="521" />
+            <param name="id" value="4218" />
             <param name="selected" value="true" />
-            <param name="width" value="410" />
-            <param name="height" value="231" />
+            <param name="width" value="416" />
+            <param name="height" value="232" />
             <param name="mask" value="library/row-landscape_mask.png" />
             <param name="art" value="$VAR[LibraryLandscape]" />
             <param name="circle" value="false" />
-            <param name="glow_width" value="506" />
-            <param name="glow_height" value="327" />
-            <param name="label_y" value="287" />
-            <param name="detail_y" value="317" />
-            <param name="active" value="Control.HasFocus(521)" />
-            <param name="center" value="205,231" />
-            <param name="native_capsule_y" value="169" />
-            <param name="native_capsule_width" value="386" />
-            <param name="native_bar_width" value="330" />
+            <param name="glow_width" value="512" />
+            <param name="glow_height" value="328" />
+            <param name="label_y" value="288" />
+            <param name="detail_y" value="318" />
+            <param name="active" value="Control.HasFocus(4218)" />
+            <param name="center" value="208,232" />
+            <param name="native_capsule_y" value="170" />
+            <param name="native_capsule_width" value="392" />
+            <param name="native_bar_width" value="336" />
             <param name="show_native_time" value="true" />
           </include>
         </focusedlayout>
         <scrolltime>220</scrolltime>
         <onup>700</onup>
-        <ondown>521</ondown>
+        <ondown>4218</ondown>
         <onleft>9000</onleft>
-        <onright>521</onright>
-        <onfocus>SetProperty(Starlight.Library.Container,521)</onfocus>
+        <onright>4218</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,4218)</onfocus>
       </control>
       <include content="LibraryDetails">
-        <param name="id" value="521" />
+        <param name="id" value="4218" />
         <param name="x" value="0" />
         <param name="y" value="165" />
         <param name="width" value="900" />
-        <param name="title" value="$INFO[Container(521).ListItem.Label]" />
-        <param name="metadata" value="$INFO[Container(521).ListItem.Year,,   ]$INFO[Container(521).ListItem.Artist,,   ]$INFO[Container(521).ListItem.Duration]" />
+        <param name="title" value="$INFO[Container(4218).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(4218).ListItem.Year,,   ]$INFO[Container(4218).ListItem.Artist,,   ]$INFO[Container(4218).ListItem.Duration]" />
       </include>
       <include content="LibraryEmpty">
-        <param name="container" value="521" />
-        <param name="visible" value="Control.IsVisible(521)" />
+        <param name="container" value="4218" />
+        <param name="visible" value="Control.IsVisible(4218)" />
       </include>
-      <control type="fixedlist" id="522">
+      <control type="fixedlist" id="4219">
         <left>-24</left>
         <top>550</top>
         <width>1680</width>
@@ -2263,7 +2263,7 @@
         <focusposition>0</focusposition>
         <itemlayout width="229" height="405">
           <include content="LibraryCard">
-            <param name="id" value="522" />
+            <param name="id" value="4219" />
             <param name="selected" value="false" />
             <param name="width" value="189" />
             <param name="height" value="283" />
@@ -2274,7 +2274,7 @@
             <param name="glow_height" value="379" />
             <param name="label_y" value="339" />
             <param name="detail_y" value="369" />
-            <param name="active" value="Control.HasFocus(522)" />
+            <param name="active" value="Control.HasFocus(4219)" />
             <param name="center" value="94.5,283" />
             <param name="native_capsule_y" value="221" />
             <param name="native_capsule_width" value="165" />
@@ -2284,7 +2284,7 @@
         </itemlayout>
         <focusedlayout width="229" height="405">
           <include content="LibraryCard">
-            <param name="id" value="522" />
+            <param name="id" value="4219" />
             <param name="selected" value="true" />
             <param name="width" value="189" />
             <param name="height" value="283" />
@@ -2295,7 +2295,7 @@
             <param name="glow_height" value="379" />
             <param name="label_y" value="339" />
             <param name="detail_y" value="369" />
-            <param name="active" value="Control.HasFocus(522)" />
+            <param name="active" value="Control.HasFocus(4219)" />
             <param name="center" value="94.5,283" />
             <param name="native_capsule_y" value="221" />
             <param name="native_capsule_width" value="165" />
@@ -2305,24 +2305,24 @@
         </focusedlayout>
         <scrolltime>220</scrolltime>
         <onup>700</onup>
-        <ondown>522</ondown>
+        <ondown>4219</ondown>
         <onleft>9000</onleft>
-        <onright>522</onright>
-        <onfocus>SetProperty(Starlight.Library.Container,522)</onfocus>
+        <onright>4219</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,4219)</onfocus>
       </control>
       <include content="LibraryDetails">
-        <param name="id" value="522" />
+        <param name="id" value="4219" />
         <param name="x" value="0" />
         <param name="y" value="165" />
         <param name="width" value="900" />
-        <param name="title" value="$INFO[Container(522).ListItem.Label]" />
-        <param name="metadata" value="$INFO[Container(522).ListItem.Year,,   ]$INFO[Container(522).ListItem.Artist,,   ]$INFO[Container(522).ListItem.Duration]" />
+        <param name="title" value="$INFO[Container(4219).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(4219).ListItem.Year,,   ]$INFO[Container(4219).ListItem.Artist,,   ]$INFO[Container(4219).ListItem.Duration]" />
       </include>
       <include content="LibraryEmpty">
-        <param name="container" value="522" />
-        <param name="visible" value="Control.IsVisible(522)" />
+        <param name="container" value="4219" />
+        <param name="visible" value="Control.IsVisible(4219)" />
       </include>
-      <control type="fixedlist" id="523">
+      <control type="fixedlist" id="4220">
         <left>-24</left>
         <top>550</top>
         <width>1680</width>
@@ -2333,7 +2333,7 @@
         <focusposition>0</focusposition>
         <itemlayout width="274" height="332">
           <include content="LibraryCard">
-            <param name="id" value="523" />
+            <param name="id" value="4220" />
             <param name="selected" value="false" />
             <param name="width" value="210" />
             <param name="height" value="210" />
@@ -2344,7 +2344,7 @@
             <param name="glow_height" value="306" />
             <param name="label_y" value="266" />
             <param name="detail_y" value="296" />
-            <param name="active" value="Control.HasFocus(523)" />
+            <param name="active" value="Control.HasFocus(4220)" />
             <param name="center" value="105,210" />
             <param name="native_capsule_y" value="148" />
             <param name="native_capsule_width" value="186" />
@@ -2354,7 +2354,7 @@
         </itemlayout>
         <focusedlayout width="274" height="332">
           <include content="LibraryCard">
-            <param name="id" value="523" />
+            <param name="id" value="4220" />
             <param name="selected" value="true" />
             <param name="width" value="210" />
             <param name="height" value="210" />
@@ -2365,7 +2365,7 @@
             <param name="glow_height" value="306" />
             <param name="label_y" value="266" />
             <param name="detail_y" value="296" />
-            <param name="active" value="Control.HasFocus(523)" />
+            <param name="active" value="Control.HasFocus(4220)" />
             <param name="center" value="105,210" />
             <param name="native_capsule_y" value="148" />
             <param name="native_capsule_width" value="186" />
@@ -2375,24 +2375,24 @@
         </focusedlayout>
         <scrolltime>220</scrolltime>
         <onup>700</onup>
-        <ondown>523</ondown>
+        <ondown>4220</ondown>
         <onleft>9000</onleft>
-        <onright>523</onright>
-        <onfocus>SetProperty(Starlight.Library.Container,523)</onfocus>
+        <onright>4220</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,4220)</onfocus>
       </control>
       <include content="LibraryDetails">
-        <param name="id" value="523" />
+        <param name="id" value="4220" />
         <param name="x" value="0" />
         <param name="y" value="165" />
         <param name="width" value="900" />
-        <param name="title" value="$INFO[Container(523).ListItem.Label]" />
-        <param name="metadata" value="$INFO[Container(523).ListItem.Year,,   ]$INFO[Container(523).ListItem.Artist,,   ]$INFO[Container(523).ListItem.Duration]" />
+        <param name="title" value="$INFO[Container(4220).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(4220).ListItem.Year,,   ]$INFO[Container(4220).ListItem.Artist,,   ]$INFO[Container(4220).ListItem.Duration]" />
       </include>
       <include content="LibraryEmpty">
-        <param name="container" value="523" />
-        <param name="visible" value="Control.IsVisible(523)" />
+        <param name="container" value="4220" />
+        <param name="visible" value="Control.IsVisible(4220)" />
       </include>
-      <control type="fixedlist" id="524">
+      <control type="fixedlist" id="4221">
         <left>-24</left>
         <top>550</top>
         <width>1680</width>
@@ -2403,7 +2403,7 @@
         <focusposition>0</focusposition>
         <itemlayout width="528" height="397">
           <include content="LibraryCard">
-            <param name="id" value="524" />
+            <param name="id" value="4221" />
             <param name="selected" value="false" />
             <param name="width" value="488" />
             <param name="height" value="275" />
@@ -2414,7 +2414,7 @@
             <param name="glow_height" value="371" />
             <param name="label_y" value="331" />
             <param name="detail_y" value="361" />
-            <param name="active" value="Control.HasFocus(524)" />
+            <param name="active" value="Control.HasFocus(4221)" />
             <param name="center" value="244,275" />
             <param name="native_capsule_y" value="213" />
             <param name="native_capsule_width" value="464" />
@@ -2424,7 +2424,7 @@
         </itemlayout>
         <focusedlayout width="528" height="397">
           <include content="LibraryCard">
-            <param name="id" value="524" />
+            <param name="id" value="4221" />
             <param name="selected" value="true" />
             <param name="width" value="488" />
             <param name="height" value="275" />
@@ -2435,7 +2435,7 @@
             <param name="glow_height" value="371" />
             <param name="label_y" value="331" />
             <param name="detail_y" value="361" />
-            <param name="active" value="Control.HasFocus(524)" />
+            <param name="active" value="Control.HasFocus(4221)" />
             <param name="center" value="244,275" />
             <param name="native_capsule_y" value="213" />
             <param name="native_capsule_width" value="464" />
@@ -2445,24 +2445,24 @@
         </focusedlayout>
         <scrolltime>220</scrolltime>
         <onup>700</onup>
-        <ondown>524</ondown>
+        <ondown>4221</ondown>
         <onleft>9000</onleft>
-        <onright>524</onright>
-        <onfocus>SetProperty(Starlight.Library.Container,524)</onfocus>
+        <onright>4221</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,4221)</onfocus>
       </control>
       <include content="LibraryDetails">
-        <param name="id" value="524" />
+        <param name="id" value="4221" />
         <param name="x" value="0" />
         <param name="y" value="165" />
         <param name="width" value="900" />
-        <param name="title" value="$INFO[Container(524).ListItem.Label]" />
-        <param name="metadata" value="$INFO[Container(524).ListItem.Year,,   ]$INFO[Container(524).ListItem.Artist,,   ]$INFO[Container(524).ListItem.Duration]" />
+        <param name="title" value="$INFO[Container(4221).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(4221).ListItem.Year,,   ]$INFO[Container(4221).ListItem.Artist,,   ]$INFO[Container(4221).ListItem.Duration]" />
       </include>
       <include content="LibraryEmpty">
-        <param name="container" value="524" />
-        <param name="visible" value="Control.IsVisible(524)" />
+        <param name="container" value="4221" />
+        <param name="visible" value="Control.IsVisible(4221)" />
       </include>
-      <control type="list" id="526">
+      <control type="list" id="4222">
         <left>488</left>
         <top>200</top>
         <width>1134</width>
@@ -2489,7 +2489,7 @@
               <top>0</top>
               <width>1134</width>
               <height>196</height>
-              <visible>Control.HasFocus(526)</visible>
+              <visible>Control.HasFocus(4222)</visible>
               <texture border="capsule_border">glass_capsule.png</texture>
             </control>
             <control type="image">
@@ -2556,7 +2556,7 @@
               <top>-48</top>
               <width>1230</width>
               <height>292</height>
-              <visible>Control.HasFocus(526)</visible>
+              <visible>Control.HasFocus(4222)</visible>
               <texture border="focus_glow_border">focus_glow.png</texture>
             </control>
             <control type="image">
@@ -2564,7 +2564,7 @@
               <top>0</top>
               <width>1134</width>
               <height>196</height>
-              <visible>Control.HasFocus(526)</visible>
+              <visible>Control.HasFocus(4222)</visible>
               <texture border="capsule_border">glass_capsule.png</texture>
             </control>
             <control type="image">
@@ -2572,7 +2572,7 @@
               <top>0</top>
               <width>1134</width>
               <height>196</height>
-              <visible>!Control.HasFocus(526)</visible>
+              <visible>!Control.HasFocus(4222)</visible>
               <texture border="capsule_border">frost_fill.png</texture>
             </control>
             <control type="image">
@@ -2580,7 +2580,7 @@
               <top>0</top>
               <width>1134</width>
               <height>196</height>
-              <visible>Control.HasFocus(526)</visible>
+              <visible>Control.HasFocus(4222)</visible>
               <texture border="focus_border">focus_button.png</texture>
             </control>
             <control type="image">
@@ -2622,16 +2622,16 @@
         </focusedlayout>
         <scrolltime>220</scrolltime>
         <onup>701</onup>
-        <ondown>526</ondown>
+        <ondown>4222</ondown>
         <onleft>9000</onleft>
-        <onright>526</onright>
-        <onfocus>SetProperty(Starlight.Library.Container,526)</onfocus>
+        <onright>4222</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,4222)</onfocus>
       </control>
       <include content="LibraryEmpty">
-        <param name="container" value="526" />
-        <param name="visible" value="Control.IsVisible(526)" />
+        <param name="container" value="4222" />
+        <param name="visible" value="Control.IsVisible(4222)" />
       </include>
-      <control type="panel" id="527">
+      <control type="panel" id="4223">
         <left>480</left>
         <top>160</top>
         <width>1176</width>
@@ -2641,7 +2641,7 @@
         <pagecontrol>60</pagecontrol>
         <itemlayout width="232" height="422">
           <include content="LibraryCard">
-            <param name="id" value="527" />
+            <param name="id" value="4223" />
             <param name="selected" value="false" />
             <param name="width" value="200" />
             <param name="height" value="300" />
@@ -2652,7 +2652,7 @@
             <param name="glow_height" value="396" />
             <param name="label_y" value="356" />
             <param name="detail_y" value="386" />
-            <param name="active" value="Control.HasFocus(527)" />
+            <param name="active" value="Control.HasFocus(4223)" />
             <param name="center" value="100,300" />
             <param name="native_capsule_y" value="238" />
             <param name="native_capsule_width" value="176" />
@@ -2662,7 +2662,7 @@
         </itemlayout>
         <focusedlayout width="232" height="422">
           <include content="LibraryCard">
-            <param name="id" value="527" />
+            <param name="id" value="4223" />
             <param name="selected" value="true" />
             <param name="width" value="200" />
             <param name="height" value="300" />
@@ -2673,7 +2673,7 @@
             <param name="glow_height" value="396" />
             <param name="label_y" value="356" />
             <param name="detail_y" value="386" />
-            <param name="active" value="Control.HasFocus(527)" />
+            <param name="active" value="Control.HasFocus(4223)" />
             <param name="center" value="100,300" />
             <param name="native_capsule_y" value="238" />
             <param name="native_capsule_width" value="176" />
@@ -2683,16 +2683,16 @@
         </focusedlayout>
         <scrolltime>220</scrolltime>
         <onup>701</onup>
-        <ondown>527</ondown>
+        <ondown>4223</ondown>
         <onleft>9000</onleft>
-        <onright>527</onright>
-        <onfocus>SetProperty(Starlight.Library.Container,527)</onfocus>
+        <onright>4223</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,4223)</onfocus>
       </control>
       <include content="LibraryEmpty">
-        <param name="container" value="527" />
-        <param name="visible" value="Control.IsVisible(527)" />
+        <param name="container" value="4223" />
+        <param name="visible" value="Control.IsVisible(4223)" />
       </include>
-      <control type="list" id="528">
+      <control type="list" id="4224">
         <left>-16</left>
         <top>220</top>
         <width>1160</width>
@@ -2719,7 +2719,7 @@
               <top>0</top>
               <width>1160</width>
               <height>196</height>
-              <visible>Control.HasFocus(528)</visible>
+              <visible>Control.HasFocus(4224)</visible>
               <texture border="capsule_border">glass_capsule.png</texture>
             </control>
             <control type="image">
@@ -2786,7 +2786,7 @@
               <top>-48</top>
               <width>1256</width>
               <height>292</height>
-              <visible>Control.HasFocus(528)</visible>
+              <visible>Control.HasFocus(4224)</visible>
               <texture border="focus_glow_border">focus_glow.png</texture>
             </control>
             <control type="image">
@@ -2794,7 +2794,7 @@
               <top>0</top>
               <width>1160</width>
               <height>196</height>
-              <visible>Control.HasFocus(528)</visible>
+              <visible>Control.HasFocus(4224)</visible>
               <texture border="capsule_border">glass_capsule.png</texture>
             </control>
             <control type="image">
@@ -2802,7 +2802,7 @@
               <top>0</top>
               <width>1160</width>
               <height>196</height>
-              <visible>!Control.HasFocus(528)</visible>
+              <visible>!Control.HasFocus(4224)</visible>
               <texture border="capsule_border">frost_fill.png</texture>
             </control>
             <control type="image">
@@ -2810,7 +2810,7 @@
               <top>0</top>
               <width>1160</width>
               <height>196</height>
-              <visible>Control.HasFocus(528)</visible>
+              <visible>Control.HasFocus(4224)</visible>
               <texture border="focus_border">focus_button.png</texture>
             </control>
             <control type="image">
@@ -2852,27 +2852,27 @@
         </focusedlayout>
         <scrolltime>220</scrolltime>
         <onup>700</onup>
-        <ondown>528</ondown>
+        <ondown>4224</ondown>
         <onleft>9000</onleft>
-        <onright>528</onright>
-        <onfocus>SetProperty(Starlight.Library.Container,528)</onfocus>
+        <onright>4224</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,4224)</onfocus>
       </control>
       <include content="LibraryDetails">
-        <param name="id" value="528" />
+        <param name="id" value="4224" />
         <param name="x" value="1214" />
         <param name="y" value="780" />
         <param name="width" value="430" />
         <param name="poster" value="true" />
         <param name="square" value="false" />
         <param name="poster_y" value="220" />
-        <param name="title" value="$INFO[Container(528).ListItem.Label]" />
-        <param name="metadata" value="$INFO[Container(528).ListItem.Year,,   ]$INFO[Container(528).ListItem.Artist,,   ]$INFO[Container(528).ListItem.Duration]" />
+        <param name="title" value="$INFO[Container(4224).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(4224).ListItem.Year,,   ]$INFO[Container(4224).ListItem.Artist,,   ]$INFO[Container(4224).ListItem.Duration]" />
       </include>
       <include content="LibraryEmpty">
-        <param name="container" value="528" />
-        <param name="visible" value="Control.IsVisible(528)" />
+        <param name="container" value="4224" />
+        <param name="visible" value="Control.IsVisible(4224)" />
       </include>
-      <control type="list" id="529">
+      <control type="list" id="4225">
         <left>-16</left>
         <top>220</top>
         <width>1660</width>
@@ -2899,7 +2899,7 @@
               <top>0</top>
               <width>1660</width>
               <height>220</height>
-              <visible>Control.HasFocus(529)</visible>
+              <visible>Control.HasFocus(4225)</visible>
               <texture border="capsule_border">glass_capsule.png</texture>
             </control>
             <control type="image">
@@ -2966,7 +2966,7 @@
               <top>-48</top>
               <width>1756</width>
               <height>316</height>
-              <visible>Control.HasFocus(529)</visible>
+              <visible>Control.HasFocus(4225)</visible>
               <texture border="focus_glow_border">focus_glow.png</texture>
             </control>
             <control type="image">
@@ -2974,7 +2974,7 @@
               <top>0</top>
               <width>1660</width>
               <height>220</height>
-              <visible>Control.HasFocus(529)</visible>
+              <visible>Control.HasFocus(4225)</visible>
               <texture border="capsule_border">glass_capsule.png</texture>
             </control>
             <control type="image">
@@ -2982,7 +2982,7 @@
               <top>0</top>
               <width>1660</width>
               <height>220</height>
-              <visible>!Control.HasFocus(529)</visible>
+              <visible>!Control.HasFocus(4225)</visible>
               <texture border="capsule_border">frost_fill.png</texture>
             </control>
             <control type="image">
@@ -2990,7 +2990,7 @@
               <top>0</top>
               <width>1660</width>
               <height>220</height>
-              <visible>Control.HasFocus(529)</visible>
+              <visible>Control.HasFocus(4225)</visible>
               <texture border="focus_border">focus_button.png</texture>
             </control>
             <control type="image">
@@ -3032,22 +3032,22 @@
         </focusedlayout>
         <scrolltime>220</scrolltime>
         <onup>700</onup>
-        <ondown>529</ondown>
+        <ondown>4225</ondown>
         <onleft>9000</onleft>
-        <onright>529</onright>
-        <onfocus>SetProperty(Starlight.Library.Container,529)</onfocus>
+        <onright>4225</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,4225)</onfocus>
       </control>
       <include content="LibraryEmpty">
-        <param name="container" value="529" />
-        <param name="visible" value="Control.IsVisible(529)" />
+        <param name="container" value="4225" />
+        <param name="visible" value="Control.IsVisible(4225)" />
       </include>
       <control type="fixedlist" id="700">
         <left>0</left>
         <top>460</top>
         <width>1644</width>
         <height>72</height>
-        <visible>Control.IsVisible(520) | Control.IsVisible(521) | Control.IsVisible(522) | Control.IsVisible(523) | Control.IsVisible(524) | Control.IsVisible(528) | Control.IsVisible(529)</visible>
-        <animation effect="slide" start="0,0" end="0,-310" time="0" condition="Control.IsVisible(528) | Control.IsVisible(529)">Conditional</animation>
+        <visible>Control.IsVisible(4217) | Control.IsVisible(4218) | Control.IsVisible(4219) | Control.IsVisible(4220) | Control.IsVisible(4221) | Control.IsVisible(4224) | Control.IsVisible(4225)</visible>
+        <animation effect="slide" start="0,0" end="0,-310" time="0" condition="Control.IsVisible(4224) | Control.IsVisible(4225)">Conditional</animation>
         <orientation>horizontal</orientation>
         <focusposition>0</focusposition>
         <content target="videos" browse="never">$VAR[LibraryCategoryPath]</content>
@@ -3132,7 +3132,7 @@
         <top>160</top>
         <width>440</width>
         <height>760</height>
-        <visible>Control.IsVisible(526) | Control.IsVisible(527)</visible>
+        <visible>Control.IsVisible(4222) | Control.IsVisible(4223)</visible>
         <orientation>vertical</orientation>
         <content target="videos" browse="never">$VAR[LibraryCategoryPath]</content>
         <itemlayout width="440" height="72">
@@ -3387,32 +3387,32 @@
     <value />
   </variable>
   <variable name="LibraryCursor">
-    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),500)">$INFO[Container(500).Position]</value>
-    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),501)">$INFO[Container(501).Position]</value>
-    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),502)">$INFO[Container(502).Position]</value>
-    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),503)">$INFO[Container(503).Position]</value>
-    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),504)">$INFO[Container(504).Position]</value>
-    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),505)">$INFO[Container(505).Position]</value>
-    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),506)">$INFO[Container(506).Position]</value>
-    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),507)">$INFO[Container(507).Position]</value>
-    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),508)">$INFO[Container(508).Position]</value>
-    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),510)">$INFO[Container(510).Position]</value>
-    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),511)">$INFO[Container(511).Position]</value>
-    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),512)">$INFO[Container(512).Position]</value>
-    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),513)">$INFO[Container(513).Position]</value>
-    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),514)">$INFO[Container(514).Position]</value>
-    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),515)">$INFO[Container(515).Position]</value>
-    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),517)">$INFO[Container(517).Position]</value>
-    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),518)">$INFO[Container(518).Position]</value>
-    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),520)">$INFO[Container(520).Position]</value>
-    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),521)">$INFO[Container(521).Position]</value>
-    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),522)">$INFO[Container(522).Position]</value>
-    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),523)">$INFO[Container(523).Position]</value>
-    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),524)">$INFO[Container(524).Position]</value>
-    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),526)">$INFO[Container(526).Position]</value>
-    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),527)">$INFO[Container(527).Position]</value>
-    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),528)">$INFO[Container(528).Position]</value>
-    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),529)">$INFO[Container(529).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),4206)">$INFO[Container(4206).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),4207)">$INFO[Container(4207).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),4208)">$INFO[Container(4208).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),4209)">$INFO[Container(4209).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),4210)">$INFO[Container(4210).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),4211)">$INFO[Container(4211).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),4212)">$INFO[Container(4212).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),4213)">$INFO[Container(4213).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),4215)">$INFO[Container(4215).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),4200)">$INFO[Container(4200).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),4201)">$INFO[Container(4201).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),4202)">$INFO[Container(4202).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),4203)">$INFO[Container(4203).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),4204)">$INFO[Container(4204).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),4205)">$INFO[Container(4205).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),4214)">$INFO[Container(4214).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),4216)">$INFO[Container(4216).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),4217)">$INFO[Container(4217).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),4218)">$INFO[Container(4218).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),4219)">$INFO[Container(4219).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),4220)">$INFO[Container(4220).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),4221)">$INFO[Container(4221).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),4222)">$INFO[Container(4222).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),4223)">$INFO[Container(4223).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),4224)">$INFO[Container(4224).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),4225)">$INFO[Container(4225).Position]</value>
     <value>0</value>
   </variable>
   <variable name="SearchCursor">
@@ -3569,8 +3569,8 @@
     </definition>
   </include>
   <variable name="LibraryColumnsPlot">
-    <value condition="!String.IsEmpty(Container(517).ListItem.Plot)">$INFO[Container(517).ListItem.Plot]</value>
-    <value>$INFO[Container(517).ListItem.Comment]</value>
+    <value condition="!String.IsEmpty(Container(4214).ListItem.Plot)">$INFO[Container(4214).ListItem.Plot]</value>
+    <value>$INFO[Container(4214).ListItem.Comment]</value>
   </variable>
   <include name="SearchStripKey">
     <param name="selected" default="false" />

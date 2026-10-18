@@ -308,7 +308,7 @@ class CardAnchorTests(unittest.TestCase):
         cases = [({}, 510, 0, 0, (152,212,968,545)),
                  ({}, 511, 3, 0, (1488,511,369,208)),
                  ({}, 522, 0, 300, (188,568,176,264)),
-                 ({'Home.Continue.Layout':'hero'}, 512, 0, 0, (175,556,451,255)),
+                 ({'Home.Continue.Layout':'hero'}, 512, 0, 0, (175,556,458,256)),
                  ({'Hub.Navigation':'top_centre'}, 510, 0, 0, (36,212,968,545))]
         for settings, control, position, scroll, expected in cases:
             preview = HomePreview(ROOT, settings=settings)

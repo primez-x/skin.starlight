@@ -5,9 +5,9 @@ from PIL import Image
 def build_library_textures(textures, mask, surface, glow):
     sizes = {'square': (230, 230), 'landscape': (380, 214),
              'poster': (189, 283), 'circle': (210, 210),
-             'board': (520, 293), 'expanded': (731, 310),
-             'row-landscape': (410, 231), 'row-board': (488, 275),
-             'row-poster': (217, 310), 'search': (240, 240),
+             'board': (520, 293), 'expanded': (736, 312),
+             'row-landscape': (416, 232), 'row-board': (488, 275),
+             'row-poster': (216, 312), 'search': (240, 240),
              'search-poster': (160, 240), 'list-thumb': (96, 54),
              'list-album': (56, 56), 'list-expanded': (284, 160),
              'list-large': (336, 189), 'preview-poster': (430, 645),

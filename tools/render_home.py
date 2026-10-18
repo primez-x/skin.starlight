@@ -74,7 +74,7 @@ class HomePreview:
             time = duration_label(minutes, self.strings['31039'], self.strings['31019'])
             detail = self.strings['31018'] % time if progress else time
             return {'Label': title, 'Year': '1982' if title == 'Blade Runner' else '2024', 'Mpaa': 'R', 'PercentPlayed': str(progress),
-                    'VideoResolution': '4K', 'HdrType': 'dolbyvision',
+                    'VideoResolution': '2160', 'HdrType': 'dolbyvision',
                     'Duration': '1 h 57 m', 'art': arts,
                     'properties': {'Starlight.Progress': str(progress), 'Starlight.Resume': 'true' if progress else '',
                                    'Starlight.Action': 'Resume' if progress else 'Play',
@@ -160,13 +160,14 @@ class HomePreview:
         if match: return self.settings.get(match[1]) == 'true'
         match = re.fullmatch(r'Skin.String\(([^,]+),([^)]+)\)', expression)
         if match: return self.settings.get(match[1], '') == match[2]
-        match = re.fullmatch(r'(String.IsEmpty|String.IsEqual|Integer.IsEqual|Integer.IsGreater)\((.*)\)', expression)
+        match = re.fullmatch(r'(String.IsEmpty|String.IsEqual|Integer.IsEqual|Integer.IsGreater|Integer.IsGreaterOrEqual)\((.*)\)', expression)
         if match:
             args = [self.info(a) for a in self.split(match[2], ',')]
             if match[1] == 'String.IsEmpty': return not args[0]
             if match[1] == 'String.IsEqual': return args[0] == args[1]
             a, b = [float(v or 0) for v in args]
-            return a == b if match[1] == 'Integer.IsEqual' else a > b
+            if match[1] == 'Integer.IsEqual': return a == b
+            return a >= b if match[1] == 'Integer.IsGreaterOrEqual' else a > b
         raise ValueError('Unsupported preview condition: ' + expression)
 
     def number(self, value): return round(float(self.resolve(self.constants.get(value, value)) or 0))
