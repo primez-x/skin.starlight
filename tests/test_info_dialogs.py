@@ -3,11 +3,14 @@ unsafe default choice, missing keyboard columns, and unresolved resources.
 Data failures: invalid IDs, empty libraries, specials, completed shows,
 encoded actor names, mixed credits, missing roles, and invalid provider paths.
 """
+import ast
 import importlib.util
 from pathlib import Path
 import re
 import sys
 import unittest
+from unittest.mock import Mock
+from urllib.parse import parse_qs, urlsplit, urlencode
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -52,6 +55,105 @@ WINDOW_IDS = {
 
 
 class WindowTests(unittest.TestCase):
+    def test_cast_requests_person_data_after_the_page_opens(self):
+        source = ast.parse((ROOT / 'resources/info.py').read_text())
+        function = next(node for node in source.body if isinstance(node, ast.FunctionDef)
+                        and node.name == 'open_person')
+        for installed in (False, True):
+            with self.subTest(installed=installed):
+                person, info, home = Mock(), Mock(), Mock()
+                person.getProperty.side_effect = lambda key: 'current' if key.endswith('Request') else ''
+                xbmc = Mock()
+                xbmc.getInfoLabel.side_effect = lambda key: "O'Brien & Sons" if key.endswith('.Label') else ''
+                xbmc.getCondVisibility.return_value = installed
+                gui = Mock()
+                gui.Window.side_effect = lambda number: {11103: person, 12003: info, 10000: home}[number]
+                namespace = {'xbmc': xbmc, 'xbmcgui': gui, 'PERSON':11103, 'INFO':12003,
+                             'time': Mock(monotonic_ns=lambda: 42), 'urlencode': urlencode}
+                exec(compile(ast.Module(body=[function], type_ignores=[]), '<person>', 'exec'), namespace)
+                namespace['open_person']()
+                calls = [call.args[0] for call in xbmc.executebuiltin.call_args_list]
+                requests = [command for command in calls if command.startswith('RunPlugin(')]
+                self.assertEqual(len(requests), int(installed))
+                if installed:
+                    self.assertLess(calls.index('ActivateWindow(11103)'), calls.index(requests[0]))
+                    path = requests[0][len('RunPlugin('):-1]
+                    self.assertEqual(urlsplit(path).path, '/starlight/person')
+                    params = parse_qs(urlsplit(path).query)
+                    self.assertEqual(params['name'], ["O'Brien & Sons"])
+                    self.assertEqual(params['request'], ['current'])
+        window = ET.parse(ROOT / '1080i/Custom_1103.xml')
+        self.assertIn('ClearProperty(Starlight.Person.Request)',
+                      [node.text for node in window.findall('onunload')])
+
+    def test_person_cards_reserve_year_space_and_keep_roles_separate(self):
+        source = ast.parse((ROOT / 'resources/home.py').read_text())
+        function = next(node for node in source.body if isinstance(node, ast.FunctionDef)
+                        and node.name == 'add_videos')
+        gui, xbmc, plugin = Mock(), Mock(), Mock()
+        namespace = {'xbmcgui':gui, 'xbmc':xbmc, 'xbmcplugin':plugin,
+                     'playback':lambda row:{'progress':0, 'resume':0, 'minutes':0},
+                     'duration_label':lambda *args:'0 m', 'cached_blurred_art':lambda path:path}
+        exec(compile(ast.Module(body=[function], type_ignores=[]), '<cards>', 'exec'), namespace)
+        namespace['add_videos'](1, [{'media':'movie', 'movieid':1, 'title':'Orbit',
+                                    'role':'Executive Producer', 'year':2026}], 'person')
+        self.assertEqual(gui.ListItem.call_args.kwargs['label2'], 'Executive Producer')
+        tree = ET.parse(ROOT / '1080i/Includes_Info.xml')
+        layout = tree.find("include[@name='PersonCreditLayout']")
+        labels = {node.findtext('label'):node for node in layout.iter('control')
+                  if node.get('type')=='label'}
+        self.assertIn('$VAR[PersonCreditYear]', labels)
+        year = labels['$VAR[PersonCreditYear]']
+        self.assertEqual((year.findtext('left'), year.findtext('width')), ('125','64'))
+
+    def test_provider_info_skips_native_queries_and_lands_on_watchlist(self):
+        source = ast.parse((ROOT / 'resources/info.py').read_text())
+        function = next(node for node in source.body if isinstance(node, ast.FunctionDef)
+                        and node.name == 'initialize')
+        window = Mock()
+        window.getProperty.return_value = 'request'
+        xbmc = Mock()
+        labels = {'ListItem.DBTYPE':'movie', 'ListItem.DBID':'-1',
+                  'ListItem.Property(Starlight.InLibrary)':'false',
+                  'ListItem.Property(Starlight.ProviderKey)':'abc123',
+                  'ListItem.Property(Starlight.TrailersPath)':
+                  'plugin://plugin.video.plexkodiconnect/starlight/trailers?rating_key=abc123'}
+        xbmc.getInfoLabel.side_effect = lambda key: labels.get(key, '')
+        gui = Mock()
+        gui.Window.return_value = window
+        native = Mock(side_effect=AssertionError('Provider titles have no native database identity'))
+        land = Mock()
+        namespace = {'xbmc':xbmc, 'xbmcgui':gui, 'INFO':12003,
+                     'time':Mock(monotonic_ns=lambda:42), 're':re,
+                     'cached_blurred_art':lambda path:path, 'rpc':native,
+                     'library_id':native, 'land':land}
+        exec(compile(ast.Module(body=[function], type_ignores=[]), '<info>', 'exec'), namespace)
+        namespace['initialize']()
+        native.assert_not_called()
+        land.assert_called_once_with(window, 418, request='42')
+        window.setProperty.assert_any_call('Starlight.Info.Provider', 'true')
+        tree = ET.parse(ROOT / '1080i/DialogVideoInfo.xml')
+        self.assertIn('Starlight.Info.Provider',
+                      tree.find(".//control[@id='550']").findtext('visible'))
+        for control in (418, 419):
+            self.assertIsNotNone(tree.find(f".//control[@id='{control}']"))
+        trailer = tree.find(".//control[@id='419']")
+        self.assertIn('Window(12003).Property(Starlight.Info.ProviderKey)',
+                      trailer.findall('onclick')[-1].text)
+        for element in tree.iter():
+            if element.get('id') in ('8', '9'):
+                parent = next(node for node in tree.iter() if element in list(node))
+                self.assertIn('Starlight.Info.Provider', parent.findtext('visible', ''))
+
+    def test_play_glow_escapes_the_action_list_clip(self):
+        tree = ET.parse(ROOT / '1080i/DialogVideoInfo.xml')
+        glow = [node for node in tree.iter('control')
+                if node.findtext('texture') == 'focus_glow.png'
+                and 'Control.HasFocus(8)' in node.findtext('visible', '')]
+        self.assertEqual(len(glow), 1)
+        group = tree.find(".//control[@id='400']")
+        self.assertNotIn(glow[0], list(group.iter('control')))
+
     def test_native_lists_use_info_labels(self):
         # Python ControlList reads only records added through the Python wrapper.
         source = (ROOT / 'resources/info.py').read_text()

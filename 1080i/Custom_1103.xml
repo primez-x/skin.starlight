@@ -2,6 +2,7 @@
 <window id="1103">
   <defaultcontrol always="true">700</defaultcontrol>
   <onload>SetProperty(Starlight.Person.Tab,library)</onload>
+  <onunload>ClearProperty(Starlight.Person.Request)</onunload>
   <controls>
     <include content="InfoBackground">
       <param name="art" value="special://skin/fanart.jpg" />

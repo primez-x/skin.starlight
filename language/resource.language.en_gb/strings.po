@@ -333,3 +333,63 @@ msgstr ""
 msgctxt "#31085"
 msgid "season"
 msgstr ""
+
+msgctxt "#31800"
+msgid "4K"
+msgstr ""
+
+msgctxt "#31801"
+msgid "1080p"
+msgstr ""
+
+msgctxt "#31802"
+msgid "720p"
+msgstr ""
+
+msgctxt "#31803"
+msgid "SD"
+msgstr ""
+
+msgctxt "#31804"
+msgid "Dolby Atmos"
+msgstr ""
+
+msgctxt "#31805"
+msgid "Dolby TrueHD"
+msgstr ""
+
+msgctxt "#31806"
+msgid "DTS-HD MA"
+msgstr ""
+
+msgctxt "#31807"
+msgid "DTS-HD HRA"
+msgstr ""
+
+msgctxt "#31808"
+msgid "Dolby Digital Plus"
+msgstr ""
+
+msgctxt "#31809"
+msgid "Dolby Digital"
+msgstr ""
+
+msgctxt "#31810"
+msgid "Stereo"
+msgstr ""
+
+msgctxt "#31811"
+msgid "Mono"
+msgstr ""
+
+msgctxt "#31812"
+msgid "Add to watchlist"
+msgstr ""
+
+msgctxt "#31813"
+msgid "Remove from watchlist"
+msgstr ""
+
+msgctxt "#31814"
+msgid "Trailer"
+msgstr ""

@@ -5,10 +5,12 @@
     <value>$INFO[Window.Property(Starlight.Info.SeasonCount)] $LOCALIZE[31081]</value>
   </variable>
   <variable name="InfoPrimary">
+    <value condition="String.IsEqual(Window.Property(Starlight.Info.Provider),true)">418</value>
     <value condition="ListItem.IsResumable">9</value>
     <value>8</value>
   </variable>
   <variable name="InfoReturn">
+    <value condition="String.IsEqual(Window.Property(Starlight.Info.Provider),true)">418</value>
     <value condition="String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)">550</value>
     <value>$VAR[InfoPrimary]</value>
   </variable>
@@ -353,12 +355,45 @@
         <param name="playable" value="false" />
         <param name="label_y" value="337" />
         <param name="detail_y" value="365" />
-        <param name="detail" value="$INFO[ListItem.Property(Starlight.RoleYear)]" />
+        <param name="detail" value="" />
         <param name="center" value="94.5,283" />
         <param name="glow_width" value="285" />
         <param name="glow_height" value="379" />
         <param name="progress_y" value="265" />
       </include>
+      <control type="group">
+        <left>24</left>
+        <top>365</top>
+        <include content="InactiveRowFade">
+          <param name="active" value="Control.HasFocus($PARAM[id])" />
+          <param name="opacity" value="40" />
+        </include>
+        <control type="label">
+          <width>125</width>
+          <height>28</height>
+          <font>font_label_small</font>
+          <textcolor>mist</textcolor>
+          <label>$INFO[ListItem.Label2]</label>
+          <visible>Integer.IsGreater(ListItem.Year,0)</visible>
+        </control>
+        <control type="label">
+          <width>189</width>
+          <height>28</height>
+          <font>font_label_small</font>
+          <textcolor>mist</textcolor>
+          <label>$INFO[ListItem.Label2]</label>
+          <visible>!Integer.IsGreater(ListItem.Year,0)</visible>
+        </control>
+        <control type="label">
+          <left>125</left>
+          <width>64</width>
+          <height>28</height>
+          <font>font_label_small</font>
+          <textcolor>mist</textcolor>
+          <label>$VAR[PersonCreditYear]</label>
+          <visible>Integer.IsGreater(ListItem.Year,0)</visible>
+        </control>
+      </control>
     </definition>
   </include>
   <include name="PersonTab">
@@ -438,11 +473,28 @@
       </control>
     </definition>
   </include>
+  <variable name="PersonCreditYear">
+    <value condition="!String.IsEmpty(ListItem.Label2)"> · $INFO[ListItem.Year]</value>
+    <value>$INFO[ListItem.Year]</value>
+  </variable>
+  <variable name="InfoProviderLabel">
+    <value condition="String.IsEqual(Window(home).Property(PKC.Watchlist.Detail.State),present)">$LOCALIZE[31813]</value>
+    <value>$LOCALIZE[31812]</value>
+  </variable>
+  <variable name="InfoProviderAction">
+    <value condition="String.IsEqual(Window(home).Property(PKC.Watchlist.Detail.State),present)">remove</value>
+    <value>add</value>
+  </variable>
+  <variable name="InfoCastPath">
+    <value condition="String.IsEqual(Window.Property(Starlight.Info.Provider),true)">plugin://plugin.video.plexkodiconnect/starlight/cast?rating_key=$INFO[Window.Property(Starlight.Info.ProviderKey)]</value>
+    <value>plugin://skin.starlight/?source=cast&amp;record=$INFO[Window.Property(Starlight.Info.DBID)]&amp;ready=$INFO[Window.Property(Starlight.Info.Ready)]</value>
+  </variable>
   <variable name="InfoPlayLabel">
     <value condition="ListItem.IsResumable">$LOCALIZE[31016]</value>
     <value>$LOCALIZE[31017]</value>
   </variable>
   <variable name="InfoCastOrEpisodes">
+    <value condition="String.IsEqual(Window.Property(Starlight.Info.Provider),true)">250</value>
     <value condition="String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)">550</value>
     <value>250</value>
   </variable>

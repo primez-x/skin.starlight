@@ -61,10 +61,42 @@
     <value condition="String.IsEqual(ListItem.HdrType,hlg)">HLG</value>
     <value>$INFO[ListItem.HdrType]</value>
   </variable>
+  <variable name="HomeResolution">
+    <value condition="String.IsEqual(ListItem.VideoResolution,4K) | Integer.IsGreaterOrEqual(ListItem.VideoResolution,2160)">$LOCALIZE[31800]</value>
+    <value condition="String.IsEqual(ListItem.VideoResolution,1080)">$LOCALIZE[31801]</value>
+    <value condition="String.IsEqual(ListItem.VideoResolution,720)">$LOCALIZE[31802]</value>
+    <value condition="!String.IsEmpty(ListItem.VideoResolution)">$LOCALIZE[31803]</value>
+  </variable>
   <variable name="HomeVideoQuality">
-    <value condition="!String.IsEmpty(ListItem.VideoResolution) + !String.IsEmpty(ListItem.HdrType)">$INFO[ListItem.VideoResolution] $VAR[HomeHdrType]</value>
-    <value condition="!String.IsEmpty(ListItem.VideoResolution)">$INFO[ListItem.VideoResolution]</value>
+    <value condition="!String.IsEmpty(ListItem.VideoResolution) + !String.IsEmpty(ListItem.HdrType)">$VAR[HomeResolution] $VAR[HomeHdrType]</value>
+    <value condition="!String.IsEmpty(ListItem.VideoResolution)">$VAR[HomeResolution]</value>
     <value>$VAR[HomeHdrType]</value>
+  </variable>
+  <variable name="InfoAudioCodec">
+    <value condition="String.Contains(ListItem.AudioCodec,atmos)">$LOCALIZE[31804]</value>
+    <value condition="String.IsEqual(ListItem.AudioCodec,truehd)">$LOCALIZE[31805]</value>
+    <value condition="String.IsEqual(ListItem.AudioCodec,dtshd_ma)">$LOCALIZE[31806]</value>
+    <value condition="String.IsEqual(ListItem.AudioCodec,dtshd_hra)">$LOCALIZE[31807]</value>
+    <value condition="String.IsEqual(ListItem.AudioCodec,dts)">DTS</value>
+    <value condition="String.IsEqual(ListItem.AudioCodec,eac3)">$LOCALIZE[31808]</value>
+    <value condition="String.IsEqual(ListItem.AudioCodec,ac3)">$LOCALIZE[31809]</value>
+    <value condition="String.IsEqual(ListItem.AudioCodec,aac)">AAC</value>
+    <value condition="String.IsEqual(ListItem.AudioCodec,flac)">FLAC</value>
+    <value>$INFO[ListItem.AudioCodec]</value>
+  </variable>
+  <variable name="InfoAudioLayout">
+    <value condition="String.IsEqual(ListItem.AudioChannels,8)">7.1</value>
+    <value condition="String.IsEqual(ListItem.AudioChannels,6)">5.1</value>
+    <value condition="String.IsEqual(ListItem.AudioChannels,2)">$LOCALIZE[31810]</value>
+    <value condition="String.IsEqual(ListItem.AudioChannels,1)">$LOCALIZE[31811]</value>
+    <value condition="String.IsEqual(ListItem.AudioChannels,4)">4.0</value>
+    <value condition="String.IsEqual(ListItem.AudioChannels,5)">5.0</value>
+    <value condition="String.IsEqual(ListItem.AudioChannels,7)">6.1</value>
+  </variable>
+  <variable name="InfoAudio">
+    <value condition="!String.IsEmpty(ListItem.AudioCodec) + !String.IsEmpty(ListItem.AudioChannels)">$VAR[InfoAudioCodec] · $VAR[InfoAudioLayout]</value>
+    <value condition="!String.IsEmpty(ListItem.AudioCodec)">$VAR[InfoAudioCodec]</value>
+    <value>$VAR[InfoAudioLayout]</value>
   </variable>
   <include name="HubRail">
     <param name="return" default="510" />

@@ -69,7 +69,7 @@ def add_videos(handle, rows, source):
         state = playback(row)
         title = row.get('title') or row.get('label', '')
         label = row.get('showtitle') if row['media'] == 'episode' and source in ('continue', 'next') else title
-        item = xbmcgui.ListItem(label=label or title, path=row.get('file', ''))
+        item = xbmcgui.ListItem(label=label or title, label2=row.get('role', ''), path=row.get('file', ''))
         item.setProperty('IsPlayable', 'true')
         art = row.get('art', {})
         art['fanart'] = art.get('fanart') or art.get('tvshow.fanart') or 'special://skin/fanart.jpg'

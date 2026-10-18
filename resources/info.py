@@ -5,6 +5,7 @@ import re
 import sys
 import time
 import xml.etree.ElementTree as ET
+from urllib.parse import urlencode
 
 import xbmc
 import xbmcgui
@@ -28,11 +29,21 @@ def initialize():
     media = xbmc.getInfoLabel('ListItem.DBTYPE')
     rawid = xbmc.getInfoLabel('ListItem.DBID')
     for key in ('Ready', 'Error', 'More', 'cast', 'seasons', 'ShowID', 'Season', 'NextID',
-                'Resume', 'Time', 'Duration', 'Progress', 'Media', 'DBID', 'Watched', 'SeasonCount'):
+                'Resume', 'Time', 'Duration', 'Progress', 'Media', 'DBID', 'Watched', 'SeasonCount',
+                'Provider', 'ProviderKey', 'ProviderType'):
         window.clearProperty('Starlight.Info.' + key)
     window.setProperty('Starlight.Info.Blurred', cached_blurred_art(xbmc.getInfoLabel('ListItem.Art(fanart)')))
     window.setProperty('Starlight.Info.Hub', xbmcgui.Window(10000).getProperty('Starlight.Hub') or
                        ('tv' if media in ('tvshow', 'season', 'episode') else 'movies'))
+    if xbmc.getInfoLabel('ListItem.Property(Starlight.InLibrary)') == 'false':
+        window.setProperty('Starlight.Info.Provider', 'true')
+        key = xbmc.getInfoLabel('ListItem.Property(Starlight.ProviderKey)')
+        if re.fullmatch(r'[A-Za-z0-9_-]{1,128}', key) and media in ('movie', 'tvshow'):
+            window.setProperty('Starlight.Info.ProviderKey', key)
+            window.setProperty('Starlight.Info.ProviderType', 'show' if media == 'tvshow' else 'movie')
+            window.setProperty('Starlight.Info.Ready', 'true')
+            land(window, 418, request=request)
+        return
     if media not in ('movie', 'episode', 'tvshow', 'season'):
         window.setProperty('Starlight.Info.Ready', 'true')
         return
@@ -145,6 +156,10 @@ def open_person():
     # Close the modal info dialog before opening a normal custom window.
     xbmc.executebuiltin('Dialog.Close(movieinformation)')
     xbmc.executebuiltin('ActivateWindow(11103)')
+    if xbmc.getCondVisibility('System.HasAddon(plugin.video.plexkodiconnect)'):
+        path = 'plugin://plugin.video.plexkodiconnect/starlight/person?' + urlencode({
+            'name': name, 'request': person.getProperty('Starlight.Person.Request')})
+        xbmc.executebuiltin('RunPlugin(' + path + ')')
 
 
 def open_credit():
