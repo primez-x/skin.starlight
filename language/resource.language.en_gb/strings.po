@@ -1,0 +1,71 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: skin.starlight 2.0.0\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgctxt "#31000"
+msgid "Starlight"
+msgstr ""
+
+msgctxt "#31001"
+msgid "Foundation"
+msgstr ""
+
+msgctxt "#31002"
+msgid "Void · #03050a"
+msgstr ""
+
+msgctxt "#31003"
+msgid "Frost · #f4f7fb"
+msgstr ""
+
+msgctxt "#31004"
+msgid "Mist · #9aa6b8"
+msgstr ""
+
+msgctxt "#31005"
+msgid "Gold · #f5c27a"
+msgstr ""
+
+msgctxt "#31006"
+msgid "Focus G"
+msgstr ""
+
+msgctxt "#31007"
+msgid "Glass"
+msgstr ""
+
+msgctxt "#31008"
+msgid "Focus"
+msgstr ""
+
+msgctxt "#31009"
+msgid "Motion"
+msgstr ""
+
+msgctxt "#31010"
+msgid "Selected state"
+msgstr ""
+
+msgctxt "#31011"
+msgid "Progress"
+msgstr ""
+
+msgctxt "#31012"
+msgid "Loading"
+msgstr ""
+
+msgctxt "#31013"
+msgid "Card lift"
+msgstr ""
+
+msgctxt "#31014"
+msgid "Event horizon"
+msgstr ""
+
+msgctxt "#31015"
+msgid "Manrope · Smoked glass · Warm gold"
+msgstr ""

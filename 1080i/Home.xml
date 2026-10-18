@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <defaultcontrol always="true">201</defaultcontrol>
+  <onload>SetProperty(Foundation.Selected,201,home)</onload>
+  <controls>
+    <control type="image">
+      <width>1920</width><height>1080</height><texture>background_void.png</texture>
+    </control>
+    <control type="label">
+      <left>120</left><top>72</top><width>1200</width><height>96</height>
+      <font>font_title_large</font><label>$LOCALIZE[31000]</label>
+    </control>
+    <control type="label">
+      <left>124</left><top>176</top><width>1200</width><height>40</height>
+      <textcolor>mist</textcolor><label>$LOCALIZE[31001]</label>
+    </control>
+    <control type="label">
+      <left>1480</left><top>100</top><width>320</width><height>56</height>
+      <font>font_clock</font><align>right</align><label>$INFO[System.Time]</label>
+    </control>
+    <control type="image">
+      <left>120</left><top>256</top><width>48</width><height>48</height>
+      <texture>palette_void.png</texture>
+    </control>
+    <control type="label">
+      <left>184</left><top>260</top><width>180</width><label>$LOCALIZE[31002]</label><textcolor>mist</textcolor>
+    </control>
+    <control type="image">
+      <left>390</left><top>256</top><width>48</width><height>48</height>
+      <texture>palette_frost.png</texture>
+    </control>
+    <control type="label">
+      <left>454</left><top>260</top><width>180</width><label>$LOCALIZE[31003]</label>
+    </control>
+    <control type="image">
+      <left>660</left><top>256</top><width>48</width><height>48</height>
+      <texture>palette_mist.png</texture>
+    </control>
+    <control type="label">
+      <left>724</left><top>260</top><width>180</width><label>$LOCALIZE[31004]</label><textcolor>mist</textcolor>
+    </control>
+    <control type="image">
+      <left>930</left><top>256</top><width>48</width><height>48</height>
+      <texture>palette_gold.png</texture>
+    </control>
+    <control type="label">
+      <left>994</left><top>260</top><width>180</width><label>$LOCALIZE[31005]</label><textcolor>gold</textcolor>
+    </control>
+    <include content="GlassPanel">
+      <param name="x" value="120"/><param name="y" value="352"/>
+      <param name="width" value="1120"/><param name="height" value="500"/>
+    </include>
+    <control type="label">
+      <left>160</left><top>376</top><width>800</width><height>48</height>
+      <font>font_heading</font><label>$LOCALIZE[31006]</label>
+    </control>
+    <control type="group" id="9000">
+      <left>160</left><top>448</top><width>1040</width><height>64</height>
+      <control type="image">
+        <left>-6</left><top>-6</top><width>1052</width><height>76</height>
+        <texture border="capsule_border">glass_capsule.png</texture>
+        <visible>ControlGroup(9000).HasFocus</visible>
+      </control>
+      <include content="FocusButton">
+        <param name="id" value="201"/><param name="x" value="0"/>
+        <param name="label" value="$LOCALIZE[31007]"/>
+        <param name="left" value="203"/><param name="right" value="202"/>
+      </include>
+      <include content="FocusButton">
+        <param name="id" value="202"/><param name="x" value="360"/>
+        <param name="label" value="$LOCALIZE[31008]"/>
+        <param name="left" value="201"/><param name="right" value="203"/>
+      </include>
+      <include content="FocusButton">
+        <param name="id" value="203"/><param name="x" value="720"/>
+        <param name="label" value="$LOCALIZE[31009]"/>
+        <param name="left" value="202"/><param name="right" value="201"/>
+      </include>
+    </control>
+    <include content="FrostSelection">
+      <param name="x" value="160"/><param name="y" value="576"/>
+      <param name="width" value="320"/><param name="label" value="$LOCALIZE[31010]"/>
+    </include>
+    <control type="label">
+      <left>160</left><top>680</top><width>800</width><label>$LOCALIZE[31011]</label><textcolor>mist</textcolor>
+    </control>
+    <control type="image">
+      <left>160</left><top>748</top><width>1040</width><height>8</height>
+      <texture border="progress_border">progress_track.png</texture>
+    </control>
+    <control type="image">
+      <left>160</left><top>748</top><width>644</width><height>8</height>
+      <texture border="progress_border">progress_gold.png</texture>
+    </control>
+    <control type="image">
+      <left>772</left><top>720</top><width>64</width><height>64</height><texture>playhead_glow.png</texture>
+    </control>
+    <include content="StatusPill">
+      <param name="x" value="1320"/><param name="y" value="352"/>
+      <param name="label" value="$LOCALIZE[31012]"/>
+    </include>
+    <control type="label">
+      <left>1384</left><top>488</top><width>360</width><label>$LOCALIZE[31013]</label><textcolor>mist</textcolor>
+    </control>
+    <include content="CardWithLift">
+      <param name="id" value="204"/><param name="x" value="1384"/><param name="y" value="584"/>
+      <param name="image" value="card_demo.png"/><param name="label" value="$LOCALIZE[31014]"/>
+      <param name="active" value="Control.HasFocus(204)"/><param name="selected" value="true"/>
+    </include>
+    <control type="label">
+      <left>124</left><top>924</top><width>1600</width><height>48</height>
+      <font>font_label</font><textcolor>mist</textcolor><label>$LOCALIZE[31015]</label>
+    </control>
+  </controls>
+</window>

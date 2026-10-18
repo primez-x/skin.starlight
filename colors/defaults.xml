@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<colors>
+  <color name="void">FF03050A</color>
+  <color name="frost">FFF4F7FB</color>
+  <color name="mist">FF9AA6B8</color>
+  <color name="gold">FFF5C27A</color>
+  <color name="frost_fill">29F4F7FB</color>
+  <color name="hairline">14FFFFFF</color>
+  <color name="selected_hairline">29FFFFFF</color>
+  <color name="dim_soft">59000000</color>
+  <color name="dim_modal">99000000</color>
+  <color name="inactive_selected">CCF4F7FB</color>
+  <color name="inactive_other">66F4F7FB</color>
+  <color name="glass_base">6B080C14</color>
+  <color name="glass_top">21FFFFFF</color>
+  <color name="glass_bottom">0DFFFFFF</color>
+  <color name="glass_rim">59FFFFFF</color>
+  <color name="focus_top">5CFFFFFF</color>
+  <color name="focus_bottom">24FFFFFF</color>
+  <color name="focus_warm">2EF5C27A</color>
+  <color name="focus_rim">D9FFFFFF</color>
+  <color name="focus_gold_rim">D9F5C27A</color>
+  <color name="transparent">00000000</color>
+</colors>

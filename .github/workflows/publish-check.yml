@@ -25,7 +25,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install test dependencies
-        run: python3 -m pip install --disable-pip-version-check pytest polib requests
+        run: python3 -m pip install --disable-pip-version-check pytest polib requests pillow
 
       - name: Check publish rules
         env:

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+  <include name="GlassPanel">
+    <param name="x" default="0"/>
+    <param name="y" default="0"/>
+    <param name="width" default="600"/>
+    <param name="height" default="300"/>
+    <definition>
+      <control type="image">
+        <left>$PARAM[x]</left><top>$PARAM[y]</top>
+        <width>$PARAM[width]</width><height>$PARAM[height]</height>
+        <texture border="panel_border">glass_panel.png</texture>
+      </control>
+    </definition>
+  </include>
+  <include name="InactiveRowFade">
+    <param name="active" default="true"/>
+    <param name="opacity" default="40"/>
+    <definition>
+      <animation effect="fade" start="100" end="$PARAM[opacity]" time="180" condition="![$PARAM[active]]">Conditional</animation>
+    </definition>
+  </include>
+  <include name="FrostSelection">
+    <param name="x" default="0"/>
+    <param name="y" default="0"/>
+    <param name="width" default="300"/>
+    <param name="label" default=""/>
+    <definition>
+      <control type="group">
+        <left>$PARAM[x]</left><top>$PARAM[y]</top>
+        <width>$PARAM[width]</width><height>64</height>
+        <control type="image">
+          <width>$PARAM[width]</width><height>64</height>
+          <texture border="capsule_border">frost_fill.png</texture>
+        </control>
+        <control type="label">
+          <width>$PARAM[width]</width><height>64</height>
+          <align>center</align><font>font_label_large</font><label>$PARAM[label]</label>
+        </control>
+      </control>
+    </definition>
+  </include>
+  <include name="FocusButton">
+    <param name="x" default="0"/>
+    <param name="width" default="320"/>
+    <param name="row" default="9000"/>
+    <param name="up" default="204"/>
+    <param name="down" default="204"/>
+    <definition>
+      <control type="group">
+        <left>$PARAM[x]</left><width>$PARAM[width]</width><height>64</height>
+        <control type="image">
+          <left>-48</left><top>-48</top>
+          <right>-48</right><height>160</height>
+          <texture border="focus_glow_border">focus_glow.png</texture>
+          <visible>Control.HasFocus($PARAM[id])</visible>
+        </control>
+        <control type="image">
+          <width>$PARAM[width]</width><height>64</height>
+          <texture border="capsule_border">glass_capsule.png</texture>
+          <visible>ControlGroup($PARAM[row]).HasFocus + !Control.HasFocus($PARAM[id])</visible>
+        </control>
+        <control type="image">
+          <width>$PARAM[width]</width><height>64</height>
+          <texture border="capsule_border">frost_fill.png</texture>
+          <visible>!ControlGroup($PARAM[row]).HasFocus + String.IsEqual(Window(home).Property(Foundation.Selected),$PARAM[id])</visible>
+        </control>
+        <control type="button" id="$PARAM[id]">
+          <width>$PARAM[width]</width><height>64</height><label>$PARAM[label]</label>
+          <onleft>$PARAM[left]</onleft><onright>$PARAM[right]</onright>
+          <onup>$PARAM[up]</onup><ondown>$PARAM[down]</ondown>
+          <onfocus>SetProperty(Foundation.Selected,$PARAM[id],home)</onfocus>
+          <onclick>SetFocus($PARAM[right])</onclick>
+        </control>
+      </control>
+    </definition>
+  </include>
+  <include name="ListFocus">
+    <definition>
+      <control type="image">
+        <left>-48</left><top>-48</top><width>356</width><height>160</height>
+        <texture border="focus_glow_border">focus_glow.png</texture>
+      </control>
+      <control type="image">
+        <width>260</width><height>64</height>
+        <texture border="focus_border">focus_button.png</texture>
+      </control>
+      <control type="label">
+        <width>260</width><height>64</height><align>center</align>
+        <font>font_label_large</font><label>$INFO[ListItem.Label]</label>
+      </control>
+    </definition>
+  </include>
+  <include name="CardWithLift">
+    <param name="active" default="true"/>
+    <param name="selected" default="false"/>
+    <definition>
+      <control type="group">
+        <left>$PARAM[x]</left><top>$PARAM[y]</top><width>300</width><height>220</height>
+        <animation effect="zoom" start="100" end="110" center="150,168" time="180" condition="Control.HasFocus($PARAM[id])">Conditional</animation>
+        <control type="group">
+          <width>300</width><height>168</height>
+          <include content="InactiveRowFade">
+            <param name="active" value="[$PARAM[active]] | ![$PARAM[selected]]"/>
+            <param name="opacity" value="80"/>
+          </include>
+          <include content="InactiveRowFade">
+            <param name="active" value="[$PARAM[active]] | [$PARAM[selected]]"/>
+            <param name="opacity" value="40"/>
+          </include>
+          <control type="image">
+            <left>-48</left><top>-48</top><width>396</width><height>264</height>
+            <texture border="card_glow_border">focus_card_glow.png</texture>
+            <visible>Control.HasFocus($PARAM[id])</visible>
+          </control>
+          <control type="image">
+            <width>300</width><height>168</height>
+            <texture diffuse="card_mask.png">$PARAM[image]</texture>
+            <aspectratio>scale</aspectratio>
+          </control>
+          <control type="button" id="$PARAM[id]">
+            <width>300</width><height>168</height><label/>
+            <texturefocus border="card_border">focus_card.png</texturefocus>
+            <texturenofocus/>
+            <onup>201</onup><ondown>201</ondown><onleft>201</onleft><onright>203</onright>
+            <onclick>SetFocus(201)</onclick>
+          </control>
+        </control>
+        <!-- Labels follow the glow in draw order and stay opaque while the row has focus. -->
+        <control type="label">
+          <top>188</top><width>300</width><height>40</height>
+          <font>font_label_large</font><label>$PARAM[label]</label>
+          <include content="InactiveRowFade"><param name="active" value="$PARAM[active]"/></include>
+        </control>
+      </control>
+    </definition>
+  </include>
+  <include name="StatusPill">
+    <param name="x" default="0"/>
+    <param name="y" default="0"/>
+    <param name="label" default=""/>
+    <definition>
+      <control type="group">
+        <left>$PARAM[x]</left><top>$PARAM[y]</top><width>480</width><height>96</height>
+        <control type="image">
+          <width>480</width><height>96</height>
+          <texture border="capsule_border">glass_capsule.png</texture>
+        </control>
+        <control type="multiimage">
+          <left>12</left><width>96</width><height>96</height>
+          <imagepath>busy</imagepath><timeperimage>0.04</timeperimage>
+          <fadetime>0</fadetime><pauseatend>0</pauseatend><loop>yes</loop><randomize>false</randomize>
+        </control>
+        <control type="label">
+          <left>120</left><width>330</width><height>96</height>
+          <font>font_label_large</font><label>$PARAM[label]</label>
+        </control>
+      </control>
+    </definition>
+  </include>
+</includes>

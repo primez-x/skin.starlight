@@ -1,0 +1,173 @@
+#!/usr/bin/env python3
+"""Render foundation PNGs with Pillow. Geometry comes from Includes_Constants.xml."""
+import argparse
+import math
+from pathlib import Path
+import xml.etree.ElementTree as ET
+
+from PIL import Image, ImageChops, ImageDraw, ImageFilter
+
+ROOT = Path(__file__).resolve().parents[1]
+SCALE = 4
+FROST = (244, 247, 251)
+GOLD = (245, 194, 122)
+CONSTANTS = {node.get('name'): int(node.text) for node in
+             ET.parse(ROOT / '1080i/Includes_Constants.xml').iter('constant')}
+
+
+def rgba(rgb, alpha):
+    return (*rgb, round(alpha * 255))
+
+
+def mask(size, radius, inset=0):
+    canvas = Image.new('L', (size[0] * SCALE, size[1] * SCALE))
+    ImageDraw.Draw(canvas).rounded_rectangle(
+        (inset * SCALE, inset * SCALE,
+         (size[0] - inset) * SCALE - 1, (size[1] - inset) * SCALE - 1),
+        radius=max(0, radius - inset) * SCALE, fill=255)
+    return canvas
+
+
+def gradient(size, stops):
+    canvas = Image.new('RGBA', (size[0] * SCALE, size[1] * SCALE))
+    draw = ImageDraw.Draw(canvas)
+    for y in range(canvas.height):
+        pos = y / (canvas.height - 1)
+        left, right = next((a, b) for a, b in zip(stops, stops[1:]) if a[0] <= pos <= b[0])
+        blend = (pos - left[0]) / (right[0] - left[0])
+        color = tuple(round(a + (b - a) * blend) for a, b in zip(left[1], right[1]))
+        draw.line((0, y, canvas.width, y), fill=color)
+    return canvas
+
+
+def surface(size, radius, focus=False, selected=False):
+    if selected:
+        canvas = Image.new('RGBA', (size[0] * SCALE, size[1] * SCALE), rgba(FROST, .16))
+    elif focus:
+        canvas = gradient(size, [(0, rgba((255, 255, 255), .36)),
+                                 (.7, rgba((255, 255, 255), .14)), (1, rgba(GOLD, .18))])
+    else:
+        canvas = Image.new('RGBA', (size[0] * SCALE, size[1] * SCALE), rgba((8, 12, 20), .42))
+        canvas = Image.alpha_composite(canvas, gradient(size, [
+            (0, rgba((255, 255, 255), .13)), (1, rgba((255, 255, 255), .05))]))
+    shape = mask(size, radius)
+    canvas.putalpha(ImageChops.multiply(canvas.getchannel('A'), shape))
+    edge = ImageChops.subtract(shape, mask(size, radius, 1))
+    rim = Image.new('RGBA', canvas.size, (255, 255, 255, 0))
+    rim.putalpha(edge.point(lambda a: round(a * (.3 if focus else .16 if selected else .08))))
+    canvas = Image.alpha_composite(canvas, rim)
+    if not selected:
+        # Shifted masks leave a one-pixel curved top rim and the warm focus foot.
+        band = ImageChops.subtract(shape, mask(size, radius, 1.5 if focus else 1))
+        rim = Image.new('RGBA', canvas.size)
+        draw = ImageDraw.Draw(rim)
+        draw.rectangle((0, 0, rim.width, round(radius * SCALE)),
+                       fill=rgba((255, 255, 255), .85 if focus else .35))
+        if focus:
+            draw.rectangle((0, (size[1] - radius) * SCALE, rim.width, rim.height), fill=rgba(GOLD, .85))
+        rim.putalpha(ImageChops.multiply(rim.getchannel('A'), band))
+        canvas = Image.alpha_composite(canvas, rim)
+    return canvas.resize(size, Image.Resampling.LANCZOS)
+
+
+def glow(size, radius):
+    padding = CONSTANTS['glow_padding']
+    full = (size[0] + padding * 2, size[1] + padding * 2)
+    silhouette = Image.new('L', (full[0] * SCALE, full[1] * SCALE))
+    silhouette.paste(mask(size, radius), (padding * SCALE, (padding + 14) * SCALE))
+    silhouette = silhouette.filter(ImageFilter.GaussianBlur(16 * SCALE))
+    cutout = Image.new('L', silhouette.size)
+    cutout.paste(mask(size, radius), (padding * SCALE, padding * SCALE))
+    silhouette = ImageChops.subtract(silhouette, cutout).point(lambda a: round(a * .7))
+    canvas = Image.new('RGBA', silhouette.size, (*GOLD, 0))
+    canvas.putalpha(silhouette)
+    return canvas.resize(full, Image.Resampling.LANCZOS)
+
+
+def point_sprite(twinkle=False):
+    size = 64
+    canvas = Image.new('RGBA', (size * SCALE, size * SCALE))
+    halo = Image.new('RGBA', canvas.size)
+    draw = ImageDraw.Draw(halo)
+    draw.ellipse((20 * SCALE, 20 * SCALE, 44 * SCALE, 44 * SCALE), fill=rgba(GOLD, .65))
+    canvas = Image.alpha_composite(canvas, halo.filter(ImageFilter.GaussianBlur(7 * SCALE)))
+    draw = ImageDraw.Draw(canvas)
+    if twinkle:
+        points = [(32, 12), (34, 29), (48, 32), (34, 34), (32, 52), (30, 34), (16, 32), (30, 29)]
+        draw.polygon([(x * SCALE, y * SCALE) for x, y in points], fill=rgba(FROST, .95))
+    else:
+        draw.ellipse((28 * SCALE, 28 * SCALE, 36 * SCALE, 36 * SCALE), fill=(255, 246, 228, 255))
+    return canvas.resize((size, size), Image.Resampling.LANCZOS)
+
+
+def busy_frame(frame):
+    size = 96
+    canvas = Image.new('RGBA', (size * SCALE, size * SCALE))
+    halo = Image.new('RGBA', canvas.size)
+    draw = ImageDraw.Draw(halo)
+    draw.ellipse((22 * SCALE, 19 * SCALE, 74 * SCALE, 77 * SCALE), outline=rgba(GOLD, .6), width=5 * SCALE)
+    canvas = Image.alpha_composite(canvas, halo.filter(ImageFilter.GaussianBlur(5 * SCALE)))
+    draw = ImageDraw.Draw(canvas)
+    draw.ellipse((28 * SCALE, 25 * SCALE, 68 * SCALE, 71 * SCALE), fill=(1, 2, 4, 255),
+                 outline=rgba(GOLD, .9), width=2 * SCALE)
+    draw.ellipse((9 * SCALE, 43 * SCALE, 87 * SCALE, 54 * SCALE), outline=rgba(GOLD, .7), width=2 * SCALE)
+    angle = 2 * math.pi * frame / 24
+    x, y = 48 + 20 * math.cos(angle), 48 + 23 * math.sin(angle)
+    point = point_sprite().resize((40 * SCALE, 40 * SCALE), Image.Resampling.LANCZOS)
+    canvas.alpha_composite(point, (round((x - 20) * SCALE), round((y - 20) * SCALE)))
+    return canvas.resize((size, size), Image.Resampling.LANCZOS)
+
+
+def build(output):
+    output.mkdir(parents=True, exist_ok=True)
+    textures = {
+        'glass_panel.png': surface((96, 96), CONSTANTS['panel_border']),
+        'glass_capsule.png': surface((132, 68), CONSTANTS['capsule_border']),
+        'focus_button.png': surface((132, 68), CONSTANTS['focus_border'], focus=True),
+        'focus_glow.png': glow((132, 68), CONSTANTS['focus_border']),
+        'focus_card.png': surface((68, 68), CONSTANTS['card_border'], focus=True),
+        'focus_card_glow.png': glow((68, 68), CONSTANTS['card_border']),
+        'frost_fill.png': surface((132, 68), CONSTANTS['capsule_border'], selected=True),
+        'playhead_glow.png': point_sprite(),
+        'star_soft.png': point_sprite(),
+        'star_twinkle.png': point_sprite(twinkle=True),
+        'background_void.png': Image.new('RGBA', (1, 1), (3, 5, 10, 255)),
+        'dim_soft.png': Image.new('RGBA', (1, 1), (0, 0, 0, 89)),
+        'dim_modal.png': Image.new('RGBA', (1, 1), (0, 0, 0, 153)),
+    }
+    for name, size, radius, color in [
+            ('card_mask.png', (68, 68), CONSTANTS['card_border'], (255, 255, 255, 255)),
+            ('circle_mask.png', (128, 128), 64, (255, 255, 255, 255)),
+            ('progress_track.png', (132, 8), CONSTANTS['progress_border'], rgba(FROST, .16)),
+            ('progress_gold.png', (132, 8), CONSTANTS['progress_border'], (*GOLD, 255))]:
+        canvas = Image.new('RGBA', (size[0] * SCALE, size[1] * SCALE), color)
+        canvas.putalpha(ImageChops.multiply(canvas.getchannel('A'), mask(size, radius)))
+        textures[name] = canvas.resize(size, Image.Resampling.LANCZOS)
+    for name, color in [('void', (3, 5, 10)), ('frost', FROST),
+                        ('mist', (154, 166, 184)), ('gold', GOLD)]:
+        canvas = Image.new('RGBA', (128 * SCALE, 128 * SCALE), (*color, 255))
+        canvas.putalpha(mask((128, 128), 64))
+        if name == 'void':
+            outline = ImageChops.subtract(mask((128, 128), 64), mask((128, 128), 64, 2))
+            rim = Image.new('RGBA', canvas.size, (*FROST, 0))
+            rim.putalpha(outline.point(lambda a: round(a * .16)))
+            canvas = Image.alpha_composite(canvas, rim)
+        textures[f'palette_{name}.png'] = canvas.resize((128, 128), Image.Resampling.LANCZOS)
+    card = gradient((300, 168), [(0, (17, 30, 48, 255)), (1, (4, 7, 13, 255))])
+    emblem = busy_frame(0).resize((144 * SCALE, 144 * SCALE), Image.Resampling.LANCZOS)
+    card.alpha_composite(emblem, (78 * SCALE, 12 * SCALE))
+    card.putalpha(mask((300, 168), CONSTANTS['card_border']))
+    textures['card_demo.png'] = card.resize((300, 168), Image.Resampling.LANCZOS)
+    for frame in range(24):
+        textures[f'busy/frame_{frame:02d}.png'] = busy_frame(frame)
+    for name, texture in sorted(textures.items()):
+        target = output / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        texture.save(target, format='PNG', optimize=False, compress_level=9)
+    print(f'Rendered {len(textures)} PNGs to {output}')
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output', type=Path, default=ROOT / 'media')
+    build(parser.parse_args().output)

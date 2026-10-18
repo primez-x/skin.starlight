@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addon id="skin.starlight" name="Starlight" version="2.0.0" provider-name="primez-x">
+  <requires>
+    <import addon="xbmc.gui" version="5.17.0"/>
+    <import addon="xbmc.python" version="3.0.0"/>
+  </requires>
+  <extension point="xbmc.gui.skin" effectslowdown="1.0" debugging="false">
+    <res width="1920" height="1080" aspect="16:9" default="true" folder="1080i"/>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Starlight: calm cinema, clear focus.</summary>
+    <description lang="en_GB">Starlight brings smoked glass, warm gold focus, and Manrope type to Kodi. This foundation preview presents the new visual system.</description>
+    <platform>all</platform>
+    <license>All rights reserved</license>
+    <news>v2.0.0
+New Starlight foundation with Manrope, procedural glass, gold focus, and event horizon artwork.</news>
+    <assets>
+      <icon>icon.png</icon>
+      <fanart>fanart.jpg</fanart>
+    </assets>
+  </extension>
+</addon>

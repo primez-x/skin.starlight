@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+  <include file="Includes_Constants.xml"/>
+  <include file="Includes_Defaults.xml"/>
+  <include file="Includes_Controls.xml"/>
+</includes>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+  <!-- Single source for renderer geometry and Kodi nine-slice borders: left,top,right,bottom. -->
+  <!-- Panel: 96 square, radius 28. Capsule/focus/selected: 132x68, radius 32. -->
+  <!-- Card: 68 square, radius 16. Glow adds 48 pixels per side. Progress: 132x8, radius 4. -->
+  <constant name="panel_border">28</constant>
+  <constant name="capsule_border">32</constant>
+  <constant name="focus_border">32</constant>
+  <constant name="focus_glow_border">80</constant>
+  <constant name="card_border">16</constant>
+  <constant name="card_glow_border">64</constant>
+  <constant name="progress_border">4</constant>
+  <constant name="glow_padding">48</constant>
+  <constant name="card_headroom">40</constant>
+  <constant name="control_height">64</constant>
+</includes>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+  <default type="label">
+    <font>font_body</font>
+    <textcolor>frost</textcolor>
+    <aligny>center</aligny>
+    <height>40</height>
+    <scroll>false</scroll>
+  </default>
+  <default type="image">
+    <aspectratio>stretch</aspectratio>
+    <fadetime>0</fadetime>
+  </default>
+  <default type="button">
+    <height>control_height</height>
+    <font>font_label_large</font>
+    <textcolor>frost</textcolor>
+    <focusedcolor>frost</focusedcolor>
+    <disabledcolor>mist</disabledcolor>
+    <align>center</align>
+    <aligny>center</aligny>
+    <textoffsetx>0</textoffsetx>
+    <texturefocus border="focus_border">focus_button.png</texturefocus>
+    <texturenofocus/>
+    <pulseonselect>false</pulseonselect>
+  </default>
+  <default type="list">
+    <orientation>horizontal</orientation>
+    <scrolltime>220</scrolltime>
+    <focusposition>0</focusposition>
+    <itemlayout width="260" height="64">
+      <control type="label">
+        <width>260</width>
+        <height>64</height>
+        <align>center</align>
+        <label>$INFO[ListItem.Label]</label>
+      </control>
+    </itemlayout>
+    <focusedlayout width="260" height="64">
+      <include>ListFocus</include>
+    </focusedlayout>
+  </default>
+</includes>
