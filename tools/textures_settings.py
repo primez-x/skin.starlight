@@ -3,7 +3,7 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
-from build_branding import eh, rasterize, stars, svg
+from build_branding import horizon, rasterize, splash_stars
 
 
 def build(output):
@@ -51,8 +51,8 @@ def build(output):
         canvas=Image.new('RGBA',(64,64))
         ImageDraw.Draw(canvas).rounded_rectangle((0,0,63,63),radius=16,fill=(244,247,251,alpha),outline=(255,255,255,18),width=1)
         canvas.save(target / (name+'.png'))
-    rasterize(svg(960,720,eh(480,360,120), 'none'),960,720).save(target / 'splash_horizon.png')
-    rasterize(svg(1920,1080,stars(120,1920,1080,11,1.4,(960,480,360)), 'none'),1920,1080).save(target / 'splash_stars.png')
+    horizon((960,720),120).save(target / 'splash_horizon.png')
+    splash_stars().save(target / 'splash_stars.png')
     canvas=Image.new('RGBA',(680,80))
     draw=ImageDraw.Draw(canvas)
     font=ImageFont.truetype(str(Path(__file__).resolve().parents[1]/'fonts/manrope-light.ttf'),40)

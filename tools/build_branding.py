@@ -1,63 +1,17 @@
 #!/usr/bin/env python3
-"""Render approved event-horizon SVG drafts with system librsvg and Cairo.
-
-Pillow supplies the rounded icon mask and the Manrope Light wordmark.
-No network access occurs during a build.
-"""
+"""Render the approved D1 brand with Pillow and the system SVG engine."""
 import ctypes as C
 from ctypes.util import find_library
+from functools import lru_cache
 import io
+import math
 from pathlib import Path
 import random
 import tempfile
 
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
-
-def stars(n, w, h, seed, maxr=1.6, avoid=None):
-    rnd = random.Random(seed); out = []
-    for _ in range(n):
-        x, y = rnd.uniform(0, w), rnd.uniform(0, h)
-        if avoid and (x - avoid[0]) ** 2 + (y - avoid[1]) ** 2 < avoid[2] ** 2: continue
-        r = rnd.choice([.6, .7, .8, 1, 1.2, maxr]); o = rnd.uniform(.25, .9)
-        out.append(f'<circle cx="{x:.0f}" cy="{y:.0f}" r="{r}" fill="#f4f7fb" opacity="{o:.2f}"/>')
-    return "".join(out)
-
-DEFS = ('<defs><radialGradient id="glow"><stop offset=".42" stop-color="#f5c27a" stop-opacity="0"/><stop offset=".5" stop-color="#f5c27a" stop-opacity=".55"/>'
-        '<stop offset=".62" stop-color="#f5c27a" stop-opacity=".12"/><stop offset="1" stop-color="#f5c27a" stop-opacity="0"/></radialGradient>'
-        '<linearGradient id="disk" x1="0" x2="1"><stop offset="0" stop-color="#fff6e4"/><stop offset=".3" stop-color="#f5c27a"/>'
-        '<stop offset=".7" stop-color="#b8743a"/><stop offset="1" stop-color="#f5c27a" stop-opacity=".5"/></linearGradient>'
-        '<filter id="bl" x="-1" y="-1" width="3" height="3"><feGaussianBlur stdDeviation="6"/></filter>'
-        '<filter id="bl2" x="-1" y="-1" width="3" height="3"><feGaussianBlur stdDeviation="2"/></filter>'
-        '<clipPath id="front"><rect x="-2000" y="0" width="4000" height="2000"/></clipPath>'
-        '<clipPath id="back"><rect x="-2000" y="-2000" width="4000" height="2000"/></clipPath>'
-        '<linearGradient id="arc" x1="0" x2="1"><stop offset="0" stop-color="#fff6e4"/><stop offset=".45" stop-color="#f5c27a"/><stop offset="1" stop-color="#a8632e"/></linearGradient>'
-        '<linearGradient id="fadeg" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".25" stop-color="#fff"/><stop offset=".75" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>'
-        '<mask id="dfade" maskContentUnits="objectBoundingBox"><rect width="1" height="1" fill="url(#fadeg)"/></mask></defs>')
-
-def eh(cx, cy, r, tilt=-8):
-    """Event horizon: lensed glow, the far side of the disk bent over the top and under the bottom of the core, black core, photon ring, near side of the disk in front."""
-    disk = (f'<ellipse rx="{r*2.6}" ry="{r*.3}" fill="none" stroke="#f5c27a" stroke-width="{r*.36}" opacity=".25" filter="url(#bl)" mask="url(#dfade)"/>'
-            f'<ellipse rx="{r*2.6}" ry="{r*.3}" fill="none" stroke="url(#disk)" stroke-width="{r*.14}" filter="url(#bl2)" mask="url(#dfade)"/>'
-            f'<ellipse rx="{r*2.6}" ry="{r*.3}" fill="none" stroke="#fff6e4" stroke-width="{r*.03}" opacity=".8" mask="url(#dfade)"/>')
-    top = f'M{-r*1.42} 0 A{r*1.42} {r*1.42} 0 0 1 {r*1.42} 0'
-    bot = f'M{-r*1.16} 0 A{r*1.16} {r*1.16} 0 0 0 {r*1.16} 0'
-    return (f'<g transform="translate({cx} {cy}) rotate({tilt})">'
-            f'<circle r="{r*2.4}" fill="url(#glow)"/>'
-            f'<g clip-path="url(#back)">{disk}</g>'
-            f'<path d="{top}" fill="none" stroke="#f5c27a" stroke-width="{r*.5}" opacity=".28" filter="url(#bl)"/>'
-            f'<path d="{top}" fill="none" stroke="url(#arc)" stroke-width="{r*.2}" opacity=".85" filter="url(#bl2)"/>'
-            f'<path d="{top}" fill="none" stroke="#fff6e4" stroke-width="{r*.035}" opacity=".85"/>'
-            f'<path d="{bot}" fill="none" stroke="#f5c27a" stroke-width="{r*.09}" opacity=".6" filter="url(#bl2)"/>'
-            f'<circle r="{r*1.06}" fill="none" stroke="#fff6e4" stroke-width="{r*.035}" opacity=".95" filter="url(#bl2)"/>'
-            f'<circle r="{r}" fill="#010204"/>'
-            f'<g clip-path="url(#front)">{disk}</g>'
-            f'<circle cx="{-r*2.1}" cy="{r*.06}" r="{r*.1}" fill="#fff6e4" filter="url(#bl2)" opacity=".85"/></g>')
-
-def svg(w, h, body, bg="#03050a"):
-    return f'<svg viewBox="0 0 {w} {h}" width="{w}" height="{h}" xmlns="http://www.w3.org/2000/svg"><rect width="{w}" height="{h}" fill="{bg}"/>{DEFS}{body}</svg>'
-
 
 class Rectangle(C.Structure):
     _fields_ = [('x', C.c_double), ('y', C.c_double),
@@ -104,30 +58,144 @@ def rasterize(source, width, height):
         objects.g_object_unref(handle)
 
 
+def smoothstep(low, high, value):
+    fraction = max(0, min(1, (value-low)/(high-low)))
+    return fraction*fraction*(3-2*fraction)
+
+
+@lru_cache(maxsize=8)
+def horizon(size, radius, tilt=-8):
+    """D1: an eight-degree near disk, two lens images and a black shadow.
+
+    Sample each radial filament across a narrow Gaussian band. Pillow rotates
+    the oversampled field and supplies the same quantized glow as the draft.
+    """
+    width, height = size
+    count = width*height
+    near, upper, lower = ([0.0]*count for _ in range(3))
+    elevation = math.sin(math.radians(8))
+    line_width, lens_width = .018, .030
+    step = (3.03-1.24)/127
+    for column in range(width):
+        x = (column-(width-1)/2)/radius
+        for ring in range(128):
+            r = 1.24+ring*step
+            weight = smoothstep(1.24, 1.38, r)*(1-smoothstep(2.36, 3.03, r))
+            weight *= math.exp(-(r-1.24)/.63)*(1+.095*math.sin(45*r)+.035*math.sin(93*r))
+            if not weight or abs(x) >= r:
+                continue
+            upper_r = 1.16+.32*(r-1.24)
+            lower_r = 1.075+.29*(r-1.24)
+            join_upper = math.sqrt(r*r-upper_r*upper_r)*elevation
+            join_lower = math.sqrt(r*r-lower_r*lower_r)*elevation
+            curves = [(near, math.sqrt(r*r-x*x)*elevation, line_width,
+                       smoothstep(0, .07, r-abs(x)))]
+            if abs(x) < upper_r:
+                curves.append((upper, join_upper-(1.13+.10*(r-1.24)+join_upper)*math.sqrt(1-(x/upper_r)**2),
+                               lens_width, smoothstep(0, .045, upper_r-abs(x))))
+            if abs(x) < lower_r:
+                curves.append((lower, join_lower+(1.045+.15*(r-1.24)-join_lower)*math.sqrt(1-(x/lower_r)**2),
+                               lens_width, smoothstep(0, .045, lower_r-abs(x))))
+            for field, centre, sigma, valid in curves:
+                centre = centre*radius+(height-1)/2
+                spread = sigma*radius
+                amplitude = weight*valid*step/.055
+                for row in range(max(0, math.floor(centre-6*spread)), min(height, math.ceil(centre+6*spread)+1)):
+                    field[row*width+column] += amplitude*math.exp(-.5*((row-centre)/spread)**2)
+    back_raw, near_raw = bytearray(count), bytearray(count)
+    photons = [0.0]*count
+    for row in range(height):
+        y = (row-(height-1)/2)/radius
+        for column in range(width):
+            index = row*width+column
+            x = (column-(width-1)/2)/radius
+            approach = 1/(1+math.exp(max(-30, min(30, x*2))))
+            beaming = .40+1.40*approach
+            near[index] *= beaming*.88
+            photon = math.exp(-.5*((math.hypot(x, y)-1.015)/.012)**2)*(.75+.35*approach)
+            photons[index] = photon
+            back = upper[index]*beaming*.55+lower[index]*beaming*.105+photon*1.65
+            upper[index] = 1-math.exp(-back)
+            lower[index] = 1-math.exp(-near[index])
+            back_raw[index] = int(upper[index]*255)
+            near_raw[index] = int(lower[index]*255)
+    def blur(data, extent):
+        return Image.frombytes('L', size, bytes(data)).filter(ImageFilter.GaussianBlur(extent)).tobytes()
+    back_soft, back_wide = blur(back_raw, radius*.10), blur(back_raw, radius*.32)
+    near_soft, near_wide = blur(near_raw, radius*.055), blur(near_raw, radius*.21)
+    pixels = bytearray(count*4)
+    gold, frost = (245/255, 194/255, 122/255), (244/255, 247/255, 251/255)
+    for row in range(height):
+        y = (row-(height-1)/2)/radius
+        for column in range(width):
+            index = row*width+column
+            x = (column-(width-1)/2)/radius
+            distance = math.hypot(x, y)
+            outside = smoothstep(.995, 1.005, distance)
+            back = (upper[index]+back_soft[index]/255*.42+back_wide[index]/255*.26)*outside
+            glow = near_soft[index]/255*.26+near_wide[index]/255*.15
+            if distance < .995:
+                glow *= smoothstep(.002, .035, near[index])
+            energy = min(1, back+lower[index]+glow)
+            approach = 1/(1+math.exp(max(-30, min(30, x*2))))
+            white = min(.95, .10+.55*approach+.19*lower[index]+.15*photons[index])
+            rgb = [energy*(a*(1-white)+b*white) for a,b in zip(gold, frost)]
+            alpha = max(max(rgb), 1-outside)
+            offset = index*4
+            for channel, value in enumerate(rgb):
+                pixels[offset+channel] = round(max(0, min(1, value/max(alpha, 1e-6)))*255)
+            pixels[offset+3] = round(max(0, min(1, alpha))*255)
+    # Pillow's positive angle is counter-clockwise; the draft uses screen axes.
+    return Image.frombytes('RGBA', size, bytes(pixels)).rotate(-tilt, Image.Resampling.BICUBIC)
+
+
+def starfield(size, count, seed, avoid=None, icon=False, transparent=False):
+    """Use the approved seeded starfield and deep-blue radial backdrop."""
+    width, height = size
+    cx, cy = (.5, .45) if icon else (.70, .4)
+    blue, void = ((20,32,58) if icon else (11,20,36)), (3,5,10)
+    image = Image.new('RGBA', size)
+    if not transparent:
+        pixels = bytearray(width*height*3)
+        for y in range(height):
+            for x in range(width):
+                radial = math.exp(-(((x/width-cx)/.52)**2+((y/height-cy)/.62)**2)*1.5)
+                offset = (y*width+x)*3
+                pixels[offset:offset+3] = bytes(int(a+(b-a)*radial) for a,b in zip(void, blue))
+        image = Image.frombytes('RGB', size, bytes(pixels)).convert('RGBA')
+    layer = Image.new('RGBA', size)
+    draw = ImageDraw.Draw(layer)
+    rng = random.Random(seed)
+    for _ in range(count):
+        x,y = rng.uniform(0,width),rng.uniform(0,height)
+        if avoid and (x-avoid[0])**2+(y-avoid[1])**2 < avoid[2]**2:
+            continue
+        r = rng.choice((.45,.6,.8,1.0,1.2))
+        draw.ellipse((x-r,y-r,x+r,y+r),fill=(244,247,251,round(rng.uniform(.18,.7)*255)))
+    image.alpha_composite(layer)
+    return image
+
+
+def splash_stars():
+    return starfield((1920,1080),120,11,(960,480,360),transparent=True)
+
+
 def build():
-    icon_source = svg(512, 512, stars(40, 512, 512, 3, 1.2, (256, 256, 170))
-                      + eh(256, 256, 78), 'url(#ibg)').replace(
-        '<defs>', '<defs><radialGradient id="ibg" cx=".5" cy=".45" r=".7">'
-        '<stop offset="0" stop-color="#14203a"/><stop offset="1" stop-color="#03050a"/>'
-        '</radialGradient>', 1)
-    icon = rasterize(icon_source, 1024, 1024)
-    mask = Image.new('L', icon.size)
-    ImageDraw.Draw(mask).rounded_rectangle((0, 0, 1023, 1023), radius=225, fill=255)
+    icon = starfield((1024,1024),40,3,(512,512,340),icon=True)
+    icon.alpha_composite(horizon((1024,1024),156))
+    mask = Image.new('L',icon.size)
+    ImageDraw.Draw(mask).rounded_rectangle((0,0,1023,1023),radius=225,fill=255)
     icon.putalpha(mask)
-    icon.resize((512, 512), Image.Resampling.LANCZOS).save(ROOT / 'icon.png')
-    fan_source = svg(1920, 1080, stars(260, 1920, 1080, 7, 1.8, (1300, 520, 420))
-                     + eh(1300, 520, 190), 'url(#fbg)').replace(
-        '<defs>', '<defs><radialGradient id="fbg" cx=".7" cy=".4" r=".8">'
-        '<stop offset="0" stop-color="#0b1424"/><stop offset="1" stop-color="#03050a"/>'
-        '</radialGradient>', 1)
-    fanart = rasterize(fan_source, 1920, 1080)
+    icon.resize((512,512),Image.Resampling.LANCZOS).save(ROOT/'icon.png',compress_level=9)
+    fanart = starfield((1920,1080),260,7,(1300,520,420))
+    fanart.alpha_composite(horizon((1180,940),190),(710,50))
     draw = ImageDraw.Draw(fanart)
-    font = ImageFont.truetype(str(ROOT / 'fonts/manrope-light.ttf'), 76)
+    font = ImageFont.truetype(str(ROOT/'fonts/manrope-light.ttf'),76)
     x = 196
     for character in 'STARLIGHT':
-        draw.text((x, 470), character, font=font, fill='#f4f7fb', anchor='lt')
-        x += draw.textlength(character, font=font) + 76 * .32
-    fanart.convert('RGB').save(ROOT / 'fanart.jpg', quality=95, subsampling=0)
+        draw.text((x,470),character,font=font,fill='#f4f7fb',anchor='lt')
+        x += draw.textlength(character,font=font)+76*.32
+    fanart.convert('RGB').save(ROOT/'fanart.jpg',quality=95,subsampling=0)
     print('Rendered icon.png (512x512) and fanart.jpg (1920x1080)')
 
 

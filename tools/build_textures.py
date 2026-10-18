@@ -6,7 +6,7 @@ from pathlib import Path
 import xml.etree.ElementTree as ET
 
 from PIL import Image, ImageChops, ImageDraw, ImageFilter
-from build_branding import rasterize
+from build_branding import horizon, rasterize
 from textures_library import build_library_textures
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -104,15 +104,7 @@ def point_sprite(twinkle=False):
 
 def busy_frame(frame, orbit=True):
     size = 96
-    canvas = Image.new('RGBA', (size * SCALE, size * SCALE))
-    halo = Image.new('RGBA', canvas.size)
-    draw = ImageDraw.Draw(halo)
-    draw.ellipse((22 * SCALE, 19 * SCALE, 74 * SCALE, 77 * SCALE), outline=rgba(GOLD, .6), width=5 * SCALE)
-    canvas = Image.alpha_composite(canvas, halo.filter(ImageFilter.GaussianBlur(5 * SCALE)))
-    draw = ImageDraw.Draw(canvas)
-    draw.ellipse((28 * SCALE, 25 * SCALE, 68 * SCALE, 71 * SCALE), fill=(1, 2, 4, 255),
-                 outline=rgba(GOLD, .9), width=2 * SCALE)
-    draw.ellipse((9 * SCALE, 43 * SCALE, 87 * SCALE, 54 * SCALE), outline=rgba(GOLD, .7), width=2 * SCALE)
+    canvas = horizon((size*SCALE,size*SCALE), 13*SCALE).copy()
     if orbit:
         angle = 2 * math.pi * frame / 24
         x, y = 48 + 20 * math.cos(angle), 48 + 23 * math.sin(angle)
