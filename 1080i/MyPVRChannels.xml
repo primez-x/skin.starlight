@@ -97,7 +97,7 @@
         <width>262</width>
         <height>64</height>
         <label>$LOCALIZE[31689]</label>
-        <onclick>ActivateWindow(11105)</onclick>
+        <onclick>ActivateWindow(11107)</onclick>
         <onup>28</onup>
         <ondown>50</ondown>
         <onleft>50</onleft>
@@ -109,7 +109,7 @@
         <width>264</width>
         <height>64</height>
         <label>$LOCALIZE[31690]</label>
-        <onclick>ActivateWindow(11105)</onclick>
+        <onclick>ActivateWindow(11107)</onclick>
         <onup>28</onup>
         <ondown>50</ondown>
         <onleft>650</onleft>

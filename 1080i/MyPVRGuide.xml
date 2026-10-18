@@ -3,7 +3,6 @@
   <defaultcontrol always="true">50</defaultcontrol>
   <views>50</views>
   <onload>SetProperty(Starlight.Hub,livetv,home)</onload>
-  <onload>RunScript(special://skin/resources/settings.py,guide)</onload>
   <controls>
     <include content="SettingsBackdrop" />
     <include content="LiveTVGroups" />

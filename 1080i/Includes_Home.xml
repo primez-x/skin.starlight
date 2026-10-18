@@ -173,7 +173,7 @@
             <param name="return" value="$PARAM[return]" />
             <param name="onup" value="906" />
             <param name="ondown" value="907" />
-            <param name="onclick" value="ActivateWindow(11105)" />
+            <param name="onclick" value="ActivateWindow(11107)" />
           </include>
           <defaultcontrol>$PARAM[sidefocus]</defaultcontrol>
         </control>
@@ -409,7 +409,7 @@
             <width>196</width>
             <height>64</height>
             <label>$LOCALIZE[31665]</label>
-            <onclick>ActivateWindow(11105)</onclick>
+            <onclick>ActivateWindow(11107)</onclick>
             <onleft>917</onleft>
             <onright>911</onright>
             <onup>$PARAM[return]</onup>

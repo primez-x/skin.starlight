@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<window id="1105">
+<window id="1107">
   <defaultcontrol always="true">610</defaultcontrol>
   <onload>SetProperty(Starlight.Hub,livetv,home)</onload>
   <onload condition="Integer.IsEqual(Container(610).NumItems,0)">SetFocus(600)</onload>

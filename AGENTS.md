@@ -124,19 +124,18 @@
 - `Includes_Settings.xml` owns the settings templates, Live TV rows, and native EPG layouts.
 - `Settings.xml` and rail destination `Custom_1102.xml` share the three-column settings home.
 - `SkinSettings.xml` exposes native hub, widget, art, Ambient effects, and visualiser preferences.
-- Choice dialog 11104 writes the selected skin string, closes, and reloads the skin.
-- `Music.Visualiser.Disabled` is false by default. Step 4 consumes the inverse for the visualiser.
+- Choice dialog 11106 writes the selected skin string, closes, and reloads the skin.
+- `Player.Visualiser.Disabled` is false by default. Step 4 consumes the inverse for the visualiser.
 - The screensaver action calls `Addon.Default.Set(xbmc.ui.screensaver)` to open the native selector. No screensaver dependency exists.
 - Native settings use category group 3, settings group 5, and templates 7 through 15.
 - Category template 10 uses a toggle button. Kodi retains the selected category after focus moves into the settings.
 - `DialogSettings.xml` also serves native profile settings. Numeric input and popup sliders have separate native windows.
 - `FileManager.xml` retains native lists 20 and 21. `FileBrowser.xml` retains native chooser views 450 and 451.
-- `Custom_1105.xml` owns the Live TV hub. Home also shows the recent-channel row.
+- `Custom_1107.xml` owns the Live TV hub. Home also shows the recent-channel row.
 - Native PVR groups populate control 11. Favourites appear when the PVR backend defines that group.
 - Recent channels use the native last-played directory, sorted by last play time.
 - SmartTube supplies `plugin://plugin.video.smarttube/live_now`. Cards read `Starlight.Source` and show no invented schedule or progress.
 - `MyPVRGuide.xml` uses native grid 50. A ruler unit of 6 shows half-hour labels.
-- `resources/settings.py guide` sets Kodi `epg.selectaction` to 0 for native programme options on OK.
 - Kodi EPG grid clicks bypass XML click actions. A failed native setting change produces a notification.
 - Recent-channel and YouTube cards supply the shared context adapter with native cursor metrics and actual lifted bounds.
 - Full pages reuse `InfoContentMotion` for the rail and top navigation layouts.

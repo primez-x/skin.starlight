@@ -678,10 +678,6 @@ msgctxt "#31685"
 msgid "Exit Kodi"
 msgstr ""
 
-msgctxt "#31686"
-msgid "Guide options could not be enabled. Open PVR settings to choose the Guide select action."
-msgstr ""
-
 msgctxt "#31687"
 msgid "LIVE"
 msgstr ""

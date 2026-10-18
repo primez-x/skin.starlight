@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<window type="dialog" id="1104">
+<window type="dialog" id="1106">
   <defaultcontrol always="true">610</defaultcontrol>
   <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Hub.Navigation)">SetFocus(610)</onload>
   <onload condition="String.IsEqual(Window(home).Property(Starlight.Settings.Key),Home.Continue.Layout)">SetFocus(611)</onload>
@@ -71,25 +71,25 @@
         <item>
           <label>$LOCALIZE[31632]</label>
           <onclick>Skin.SetString(Hub.Navigation,rail)</onclick>
-          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>Dialog.Close(11106)</onclick>
           <onclick>ReloadSkin()</onclick>
         </item>
         <item>
           <label>$LOCALIZE[31633]</label>
           <onclick>Skin.SetString(Hub.Navigation,icons)</onclick>
-          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>Dialog.Close(11106)</onclick>
           <onclick>ReloadSkin()</onclick>
         </item>
         <item>
           <label>$LOCALIZE[31634]</label>
           <onclick>Skin.SetString(Hub.Navigation,top_left)</onclick>
-          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>Dialog.Close(11106)</onclick>
           <onclick>ReloadSkin()</onclick>
         </item>
         <item>
           <label>$LOCALIZE[31635]</label>
           <onclick>Skin.SetString(Hub.Navigation,top_centre)</onclick>
-          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>Dialog.Close(11106)</onclick>
           <onclick>ReloadSkin()</onclick>
         </item>
       </content>
@@ -134,31 +134,31 @@
         <item>
           <label>$LOCALIZE[31638]</label>
           <onclick>Skin.SetString(Home.Continue.Layout,board)</onclick>
-          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>Dialog.Close(11106)</onclick>
           <onclick>ReloadSkin()</onclick>
         </item>
         <item>
           <label>$LOCALIZE[31639]</label>
           <onclick>Skin.SetString(Home.Continue.Layout,hero)</onclick>
-          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>Dialog.Close(11106)</onclick>
           <onclick>ReloadSkin()</onclick>
         </item>
         <item>
           <label>$LOCALIZE[31640]</label>
           <onclick>Skin.SetString(Home.Continue.Layout,landscape)</onclick>
-          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>Dialog.Close(11106)</onclick>
           <onclick>ReloadSkin()</onclick>
         </item>
         <item>
           <label>$LOCALIZE[31641]</label>
           <onclick>Skin.SetString(Home.Continue.Layout,poster)</onclick>
-          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>Dialog.Close(11106)</onclick>
           <onclick>ReloadSkin()</onclick>
         </item>
         <item>
           <label>$LOCALIZE[31642]</label>
           <onclick>Skin.SetString(Home.Continue.Layout,square)</onclick>
-          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>Dialog.Close(11106)</onclick>
           <onclick>ReloadSkin()</onclick>
         </item>
       </content>
@@ -203,31 +203,31 @@
         <item>
           <label>$LOCALIZE[31638]</label>
           <onclick>Skin.SetString(Home.Movies.Layout,board)</onclick>
-          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>Dialog.Close(11106)</onclick>
           <onclick>ReloadSkin()</onclick>
         </item>
         <item>
           <label>$LOCALIZE[31639]</label>
           <onclick>Skin.SetString(Home.Movies.Layout,hero)</onclick>
-          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>Dialog.Close(11106)</onclick>
           <onclick>ReloadSkin()</onclick>
         </item>
         <item>
           <label>$LOCALIZE[31640]</label>
           <onclick>Skin.SetString(Home.Movies.Layout,landscape)</onclick>
-          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>Dialog.Close(11106)</onclick>
           <onclick>ReloadSkin()</onclick>
         </item>
         <item>
           <label>$LOCALIZE[31641]</label>
           <onclick>Skin.SetString(Home.Movies.Layout,poster)</onclick>
-          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>Dialog.Close(11106)</onclick>
           <onclick>ReloadSkin()</onclick>
         </item>
         <item>
           <label>$LOCALIZE[31642]</label>
           <onclick>Skin.SetString(Home.Movies.Layout,square)</onclick>
-          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>Dialog.Close(11106)</onclick>
           <onclick>ReloadSkin()</onclick>
         </item>
       </content>
@@ -272,31 +272,31 @@
         <item>
           <label>$LOCALIZE[31638]</label>
           <onclick>Skin.SetString(Home.Next.Layout,board)</onclick>
-          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>Dialog.Close(11106)</onclick>
           <onclick>ReloadSkin()</onclick>
         </item>
         <item>
           <label>$LOCALIZE[31639]</label>
           <onclick>Skin.SetString(Home.Next.Layout,hero)</onclick>
-          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>Dialog.Close(11106)</onclick>
           <onclick>ReloadSkin()</onclick>
         </item>
         <item>
           <label>$LOCALIZE[31640]</label>
           <onclick>Skin.SetString(Home.Next.Layout,landscape)</onclick>
-          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>Dialog.Close(11106)</onclick>
           <onclick>ReloadSkin()</onclick>
         </item>
         <item>
           <label>$LOCALIZE[31641]</label>
           <onclick>Skin.SetString(Home.Next.Layout,poster)</onclick>
-          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>Dialog.Close(11106)</onclick>
           <onclick>ReloadSkin()</onclick>
         </item>
         <item>
           <label>$LOCALIZE[31642]</label>
           <onclick>Skin.SetString(Home.Next.Layout,square)</onclick>
-          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>Dialog.Close(11106)</onclick>
           <onclick>ReloadSkin()</onclick>
         </item>
       </content>
@@ -341,31 +341,31 @@
         <item>
           <label>$LOCALIZE[31638]</label>
           <onclick>Skin.SetString(Home.Episodes.Layout,board)</onclick>
-          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>Dialog.Close(11106)</onclick>
           <onclick>ReloadSkin()</onclick>
         </item>
         <item>
           <label>$LOCALIZE[31639]</label>
           <onclick>Skin.SetString(Home.Episodes.Layout,hero)</onclick>
-          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>Dialog.Close(11106)</onclick>
           <onclick>ReloadSkin()</onclick>
         </item>
         <item>
           <label>$LOCALIZE[31640]</label>
           <onclick>Skin.SetString(Home.Episodes.Layout,landscape)</onclick>
-          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>Dialog.Close(11106)</onclick>
           <onclick>ReloadSkin()</onclick>
         </item>
         <item>
           <label>$LOCALIZE[31641]</label>
           <onclick>Skin.SetString(Home.Episodes.Layout,poster)</onclick>
-          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>Dialog.Close(11106)</onclick>
           <onclick>ReloadSkin()</onclick>
         </item>
         <item>
           <label>$LOCALIZE[31642]</label>
           <onclick>Skin.SetString(Home.Episodes.Layout,square)</onclick>
-          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>Dialog.Close(11106)</onclick>
           <onclick>ReloadSkin()</onclick>
         </item>
       </content>
@@ -410,13 +410,13 @@
         <item>
           <label>$LOCALIZE[31651]</label>
           <onclick>Skin.SetString(Home.Art.Mode,blurred)</onclick>
-          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>Dialog.Close(11106)</onclick>
           <onclick>ReloadSkin()</onclick>
         </item>
         <item>
           <label>$LOCALIZE[31652]</label>
           <onclick>Skin.SetString(Home.Art.Mode,bound)</onclick>
-          <onclick>Dialog.Close(11104)</onclick>
+          <onclick>Dialog.Close(11106)</onclick>
           <onclick>ReloadSkin()</onclick>
         </item>
       </content>

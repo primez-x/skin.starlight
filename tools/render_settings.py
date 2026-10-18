@@ -20,7 +20,7 @@ WINDOWS = ['SkinSettings','Settings','SettingsCategory','SettingsSystemInfo','Se
            'DialogSettings','DialogAddonSettings','FileBrowser','DialogButtonMenu','DialogAddonInfo',
            'AddonBrowser','MyPVRGuide','MyPVRChannels','MyPVRRecordings','MyPVRTimers',
            'DialogPVRInfo','DialogPVRChannelsOSD','DialogPVRChannelGuide','Startup','Pointer',
-           'Custom_1102','Custom_1104','Custom_1105','FileManager','DialogNumeric','DialogSlider']
+           'Custom_1102','Custom_1106','Custom_1107','FileManager','DialogNumeric','DialogSlider']
 
 
 class SettingsPreview(HomePreview):
@@ -41,7 +41,7 @@ class SettingsPreview(HomePreview):
                     'DialogAddonInfo':9,'AddonBrowser':50,'MyPVRGuide':50,'MyPVRChannels':50,
                     'MyPVRRecordings':50,'MyPVRTimers':50,'DialogPVRInfo':5,
                     'DialogPVRChannelsOSD':11,'DialogPVRChannelGuide':11,
-                    'Custom_1104':610,'Custom_1105':610,'FileManager':20,'DialogNumeric':11,'DialogSlider':11}.get(name,0)
+                    'Custom_1106':610,'Custom_1107':610,'FileManager':20,'DialogNumeric':11,'DialogSlider':11}.get(name,0)
         if name=='SkinSettings':self.focus={'Hub':710,'Widgets':711,'Appearance':716,'Music':717,'Screensaver':718}[section]
         self.guide=json.loads((art/'pvr/guide.json').read_text())
         self.channels=[self.channel(row) for row in self.guide['channels']]
@@ -82,12 +82,12 @@ class SettingsPreview(HomePreview):
         if self.name in ('Settings','Custom_1102'):self.selected[510]=5
         if self.name in ('SettingsCategory','DialogSettings','DialogAddonSettings'):
             self.native_settings()
-        if self.name in ('MyPVRGuide','MyPVRChannels','Custom_1105','DialogPVRChannelsOSD','DialogPVRChannelGuide','MyPVRRecordings','MyPVRTimers'):
+        if self.name in ('MyPVRGuide','MyPVRChannels','Custom_1107','DialogPVRChannelsOSD','DialogPVRChannelGuide','MyPVRRecordings','MyPVRTimers'):
             self.containers[50]=self.channels[:6]
             self.containers[610]=[] if self.empty else self.channels[:5]
             self.containers[11]=self.channels[:5] if self.name.startswith('Dialog') else [{'Label':n} for n in ['All channels','Favourites']]
             self.containers[620]=[] if self.empty else [{'Label':f'Live channel {n+1}','art':{'thumb':str(ROOT/'fanart.jpg')},'properties':{'Starlight.Source':'YouTube'}} for n in range(5)]
-        if self.name=='Custom_1104':self.selected[610]=0
+        if self.name=='Custom_1106':self.selected[610]=0
         if self.name=='SettingsSystemInfo':
             self.native_labels.update({2:'Kodi 21.3 · Starlight',3:'System uptime: 3 hours',4:'Display: 1920 × 1080',
                                        5:'CPU usage: 8%',6:'Memory: 812 MB used',7:'Storage: 19 GB free',
@@ -134,7 +134,7 @@ class SettingsPreview(HomePreview):
     def info(self,text):
         match=re.fullmatch(r'Window(?:\(home\))?\.Property\(([^)]+)\)',text.strip())
         if match:
-            if match[1]=='Starlight.Hub':return 'livetv' if self.name.startswith(('MyPVR','DialogPVR')) or self.name=='Custom_1105' else 'settings'
+            if match[1]=='Starlight.Hub':return 'livetv' if self.name.startswith(('MyPVR','DialogPVR')) or self.name=='Custom_1107' else 'settings'
             return self.properties.get(match[1],'')
         if text=='Container.FolderPath':return 'Add-ons'
         if text in ('Container(450).ListItem.Size','Container(450).ListItem.Date'):return ''

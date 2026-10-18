@@ -14,7 +14,7 @@ WINDOWS = ['SkinSettings', 'Settings', 'SettingsCategory', 'SettingsSystemInfo',
            'DialogButtonMenu', 'DialogAddonInfo', 'AddonBrowser', 'MyPVRGuide',
            'MyPVRChannels', 'MyPVRRecordings', 'MyPVRTimers', 'DialogPVRInfo',
            'DialogPVRChannelsOSD', 'DialogPVRChannelGuide', 'Startup', 'Pointer',
-           'Custom_1102', 'Custom_1104', 'Custom_1105', 'FileManager', 'DialogNumeric', 'DialogSlider']
+           'Custom_1102', 'Custom_1106', 'Custom_1107', 'FileManager', 'DialogNumeric', 'DialogSlider']
 
 
 def expanded(name):
@@ -45,7 +45,7 @@ class Step6Tests(unittest.TestCase):
             for identity in [2,6,20,28,29,30]: self.assertIn(identity,controls)
 
     def test_skin_options_have_complete_native_actions(self):
-        text = (ROOT / '1080i/Custom_1104.xml').read_text()
+        text = (ROOT / '1080i/Custom_1106.xml').read_text()
         for key, values in {'Hub.Navigation':['rail','icons','top_left','top_centre'],
                             'Home.Art.Mode':['blurred','bound']}.items():
             for value in values: self.assertIn(f'Skin.SetString({key},{value})',text)
@@ -57,7 +57,7 @@ class Step6Tests(unittest.TestCase):
         self.assertIn('!Skin.HasSetting(AmbientEffects.Disabled)',skin)
         self.assertIn('Skin.ToggleSetting(AmbientEffects.Disabled)',skin)
         self.assertIn('Addon.Default.Set(xbmc.ui.screensaver)',skin)
-        self.assertIn('Music.Visualiser.Disabled',skin)
+        self.assertIn('Player.Visualiser.Disabled',skin)
         self.assertNotIn('InstallAddon',skin)
 
     def test_settings_placeholder_becomes_the_real_home(self):
@@ -83,7 +83,6 @@ class Step6Tests(unittest.TestCase):
         self.assertEqual(grid.findtext('rulerunit'),'6')
         for tag in ['rulerlayout','channellayout','focusedchannellayout','itemlayout','focusedlayout','progresstexture']:
             self.assertIsNotNone(grid.find(tag),tag)
-        self.assertIn('guide', ''.join(n.text or '' for n in expanded('MyPVRGuide').findall('onload')))
         self.assertIsNone(grid.find('content'))
         for name in ['DialogPVRChannelsOSD','DialogPVRChannelGuide']:
             self.assertIsNotNone(expanded(name).find(".//control[@type='list'][@id='11']"))
@@ -92,7 +91,7 @@ class Step6Tests(unittest.TestCase):
         self.assertLessEqual(set(range(4,12)),ids)
 
     def test_recent_channels_and_youtube_contract(self):
-        tree=expanded('Custom_1105')
+        tree=expanded('Custom_1107')
         contents=[n.text for n in tree.iter('content')]
         self.assertIn('pvr://channels/tv/All channels/?view=lastplayed',contents)
         self.assertIn('plugin://plugin.video.smarttube/live_now',contents)
@@ -103,44 +102,21 @@ class Step6Tests(unittest.TestCase):
         home=(ROOT / '1080i/Home.xml').read_text()
         self.assertIn('LiveTVHomeWidget',home)
         rail=(ROOT / '1080i/Includes_Home.xml').read_text()
-        self.assertIn('ActivateWindow(11105)',rail)
+        self.assertIn('ActivateWindow(11107)',rail)
 
     def test_live_tile_context_uses_the_actual_lifted_card_bounds(self):
         import sys
         sys.path.insert(0,str(ROOT/'resources/lib'))
         from skin_xml import card_rect
         constants={n.get('name'):n.text for n in ET.parse(ROOT/'1080i/Includes_Constants.xml').iter('constant')}
-        tree=expanded('Custom_1105')
+        tree=expanded('Custom_1107')
         def condition(expression):
             return not any(value in expression for value in ['top_left','top_centre','ControlGroup(9000)'])
         self.assertEqual(card_rect(tree,610,1,0,constants,condition),(515,369,330,186))
         self.assertIsNotNone(tree.find(".//control[@id='5502']"))
         helper=(ROOT/'resources/info.py').read_text()
-        self.assertIn('11105',helper)
+        self.assertIn('11107',helper)
         self.assertIn('570',helper)
-
-    def test_guide_action_adapter_uses_native_setting_and_reports_failure(self):
-        import runpy
-        import json
-        import sys
-        from unittest.mock import Mock, patch
-        # Failure modes: current value already correct, changed value, RPC rejection.
-        for current, accepted in [(0,True),(2,True),(2,False)]:
-            calls=[]
-            def rpc(payload):
-                request=json.loads(payload); calls.append(request)
-                if request['method']=='Settings.GetSettingValue':
-                    return json.dumps({'result':{'value':current}})
-                return json.dumps({'result':accepted})
-            kodi=Mock(executeJSONRPC=rpc)
-            gui=Mock()
-            with patch.dict(sys.modules,{'xbmc':kodi,'xbmcgui':gui}), patch.object(sys,'argv',['settings.py','guide']):
-                runpy.run_path(str(ROOT/'resources/settings.py'),run_name='__main__')
-            self.assertEqual(calls[0]['params'],{'setting':'epg.selectaction'})
-            self.assertEqual(len(calls),1 if current==0 else 2)
-            if current!=0:
-                self.assertEqual(calls[1]['params'],{'setting':'epg.selectaction','value':0})
-            self.assertEqual(kodi.log.called,not accepted)
 
     def test_splash_is_nonblocking_and_pointer_states_exist(self):
         tree=expanded('Startup')
