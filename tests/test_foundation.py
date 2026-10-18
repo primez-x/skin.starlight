@@ -79,6 +79,11 @@ class FoundationTests(unittest.TestCase):
             self.assertTrue(path.is_file(), str(path))
             self.assertEqual(path.read_bytes()[:4], b'\x00\x01\x00\x00')
         self.assertTrue((ROOT / 'fonts/OFL.txt').is_file())
+        # Add-on dialogs (PlexKodiConnect Skip intro, Up Next) name Kodi's standard fonts.
+        # Kodi falls back to font13, so a missing name renders no text at all.
+        self.assertLessEqual({'font10', 'font11', 'font12', 'font12_title', 'font13', 'font14', 'font16',
+                              'font20', 'font20_title', 'font25_narrow', 'font25_title', 'font27',
+                              'font30', 'font37', 'font_clock'}, names)
         for path in (ROOT / '1080i').glob('*.xml'):
             for node in ET.parse(path).iter('font'):
                 if not list(node):
