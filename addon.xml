@@ -17,7 +17,7 @@
     <platform>all</platform>
     <license>GPL-2.0-or-later</license>
     <news>v2.0.0
-New Starlight foundation with Manrope, procedural glass, gold focus, and event horizon artwork.</news>
+Starlight rebuilt from scratch: a Plex-first Home with hubs, Search and Discover, 26 library views, new player, music, cast and Live TV screens, Starlight settings, and the event horizon artwork. Requires the Starlight helper.</news>
     <assets>
       <icon>icon.png</icon>
       <fanart>fanart.jpg</fanart>
