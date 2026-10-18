@@ -58,6 +58,9 @@ class HomePreview:
                 self.groups[int(node.get('id'))] = {int(c.get('id')) for c in node.iter('control') if c.get('id')}
             if node.find('content') is not None:
                 args = parse_qs(urlsplit(node.findtext('content')).query)
+                if 'source' not in args:
+                    self.containers[int(node.get('id'))] = []
+                    continue
                 rows = self.samples[args['source'][0]]
                 part = args.get('part', ['row'])[0]
                 self.containers[int(node.get('id'))] = rows[:1] if part == 'feature' else rows[1:5] if part == 'tiles' else rows

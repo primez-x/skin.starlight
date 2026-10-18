@@ -150,8 +150,9 @@
           <param name="row" value="542" />
           <param name="empty" value="543" />
           <param name="up" value="1530" />
-          <param name="down" value="9000" />
+          <param name="down" value="1550" />
         </include>
+        <include content="LiveTVHomeWidget" />
         <pagecontrol>5500</pagecontrol>
       </control>
     </control>

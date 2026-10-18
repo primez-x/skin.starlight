@@ -184,7 +184,7 @@
             <param name="icon" value="discover" />
             <param name="return" value="$PARAM[return]" />
             <param name="onup" value="905" />
-            <param name="ondown" value="907" />
+            <param name="ondown" value="908" />
             <param name="onclick" value="ActivateWindow(11101)" />
           </include>
           <include content="HubRailItem">
@@ -193,23 +193,33 @@
             <param name="label" value="$LOCALIZE[31010]" />
             <param name="icon" value="settings" />
             <param name="return" value="$PARAM[return]" />
-            <param name="onup" value="906" />
+            <param name="onup" value="908" />
             <param name="ondown" value="901" />
             <param name="onclick" value="ActivateWindow(11102)" />
+          </include>
+          <include content="HubRailItem">
+            <param name="y" value="446" />
+            <param name="id" value="908" />
+            <param name="label" value="$LOCALIZE[31665]" />
+            <param name="icon" value="livetv" />
+            <param name="return" value="$PARAM[return]" />
+            <param name="onup" value="906" />
+            <param name="ondown" value="907" />
+            <param name="onclick" value="ActivateWindow(11107)" />
           </include>
           <defaultcontrol>$PARAM[sidefocus]</defaultcontrol>
         </control>
         <control type="group">
           <left>196</left>
           <top>144</top>
-          <width>1600</width>
+          <width>1644</width>
           <height>64</height>
           <visible>Skin.String(Hub.Navigation,top_left) | Skin.String(Hub.Navigation,top_centre)</visible>
-          <animation effect="slide" start="0,0" end="164,0" time="220" condition="Skin.String(Hub.Navigation,top_centre)">Conditional</animation>
+          <animation effect="slide" start="0,0" end="-48,0" time="220" condition="Skin.String(Hub.Navigation,top_centre)">Conditional</animation>
           <control type="image">
             <left>-8</left>
             <top>-6</top>
-            <width>1464</width>
+            <width>1640</width>
             <height>76</height>
             <texture border="capsule_border">glass_capsule.png</texture>
             <visible>ControlGroup(9000).HasFocus</visible>
@@ -236,7 +246,7 @@
             <width>196</width>
             <height>64</height>
             <label>$LOCALIZE[31001]</label>
-            <onleft>917</onleft>
+            <onleft>918</onleft>
             <onright>912</onright>
             <onup>$PARAM[return]</onup>
             <ondown>$PARAM[return]</ondown>
@@ -411,13 +421,35 @@
             <height>64</height>
             <label>$LOCALIZE[31010]</label>
             <onleft>916</onleft>
-            <onright>911</onright>
+            <onright>918</onright>
             <onup>$PARAM[return]</onup>
             <ondown>$PARAM[return]</ondown>
             <onclick>SetProperty(Starlight.Hub,settings,home)</onclick>
             <onclick>ActivateWindow(11102)</onclick>
           </control>
+          <control type="image">
+            <left>1428</left>
+            <top>0</top>
+            <width>196</width>
+            <height>64</height>
+            <texture border="capsule_border">frost_fill.png</texture>
+            <visible>String.IsEqual(Window(home).Property(Starlight.Hub),livetv)</visible>
+          </control>
+          <control type="button" id="918">
+            <left>1428</left>
+            <top>0</top>
+            <width>196</width>
+            <height>64</height>
+            <label>$LOCALIZE[31665]</label>
+            <onclick>ActivateWindow(11107)</onclick>
+            <onleft>917</onleft>
+            <onright>911</onright>
+            <onup>$PARAM[return]</onup>
+            <ondown>$PARAM[return]</ondown>
+            <onclick>SetProperty(Starlight.Hub,livetv,home)</onclick>
+          </control>
           <defaultcontrol>$PARAM[topfocus]</defaultcontrol>
+          <animation effect="slide" start="0,0" end="-116,0" time="220" condition="Skin.String(Hub.Navigation,top_left)">Conditional</animation>
         </control>
       </control>
     </definition>
@@ -1348,6 +1380,7 @@
     <value condition="String.IsEqual(Window(home).Property(Starlight.Container),540)">$INFO[Container(540).Position]</value>
     <value condition="String.IsEqual(Window(home).Property(Starlight.Container),541)">$INFO[Container(541).Position]</value>
     <value condition="String.IsEqual(Window(home).Property(Starlight.Container),542)">$INFO[Container(542).Position]</value>
+    <value condition="String.IsEqual(Window(home).Property(Starlight.Container),570)">$INFO[Container(570).Position]</value>
     <value>0</value>
   </variable>
 </includes>

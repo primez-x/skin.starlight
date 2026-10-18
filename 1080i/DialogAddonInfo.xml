@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <defaultcontrol always="true">6</defaultcontrol>
+  <controls>
+    <include content="SettingsBackdrop" />
+    <include content="SettingsHeading">
+      <param name="title" value="$INFO[ListItem.Label]" />
+    </include>
+    <control type="image">
+      <left>196</left>
+      <top>230</top>
+      <width>220</width>
+      <height>220</height>
+      <texture>$INFO[ListItem.Icon]</texture>
+    </control>
+    <control type="label">
+      <left>196</left>
+      <top>472</top>
+      <width>220</width>
+      <height>44</height>
+      <font>font_body</font>
+      <textcolor>mist</textcolor>
+      <label>$INFO[ListItem.AddonVersion]</label>
+    </control>
+    <control type="textbox">
+      <left>468</left>
+      <top>230</top>
+      <width>1360</width>
+      <height>260</height>
+      <font>font_body_large</font>
+      <label>$INFO[ListItem.AddonDescription]</label>
+    </control>
+    <control type="button" id="6">
+      <left>196</left>
+      <top>548</top>
+      <width>390</width>
+      <height>70</height>
+      <label>$LOCALIZE[31672]</label>
+      <onclick />
+      <onleft>14</onleft>
+      <onright>7</onright>
+      <onup>10</onup>
+      <ondown>10</ondown>
+      <texturenofocus border="capsule_border">glass_capsule.png</texturenofocus>
+    </control>
+    <control type="button" id="7">
+      <left>606</left>
+      <top>548</top>
+      <width>390</width>
+      <height>70</height>
+      <label>$LOCALIZE[31673]</label>
+      <onclick />
+      <onleft>6</onleft>
+      <onright>8</onright>
+      <onup>12</onup>
+      <ondown>12</ondown>
+      <texturenofocus border="capsule_border">glass_capsule.png</texturenofocus>
+    </control>
+    <control type="button" id="8">
+      <left>1016</left>
+      <top>548</top>
+      <width>390</width>
+      <height>70</height>
+      <label>$LOCALIZE[31674]</label>
+      <onclick />
+      <onleft>7</onleft>
+      <onright>9</onright>
+      <onup>13</onup>
+      <ondown>13</ondown>
+      <texturenofocus border="capsule_border">glass_capsule.png</texturenofocus>
+    </control>
+    <control type="button" id="9">
+      <left>1426</left>
+      <top>548</top>
+      <width>390</width>
+      <height>70</height>
+      <label>$LOCALIZE[31625]</label>
+      <onclick />
+      <onleft>8</onleft>
+      <onright>10</onright>
+      <onup>14</onup>
+      <ondown>14</ondown>
+      <texturenofocus border="capsule_border">glass_capsule.png</texturenofocus>
+    </control>
+    <control type="button" id="10">
+      <left>196</left>
+      <top>636</top>
+      <width>390</width>
+      <height>70</height>
+      <label>$LOCALIZE[31675]</label>
+      <onclick />
+      <onleft>9</onleft>
+      <onright>12</onright>
+      <onup>6</onup>
+      <ondown>6</ondown>
+      <texturenofocus border="capsule_border">glass_capsule.png</texturenofocus>
+    </control>
+    <control type="button" id="12">
+      <left>606</left>
+      <top>636</top>
+      <width>390</width>
+      <height>70</height>
+      <label>$LOCALIZE[31676]</label>
+      <onclick />
+      <onleft>10</onleft>
+      <onright>13</onright>
+      <onup>7</onup>
+      <ondown>7</ondown>
+      <texturenofocus border="capsule_border">glass_capsule.png</texturenofocus>
+    </control>
+    <control type="radiobutton" id="13">
+      <left>1016</left>
+      <top>636</top>
+      <width>390</width>
+      <height>70</height>
+      <label>$LOCALIZE[31677]</label>
+      <font>font_body</font>
+      <texturefocus border="focus_border">focus_button.png</texturefocus>
+      <texturenofocus border="capsule_border">glass_capsule.png</texturenofocus>
+      <radioposx>302</radioposx>
+      <radioposy>16</radioposy>
+      <radiowidth>68</radiowidth>
+      <radioheight>38</radioheight>
+      <textureradioon>settings/toggle_on.png</textureradioon>
+      <textureradiooff>settings/toggle_off.png</textureradiooff>
+      <onleft>12</onleft>
+      <onright>14</onright>
+      <onup>8</onup>
+      <ondown>8</ondown>
+    </control>
+    <control type="button" id="14">
+      <left>1426</left>
+      <top>636</top>
+      <width>390</width>
+      <height>70</height>
+      <label>$LOCALIZE[31678]</label>
+      <onclick />
+      <onleft>13</onleft>
+      <onright>6</onright>
+      <onup>9</onup>
+      <ondown>9</ondown>
+      <texturenofocus border="capsule_border">glass_capsule.png</texturenofocus>
+    </control>
+    <control type="list" id="50">
+      <left>196</left>
+      <top>760</top>
+      <width>1644</width>
+      <height>230</height>
+      <orientation>horizontal</orientation>
+      <onup>6</onup>
+      <ondown>6</ondown>
+      <itemlayout width="340" height="210">
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>320</width>
+          <height>180</height>
+          <texture>$INFO[ListItem.Thumb]</texture>
+        </control>
+      </itemlayout>
+      <focusedlayout width="340" height="210">
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>320</width>
+          <height>180</height>
+          <texture>$INFO[ListItem.Thumb]</texture>
+        </control>
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>320</width>
+          <height>180</height>
+          <texture border="card_border">focus_card.png</texture>
+        </control>
+      </focusedlayout>
+    </control>
+  </controls>
+</window>

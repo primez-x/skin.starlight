@@ -158,3 +158,31 @@
 - `VideoOSDBookmarks.xml` provides native list 11 and Add bookmark 2. Kodi supplies chapters and bookmark actions.
 - The queue reuses `HomePlayCapsule` for Play actions, as the global play-card rule requires.
 - `DefaultAlbumCover.png` supplies Kodi’s native missing-art fallback. Menu album icons use a separate texture.
+
+## Step 6 settings and Live TV
+
+- `Includes_Settings.xml` owns the settings templates, Live TV rows, and native EPG layouts.
+- `Settings.xml` and rail destination `Custom_1102.xml` share the three-column settings home.
+- `SkinSettings.xml` exposes native hub, widget, art, Ambient effects, and visualiser preferences.
+- Choice dialog 11106 writes the selected skin string, closes, and reloads the skin.
+- `Player.Visualiser.Disabled` is false by default. Step 4 consumes the inverse for the visualiser.
+- The screensaver action calls `Addon.Default.Set(xbmc.ui.screensaver)` to open the native selector. No screensaver dependency exists.
+- Native settings use category group 3, settings group 5, and templates 7 through 15.
+- Category template 10 uses a toggle button. Kodi retains the selected category after focus moves into the settings.
+- `DialogSettings.xml` also serves native profile settings. Numeric input and popup sliders have separate native windows.
+- `FileManager.xml` retains native lists 20 and 21. `FileBrowser.xml` retains native chooser views 450 and 451.
+- `Custom_1107.xml` owns the Live TV hub. Home also shows the recent-channel row.
+- Native PVR groups populate control 11. Favourites appear when the PVR backend defines that group.
+- Recent channels use the native last-played directory, sorted by last play time.
+- SmartTube supplies `plugin://plugin.video.smarttube/live_now`. Cards read `Starlight.Source` and show no invented schedule or progress.
+- `MyPVRGuide.xml` uses native grid 50. A ruler unit of 6 shows half-hour labels.
+- Kodi EPG grid clicks bypass XML click actions. A failed native setting change produces a notification.
+- Recent-channel and YouTube cards supply the shared context adapter with native cursor metrics and actual lifted bounds.
+- Full pages reuse `InfoContentMotion` for the rail and top navigation layouts.
+- The native Guide currently uses the existing centred context sheet. Exact programme-cell anchoring needs a native grid geometry source.
+- Startup uses an asynchronous one-second alarm, short native animations, and cancellation on exit. No helper service delays startup.
+- `Pointer.xml` provides the four native pointer states. `tools/textures_settings.py` generates every step 6 texture.
+- Render each new window with `python3 tools/render_settings.py --art /path/to/sample/art --output /tmp/starlight-step6`.
+- Previews expand shipped XML and supply native-control fixtures. YouTube preview cards are explicit synthetic fixtures without schedule fields.
+- Verify remote navigation, native setting persistence, add-on settings, file selection, PVR actions, and startup on the integration box.
+- Verify PVR programme art, native progress, variable-width EPG cells, pointer motion, and guide scrolling on the integration box.

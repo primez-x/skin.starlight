@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <defaultcontrol always="true">50</defaultcontrol>
+  <views>50</views>
+  <onload>SetProperty(Starlight.Hub,livetv,home)</onload>
+  <controls>
+    <include content="SettingsBackdrop" />
+    <include content="LiveTVGroups" />
+    <include content="HubRail">
+      <param name="return" value="50" />
+      <param name="sidefocus" value="908" />
+      <param name="topfocus" value="918" />
+    </include>
+    <control type="group" id="8050">
+      <include content="InfoContentMotion" />
+      <control type="list" id="50">
+        <left>196</left>
+        <top>150</top>
+        <width>1040</width>
+        <height>800</height>
+        <orientation>vertical</orientation>
+        <onup>11</onup>
+        <onleft>9000</onleft>
+        <onright>28</onright>
+        <ondown>11</ondown>
+        <include content="LiveTVChannelLayouts">
+          <param name="id" value="50" />
+        </include>
+      </control>
+      <control type="image">
+        <left>1360</left>
+        <top>150</top>
+        <width>480</width>
+        <height>270</height>
+        <texture diffuse="home_landscape_mask.png">$VAR[PVRProgrammeArt]</texture>
+        <visible>!Player.HasVideo</visible>
+        <aspectratio>scale</aspectratio>
+      </control>
+      <control type="image">
+        <left>1380</left>
+        <top>350</top>
+        <width>120</width>
+        <height>52</height>
+        <texture>$INFO[ListItem.Icon]</texture>
+        <visible>!Player.HasVideo</visible>
+        <aspectratio>keep</aspectratio>
+      </control>
+      <control type="label">
+        <left>1380</left>
+        <top>168</top>
+        <width>130</width>
+        <height>38</height>
+        <font>font_kicker</font>
+        <textcolor>gold</textcolor>
+        <label>$LOCALIZE[31687]</label>
+      </control>
+      <control type="videowindow">
+        <left>1360</left>
+        <top>150</top>
+        <width>480</width>
+        <height>270</height>
+        <visible>Player.HasVideo</visible>
+      </control>
+      <control type="label">
+        <left>1300</left>
+        <top>500</top>
+        <width>540</width>
+        <height>72</height>
+        <font>font_heading</font>
+        <textcolor>frost</textcolor>
+        <label>$VAR[PVRChannelTitle]</label>
+      </control>
+      <control type="textbox">
+        <left>1300</left>
+        <top>588</top>
+        <width>540</width>
+        <height>170</height>
+        <font>font_body</font>
+        <textcolor>mist</textcolor>
+        <label>$INFO[ListItem.Plot]</label>
+      </control>
+      <control type="button" id="28">
+        <left>1300</left>
+        <top>810</top>
+        <width>540</width>
+        <height>64</height>
+        <label>$LOCALIZE[31688]</label>
+        <onclick />
+        <onup>50</onup>
+        <ondown>50</ondown>
+        <onleft>50</onleft>
+        <onright>50</onright>
+      </control>
+      <control type="button" id="650">
+        <left>1300</left>
+        <top>898</top>
+        <width>262</width>
+        <height>64</height>
+        <label>$LOCALIZE[31689]</label>
+        <onclick>ActivateWindow(11107)</onclick>
+        <onup>28</onup>
+        <ondown>50</ondown>
+        <onleft>50</onleft>
+        <onright>651</onright>
+      </control>
+      <control type="button" id="651">
+        <left>1576</left>
+        <top>898</top>
+        <width>264</width>
+        <height>64</height>
+        <label>$LOCALIZE[31690]</label>
+        <onclick>ActivateWindow(11107)</onclick>
+        <onup>28</onup>
+        <ondown>50</ondown>
+        <onleft>650</onleft>
+        <onright>50</onright>
+      </control>
+    </control>
+  </controls>
+</window>

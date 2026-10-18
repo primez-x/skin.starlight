@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <defaultcontrol always="true">601</defaultcontrol>
+  <onload>SetProperty(Starlight.Hub,settings,home)</onload>
+  <onload>SetProperty(Starlight.Settings.Section,Hub)</onload>
+  <controls>
+    <include content="SettingsBackdrop" />
+    <include content="HubRail">
+      <param name="return" value="700" />
+      <param name="sidefocus" value="907" />
+      <param name="topfocus" value="917" />
+    </include>
+    <control type="group" id="8050">
+      <include content="InfoContentMotion" />
+      <include content="SettingsHeading">
+        <param name="title" value="$LOCALIZE[31623]" />
+      </include>
+      <control type="grouplist" id="700">
+        <left>196</left>
+        <top>310</top>
+        <width>1644</width>
+        <height>560</height>
+        <orientation>vertical</orientation>
+        <itemgap>10</itemgap>
+        <onup>601</onup>
+        <ondown>601</ondown>
+        <onleft>9000</onleft>
+        <onright>601</onright>
+        <control type="button" id="710">
+          <label>$LOCALIZE[31636]</label>
+          <label2>$VAR[SettingValue0]</label2>
+          <visible>String.IsEqual(Window.Property(Starlight.Settings.Section),Hub)</visible>
+          <onfocus>SetProperty(Starlight.Settings.Help,$LOCALIZE[31631])</onfocus>
+          <include>SettingsRowStyle</include>
+          <onclick>SetProperty(Starlight.Settings.Key,Hub.Navigation,home)</onclick>
+          <onclick>SetProperty(Starlight.Settings.Title,$LOCALIZE[31636],home)</onclick>
+          <onclick>ActivateWindow(11106)</onclick>
+        </control>
+        <control type="button" id="711">
+          <label>$LOCALIZE[31643]</label>
+          <label2>$VAR[SettingValue1]</label2>
+          <visible>String.IsEqual(Window.Property(Starlight.Settings.Section),Widgets)</visible>
+          <onfocus>SetProperty(Starlight.Settings.Help,$LOCALIZE[31637])</onfocus>
+          <include>SettingsRowStyle</include>
+          <onclick>SetProperty(Starlight.Settings.Key,Home.Continue.Layout,home)</onclick>
+          <onclick>SetProperty(Starlight.Settings.Title,$LOCALIZE[31643],home)</onclick>
+          <onclick>ActivateWindow(11106)</onclick>
+        </control>
+        <control type="button" id="712">
+          <label>$LOCALIZE[31645]</label>
+          <label2>$VAR[SettingValue2]</label2>
+          <visible>String.IsEqual(Window.Property(Starlight.Settings.Section),Widgets)</visible>
+          <onfocus>SetProperty(Starlight.Settings.Help,$LOCALIZE[31644])</onfocus>
+          <include>SettingsRowStyle</include>
+          <onclick>SetProperty(Starlight.Settings.Key,Home.Movies.Layout,home)</onclick>
+          <onclick>SetProperty(Starlight.Settings.Title,$LOCALIZE[31645],home)</onclick>
+          <onclick>ActivateWindow(11106)</onclick>
+        </control>
+        <control type="button" id="713">
+          <label>$LOCALIZE[31647]</label>
+          <label2>$VAR[SettingValue3]</label2>
+          <visible>String.IsEqual(Window.Property(Starlight.Settings.Section),Widgets)</visible>
+          <onfocus>SetProperty(Starlight.Settings.Help,$LOCALIZE[31646])</onfocus>
+          <include>SettingsRowStyle</include>
+          <onclick>SetProperty(Starlight.Settings.Key,Home.Next.Layout,home)</onclick>
+          <onclick>SetProperty(Starlight.Settings.Title,$LOCALIZE[31647],home)</onclick>
+          <onclick>ActivateWindow(11106)</onclick>
+        </control>
+        <control type="button" id="714">
+          <label>$LOCALIZE[31649]</label>
+          <label2>$VAR[SettingValue4]</label2>
+          <visible>String.IsEqual(Window.Property(Starlight.Settings.Section),Widgets)</visible>
+          <onfocus>SetProperty(Starlight.Settings.Help,$LOCALIZE[31648])</onfocus>
+          <include>SettingsRowStyle</include>
+          <onclick>SetProperty(Starlight.Settings.Key,Home.Episodes.Layout,home)</onclick>
+          <onclick>SetProperty(Starlight.Settings.Title,$LOCALIZE[31649],home)</onclick>
+          <onclick>ActivateWindow(11106)</onclick>
+        </control>
+        <control type="button" id="715">
+          <label>$LOCALIZE[31653]</label>
+          <label2>$VAR[SettingValue5]</label2>
+          <visible>String.IsEqual(Window.Property(Starlight.Settings.Section),Appearance)</visible>
+          <onfocus>SetProperty(Starlight.Settings.Help,$LOCALIZE[31650])</onfocus>
+          <include>SettingsRowStyle</include>
+          <onclick>SetProperty(Starlight.Settings.Key,Home.Art.Mode,home)</onclick>
+          <onclick>SetProperty(Starlight.Settings.Title,$LOCALIZE[31653],home)</onclick>
+          <onclick>ActivateWindow(11106)</onclick>
+        </control>
+        <control type="radiobutton" id="716">
+          <label>$LOCALIZE[31655]</label>
+          <visible>String.IsEqual(Window.Property(Starlight.Settings.Section),Appearance)</visible>
+          <onfocus>SetProperty(Starlight.Settings.Help,$LOCALIZE[31654])</onfocus>
+          <include>SettingsRowStyle</include>
+          <include>SettingsToggleStyle</include>
+          <selected>!Skin.HasSetting(AmbientEffects.Disabled)</selected>
+          <onclick>Skin.ToggleSetting(AmbientEffects.Disabled)</onclick>
+        </control>
+        <control type="radiobutton" id="717">
+          <label>$LOCALIZE[31657]</label>
+          <visible>String.IsEqual(Window.Property(Starlight.Settings.Section),Music)</visible>
+          <onfocus>SetProperty(Starlight.Settings.Help,$LOCALIZE[31656])</onfocus>
+          <include>SettingsRowStyle</include>
+          <include>SettingsToggleStyle</include>
+          <selected>!Skin.HasSetting(Player.Visualiser.Disabled)</selected>
+          <onclick>Skin.ToggleSetting(Player.Visualiser.Disabled)</onclick>
+        </control>
+        <control type="button" id="718">
+          <label>$LOCALIZE[31659]</label>
+          <visible>String.IsEqual(Window.Property(Starlight.Settings.Section),Screensaver)</visible>
+          <onfocus>SetProperty(Starlight.Settings.Help,$LOCALIZE[31658])</onfocus>
+          <include>SettingsRowStyle</include>
+          <onclick>Addon.Default.Set(xbmc.ui.screensaver)</onclick>
+        </control>
+      </control>
+      <control type="label">
+        <left>220</left>
+        <top>910</top>
+        <width>1572</width>
+        <height>100</height>
+        <font>font_body</font>
+        <textcolor>mist</textcolor>
+        <label>$INFO[Window.Property(Starlight.Settings.Help)]</label>
+      </control>
+      <control type="group" id="600">
+        <control type="image">
+          <left>196</left>
+          <top>210</top>
+          <width>1448</width>
+          <height>64</height>
+          <texture border="capsule_border">glass_capsule.png</texture>
+          <visible>ControlGroup(600).HasFocus</visible>
+        </control>
+        <control type="image">
+          <left>196</left>
+          <top>210</top>
+          <width>280</width>
+          <height>64</height>
+          <texture border="capsule_border">frost_fill.png</texture>
+          <visible>!ControlGroup(600).HasFocus + String.IsEqual(Window.Property(Starlight.Settings.Section),Hub)</visible>
+        </control>
+        <control type="button" id="601">
+          <left>196</left>
+          <top>210</top>
+          <width>280</width>
+          <height>64</height>
+          <label>$LOCALIZE[31626]</label>
+          <onclick>SetFocus(700)</onclick>
+          <onfocus>SetProperty(Starlight.Settings.Section,Hub)</onfocus>
+          <onfocus>ClearProperty(Starlight.Settings.Help)</onfocus>
+          <ondown>700</ondown>
+          <onup>9000</onup>
+          <onleft>9000</onleft>
+          <onright>602</onright>
+          <texturenofocus border="capsule_border" />
+        </control>
+        <control type="image">
+          <left>488</left>
+          <top>210</top>
+          <width>280</width>
+          <height>64</height>
+          <texture border="capsule_border">frost_fill.png</texture>
+          <visible>!ControlGroup(600).HasFocus + String.IsEqual(Window.Property(Starlight.Settings.Section),Widgets)</visible>
+        </control>
+        <control type="button" id="602">
+          <left>488</left>
+          <top>210</top>
+          <width>280</width>
+          <height>64</height>
+          <label>$LOCALIZE[31627]</label>
+          <onclick>SetFocus(700)</onclick>
+          <onfocus>SetProperty(Starlight.Settings.Section,Widgets)</onfocus>
+          <onfocus>ClearProperty(Starlight.Settings.Help)</onfocus>
+          <ondown>700</ondown>
+          <onup>9000</onup>
+          <onleft>601</onleft>
+          <onright>603</onright>
+          <texturenofocus border="capsule_border" />
+        </control>
+        <control type="image">
+          <left>780</left>
+          <top>210</top>
+          <width>280</width>
+          <height>64</height>
+          <texture border="capsule_border">frost_fill.png</texture>
+          <visible>!ControlGroup(600).HasFocus + String.IsEqual(Window.Property(Starlight.Settings.Section),Appearance)</visible>
+        </control>
+        <control type="button" id="603">
+          <left>780</left>
+          <top>210</top>
+          <width>280</width>
+          <height>64</height>
+          <label>$LOCALIZE[31628]</label>
+          <onclick>SetFocus(700)</onclick>
+          <onfocus>SetProperty(Starlight.Settings.Section,Appearance)</onfocus>
+          <onfocus>ClearProperty(Starlight.Settings.Help)</onfocus>
+          <ondown>700</ondown>
+          <onup>9000</onup>
+          <onleft>602</onleft>
+          <onright>604</onright>
+          <texturenofocus border="capsule_border" />
+        </control>
+        <control type="image">
+          <left>1072</left>
+          <top>210</top>
+          <width>280</width>
+          <height>64</height>
+          <texture border="capsule_border">frost_fill.png</texture>
+          <visible>!ControlGroup(600).HasFocus + String.IsEqual(Window.Property(Starlight.Settings.Section),Music)</visible>
+        </control>
+        <control type="button" id="604">
+          <left>1072</left>
+          <top>210</top>
+          <width>280</width>
+          <height>64</height>
+          <label>$LOCALIZE[31629]</label>
+          <onclick>SetFocus(700)</onclick>
+          <onfocus>SetProperty(Starlight.Settings.Section,Music)</onfocus>
+          <onfocus>ClearProperty(Starlight.Settings.Help)</onfocus>
+          <ondown>700</ondown>
+          <onup>9000</onup>
+          <onleft>603</onleft>
+          <onright>605</onright>
+          <texturenofocus border="capsule_border" />
+        </control>
+        <control type="image">
+          <left>1364</left>
+          <top>210</top>
+          <width>280</width>
+          <height>64</height>
+          <texture border="capsule_border">frost_fill.png</texture>
+          <visible>!ControlGroup(600).HasFocus + String.IsEqual(Window.Property(Starlight.Settings.Section),Screensaver)</visible>
+        </control>
+        <control type="button" id="605">
+          <left>1364</left>
+          <top>210</top>
+          <width>280</width>
+          <height>64</height>
+          <label>$LOCALIZE[31630]</label>
+          <onclick>SetFocus(700)</onclick>
+          <onfocus>SetProperty(Starlight.Settings.Section,Screensaver)</onfocus>
+          <onfocus>ClearProperty(Starlight.Settings.Help)</onfocus>
+          <ondown>700</ondown>
+          <onup>9000</onup>
+          <onleft>604</onleft>
+          <onright>601</onright>
+          <texturenofocus border="capsule_border" />
+        </control>
+      </control>
+    </control>
+  </controls>
+</window>

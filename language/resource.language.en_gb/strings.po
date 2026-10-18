@@ -527,4 +527,443 @@ msgstr ""
 
 msgctxt "#31233"
 msgid "No bookmarks or chapters"
+
+msgctxt "#31600"
+msgid "Done"
+msgstr ""
+
+msgctxt "#31601"
+msgid "Cancel"
+msgstr ""
+
+msgctxt "#31602"
+msgid "Player"
+msgstr ""
+
+msgctxt "#31603"
+msgid "Videos, music, discs and subtitles"
+msgstr ""
+
+msgctxt "#31604"
+msgid "Media"
+msgstr ""
+
+msgctxt "#31605"
+msgid "Sources, library and artwork"
+msgstr ""
+
+msgctxt "#31606"
+msgid "Library"
+msgstr ""
+
+msgctxt "#31607"
+msgid "Library sources and updates"
+msgstr ""
+
+msgctxt "#31608"
+msgid "PVR and Live TV"
+msgstr ""
+
+msgctxt "#31609"
+msgid "Guide, channels and recordings"
+msgstr ""
+
+msgctxt "#31610"
+msgid "Services"
+msgstr ""
+
+msgctxt "#31611"
+msgid "Remote control and network services"
+msgstr ""
+
+msgctxt "#31612"
+msgid "Interface"
+msgstr ""
+
+msgctxt "#31613"
+msgid "Skin, language and screensaver"
+msgstr ""
+
+msgctxt "#31614"
+msgid "System"
+msgstr ""
+
+msgctxt "#31615"
+msgid "Display, audio, input and power"
+msgstr ""
+
+msgctxt "#31616"
+msgid "Add-ons"
+msgstr ""
+
+msgctxt "#31617"
+msgid "Install, update and manage"
+msgstr ""
+
+msgctxt "#31618"
+msgid "Profiles"
+msgstr ""
+
+msgctxt "#31619"
+msgid "Users and locks"
+msgstr ""
+
+msgctxt "#31620"
+msgid "File manager"
+msgstr ""
+
+msgctxt "#31621"
+msgid "Browse and copy files"
+msgstr ""
+
+msgctxt "#31622"
+msgid "Categories"
+msgstr ""
+
+msgctxt "#31623"
+msgid "Customisation"
+msgstr ""
+
+msgctxt "#31624"
+msgid "System info"
+msgstr ""
+
+msgctxt "#31625"
+msgid "Settings"
+msgstr ""
+
+msgctxt "#31626"
+msgid "Hub"
+msgstr ""
+
+msgctxt "#31627"
+msgid "Widgets"
+msgstr ""
+
+msgctxt "#31628"
+msgid "Appearance"
+msgstr ""
+
+msgctxt "#31629"
+msgid "Music"
+msgstr ""
+
+msgctxt "#31630"
+msgid "Screensaver"
+msgstr ""
+
+msgctxt "#31631"
+msgid "Choose where the hub navigation appears. The rail opens when the rail has focus."
+msgstr ""
+
+msgctxt "#31632"
+msgid "Left rail"
+msgstr ""
+
+msgctxt "#31633"
+msgid "Left icons only"
+msgstr ""
+
+msgctxt "#31634"
+msgid "Top left"
+msgstr ""
+
+msgctxt "#31635"
+msgid "Top centre"
+msgstr ""
+
+msgctxt "#31636"
+msgid "Hub navigation"
+msgstr ""
+
+msgctxt "#31637"
+msgid "Choose the card layout for Continue watching."
+msgstr ""
+
+msgctxt "#31638"
+msgid "Board"
+msgstr ""
+
+msgctxt "#31639"
+msgid "Hero"
+msgstr ""
+
+msgctxt "#31640"
+msgid "Landscape"
+msgstr ""
+
+msgctxt "#31641"
+msgid "Poster"
+msgstr ""
+
+msgctxt "#31642"
+msgid "Square"
+msgstr ""
+
+msgctxt "#31643"
+msgid "Continue watching"
+msgstr ""
+
+msgctxt "#31644"
+msgid "Choose the card layout for recently added movies."
+msgstr ""
+
+msgctxt "#31645"
+msgid "Recently added movies"
+msgstr ""
+
+msgctxt "#31646"
+msgid "Choose the card layout for Next up."
+msgstr ""
+
+msgctxt "#31647"
+msgid "Next up"
+msgstr ""
+
+msgctxt "#31648"
+msgid "Choose the card layout for recently added episodes."
+msgstr ""
+
+msgctxt "#31649"
+msgid "Recently added episodes"
+msgstr ""
+
+msgctxt "#31650"
+msgid "Blurred keeps the background soft. Bound adds sharp artwork at the upper right."
+msgstr ""
+
+msgctxt "#31651"
+msgid "Blurred"
+msgstr ""
+
+msgctxt "#31652"
+msgid "Bound artwork"
+msgstr ""
+
+msgctxt "#31653"
+msgid "Background art"
+msgstr ""
+
+msgctxt "#31654"
+msgid "Disable Ambient effects to stop the arrival glint and background twinkles. Progress feedback stays visible."
+msgstr ""
+
+msgctxt "#31655"
+msgid "Ambient effects"
+msgstr ""
+
+msgctxt "#31656"
+msgid "Show the Starlight audio visualiser during music playback. Disable the visualiser to show the dotted ring."
+msgstr ""
+
+msgctxt "#31657"
+msgid "Visualiser"
+msgstr ""
+
+msgctxt "#31658"
+msgid "Open the Kodi screensaver selector. Starlight screensaver is a separate optional add-on."
+msgstr ""
+
+msgctxt "#31659"
+msgid "Select screensaver"
+msgstr ""
+
+msgctxt "#31660"
+msgid "Summary"
+msgstr ""
+
+msgctxt "#31661"
+msgid "Storage"
+msgstr ""
+
+msgctxt "#31662"
+msgid "Network"
+msgstr ""
+
+msgctxt "#31663"
+msgid "Video"
+msgstr ""
+
+msgctxt "#31664"
+msgid "Hardware"
+msgstr ""
+
+msgctxt "#31665"
+msgid "Live TV"
+msgstr ""
+
+msgctxt "#31666"
+msgid "Privacy policy"
+msgstr ""
+
+msgctxt "#31667"
+msgid "Show login screen"
+msgstr ""
+
+msgctxt "#31668"
+msgid "Automatic login"
+msgstr ""
+
+msgctxt "#31669"
+msgid "Select"
+msgstr ""
+
+msgctxt "#31670"
+msgid "New folder"
+msgstr ""
+
+msgctxt "#31671"
+msgid "Flip image"
+msgstr ""
+
+msgctxt "#31672"
+msgid "Install"
+msgstr ""
+
+msgctxt "#31673"
+msgid "Enable"
+msgstr ""
+
+msgctxt "#31674"
+msgid "Update"
+msgstr ""
+
+msgctxt "#31675"
+msgid "Dependencies"
+msgstr ""
+
+msgctxt "#31676"
+msgid "Use"
+msgstr ""
+
+msgctxt "#31677"
+msgid "Auto-update"
+msgstr ""
+
+msgctxt "#31678"
+msgid "Versions"
+msgstr ""
+
+msgctxt "#31679"
+msgid "Power"
+msgstr ""
+
+msgctxt "#31680"
+msgid "Back"
+msgstr ""
+
+msgctxt "#31681"
+msgid "Power off"
+msgstr ""
+
+msgctxt "#31682"
+msgid "Restart"
+msgstr ""
+
+msgctxt "#31683"
+msgid "Suspend"
+msgstr ""
+
+msgctxt "#31684"
+msgid "Hibernate"
+msgstr ""
+
+msgctxt "#31685"
+msgid "Exit Kodi"
+msgstr ""
+
+msgctxt "#31687"
+msgid "LIVE"
+msgstr ""
+
+msgctxt "#31688"
+msgid "Channel groups"
+msgstr ""
+
+msgctxt "#31689"
+msgid "Recent channels"
+msgstr ""
+
+msgctxt "#31690"
+msgid "YouTube live"
+msgstr ""
+
+msgctxt "#31691"
+msgid "Recordings"
+msgstr ""
+
+msgctxt "#31692"
+msgid "Timers"
+msgstr ""
+
+msgctxt "#31693"
+msgid "Watch channel"
+msgstr ""
+
+msgctxt "#31694"
+msgid "Play recording"
+msgstr ""
+
+msgctxt "#31695"
+msgid "Play programme"
+msgstr ""
+
+msgctxt "#31696"
+msgid "Record"
+msgstr ""
+
+msgctxt "#31697"
+msgid "Add timer"
+msgstr ""
+
+msgctxt "#31698"
+msgid "Set reminder"
+msgstr ""
+
+msgctxt "#31699"
+msgid "Find similar"
+msgstr ""
+
+msgctxt "#31700"
+msgid "Close"
+msgstr ""
+
+msgctxt "#31701"
+msgid "Channels"
+msgstr ""
+
+msgctxt "#31702"
+msgid "Channel guide"
+msgstr ""
+
+msgctxt "#31703"
+msgid "Guide"
+msgstr ""
+
+msgctxt "#31704"
+msgid "YouTube live now"
+msgstr ""
+
+msgctxt "#31705"
+msgid "No recent channels. Open Guide to watch a channel."
+msgstr ""
+
+msgctxt "#31706"
+msgid "YouTube settings"
+msgstr ""
+
+msgctxt "#31707"
+msgid "Install SmartTube from Add-ons to show YouTube live streams."
+msgstr ""
+
+msgctxt "#31708"
+msgid "No live streams. Follow channels in YouTube settings."
+msgstr ""
+
+msgctxt "#31709"
+msgid "Previous field"
+msgstr ""
+
+msgctxt "#31710"
+msgid "Next field"
 msgstr ""

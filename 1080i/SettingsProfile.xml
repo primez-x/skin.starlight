@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <defaultcontrol always="true">2</defaultcontrol>
+  <onload>SetProperty(Starlight.Hub,settings,home)</onload>
+  <controls>
+    <include content="SettingsBackdrop" />
+    <include content="HubRail">
+      <param name="return" value="2" />
+      <param name="sidefocus" value="907" />
+      <param name="topfocus" value="917" />
+    </include>
+    <control type="group" id="8050">
+      <include content="InfoContentMotion" />
+      <include content="SettingsHeading">
+        <param name="title" value="$LOCALIZE[31618]" />
+      </include>
+      <control type="list" id="2">
+        <left>196</left>
+        <top>320</top>
+        <width>1644</width>
+        <height>550</height>
+        <orientation>vertical</orientation>
+        <onleft>9000</onleft>
+        <onup>9000</onup>
+        <ondown>9000</ondown>
+        <onright>9000</onright>
+        <include content="SettingsDirectoryLayouts">
+          <param name="width" value="1644" />
+          <param name="id" value="2" />
+        </include>
+      </control>
+      <control type="radiobutton" id="4">
+        <left>196</left>
+        <top>210</top>
+        <label>$LOCALIZE[31667]</label>
+        <include>SettingsRowStyle</include>
+        <include>SettingsToggleStyle</include>
+        <ondown>2</ondown>
+      </control>
+      <control type="button" id="5">
+        <left>196</left>
+        <top>920</top>
+        <width>600</width>
+        <height>64</height>
+        <label>$LOCALIZE[31668]</label>
+        <onclick />
+        <onup>2</onup>
+        <ondown>4</ondown>
+      </control>
+    </control>
+  </controls>
+</window>

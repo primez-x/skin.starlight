@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <defaultcontrol always="true">450</defaultcontrol>
+  <controls>
+    <include content="SettingsBackdrop" />
+    <control type="label" id="411">
+      <left>196</left>
+      <top>110</top>
+      <width>1550</width>
+      <height>76</height>
+      <font>font_title</font>
+      <textcolor>frost</textcolor>
+      <label />
+    </control>
+    <control type="label" id="412">
+      <left>196</left>
+      <top>210</top>
+      <width>1600</width>
+      <height>54</height>
+      <font>font_body</font>
+      <textcolor>mist</textcolor>
+      <label />
+    </control>
+    <control type="list" id="450">
+      <left>196</left>
+      <top>300</top>
+      <width>760</width>
+      <height>600</height>
+      <orientation>vertical</orientation>
+      <onleft>9000</onleft>
+      <onup>9000</onup>
+      <ondown>9000</ondown>
+      <onright>9000</onright>
+      <include content="SettingsDirectoryLayouts">
+        <param name="width" value="760" />
+        <param name="id" value="450" />
+      </include>
+    </control>
+    <control type="panel" id="451">
+      <left>196</left>
+      <top>300</top>
+      <width>760</width>
+      <height>600</height>
+      <visible>false</visible>
+      <onup>413</onup>
+      <ondown>413</ondown>
+      <itemlayout width="250" height="180">
+        <control type="image">
+          <left>8</left>
+          <top>8</top>
+          <width>234</width>
+          <height>132</height>
+          <aspectratio>keep</aspectratio>
+          <texture fallback="icons/movies.png">$VAR[FileBrowserRowArt]</texture>
+        </control>
+        <control type="label">
+          <left>12</left>
+          <top>142</top>
+          <width>226</width>
+          <height>34</height>
+          <font>font_label</font>
+          <label>$INFO[ListItem.Label]</label>
+        </control>
+      </itemlayout>
+      <focusedlayout width="250" height="180">
+        <control type="image">
+          <left>8</left>
+          <top>8</top>
+          <width>234</width>
+          <height>132</height>
+          <aspectratio>keep</aspectratio>
+          <texture fallback="icons/movies.png">$VAR[FileBrowserRowArt]</texture>
+        </control>
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>250</width>
+          <height>176</height>
+          <texture border="card_border">focus_card.png</texture>
+        </control>
+        <control type="label">
+          <left>12</left>
+          <top>142</top>
+          <width>226</width>
+          <height>34</height>
+          <font>font_label</font>
+          <label>$INFO[ListItem.Label]</label>
+        </control>
+      </focusedlayout>
+    </control>
+    <control type="button" id="413">
+      <left>1540</left>
+      <top>972</top>
+      <width>240</width>
+      <height>64</height>
+      <label>$LOCALIZE[31669]</label>
+      <onclick />
+      <onup>450</onup>
+      <onleft>414</onleft>
+      <onright>416</onright>
+    </control>
+    <control type="button" id="414">
+      <left>1280</left>
+      <top>972</top>
+      <width>240</width>
+      <height>64</height>
+      <label>$LOCALIZE[31601]</label>
+      <onclick />
+      <onup>450</onup>
+      <onleft>415</onleft>
+      <onright>413</onright>
+    </control>
+    <control type="button" id="415">
+      <left>1000</left>
+      <top>972</top>
+      <width>240</width>
+      <height>64</height>
+      <label>$LOCALIZE[31670]</label>
+      <onclick />
+      <onup>450</onup>
+      <onleft>416</onleft>
+      <onright>414</onright>
+    </control>
+    <control type="button" id="416">
+      <left>700</left>
+      <top>972</top>
+      <width>240</width>
+      <height>64</height>
+      <label>$LOCALIZE[31671]</label>
+      <onclick />
+      <onup>450</onup>
+      <onleft>413</onleft>
+      <onright>415</onright>
+    </control>
+    <control type="image">
+      <left>980</left>
+      <top>250</top>
+      <width>860</width>
+      <height>420</height>
+      <aspectratio>keep</aspectratio>
+      <texture fallback="icons/movies.png">$VAR[FileBrowserArt]</texture>
+    </control>
+    <control type="label">
+      <left>980</left>
+      <top>710</top>
+      <width>860</width>
+      <height>76</height>
+      <font>font_heading</font>
+      <label>$INFO[Container(450).ListItem.Label]</label>
+    </control>
+    <control type="label">
+      <left>980</left>
+      <top>798</top>
+      <width>860</width>
+      <height>54</height>
+      <font>font_body</font>
+      <textcolor>mist</textcolor>
+      <label>$INFO[Container(450).ListItem.Label2]</label>
+    </control>
+    <control type="label">
+      <left>980</left>
+      <top>860</top>
+      <width>860</width>
+      <height>54</height>
+      <font>font_label</font>
+      <textcolor>mist</textcolor>
+      <label>$INFO[Container(450).ListItem.Size]  $INFO[Container(450).ListItem.Date]</label>
+    </control>
+  </controls>
+</window>

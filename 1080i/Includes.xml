@@ -7,4 +7,5 @@
   <include file="Includes_Info.xml" />
   <include file="Includes_Dialogs.xml" />
   <include file="Includes_Player.xml" />
+  <include file="Includes_Settings.xml" />
 </includes>
