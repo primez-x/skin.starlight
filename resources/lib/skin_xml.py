@@ -51,7 +51,10 @@ def card_rect(tree, control_id, position, scroll, constants, condition):
                 x += position % columns * width
                 y += position // columns * height
             elif node.get('type') != 'fixedlist':
-                x += position * width
+                if node.findtext('orientation') == 'vertical':
+                    y += position * height
+                else:
+                    x += position * width
             card = layout.find("control[@type='group']")
             if card is None:
                 return None

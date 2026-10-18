@@ -28,11 +28,16 @@ def initialize():
     media = xbmc.getInfoLabel('ListItem.DBTYPE')
     rawid = xbmc.getInfoLabel('ListItem.DBID')
     for key in ('Ready', 'Error', 'More', 'cast', 'seasons', 'ShowID', 'Season', 'NextID',
-                'Resume', 'Time', 'Duration', 'Progress', 'Media', 'DBID', 'Watched', 'SeasonCount'):
+                'Resume', 'Time', 'Duration', 'Progress', 'Media', 'DBID', 'Watched', 'SeasonCount',
+                'Provider', 'ProviderKey', 'ProviderAction', 'ProviderLabel', 'ProviderCast', 'ProviderPending', 'ProviderError'):
         window.clearProperty('Starlight.Info.' + key)
     window.setProperty('Starlight.Info.Blurred', cached_blurred_art(xbmc.getInfoLabel('ListItem.Art(fanart)')))
     window.setProperty('Starlight.Info.Hub', xbmcgui.Window(10000).getProperty('Starlight.Hub') or
                        ('tv' if media in ('tvshow', 'season', 'episode') else 'movies'))
+    if xbmc.getInfoLabel('ListItem.Property(Starlight.InLibrary)') == 'false':
+        from library import provider_initialize
+        provider_initialize(window)
+        return
     if media not in ('movie', 'episode', 'tvshow', 'season'):
         window.setProperty('Starlight.Info.Ready', 'true')
         return
@@ -274,7 +279,8 @@ def context_anchor(window):
     home = window_id == 10000 and focused in {510, 511, 512, 520, 521, 522, 530, 531, 532, 540, 541, 542}
     person = window_id == PERSON and focused in {700, 710, 720}
     if not (home or person):
-        return None
+        from library import library_context_anchor
+        return library_context_anchor(window, window_id, focused)
     directory = Path(__file__).resolve().parents[1] / '1080i'
     includes, constants = {}, {}
     for path in directory.glob('Includes*.xml'):

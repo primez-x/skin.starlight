@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window>
   <zorder>20</zorder>
+  <onload>RunScript(special://skin/resources/library.py,keyboard-ready)</onload>
   <defaultcontrol>165</defaultcontrol>
   <controls>
     <control type="image">
@@ -75,7 +76,7 @@
           <param name="width" value="149" />
           <param name="left" value="119" />
           <param name="right" value="101" />
-          <param name="up" value="312" />
+          <param name="up" value="RunScript(special://skin/resources/library.py,keyboard-results)" />
           <param name="down" value="120" />
         </include>
         <include content="KeyboardKey">
@@ -86,7 +87,7 @@
           <param name="width" value="149" />
           <param name="left" value="100" />
           <param name="right" value="102" />
-          <param name="up" value="312" />
+          <param name="up" value="RunScript(special://skin/resources/library.py,keyboard-results)" />
           <param name="down" value="121" />
         </include>
         <include content="KeyboardKey">
@@ -97,7 +98,7 @@
           <param name="width" value="149" />
           <param name="left" value="101" />
           <param name="right" value="103" />
-          <param name="up" value="312" />
+          <param name="up" value="RunScript(special://skin/resources/library.py,keyboard-results)" />
           <param name="down" value="122" />
         </include>
         <include content="KeyboardKey">
@@ -108,7 +109,7 @@
           <param name="width" value="149" />
           <param name="left" value="102" />
           <param name="right" value="104" />
-          <param name="up" value="312" />
+          <param name="up" value="RunScript(special://skin/resources/library.py,keyboard-results)" />
           <param name="down" value="123" />
         </include>
         <include content="KeyboardKey">
@@ -119,7 +120,7 @@
           <param name="width" value="149" />
           <param name="left" value="103" />
           <param name="right" value="105" />
-          <param name="up" value="312" />
+          <param name="up" value="RunScript(special://skin/resources/library.py,keyboard-results)" />
           <param name="down" value="124" />
         </include>
         <include content="KeyboardKey">
@@ -130,7 +131,7 @@
           <param name="width" value="149" />
           <param name="left" value="104" />
           <param name="right" value="106" />
-          <param name="up" value="312" />
+          <param name="up" value="RunScript(special://skin/resources/library.py,keyboard-results)" />
           <param name="down" value="125" />
         </include>
         <include content="KeyboardKey">
@@ -141,7 +142,7 @@
           <param name="width" value="149" />
           <param name="left" value="105" />
           <param name="right" value="107" />
-          <param name="up" value="312" />
+          <param name="up" value="RunScript(special://skin/resources/library.py,keyboard-results)" />
           <param name="down" value="126" />
         </include>
         <include content="KeyboardKey">
@@ -152,7 +153,7 @@
           <param name="width" value="149" />
           <param name="left" value="106" />
           <param name="right" value="108" />
-          <param name="up" value="312" />
+          <param name="up" value="RunScript(special://skin/resources/library.py,keyboard-results)" />
           <param name="down" value="127" />
         </include>
         <include content="KeyboardKey">
@@ -163,7 +164,7 @@
           <param name="width" value="149" />
           <param name="left" value="107" />
           <param name="right" value="109" />
-          <param name="up" value="312" />
+          <param name="up" value="RunScript(special://skin/resources/library.py,keyboard-results)" />
           <param name="down" value="128" />
         </include>
         <include content="KeyboardKey">
@@ -174,7 +175,7 @@
           <param name="width" value="149" />
           <param name="left" value="108" />
           <param name="right" value="110" />
-          <param name="up" value="312" />
+          <param name="up" value="RunScript(special://skin/resources/library.py,keyboard-results)" />
           <param name="down" value="129" />
         </include>
         <include content="KeyboardKey">
@@ -185,7 +186,7 @@
           <param name="width" value="149" />
           <param name="left" value="109" />
           <param name="right" value="111" />
-          <param name="up" value="312" />
+          <param name="up" value="RunScript(special://skin/resources/library.py,keyboard-results)" />
           <param name="down" value="130" />
         </include>
         <include content="KeyboardKey">
@@ -196,7 +197,7 @@
           <param name="width" value="149" />
           <param name="left" value="110" />
           <param name="right" value="112" />
-          <param name="up" value="312" />
+          <param name="up" value="RunScript(special://skin/resources/library.py,keyboard-results)" />
           <param name="down" value="131" />
         </include>
         <include content="KeyboardKey">
@@ -207,7 +208,7 @@
           <param name="width" value="149" />
           <param name="left" value="111" />
           <param name="right" value="113" />
-          <param name="up" value="312" />
+          <param name="up" value="RunScript(special://skin/resources/library.py,keyboard-results)" />
           <param name="down" value="132" />
         </include>
         <include content="KeyboardKey">
@@ -218,7 +219,7 @@
           <param name="width" value="149" />
           <param name="left" value="112" />
           <param name="right" value="114" />
-          <param name="up" value="312" />
+          <param name="up" value="RunScript(special://skin/resources/library.py,keyboard-results)" />
           <param name="down" value="133" />
         </include>
         <include content="KeyboardKey">
@@ -229,7 +230,7 @@
           <param name="width" value="149" />
           <param name="left" value="113" />
           <param name="right" value="115" />
-          <param name="up" value="312" />
+          <param name="up" value="RunScript(special://skin/resources/library.py,keyboard-results)" />
           <param name="down" value="134" />
         </include>
         <include content="KeyboardKey">
@@ -240,7 +241,7 @@
           <param name="width" value="149" />
           <param name="left" value="114" />
           <param name="right" value="116" />
-          <param name="up" value="312" />
+          <param name="up" value="RunScript(special://skin/resources/library.py,keyboard-results)" />
           <param name="down" value="135" />
         </include>
         <include content="KeyboardKey">
@@ -251,7 +252,7 @@
           <param name="width" value="149" />
           <param name="left" value="115" />
           <param name="right" value="117" />
-          <param name="up" value="312" />
+          <param name="up" value="RunScript(special://skin/resources/library.py,keyboard-results)" />
           <param name="down" value="136" />
         </include>
         <include content="KeyboardKey">
@@ -262,7 +263,7 @@
           <param name="width" value="149" />
           <param name="left" value="116" />
           <param name="right" value="118" />
-          <param name="up" value="312" />
+          <param name="up" value="RunScript(special://skin/resources/library.py,keyboard-results)" />
           <param name="down" value="137" />
         </include>
         <include content="KeyboardKey">
@@ -273,7 +274,7 @@
           <param name="width" value="149" />
           <param name="left" value="117" />
           <param name="right" value="119" />
-          <param name="up" value="312" />
+          <param name="up" value="RunScript(special://skin/resources/library.py,keyboard-results)" />
           <param name="down" value="138" />
         </include>
         <include content="KeyboardKey">
@@ -284,7 +285,7 @@
           <param name="width" value="149" />
           <param name="left" value="118" />
           <param name="right" value="100" />
-          <param name="up" value="312" />
+          <param name="up" value="RunScript(special://skin/resources/library.py,keyboard-results)" />
           <param name="down" value="139" />
         </include>
       </control>

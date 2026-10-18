@@ -118,3 +118,33 @@
 - Run the configured tests before a publish.
 - Preserve the shared publish validator. Run `python3 .githooks/publish_check.py check` against a commit.
 - The hook checks committed exports. A working-tree test run does not replace the hook.
+
+## Step 5: libraries, Search and Discover
+
+- `Includes_Library.xml` owns the 26 locked library views and the named View menu.
+- Native IDs 500–508 and 510–515 retain the locked shapes. Dropped IDs 509, 549 and 550 stay absent.
+- Variant IDs: 517 = 507B; 518 = 508B; 526/527 = 526A/B; 528/529 = 528A/B.
+- Movies and TV use `MyVideoNav.xml`. Music uses `MyMusicNav.xml`. The spec defines no separate hub pages.
+- Kodi owns native folders, sort order, selected-item actions, queues and context menus.
+- Combined selectors read native genre directories. The current library path remains a native database path.
+- Search keeps custom window 11100. Discover keeps custom window 11101. Rail return paths reach page controls.
+- Search requires `script.starlight` 1.0.0. Every search command passes `window=11100` explicitly.
+- Search controls 610–619 hold ranked source rows. Control 620 holds the cached source wall. No XML content binds those lists.
+- Search text travels through the Home query property. Never interpolate query text into Kodi command strings.
+- The page controller reads native keyboard edit 312 during Search. Generic keyboard callers keep their original field position.
+- Up from the keyboard top row confirms text and returns focus to Top results. The native sheet remains the sole keyboard.
+- Discover uses `HomeBoardWidget`. New Board parameters preserve the Home defaults.
+- The skin reads PKC directories through `Files.GetDirectory`, including native `customproperties`.
+- Every Discover card opens the exact provider `Starlight.InfoPath`. No title or year match creates a library identity.
+- A 30-second ordered snapshot supplies Board record 1, grid records 2–5, and remaining records below.
+- A temporary exclusive file lock prevents concurrent Board loads from fetching separate snapshots.
+- Provider-only titles reuse `DialogVideoInfo.xml`. Control 409 binds the validated provider watchlist action.
+- Provider-only shows expose cast and hide native episode rows, season tabs and library actions.
+- Watchlist feedback reads matching `PKC.Watchlist.Detail.Identity`, `Pending`, `State` and `Error` properties.
+- The PKC contract names that property namespace but omits the exact state fields. Confirm the fields during integration.
+- `script.starlight` search selection currently reads a fresh Python list wrapper. Kodi cannot expose another wrapper's item cache.
+- The parent must correct that helper command to read the native selected record. The skin retains the documented call.
+- Search song records lack capsule runtime fields in the helper contract. Search shows Play without a fabricated runtime.
+- Library context anchors use retained native cursor labels and the shared XML geometry. Search anchors retain the result shape.
+- Render previews with `python3 tools/render_library.py --art /path/to/design/art --output /tmp/starlight-step5`.
+- Preview images use sample records. Verify input, native focus, provider mutations and playback in the parent Kodi integration round.

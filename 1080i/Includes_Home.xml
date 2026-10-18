@@ -517,6 +517,9 @@
   </include>
   <include name="HomeLibraryCard">
     <param name="label" default="" />
+    <param name="card_top" default="40" />
+    <param name="feature_text_top" default="198" />
+    <param name="metadata" default="$INFO[ListItem.Year,,   ][COLOR mist]$INFO[ListItem.Mpaa,,   ]$INFO[ListItem.Property(Starlight.Duration),,   ]$VAR[HomeVideoQuality][/COLOR]" />
     <param name="width" default="335" />
     <param name="height" default="189" />
     <param name="mask" default="home_landscape_mask.png" />
@@ -537,7 +540,7 @@
     <definition>
       <control type="group">
         <left>$PARAM[x]</left>
-        <top>40</top>
+        <top>$PARAM[card_top]</top>
         <width>$PARAM[width]</width>
         <height>$PARAM[height]</height>
         <include content="InactiveRowFade">
@@ -617,7 +620,7 @@
         </control>
         <control type="group">
           <left>38</left>
-          <top>198</top>
+          <top>$PARAM[feature_text_top]</top>
           <width>760</width>
           <height>270</height>
           <visible>$PARAM[feature]</visible>
@@ -653,12 +656,12 @@
             <top>152</top>
             <width>740</width>
             <height>36</height>
-            <label>$INFO[ListItem.Year,,   ][COLOR mist]$INFO[ListItem.Mpaa,,   ]$INFO[ListItem.Property(Starlight.Duration),,   ]$VAR[HomeVideoQuality][/COLOR]</label>
+            <label>$PARAM[metadata]</label>
             <font>font_body</font>
             <textcolor>frost</textcolor>
           </control>
         </control>
-        <include content="HomePlayCapsule" condition="$PARAM[feature]">
+        <include content="HomePlayCapsule" condition="$PARAM[feature] + $PARAM[playable]">
           <param name="id" value="$PARAM[id]" />
           <param name="x" value="38" />
           <param name="y" value="413" />
@@ -853,6 +856,13 @@
     <param name="x" default="48" />
   </include>
   <include name="HomeBoardWidget">
+    <param name="onclick" default="RunScript(special://skin/resources/home.py,play,$INFO[ListItem.Property(Starlight.Media)],$INFO[ListItem.DBID])" />
+    <param name="playable" default="true" />
+    <param name="feature_top" default="40" />
+    <param name="feature_text_top" default="198" />
+    <param name="up" default="9000" />
+    <param name="metadata" default="$INFO[ListItem.Year,,   ][COLOR mist]$INFO[ListItem.Mpaa,,   ]$INFO[ListItem.Property(Starlight.Duration),,   ]$VAR[HomeVideoQuality][/COLOR]" />
+    <param name="detail" default="$INFO[ListItem.Property(Starlight.Detail)]" />
     <definition>
       <control type="group" id="$PARAM[group]">
         <left>$PARAM[x]</left>
@@ -868,7 +878,7 @@
           <orientation>horizontal</orientation>
           <onleft>9000</onleft>
           <onright>$PARAM[tiles]</onright>
-          <onup>9000</onup>
+          <onup>$PARAM[up]</onup>
           <ondown>$PARAM[down]</ondown>
           <scrolltime>220</scrolltime>
           <onfocus>SetProperty(Starlight.Container,$PARAM[feature],home)</onfocus>
@@ -880,6 +890,8 @@
               <param name="active" value="ControlGroup($PARAM[group]).HasFocus" />
               <param name="selected" value="false" />
               <param name="feature" value="true" />
+              <param name="card_top" value="$PARAM[feature_top]" />
+              <param name="feature_text_top" value="$PARAM[feature_text_top]" />
               <param name="x" value="44" />
               <param name="width" value="880" />
               <param name="height" value="495" />
@@ -889,6 +901,9 @@
               <param name="glow_width" value="976" />
               <param name="glow_height" value="591" />
               <param name="label" value="$PARAM[label]" />
+              <param name="playable" value="$PARAM[playable]" />
+              <param name="detail" value="$PARAM[detail]" />
+              <param name="metadata" value="$PARAM[metadata]" />
               <param name="progress_y" value="477" />
             </include>
           </itemlayout>
@@ -898,6 +913,8 @@
               <param name="active" value="ControlGroup($PARAM[group]).HasFocus" />
               <param name="selected" value="true" />
               <param name="feature" value="true" />
+              <param name="card_top" value="$PARAM[feature_top]" />
+              <param name="feature_text_top" value="$PARAM[feature_text_top]" />
               <param name="x" value="44" />
               <param name="width" value="880" />
               <param name="height" value="495" />
@@ -907,10 +924,13 @@
               <param name="glow_width" value="976" />
               <param name="glow_height" value="591" />
               <param name="label" value="$PARAM[label]" />
+              <param name="playable" value="$PARAM[playable]" />
+              <param name="detail" value="$PARAM[detail]" />
+              <param name="metadata" value="$PARAM[metadata]" />
               <param name="progress_y" value="477" />
             </include>
           </focusedlayout>
-          <onclick>RunScript(special://skin/resources/home.py,play,$INFO[ListItem.Property(Starlight.Media)],$INFO[ListItem.DBID])</onclick>
+          <onclick>$PARAM[onclick]</onclick>
         </control>
         <control type="panel" id="$PARAM[tiles]">
           <left>920</left>
@@ -932,6 +952,9 @@
               <param name="active" value="ControlGroup($PARAM[group]).HasFocus" />
               <param name="selected" value="false" />
               <param name="label" value="$PARAM[label]" />
+              <param name="playable" value="$PARAM[playable]" />
+              <param name="detail" value="$PARAM[detail]" />
+              <param name="metadata" value="$PARAM[metadata]" />
             </include>
           </itemlayout>
           <focusedlayout width="365" height="268">
@@ -940,9 +963,12 @@
               <param name="active" value="ControlGroup($PARAM[group]).HasFocus" />
               <param name="selected" value="true" />
               <param name="label" value="$PARAM[label]" />
+              <param name="playable" value="$PARAM[playable]" />
+              <param name="detail" value="$PARAM[detail]" />
+              <param name="metadata" value="$PARAM[metadata]" />
             </include>
           </focusedlayout>
-          <onclick>RunScript(special://skin/resources/home.py,play,$INFO[ListItem.Property(Starlight.Media)],$INFO[ListItem.DBID])</onclick>
+          <onclick>$PARAM[onclick]</onclick>
         </control>
         <control type="image">
           <left>710</left>
@@ -971,7 +997,7 @@
           <visible>Integer.IsEqual(Container($PARAM[feature]).NumItems,0)</visible>
           <onleft>9000</onleft>
           <onright>9000</onright>
-          <onup>9000</onup>
+          <onup>$PARAM[up]</onup>
           <ondown>$PARAM[down]</ondown>
           <onclick>SetFocus(9000)</onclick>
         </control>

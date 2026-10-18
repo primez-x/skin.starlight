@@ -1,42 +1,906 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <window id="1100">
-  <defaultcontrol>901</defaultcontrol>
+  <defaultcontrol always="true">30</defaultcontrol>
   <onload>SetProperty(Starlight.Hub,search,home)</onload>
+  <onload>SetProperty(Starlight.Search.Source,top)</onload>
+  <onload>RunScript(special://skin/resources/library.py,search-monitor)</onload>
+  <onunload>ClearProperty(Starlight.Search.Keyboard,home)</onunload>
   <controls>
-    <control type="image">
-      <left>0</left>
+    <include content="InfoBackground">
+      <param name="art" value="$INFO[Container(610).ListItem.Art(fanart)]" />
+      <param name="blur" value="$VAR[LibraryBlur]" />
+      <param name="bound" value="false" />
+    </include>
+    <include content="InfoClock" />
+    <control type="group">
+      <left>196</left>
       <top>0</top>
-      <width>1920</width>
+      <width>1644</width>
       <height>1080</height>
-      <texture>special://skin/fanart.jpg</texture>
-    </control>
-    <control type="image">
-      <left>0</left>
-      <top>0</top>
-      <width>1920</width>
-      <height>1080</height>
-      <texture>dim_modal.png</texture>
-    </control>
-    <control type="label">
-      <left>400</left>
-      <top>160</top>
-      <width>1200</width>
-      <height>80</height>
-      <label>$LOCALIZE[31001]</label>
-      <font>font_title</font>
-    </control>
-    <control type="label">
-      <left>400</left>
-      <top>260</top>
-      <width>1200</width>
-      <height>60</height>
-      <label>$LOCALIZE[31023]</label>
-      <font>font_body</font>
+      <include content="InfoContentMotion" />
+      <control type="button" id="30">
+        <left>0</left>
+        <top>46</top>
+        <width>1424</width>
+        <height>76</height>
+        <visible>!String.IsEqual(Window(home).Property(Starlight.Search.Keyboard),true)</visible>
+        <label>$VAR[SearchField]</label>
+        <font>font_heading</font>
+        <texturefocus border="focus_border">focus_button.png</texturefocus>
+        <texturenofocus border="capsule_border">frost_fill.png</texturenofocus>
+        <onclick>RunScript(special://skin/resources/library.py,search-keyboard)</onclick>
+        <onup>9000</onup>
+        <ondown>40</ondown>
+        <onleft>9000</onleft>
+        <onright>40</onright>
+        <align>left</align>
+        <textoffsetx>28</textoffsetx>
+      </control>
+      <control type="image">
+        <left>0</left>
+        <top>146</top>
+        <width>1644</width>
+        <height>64</height>
+        <visible>Control.HasFocus(40) | Control.HasFocus(41) | Control.HasFocus(42)</visible>
+        <texture border="capsule_border">glass_capsule.png</texture>
+      </control>
+      <control type="fixedlist" id="40">
+        <left>0</left>
+        <top>146</top>
+        <width>1368</width>
+        <height>72</height>
+        <orientation>horizontal</orientation>
+        <focusposition>0</focusposition>
+        <onup>30</onup>
+        <ondown>RunScript(special://skin/resources/library.py,search-results)</ondown>
+        <onleft>9000</onleft>
+        <onright>41</onright>
+        <onclick>RunScript(special://skin/resources/library.py,search-key)</onclick>
+        <itemlayout width="38" height="72">
+          <include content="SearchStripKey">
+            <param name="selected" value="false" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="38" height="72">
+          <include content="SearchStripKey">
+            <param name="selected" value="true" />
+          </include>
+        </focusedlayout>
+        <content>
+          <item>
+            <label>a</label>
+            <property name="Key">a</property>
+          </item>
+          <item>
+            <label>b</label>
+            <property name="Key">b</property>
+          </item>
+          <item>
+            <label>c</label>
+            <property name="Key">c</property>
+          </item>
+          <item>
+            <label>d</label>
+            <property name="Key">d</property>
+          </item>
+          <item>
+            <label>e</label>
+            <property name="Key">e</property>
+          </item>
+          <item>
+            <label>f</label>
+            <property name="Key">f</property>
+          </item>
+          <item>
+            <label>g</label>
+            <property name="Key">g</property>
+          </item>
+          <item>
+            <label>h</label>
+            <property name="Key">h</property>
+          </item>
+          <item>
+            <label>i</label>
+            <property name="Key">i</property>
+          </item>
+          <item>
+            <label>j</label>
+            <property name="Key">j</property>
+          </item>
+          <item>
+            <label>k</label>
+            <property name="Key">k</property>
+          </item>
+          <item>
+            <label>l</label>
+            <property name="Key">l</property>
+          </item>
+          <item>
+            <label>m</label>
+            <property name="Key">m</property>
+          </item>
+          <item>
+            <label>n</label>
+            <property name="Key">n</property>
+          </item>
+          <item>
+            <label>o</label>
+            <property name="Key">o</property>
+          </item>
+          <item>
+            <label>p</label>
+            <property name="Key">p</property>
+          </item>
+          <item>
+            <label>q</label>
+            <property name="Key">q</property>
+          </item>
+          <item>
+            <label>r</label>
+            <property name="Key">r</property>
+          </item>
+          <item>
+            <label>s</label>
+            <property name="Key">s</property>
+          </item>
+          <item>
+            <label>t</label>
+            <property name="Key">t</property>
+          </item>
+          <item>
+            <label>u</label>
+            <property name="Key">u</property>
+          </item>
+          <item>
+            <label>v</label>
+            <property name="Key">v</property>
+          </item>
+          <item>
+            <label>w</label>
+            <property name="Key">w</property>
+          </item>
+          <item>
+            <label>x</label>
+            <property name="Key">x</property>
+          </item>
+          <item>
+            <label>y</label>
+            <property name="Key">y</property>
+          </item>
+          <item>
+            <label>z</label>
+            <property name="Key">z</property>
+          </item>
+          <item>
+            <label>0</label>
+            <property name="Key">0</property>
+          </item>
+          <item>
+            <label>1</label>
+            <property name="Key">1</property>
+          </item>
+          <item>
+            <label>2</label>
+            <property name="Key">2</property>
+          </item>
+          <item>
+            <label>3</label>
+            <property name="Key">3</property>
+          </item>
+          <item>
+            <label>4</label>
+            <property name="Key">4</property>
+          </item>
+          <item>
+            <label>5</label>
+            <property name="Key">5</property>
+          </item>
+          <item>
+            <label>6</label>
+            <property name="Key">6</property>
+          </item>
+          <item>
+            <label>7</label>
+            <property name="Key">7</property>
+          </item>
+          <item>
+            <label>8</label>
+            <property name="Key">8</property>
+          </item>
+          <item>
+            <label>9</label>
+            <property name="Key">9</property>
+          </item>
+        </content>
+      </control>
+      <control type="fixedlist" id="50">
+        <left>0</left>
+        <top>244</top>
+        <width>1644</width>
+        <height>72</height>
+        <visible>String.IsEmpty(Window(home).Property(Starlight.Search.Query))</visible>
+        <orientation>horizontal</orientation>
+        <focusposition>0</focusposition>
+        <onup>40</onup>
+        <ondown>30</ondown>
+        <onleft>9000</onleft>
+        <onright>50</onright>
+        <onclick>RunScript(special://skin/resources/library.py,search-recent)</onclick>
+        <itemlayout width="270" height="72">
+          <include content="LibraryTab">
+            <param name="id" value="50" />
+            <param name="selected" value="false" />
+            <param name="width" value="260" />
+            <param name="label_width" value="220" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="270" height="72">
+          <include content="LibraryTab">
+            <param name="id" value="50" />
+            <param name="selected" value="true" />
+            <param name="width" value="260" />
+            <param name="label_width" value="220" />
+          </include>
+        </focusedlayout>
+      </control>
+      <control type="fixedlist" id="600">
+        <left>0</left>
+        <top>244</top>
+        <width>1644</width>
+        <height>72</height>
+        <visible>!String.IsEmpty(Window(home).Property(Starlight.Search.Query)) + !String.IsEqual(Window(home).Property(Starlight.Search.Keyboard),true)</visible>
+        <orientation>horizontal</orientation>
+        <focusposition>0</focusposition>
+        <onup>40</onup>
+        <ondown>RunScript(special://skin/resources/library.py,search-results)</ondown>
+        <onleft>9000</onleft>
+        <onright>600</onright>
+        <onclick>RunScript(special://skin/resources/library.py,search-source)</onclick>
+        <itemlayout width="250" height="72">
+          <include content="LibraryTab">
+            <param name="id" value="600" />
+            <param name="selected" value="false" />
+            <param name="width" value="244" />
+            <param name="label_width" value="204" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="250" height="72">
+          <include content="LibraryTab">
+            <param name="id" value="600" />
+            <param name="selected" value="true" />
+            <param name="width" value="244" />
+            <param name="label_width" value="204" />
+          </include>
+        </focusedlayout>
+        <content>
+          <item>
+            <label>$LOCALIZE[31435]</label>
+            <property name="Source">top</property>
+          </item>
+          <item>
+            <label>$LOCALIZE[31436] $INFO[Window(home).Property(Starlight.Search.Count.movies)]</label>
+            <property name="Source">movies</property>
+          </item>
+          <item>
+            <label>$LOCALIZE[31437] $INFO[Window(home).Property(Starlight.Search.Count.tvshows)]</label>
+            <property name="Source">tvshows</property>
+          </item>
+          <item>
+            <label>$LOCALIZE[31438] $INFO[Window(home).Property(Starlight.Search.Count.episodes)]</label>
+            <property name="Source">episodes</property>
+          </item>
+          <item>
+            <label>$LOCALIZE[31400] $INFO[Window(home).Property(Starlight.Search.Count.music)]</label>
+            <property name="Source">music</property>
+          </item>
+          <item>
+            <label>$LOCALIZE[31439] $INFO[Window(home).Property(Starlight.Search.Count.spotify)]</label>
+            <property name="Source">spotify</property>
+            <visible>System.HasAddon(plugin.audio.spotifykodiconnect)</visible>
+          </item>
+          <item>
+            <label>$LOCALIZE[31440] $INFO[Window(home).Property(Starlight.Search.Count.people)]</label>
+            <property name="Source">people</property>
+          </item>
+          <item>
+            <label>$LOCALIZE[31441] $INFO[Window(home).Property(Starlight.Search.Count.collections)]</label>
+            <property name="Source">collections</property>
+          </item>
+          <item>
+            <label>$LOCALIZE[31442] $INFO[Window(home).Property(Starlight.Search.Count.genres)]</label>
+            <property name="Source">genres</property>
+          </item>
+          <item>
+            <label>$LOCALIZE[31443] $INFO[Window(home).Property(Starlight.Search.Count.plex)]</label>
+            <property name="Source">plex</property>
+            <visible>System.HasAddon(plugin.video.plexkodiconnect)</visible>
+          </item>
+        </content>
+      </control>
+      <control type="grouplist" id="5000">
+        <left>-24</left>
+        <top>326</top>
+        <width>1692</width>
+        <height>754</height>
+        <orientation>vertical</orientation>
+        <itemgap>0</itemgap>
+        <scrolltime>220</scrolltime>
+        <usecontrolcoords>true</usecontrolcoords>
+        <pagecontrol>6500</pagecontrol>
+        <animation effect="slide" start="0,0" end="0,-96" time="180" condition="String.IsEqual(Window(home).Property(Starlight.Search.Keyboard),true)">Conditional</animation>
+        <control type="group" id="1510">
+          <left>0</left>
+          <top>0</top>
+          <width>1692</width>
+          <height>398</height>
+          <visible>[String.IsEqual(Window.Property(Starlight.Search.Source),top) | String.IsEqual(Window(home).Property(Starlight.Search.Keyboard),true)] + Integer.IsGreater(Window(home).Property(Starlight.Search.Count.top),0)</visible>
+          <control type="label">
+            <left>24</left>
+            <top>0</top>
+            <width>1550</width>
+            <height>40</height>
+            <label>$LOCALIZE[31444]</label>
+            <font>font_heading_small</font>
+            <textcolor>frost</textcolor>
+          </control>
+          <control type="fixedlist" id="610">
+            <left>0</left>
+            <top>40</top>
+            <width>1692</width>
+            <height>358</height>
+            <orientation>horizontal</orientation>
+            <focusposition>0</focusposition>
+            <scrolltime>220</scrolltime>
+            <onup>600</onup>
+            <ondown>1511</ondown>
+            <onleft>9000</onleft>
+            <onright>610</onright>
+            <onclick>RunScript(script.starlight,search.select,window=11100,control=610)</onclick>
+            <onfocus>SetProperty(Starlight.Search.Container,610)</onfocus>
+            <onback>SetFocus(9000)</onback>
+            <itemlayout width="240" height="310" condition="String.IsEqual(Window(home).Property(Starlight.Search.Keyboard),true)">
+              <include content="SearchCompactCard">
+                <param name="id" value="610" />
+                <param name="selected" value="false" />
+              </include>
+            </itemlayout>
+            <itemlayout width="280" height="358" condition="!String.IsEqual(Window(home).Property(Starlight.Search.Keyboard),true)">
+              <include content="SearchResultCard">
+                <param name="id" value="610" />
+                <param name="selected" value="false" />
+              </include>
+            </itemlayout>
+            <focusedlayout width="240" height="310" condition="String.IsEqual(Window(home).Property(Starlight.Search.Keyboard),true)">
+              <include content="SearchCompactCard">
+                <param name="id" value="610" />
+                <param name="selected" value="true" />
+              </include>
+            </focusedlayout>
+            <focusedlayout width="280" height="358" condition="!String.IsEqual(Window(home).Property(Starlight.Search.Keyboard),true)">
+              <include content="SearchResultCard">
+                <param name="id" value="610" />
+                <param name="selected" value="true" />
+              </include>
+            </focusedlayout>
+          </control>
+        </control>
+        <control type="group" id="1511">
+          <left>0</left>
+          <top>0</top>
+          <width>1692</width>
+          <height>398</height>
+          <visible>String.IsEqual(Window.Property(Starlight.Search.Source),top) + !String.IsEqual(Window(home).Property(Starlight.Search.Keyboard),true) + Integer.IsGreater(Window(home).Property(Starlight.Search.Count.movies),0)</visible>
+          <control type="label">
+            <left>24</left>
+            <top>0</top>
+            <width>1550</width>
+            <height>40</height>
+            <label>$LOCALIZE[31436]</label>
+            <font>font_heading_small</font>
+            <textcolor>frost</textcolor>
+          </control>
+          <control type="fixedlist" id="611">
+            <left>0</left>
+            <top>40</top>
+            <width>1692</width>
+            <height>358</height>
+            <orientation>horizontal</orientation>
+            <focusposition>0</focusposition>
+            <scrolltime>220</scrolltime>
+            <onup>1510</onup>
+            <ondown>1512</ondown>
+            <onleft>9000</onleft>
+            <onright>611</onright>
+            <onclick>RunScript(script.starlight,search.select,window=11100,control=611)</onclick>
+            <onfocus>SetProperty(Starlight.Search.Container,611)</onfocus>
+            <onback>SetFocus(9000)</onback>
+            <itemlayout width="280" height="358">
+              <include content="SearchResultCard">
+                <param name="id" value="611" />
+                <param name="selected" value="false" />
+              </include>
+            </itemlayout>
+            <focusedlayout width="280" height="358">
+              <include content="SearchResultCard">
+                <param name="id" value="611" />
+                <param name="selected" value="true" />
+              </include>
+            </focusedlayout>
+          </control>
+        </control>
+        <control type="group" id="1512">
+          <left>0</left>
+          <top>0</top>
+          <width>1692</width>
+          <height>398</height>
+          <visible>String.IsEqual(Window.Property(Starlight.Search.Source),top) + !String.IsEqual(Window(home).Property(Starlight.Search.Keyboard),true) + Integer.IsGreater(Window(home).Property(Starlight.Search.Count.tvshows),0)</visible>
+          <control type="label">
+            <left>24</left>
+            <top>0</top>
+            <width>1550</width>
+            <height>40</height>
+            <label>$LOCALIZE[31437]</label>
+            <font>font_heading_small</font>
+            <textcolor>frost</textcolor>
+          </control>
+          <control type="fixedlist" id="612">
+            <left>0</left>
+            <top>40</top>
+            <width>1692</width>
+            <height>358</height>
+            <orientation>horizontal</orientation>
+            <focusposition>0</focusposition>
+            <scrolltime>220</scrolltime>
+            <onup>1511</onup>
+            <ondown>1513</ondown>
+            <onleft>9000</onleft>
+            <onright>612</onright>
+            <onclick>RunScript(script.starlight,search.select,window=11100,control=612)</onclick>
+            <onfocus>SetProperty(Starlight.Search.Container,612)</onfocus>
+            <onback>SetFocus(9000)</onback>
+            <itemlayout width="280" height="358">
+              <include content="SearchResultCard">
+                <param name="id" value="612" />
+                <param name="selected" value="false" />
+              </include>
+            </itemlayout>
+            <focusedlayout width="280" height="358">
+              <include content="SearchResultCard">
+                <param name="id" value="612" />
+                <param name="selected" value="true" />
+              </include>
+            </focusedlayout>
+          </control>
+        </control>
+        <control type="group" id="1513">
+          <left>0</left>
+          <top>0</top>
+          <width>1692</width>
+          <height>398</height>
+          <visible>String.IsEqual(Window.Property(Starlight.Search.Source),top) + !String.IsEqual(Window(home).Property(Starlight.Search.Keyboard),true) + Integer.IsGreater(Window(home).Property(Starlight.Search.Count.episodes),0)</visible>
+          <control type="label">
+            <left>24</left>
+            <top>0</top>
+            <width>1550</width>
+            <height>40</height>
+            <label>$LOCALIZE[31438]</label>
+            <font>font_heading_small</font>
+            <textcolor>frost</textcolor>
+          </control>
+          <control type="fixedlist" id="613">
+            <left>0</left>
+            <top>40</top>
+            <width>1692</width>
+            <height>358</height>
+            <orientation>horizontal</orientation>
+            <focusposition>0</focusposition>
+            <scrolltime>220</scrolltime>
+            <onup>1512</onup>
+            <ondown>1514</ondown>
+            <onleft>9000</onleft>
+            <onright>613</onright>
+            <onclick>RunScript(script.starlight,search.select,window=11100,control=613)</onclick>
+            <onfocus>SetProperty(Starlight.Search.Container,613)</onfocus>
+            <onback>SetFocus(9000)</onback>
+            <itemlayout width="280" height="358">
+              <include content="SearchResultCard">
+                <param name="id" value="613" />
+                <param name="selected" value="false" />
+              </include>
+            </itemlayout>
+            <focusedlayout width="280" height="358">
+              <include content="SearchResultCard">
+                <param name="id" value="613" />
+                <param name="selected" value="true" />
+              </include>
+            </focusedlayout>
+          </control>
+        </control>
+        <control type="group" id="1514">
+          <left>0</left>
+          <top>0</top>
+          <width>1692</width>
+          <height>398</height>
+          <visible>String.IsEqual(Window.Property(Starlight.Search.Source),top) + !String.IsEqual(Window(home).Property(Starlight.Search.Keyboard),true) + Integer.IsGreater(Window(home).Property(Starlight.Search.Count.music),0)</visible>
+          <control type="label">
+            <left>24</left>
+            <top>0</top>
+            <width>1550</width>
+            <height>40</height>
+            <label>$LOCALIZE[31400]</label>
+            <font>font_heading_small</font>
+            <textcolor>frost</textcolor>
+          </control>
+          <control type="fixedlist" id="614">
+            <left>0</left>
+            <top>40</top>
+            <width>1692</width>
+            <height>358</height>
+            <orientation>horizontal</orientation>
+            <focusposition>0</focusposition>
+            <scrolltime>220</scrolltime>
+            <onup>1513</onup>
+            <ondown>1515</ondown>
+            <onleft>9000</onleft>
+            <onright>614</onright>
+            <onclick>RunScript(script.starlight,search.select,window=11100,control=614)</onclick>
+            <onfocus>SetProperty(Starlight.Search.Container,614)</onfocus>
+            <onback>SetFocus(9000)</onback>
+            <itemlayout width="280" height="358">
+              <include content="SearchResultCard">
+                <param name="id" value="614" />
+                <param name="selected" value="false" />
+              </include>
+            </itemlayout>
+            <focusedlayout width="280" height="358">
+              <include content="SearchResultCard">
+                <param name="id" value="614" />
+                <param name="selected" value="true" />
+              </include>
+            </focusedlayout>
+          </control>
+        </control>
+        <control type="group" id="1515">
+          <left>0</left>
+          <top>0</top>
+          <width>1692</width>
+          <height>398</height>
+          <visible>String.IsEqual(Window.Property(Starlight.Search.Source),top) + !String.IsEqual(Window(home).Property(Starlight.Search.Keyboard),true) + Integer.IsGreater(Window(home).Property(Starlight.Search.Count.spotify),0)</visible>
+          <control type="label">
+            <left>24</left>
+            <top>0</top>
+            <width>1550</width>
+            <height>40</height>
+            <label>$LOCALIZE[31439]</label>
+            <font>font_heading_small</font>
+            <textcolor>frost</textcolor>
+          </control>
+          <control type="fixedlist" id="615">
+            <left>0</left>
+            <top>40</top>
+            <width>1692</width>
+            <height>358</height>
+            <orientation>horizontal</orientation>
+            <focusposition>0</focusposition>
+            <scrolltime>220</scrolltime>
+            <onup>1514</onup>
+            <ondown>1516</ondown>
+            <onleft>9000</onleft>
+            <onright>615</onright>
+            <onclick>RunScript(script.starlight,search.select,window=11100,control=615)</onclick>
+            <onfocus>SetProperty(Starlight.Search.Container,615)</onfocus>
+            <onback>SetFocus(9000)</onback>
+            <itemlayout width="280" height="358">
+              <include content="SearchResultCard">
+                <param name="id" value="615" />
+                <param name="selected" value="false" />
+              </include>
+            </itemlayout>
+            <focusedlayout width="280" height="358">
+              <include content="SearchResultCard">
+                <param name="id" value="615" />
+                <param name="selected" value="true" />
+              </include>
+            </focusedlayout>
+          </control>
+        </control>
+        <control type="group" id="1516">
+          <left>0</left>
+          <top>0</top>
+          <width>1692</width>
+          <height>398</height>
+          <visible>String.IsEqual(Window.Property(Starlight.Search.Source),top) + !String.IsEqual(Window(home).Property(Starlight.Search.Keyboard),true) + Integer.IsGreater(Window(home).Property(Starlight.Search.Count.people),0)</visible>
+          <control type="label">
+            <left>24</left>
+            <top>0</top>
+            <width>1550</width>
+            <height>40</height>
+            <label>$LOCALIZE[31440]</label>
+            <font>font_heading_small</font>
+            <textcolor>frost</textcolor>
+          </control>
+          <control type="fixedlist" id="616">
+            <left>0</left>
+            <top>40</top>
+            <width>1692</width>
+            <height>358</height>
+            <orientation>horizontal</orientation>
+            <focusposition>0</focusposition>
+            <scrolltime>220</scrolltime>
+            <onup>1515</onup>
+            <ondown>1517</ondown>
+            <onleft>9000</onleft>
+            <onright>616</onright>
+            <onclick>RunScript(script.starlight,search.select,window=11100,control=616)</onclick>
+            <onfocus>SetProperty(Starlight.Search.Container,616)</onfocus>
+            <onback>SetFocus(9000)</onback>
+            <itemlayout width="280" height="358">
+              <include content="SearchResultCard">
+                <param name="id" value="616" />
+                <param name="selected" value="false" />
+              </include>
+            </itemlayout>
+            <focusedlayout width="280" height="358">
+              <include content="SearchResultCard">
+                <param name="id" value="616" />
+                <param name="selected" value="true" />
+              </include>
+            </focusedlayout>
+          </control>
+        </control>
+        <control type="group" id="1517">
+          <left>0</left>
+          <top>0</top>
+          <width>1692</width>
+          <height>398</height>
+          <visible>String.IsEqual(Window.Property(Starlight.Search.Source),top) + !String.IsEqual(Window(home).Property(Starlight.Search.Keyboard),true) + Integer.IsGreater(Window(home).Property(Starlight.Search.Count.collections),0)</visible>
+          <control type="label">
+            <left>24</left>
+            <top>0</top>
+            <width>1550</width>
+            <height>40</height>
+            <label>$LOCALIZE[31441]</label>
+            <font>font_heading_small</font>
+            <textcolor>frost</textcolor>
+          </control>
+          <control type="fixedlist" id="617">
+            <left>0</left>
+            <top>40</top>
+            <width>1692</width>
+            <height>358</height>
+            <orientation>horizontal</orientation>
+            <focusposition>0</focusposition>
+            <scrolltime>220</scrolltime>
+            <onup>1516</onup>
+            <ondown>1518</ondown>
+            <onleft>9000</onleft>
+            <onright>617</onright>
+            <onclick>RunScript(script.starlight,search.select,window=11100,control=617)</onclick>
+            <onfocus>SetProperty(Starlight.Search.Container,617)</onfocus>
+            <onback>SetFocus(9000)</onback>
+            <itemlayout width="280" height="358">
+              <include content="SearchResultCard">
+                <param name="id" value="617" />
+                <param name="selected" value="false" />
+              </include>
+            </itemlayout>
+            <focusedlayout width="280" height="358">
+              <include content="SearchResultCard">
+                <param name="id" value="617" />
+                <param name="selected" value="true" />
+              </include>
+            </focusedlayout>
+          </control>
+        </control>
+        <control type="group" id="1518">
+          <left>0</left>
+          <top>0</top>
+          <width>1692</width>
+          <height>398</height>
+          <visible>String.IsEqual(Window.Property(Starlight.Search.Source),top) + !String.IsEqual(Window(home).Property(Starlight.Search.Keyboard),true) + Integer.IsGreater(Window(home).Property(Starlight.Search.Count.genres),0)</visible>
+          <control type="label">
+            <left>24</left>
+            <top>0</top>
+            <width>1550</width>
+            <height>40</height>
+            <label>$LOCALIZE[31442]</label>
+            <font>font_heading_small</font>
+            <textcolor>frost</textcolor>
+          </control>
+          <control type="fixedlist" id="618">
+            <left>0</left>
+            <top>40</top>
+            <width>1692</width>
+            <height>358</height>
+            <orientation>horizontal</orientation>
+            <focusposition>0</focusposition>
+            <scrolltime>220</scrolltime>
+            <onup>1517</onup>
+            <ondown>1519</ondown>
+            <onleft>9000</onleft>
+            <onright>618</onright>
+            <onclick>RunScript(script.starlight,search.select,window=11100,control=618)</onclick>
+            <onfocus>SetProperty(Starlight.Search.Container,618)</onfocus>
+            <onback>SetFocus(9000)</onback>
+            <itemlayout width="280" height="358">
+              <include content="SearchResultCard">
+                <param name="id" value="618" />
+                <param name="selected" value="false" />
+              </include>
+            </itemlayout>
+            <focusedlayout width="280" height="358">
+              <include content="SearchResultCard">
+                <param name="id" value="618" />
+                <param name="selected" value="true" />
+              </include>
+            </focusedlayout>
+          </control>
+        </control>
+        <control type="group" id="1519">
+          <left>0</left>
+          <top>0</top>
+          <width>1692</width>
+          <height>398</height>
+          <visible>String.IsEqual(Window.Property(Starlight.Search.Source),top) + !String.IsEqual(Window(home).Property(Starlight.Search.Keyboard),true) + Integer.IsGreater(Window(home).Property(Starlight.Search.Count.plex),0)</visible>
+          <control type="label">
+            <left>24</left>
+            <top>0</top>
+            <width>1550</width>
+            <height>40</height>
+            <label>$LOCALIZE[31443]</label>
+            <font>font_heading_small</font>
+            <textcolor>frost</textcolor>
+          </control>
+          <control type="fixedlist" id="619">
+            <left>0</left>
+            <top>40</top>
+            <width>1692</width>
+            <height>358</height>
+            <orientation>horizontal</orientation>
+            <focusposition>0</focusposition>
+            <scrolltime>220</scrolltime>
+            <onup>1518</onup>
+            <ondown>600</ondown>
+            <onleft>9000</onleft>
+            <onright>619</onright>
+            <onclick>RunScript(script.starlight,search.select,window=11100,control=619)</onclick>
+            <onfocus>SetProperty(Starlight.Search.Container,619)</onfocus>
+            <onback>SetFocus(9000)</onback>
+            <itemlayout width="280" height="358">
+              <include content="SearchResultCard">
+                <param name="id" value="619" />
+                <param name="selected" value="false" />
+              </include>
+            </itemlayout>
+            <focusedlayout width="280" height="358">
+              <include content="SearchResultCard">
+                <param name="id" value="619" />
+                <param name="selected" value="true" />
+              </include>
+            </focusedlayout>
+          </control>
+        </control>
+      </control>
+      <control type="panel" id="620">
+        <left>-24</left>
+        <top>326</top>
+        <width>1692</width>
+        <height>754</height>
+        <visible>!String.IsEqual(Window.Property(Starlight.Search.Source),top) + !String.IsEqual(Window(home).Property(Starlight.Search.Keyboard),true)</visible>
+        <orientation>vertical</orientation>
+        <scrolltime>220</scrolltime>
+        <onup>600</onup>
+        <ondown>620</ondown>
+        <onleft>9000</onleft>
+        <onright>620</onright>
+        <onclick>RunScript(script.starlight,search.select,window=11100,control=620)</onclick>
+        <onfocus>SetProperty(Starlight.Search.Container,620)</onfocus>
+        <onback>SetFocus(600)</onback>
+        <itemlayout width="280" height="358">
+          <include content="SearchResultCard">
+            <param name="id" value="620" />
+            <param name="selected" value="false" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="280" height="358">
+          <include content="SearchResultCard">
+            <param name="id" value="620" />
+            <param name="selected" value="true" />
+          </include>
+        </focusedlayout>
+      </control>
+      <control type="label">
+        <left>0</left>
+        <top>420</top>
+        <width>1644</width>
+        <height>60</height>
+        <visible>String.IsEmpty(Window(home).Property(Starlight.Search.Query)) | [[[String.IsEqual(Window.Property(Starlight.Search.Source),top) + Integer.IsEqual(Window(home).Property(Starlight.Search.Count.top),0) + Integer.IsEqual(Window(home).Property(Starlight.Search.Count.plex),0)] | [String.IsEqual(Window.Property(Starlight.Search.Source),movies) + Integer.IsEqual(Window(home).Property(Starlight.Search.Count.movies),0)] | [String.IsEqual(Window.Property(Starlight.Search.Source),tvshows) + Integer.IsEqual(Window(home).Property(Starlight.Search.Count.tvshows),0)] | [String.IsEqual(Window.Property(Starlight.Search.Source),episodes) + Integer.IsEqual(Window(home).Property(Starlight.Search.Count.episodes),0)] | [String.IsEqual(Window.Property(Starlight.Search.Source),music) + Integer.IsEqual(Window(home).Property(Starlight.Search.Count.music),0)] | [String.IsEqual(Window.Property(Starlight.Search.Source),spotify) + Integer.IsEqual(Window(home).Property(Starlight.Search.Count.spotify),0)] | [String.IsEqual(Window.Property(Starlight.Search.Source),people) + Integer.IsEqual(Window(home).Property(Starlight.Search.Count.people),0)] | [String.IsEqual(Window.Property(Starlight.Search.Source),collections) + Integer.IsEqual(Window(home).Property(Starlight.Search.Count.collections),0)] | [String.IsEqual(Window.Property(Starlight.Search.Source),genres) + Integer.IsEqual(Window(home).Property(Starlight.Search.Count.genres),0)] | [String.IsEqual(Window.Property(Starlight.Search.Source),plex) + Integer.IsEqual(Window(home).Property(Starlight.Search.Count.plex),0)]] + !String.IsEqual(Window(home).Property(Starlight.Search.Busy),true)]</visible>
+        <label>$VAR[SearchEmptyMessage]</label>
+        <font>font_heading</font>
+        <textcolor>mist</textcolor>
+        <align>center</align>
+      </control>
+      <control type="image">
+        <left>770</left>
+        <top>316</top>
+        <width>96</width>
+        <height>96</height>
+        <visible>String.IsEmpty(Window(home).Property(Starlight.Search.Query)) | [[[String.IsEqual(Window.Property(Starlight.Search.Source),top) + Integer.IsEqual(Window(home).Property(Starlight.Search.Count.top),0) + Integer.IsEqual(Window(home).Property(Starlight.Search.Count.plex),0)] | [String.IsEqual(Window.Property(Starlight.Search.Source),movies) + Integer.IsEqual(Window(home).Property(Starlight.Search.Count.movies),0)] | [String.IsEqual(Window.Property(Starlight.Search.Source),tvshows) + Integer.IsEqual(Window(home).Property(Starlight.Search.Count.tvshows),0)] | [String.IsEqual(Window.Property(Starlight.Search.Source),episodes) + Integer.IsEqual(Window(home).Property(Starlight.Search.Count.episodes),0)] | [String.IsEqual(Window.Property(Starlight.Search.Source),music) + Integer.IsEqual(Window(home).Property(Starlight.Search.Count.music),0)] | [String.IsEqual(Window.Property(Starlight.Search.Source),spotify) + Integer.IsEqual(Window(home).Property(Starlight.Search.Count.spotify),0)] | [String.IsEqual(Window.Property(Starlight.Search.Source),people) + Integer.IsEqual(Window(home).Property(Starlight.Search.Count.people),0)] | [String.IsEqual(Window.Property(Starlight.Search.Source),collections) + Integer.IsEqual(Window(home).Property(Starlight.Search.Count.collections),0)] | [String.IsEqual(Window.Property(Starlight.Search.Source),genres) + Integer.IsEqual(Window(home).Property(Starlight.Search.Count.genres),0)] | [String.IsEqual(Window.Property(Starlight.Search.Source),plex) + Integer.IsEqual(Window(home).Property(Starlight.Search.Count.plex),0)]] + !String.IsEqual(Window(home).Property(Starlight.Search.Busy),true)]</visible>
+        <texture>busy/frame_00.png</texture>
+      </control>
+      <control type="label">
+        <left>1120</left>
+        <top>246</top>
+        <width>520</width>
+        <height>64</height>
+        <label>$VAR[SearchStatus]</label>
+        <font>font_label</font>
+        <textcolor>mist</textcolor>
+        <align>right</align>
+      </control>
+      <control type="scrollbar" id="6500">
+        <left>0</left>
+        <top>0</top>
+        <width>1</width>
+        <height>1</height>
+        <visible>false</visible>
+        <orientation>vertical</orientation>
+      </control>
+      <control type="button" id="41">
+        <left>1378</left>
+        <top>146</top>
+        <width>128</width>
+        <height>64</height>
+        <label>$LOCALIZE[31059]</label>
+        <font>font_label</font>
+        <onleft>40</onleft>
+        <onright>42</onright>
+        <onup>30</onup>
+        <ondown>RunScript(special://skin/resources/library.py,search-results)</ondown>
+        <onclick>RunScript(special://skin/resources/library.py,search-key,space)</onclick>
+      </control>
+      <control type="button" id="42">
+        <left>1516</left>
+        <top>146</top>
+        <width>128</width>
+        <height>64</height>
+        <label>$LOCALIZE[31058]</label>
+        <font>font_label</font>
+        <onleft>41</onleft>
+        <onright>40</onright>
+        <onup>30</onup>
+        <ondown>RunScript(special://skin/resources/library.py,search-results)</ondown>
+        <onclick>RunScript(special://skin/resources/library.py,search-key,delete)</onclick>
+      </control>
     </control>
     <include content="HubRail">
-      <param name="return" value="902" />
+      <param name="return" value="30" />
       <param name="sidefocus" value="901" />
       <param name="topfocus" value="911" />
     </include>
+    <control type="button" id="6501">
+      <left>0</left>
+      <top>0</top>
+      <width>1</width>
+      <height>1</height>
+      <visible>false</visible>
+      <label>$INFO[Control.GetLabel(6500)]</label>
+    </control>
+    <control type="button" id="6502">
+      <left>0</left>
+      <top>0</top>
+      <width>1</width>
+      <height>1</height>
+      <visible>false</visible>
+      <label>$VAR[SearchCursor]</label>
+    </control>
+    <control type="button" id="6503">
+      <left>0</left>
+      <top>0</top>
+      <width>1</width>
+      <height>1</height>
+      <visible>false</visible>
+      <label>$VAR[SearchShape]</label>
+    </control>
   </controls>
 </window>

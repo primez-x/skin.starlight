@@ -65,7 +65,7 @@
           <label>$INFO[Window.Property(Starlight.Info.Duration)]</label>
           <font>font_body</font>
           <textcolor>mist</textcolor>
-          <visible>![String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)]</visible>
+          <visible>[![String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)]] | String.IsEqual(Window.Property(Starlight.Info.Provider),true)</visible>
         </control>
         <control type="label">
           <left>0</left>
@@ -75,7 +75,7 @@
           <label>$VAR[InfoSeasons]</label>
           <font>font_body</font>
           <textcolor>mist</textcolor>
-          <visible>String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)</visible>
+          <visible>[String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)] + !String.IsEqual(Window.Property(Starlight.Info.Provider),true)</visible>
         </control>
         <control type="label">
           <left>0</left>
@@ -164,6 +164,7 @@
         <orientation>horizontal</orientation>
         <itemgap>16</itemgap>
         <usecontrolcoords>true</usecontrolcoords>
+        <include content="LibraryProviderPrimary" />
         <onup>9000</onup>
         <ondown>250</ondown>
         <animation effect="slide" start="0,0" end="0,-190" time="0" condition="String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)">Conditional</animation>
@@ -172,7 +173,7 @@
           <top>0</top>
           <width>390</width>
           <height>64</height>
-          <visible>![String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)] + ListItem.IsResumable</visible>
+          <visible>[![String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)] + ListItem.IsResumable] + !String.IsEqual(Window.Property(Starlight.Info.Provider),true)</visible>
           <control type="image">
             <left>-48</left>
             <top>-48</top>
@@ -261,7 +262,7 @@
           <top>0</top>
           <width>390</width>
           <height>64</height>
-          <visible>![String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)] + !ListItem.IsResumable</visible>
+          <visible>[![String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)] + !ListItem.IsResumable] + !String.IsEqual(Window.Property(Starlight.Info.Provider),true)</visible>
           <control type="image">
             <left>-48</left>
             <top>-48</top>
@@ -349,7 +350,7 @@
           <param name="id" value="408" />
           <param name="icon" value="restart" />
           <param name="label" value="$LOCALIZE[31051]" />
-          <param name="visible" value="![String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)] + !String.IsEmpty(Window.Property(Starlight.Info.Resume))" />
+          <param name="visible" value="[![String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)] + !String.IsEmpty(Window.Property(Starlight.Info.Resume))] + !String.IsEqual(Window.Property(Starlight.Info.Provider),true)" />
           <param name="left" value="9" />
           <param name="right" value="401" />
           <param name="down" value="250" />
@@ -362,7 +363,7 @@
           <param name="id" value="402" />
           <param name="icon" value="shuffle" />
           <param name="label" value="$LOCALIZE[31054]" />
-          <param name="visible" value="String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)" />
+          <param name="visible" value="[String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)] + !String.IsEqual(Window.Property(Starlight.Info.Provider),true)" />
           <param name="onclick" value="RunScript(special://skin/resources/info.py,shuffle)" />
           <param name="right" value="401" />
           <param name="down" value="550" />
@@ -380,6 +381,7 @@
           <param name="expanded_text" value="214" />
           <param name="expanded_glow" value="376" />
           <param name="shift_wide" value="Control.HasFocus(408)" />
+          <param name="visible" value="[true] + !String.IsEqual(Window.Property(Starlight.Info.Provider),true)" />
         </include>
         <include content="InfoAction">
           <param name="id" value="403" />
@@ -393,6 +395,7 @@
           <param name="onclick2" value="" />
           <param name="shift_medium" value="Control.HasFocus(401)" />
           <param name="shift_wide" value="Control.HasFocus(408)" />
+          <param name="visible" value="[true] + !String.IsEqual(Window.Property(Starlight.Info.Provider),true)" />
         </include>
       </control>
       <control type="list" id="50">
@@ -422,8 +425,8 @@
         <ondown>400</ondown>
         <onleft>9000</onleft>
         <onright>250</onright>
-        <visible>[![String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)] | String.IsEqual(Window.Property(Starlight.Info.Cast),true)] + !String.IsEmpty(Window.Property(Starlight.Info.Ready))</visible>
-        <content target="videos" browse="never">plugin://skin.starlight/?source=cast&amp;record=$INFO[Window.Property(Starlight.Info.DBID)]&amp;ready=$INFO[Window.Property(Starlight.Info.Ready)]</content>
+        <visible>[[![String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)] | String.IsEqual(Window.Property(Starlight.Info.Cast),true)] + !String.IsEmpty(Window.Property(Starlight.Info.Ready))] | String.IsEqual(Window.Property(Starlight.Info.Provider),true)</visible>
+        <content target="videos" browse="never">$VAR[LibraryInfoCast]</content>
         <itemlayout width="180" height="250">
           <include content="InfoCastLayout">
             <param name="selected" value="false" />
@@ -434,7 +437,8 @@
             <param name="selected" value="true" />
           </include>
         </focusedlayout>
-        <onclick>RunScript(special://skin/resources/info.py,person)</onclick>
+        <onclick condition="!String.IsEqual(Window.Property(Starlight.Info.Provider),true)">RunScript(special://skin/resources/info.py,person)</onclick>
+        <onclick condition="String.IsEqual(Window.Property(Starlight.Info.Provider),true)">RunScript(special://skin/resources/library.py,provider-cast)</onclick>
         <onback>ClearProperty(Starlight.Info.Cast)</onback>
         <onback>SetFocus(400)</onback>
       </control>
@@ -449,7 +453,7 @@
         <ondown>560</ondown>
         <onleft>9000</onleft>
         <onright>550</onright>
-        <visible>String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season) + !String.IsEmpty(Window.Property(Starlight.Info.Ready)) + !String.IsEqual(Window.Property(Starlight.Info.Cast),true)</visible>
+        <visible>[String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season) + !String.IsEmpty(Window.Property(Starlight.Info.Ready)) + !String.IsEqual(Window.Property(Starlight.Info.Cast),true)] + !String.IsEqual(Window.Property(Starlight.Info.Provider),true)</visible>
         <content target="videos" browse="never">plugin://skin.starlight/?source=infoepisodes&amp;showid=$INFO[Window.Property(Starlight.Info.ShowID)]&amp;season=$INFO[Window.Property(Starlight.Info.Season)]&amp;revision=$INFO[Window.Property(Starlight.Info.Revision)]</content>
         <itemlayout width="420" height="340">
           <include content="InfoEpisodeLayout">
@@ -465,7 +469,7 @@
       </control>
       <include content="EmptyInfoRow">
         <param name="label" value="$LOCALIZE[31061]" />
-        <param name="visible" value="[String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)] + String.IsEqual(Window.Property(Starlight.Info.Ready),true) + Integer.IsEqual(Container(550).NumItems,0)" />
+        <param name="visible" value="[[String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)] + String.IsEqual(Window.Property(Starlight.Info.Ready),true) + Integer.IsEqual(Container(550).NumItems,0)] + !String.IsEqual(Window.Property(Starlight.Info.Provider),true)" />
         <param name="x" value="0" />
         <param name="y" value="620" />
       </include>
@@ -480,7 +484,7 @@
         <top>940</top>
         <width>1500</width>
         <height>64</height>
-        <visible>String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)</visible>
+        <visible>[String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)] + !String.IsEqual(Window.Property(Starlight.Info.Provider),true)</visible>
         <control type="image">
           <left>-8</left>
           <top>-6</top>
@@ -638,7 +642,7 @@
       </control>
     </control>
     <include content="HubRail">
-      <param name="return" value="SetFocus($VAR[InfoReturn])" />
+      <param name="return" value="SetFocus($VAR[LibraryInfoReturn])" />
       <param name="sidefocus" value="903" />
       <param name="topfocus" value="913" />
     </include>
