@@ -165,3 +165,167 @@ msgstr ""
 msgctxt "#31039"
 msgid "%d h %d m"
 msgstr ""
+
+msgctxt "#31040"
+msgid "Season %d"
+msgstr ""
+
+msgctxt "#31041"
+msgid "Cast"
+msgstr ""
+
+msgctxt "#31042"
+msgid "Actor"
+msgstr ""
+
+msgctxt "#31043"
+msgid "In your library"
+msgstr ""
+
+msgctxt "#31044"
+msgid "All credits"
+msgstr ""
+
+msgctxt "#31045"
+msgid "Images"
+msgstr ""
+
+msgctxt "#31046"
+msgid "No library credits"
+msgstr ""
+
+msgctxt "#31047"
+msgid "No biography available"
+msgstr ""
+
+msgctxt "#31049"
+msgid "No credits available"
+msgstr ""
+
+msgctxt "#31050"
+msgid "No images available"
+msgstr ""
+
+msgctxt "#31051"
+msgid "Play from beginning"
+msgstr ""
+
+msgctxt "#31052"
+msgid "Mark watched"
+msgstr ""
+
+msgctxt "#31053"
+msgid "More"
+msgstr ""
+
+msgctxt "#31054"
+msgid "Shuffle"
+msgstr ""
+
+msgctxt "#31055"
+msgid "Loading"
+msgstr ""
+
+msgctxt "#31057"
+msgid "Cancel"
+msgstr ""
+
+msgctxt "#31058"
+msgid "Delete"
+msgstr ""
+
+msgctxt "#31059"
+msgid "Space"
+msgstr ""
+
+msgctxt "#31060"
+msgid "Done"
+msgstr ""
+
+msgctxt "#31061"
+msgid "No episodes available"
+msgstr ""
+
+msgctxt "#31062"
+msgid "Mark unwatched"
+msgstr ""
+
+msgctxt "#31063"
+msgid "The library action failed."
+msgstr ""
+
+msgctxt "#31064"
+msgid "Refresh"
+msgstr ""
+
+msgctxt "#31065"
+msgid "Choose art"
+msgstr ""
+
+msgctxt "#31066"
+msgid "Trailer"
+msgstr ""
+
+msgctxt "#31067"
+msgid "Director"
+msgstr ""
+
+msgctxt "#31068"
+msgid "Versions"
+msgstr ""
+
+msgctxt "#31069"
+msgid "Extras"
+msgstr ""
+
+msgctxt "#31070"
+msgid "Your rating"
+msgstr ""
+
+msgctxt "#31071"
+msgid "OK"
+msgstr ""
+
+msgctxt "#31072"
+msgid "No"
+msgstr ""
+
+msgctxt "#31073"
+msgid "Yes"
+msgstr ""
+
+msgctxt "#31074"
+msgid "Clear"
+msgstr ""
+
+msgctxt "#31075"
+msgid "Layout"
+msgstr ""
+
+msgctxt "#31076"
+msgid "Shift"
+msgstr ""
+
+msgctxt "#31077"
+msgid "Show password"
+msgstr ""
+
+msgctxt "#31079"
+msgid "Muted"
+msgstr ""
+
+msgctxt "#31081"
+msgid "seasons"
+msgstr ""
+
+msgctxt "#31082"
+msgid "Subtitles:"
+msgstr ""
+
+msgctxt "#31083"
+msgid "No cast available"
+msgstr ""
+
+msgctxt "#31084"
+msgid "Choose fanart"
+msgstr ""

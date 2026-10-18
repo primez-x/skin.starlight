@@ -12,6 +12,7 @@ import xbmcplugin
 
 sys.path.insert(0, str(Path(__file__).resolve().parent / 'lib'))
 from home_content import blurred_art, duration_label, library_items, partition, playback, rpc_result
+from info_content import episode_items, person_items
 
 
 def rpc(method, params):
@@ -24,6 +25,9 @@ def listing():
     args = parse_qs(sys.argv[2].lstrip('?'))
     source = args.get('source', ['continue'])[0]
     part = args.get('part', ['row'])[0]
+    if source in ('infoepisodes', 'person', 'cast', 'seasons'):
+        info_listing(handle, source, args)
+        return
     if source not in ('continue', 'next', 'movies', 'episodes') or part not in ('feature', 'tiles', 'row'):
         xbmcplugin.endOfDirectory(handle, succeeded=False)
         return
@@ -41,12 +45,18 @@ def listing():
             xbmcplugin.endOfDirectory(handle, succeeded=False)
             return
         home.setProperty(key, json.dumps({'time': time.time(), 'rows': rows}))
+    add_videos(handle, partition(rows, part), source)
+    xbmcplugin.setContent(handle, 'videos')
+    xbmcplugin.endOfDirectory(handle, cacheToDisc=False)
+
+
+def add_videos(handle, rows, source):
     addon = xbmcaddon.Addon('skin.starlight')
-    for row in partition(rows, part):
+    for row in rows:
         state = playback(row)
         title = row.get('title') or row.get('label', '')
         label = row.get('showtitle') if row['media'] == 'episode' and source in ('continue', 'next') else title
-        item = xbmcgui.ListItem(label=label or title, path=row['file'])
+        item = xbmcgui.ListItem(label=label or title, path=row.get('file', ''))
         item.setProperty('IsPlayable', 'true')
         art = row.get('art', {})
         art['fanart'] = art.get('fanart') or art.get('tvshow.fanart') or 'special://skin/fanart.jpg'
@@ -74,27 +84,66 @@ def listing():
             tag.setEpisode(row.get('episode', 0))
         item.setProperty('Starlight.Blurred', blurred_art(art.get('fanart') or art.get('tvshow.fanart', '')))
         item.setProperty('Starlight.Progress', str(state['progress']))
+        item.setProperty('Starlight.Playhead', str(round(.64 * state['progress']) - 8))
+        item.setProperty('Starlight.CompactPlayhead', str(round(1.08 * state['progress']) - 8))
         item.setProperty('Starlight.Resume', 'true' if state['resume'] else '')
         item.setProperty('Starlight.Action', addon.getLocalizedString(31016 if state['resume'] else 31017))
         templates = (addon.getLocalizedString(31039), addon.getLocalizedString(31019))
         duration = duration_label(state['minutes'], *templates)
+        if source == 'infoepisodes' and not state['resume']:
+            duration = duration_label(row.get('runtime', 0) // 60, *templates)
         item.setProperty('Starlight.Duration', duration_label(row.get('runtime', 0) / 60, *templates))
         item.setProperty('Starlight.Time', duration)
         detail = addon.getLocalizedString(31018) % duration if state['resume'] else duration
         detail = addon.getLocalizedString(31038) % (row['season'], row['episode'], detail) if row['media'] == 'episode' else detail
         item.setProperty('Starlight.Detail', detail)
         item.setProperty('Starlight.Next', 'true' if row.get('next') else '')
-        xbmcplugin.addDirectoryItem(handle, row['file'], item, isFolder=False)
-    xbmcplugin.setContent(handle, 'videos')
+        role_year = ' · '.join(str(value) for value in (row.get('role'), row.get('year')) if value)
+        item.setProperty('Starlight.RoleYear', role_year)
+        if source == 'infoepisodes':
+            item.setLabel(f"{row.get('episode', 0)}. {title}")
+            item.setProperty('Starlight.Detail', detail.split(' · ', 1)[-1])
+        xbmcplugin.addDirectoryItem(handle, row.get('file', ''), item, isFolder=row['media'] == 'tvshow')
+
+
+def info_listing(handle, source, args):
+    try:
+        if source == 'person':
+            rows = person_items(xbmcgui.Window(11103).getProperty('Starlight.Person.Name'), rpc)
+            add_videos(handle, rows, source)
+        elif source == 'infoepisodes':
+            rows = episode_items(args.get('showid', [''])[0], args.get('season', [''])[0], rpc)
+            nextid = xbmcgui.Window(12003).getProperty('Starlight.Info.NextID')
+            add_videos(handle, [dict(row, next=str(row['episodeid']) == nextid) for row in rows], source)
+        else:
+            info = xbmcgui.Window(12003)
+            records = json.loads(info.getProperty('Starlight.Info.' + source) or '[]')
+            for record in records:
+                item = xbmcgui.ListItem(label=record['label'], label2=record.get('role', ''))
+                item.setArt({'thumb': record.get('thumbnail') or 'special://skin/media/person_placeholder.png'})
+                item.setProperty('Starlight.Season', str(record.get('season', '')))
+                xbmcplugin.addDirectoryItem(handle, '', item, isFolder=False)
+        xbmcplugin.setContent(handle, 'videos' if source == 'infoepisodes' else 'files')
+    except (RuntimeError, ValueError) as error:
+        xbmc.log('Starlight info: ' + str(error), xbmc.LOGERROR)
+        xbmcplugin.endOfDirectory(handle, succeeded=False)
+        return
     xbmcplugin.endOfDirectory(handle, cacheToDisc=False)
+
+
+def clear_home_cache():
+    for source in ('continue', 'next', 'movies', 'episodes'):
+        xbmcgui.Window(10000).clearProperty('Starlight.Source.' + source)
+
+
+def play(media, dbid):
+    if media in ('movie', 'episode') and dbid.isdecimal() and int(dbid) > 0:
+        clear_home_cache()
+        rpc('Player.Open', {'item': {media + 'id': int(dbid)}, 'options': {'resume': True}})
 
 
 if __name__ == '__main__':
     if len(sys.argv) == 4 and sys.argv[1] == 'play':
-        media, dbid = sys.argv[2:]
-        if media in ('movie', 'episode') and dbid.isdecimal() and int(dbid) > 0:
-            for source in ('continue', 'next', 'movies', 'episodes'):
-                xbmcgui.Window(10000).clearProperty('Starlight.Source.' + source)
-            rpc('Player.Open', {'item': {media + 'id': int(dbid)}, 'options': {'resume': True}})
+        play(*sys.argv[2:])
     else:
         listing()

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <zorder>61</zorder>
+  <controls>
+    <control type="group">
+      <left>650</left>
+      <top>40</top>
+      <width>620</width>
+      <height>88</height>
+      <include content="StatusSlot">
+        <param name="toast" value="true" />
+      </include>
+      <control type="image">
+        <left>0</left>
+        <top>0</top>
+        <width>620</width>
+        <height>88</height>
+        <texture border="capsule_border">glass_capsule.png</texture>
+      </control>
+      <control type="image">
+        <left>18</left>
+        <top>18</top>
+        <width>52</width>
+        <height>52</height>
+        <colordiffuse>40FFFFFF</colordiffuse>
+        <texture>palette_gold.png</texture>
+      </control>
+      <control type="image" id="400">
+        <left>31</left>
+        <top>31</top>
+        <width>26</width>
+        <height>26</height>
+        <texture>icons/notification.png</texture>
+      </control>
+      <control type="label" id="401">
+        <left>88</left>
+        <top>14</top>
+        <width>504</width>
+        <height>30</height>
+        <label />
+        <font>font_label_large</font>
+      </control>
+      <control type="fadelabel" id="402">
+        <left>88</left>
+        <top>46</top>
+        <width>504</width>
+        <height>26</height>
+        <font>font_body_small</font>
+        <textcolor>mist</textcolor>
+        <scrollout>false</scrollout>
+        <pauseatend>2000</pauseatend>
+      </control>
+    </control>
+  </controls>
+</window>

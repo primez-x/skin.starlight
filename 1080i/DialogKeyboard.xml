@@ -1,0 +1,1123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <zorder>20</zorder>
+  <defaultcontrol>165</defaultcontrol>
+  <controls>
+    <control type="image">
+      <left>0</left>
+      <top>0</top>
+      <width>1920</width>
+      <height>1080</height>
+      <texture>keyboard_fade.png</texture>
+    </control>
+    <control type="label" id="311">
+      <left>196</left>
+      <top>84</top>
+      <width>1644</width>
+      <height>52</height>
+      <font>font_heading</font>
+      <label />
+    </control>
+    <control type="edit" id="312">
+      <left>196</left>
+      <top>154</top>
+      <width>1644</width>
+      <height>76</height>
+      <font>font_heading</font>
+      <label />
+      <onup>100</onup>
+      <ondown>100</ondown>
+      <textoffsetx>28</textoffsetx>
+      <textoffsety>0</textoffsety>
+      <texturefocus border="capsule_border">frost_fill.png</texturefocus>
+      <texturenofocus border="capsule_border">frost_fill.png</texturenofocus>
+    </control>
+    <control type="label" id="313">
+      <left>196</left>
+      <top>238</top>
+      <width>160</width>
+      <height>30</height>
+      <font>font_body</font>
+      <label />
+    </control>
+    <control type="label" id="314">
+      <left>366</left>
+      <top>238</top>
+      <width>1474</width>
+      <height>30</height>
+      <font>font_body</font>
+      <label />
+    </control>
+    <control type="group">
+      <left>196</left>
+      <top>614</top>
+      <width>1644</width>
+      <height>426</height>
+      <include content="GlassPanel">
+        <param name="width" value="1644" />
+        <param name="height" value="426" />
+      </include>
+      <control type="grouplist" id="800">
+        <left>30</left>
+        <top>28</top>
+        <width>1584</width>
+        <height>66</height>
+        <orientation>horizontal</orientation>
+        <itemgap>10</itemgap>
+        <scrolltime>180</scrolltime>
+        <include content="KeyboardKey">
+          <param name="id" value="100" />
+          <param name="label" value="1" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="119" />
+          <param name="right" value="101" />
+          <param name="up" value="312" />
+          <param name="down" value="120" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="101" />
+          <param name="label" value="2" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="100" />
+          <param name="right" value="102" />
+          <param name="up" value="312" />
+          <param name="down" value="121" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="102" />
+          <param name="label" value="3" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="101" />
+          <param name="right" value="103" />
+          <param name="up" value="312" />
+          <param name="down" value="122" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="103" />
+          <param name="label" value="4" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="102" />
+          <param name="right" value="104" />
+          <param name="up" value="312" />
+          <param name="down" value="123" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="104" />
+          <param name="label" value="5" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="103" />
+          <param name="right" value="105" />
+          <param name="up" value="312" />
+          <param name="down" value="124" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="105" />
+          <param name="label" value="6" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="104" />
+          <param name="right" value="106" />
+          <param name="up" value="312" />
+          <param name="down" value="125" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="106" />
+          <param name="label" value="7" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="105" />
+          <param name="right" value="107" />
+          <param name="up" value="312" />
+          <param name="down" value="126" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="107" />
+          <param name="label" value="8" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="106" />
+          <param name="right" value="108" />
+          <param name="up" value="312" />
+          <param name="down" value="127" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="108" />
+          <param name="label" value="9" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="107" />
+          <param name="right" value="109" />
+          <param name="up" value="312" />
+          <param name="down" value="128" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="109" />
+          <param name="label" value="0" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="108" />
+          <param name="right" value="110" />
+          <param name="up" value="312" />
+          <param name="down" value="129" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="110" />
+          <param name="label" value="-" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="109" />
+          <param name="right" value="111" />
+          <param name="up" value="312" />
+          <param name="down" value="130" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="111" />
+          <param name="label" value="=" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="110" />
+          <param name="right" value="112" />
+          <param name="up" value="312" />
+          <param name="down" value="131" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="112" />
+          <param name="label" value="`" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="111" />
+          <param name="right" value="113" />
+          <param name="up" value="312" />
+          <param name="down" value="132" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="113" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="112" />
+          <param name="right" value="114" />
+          <param name="up" value="312" />
+          <param name="down" value="133" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="114" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="113" />
+          <param name="right" value="115" />
+          <param name="up" value="312" />
+          <param name="down" value="134" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="115" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="114" />
+          <param name="right" value="116" />
+          <param name="up" value="312" />
+          <param name="down" value="135" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="116" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="115" />
+          <param name="right" value="117" />
+          <param name="up" value="312" />
+          <param name="down" value="136" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="117" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="116" />
+          <param name="right" value="118" />
+          <param name="up" value="312" />
+          <param name="down" value="137" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="118" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="117" />
+          <param name="right" value="119" />
+          <param name="up" value="312" />
+          <param name="down" value="138" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="119" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="118" />
+          <param name="right" value="100" />
+          <param name="up" value="312" />
+          <param name="down" value="139" />
+        </include>
+      </control>
+      <control type="grouplist" id="801">
+        <left>30</left>
+        <top>104</top>
+        <width>1584</width>
+        <height>66</height>
+        <orientation>horizontal</orientation>
+        <itemgap>10</itemgap>
+        <scrolltime>180</scrolltime>
+        <include content="KeyboardKey">
+          <param name="id" value="120" />
+          <param name="label" value="q" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="139" />
+          <param name="right" value="121" />
+          <param name="up" value="100" />
+          <param name="down" value="140" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="121" />
+          <param name="label" value="w" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="120" />
+          <param name="right" value="122" />
+          <param name="up" value="101" />
+          <param name="down" value="141" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="122" />
+          <param name="label" value="e" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="121" />
+          <param name="right" value="123" />
+          <param name="up" value="102" />
+          <param name="down" value="142" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="123" />
+          <param name="label" value="r" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="122" />
+          <param name="right" value="124" />
+          <param name="up" value="103" />
+          <param name="down" value="143" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="124" />
+          <param name="label" value="t" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="123" />
+          <param name="right" value="125" />
+          <param name="up" value="104" />
+          <param name="down" value="144" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="125" />
+          <param name="label" value="y" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="124" />
+          <param name="right" value="126" />
+          <param name="up" value="105" />
+          <param name="down" value="145" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="126" />
+          <param name="label" value="u" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="125" />
+          <param name="right" value="127" />
+          <param name="up" value="106" />
+          <param name="down" value="146" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="127" />
+          <param name="label" value="i" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="126" />
+          <param name="right" value="128" />
+          <param name="up" value="107" />
+          <param name="down" value="147" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="128" />
+          <param name="label" value="o" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="127" />
+          <param name="right" value="129" />
+          <param name="up" value="108" />
+          <param name="down" value="148" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="129" />
+          <param name="label" value="p" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="128" />
+          <param name="right" value="130" />
+          <param name="up" value="109" />
+          <param name="down" value="149" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="130" />
+          <param name="label" value="[" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="129" />
+          <param name="right" value="131" />
+          <param name="up" value="110" />
+          <param name="down" value="150" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="131" />
+          <param name="label" value="]" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="130" />
+          <param name="right" value="132" />
+          <param name="up" value="111" />
+          <param name="down" value="151" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="132" />
+          <param name="label" value="\" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="131" />
+          <param name="right" value="133" />
+          <param name="up" value="112" />
+          <param name="down" value="152" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="133" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="132" />
+          <param name="right" value="134" />
+          <param name="up" value="113" />
+          <param name="down" value="153" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="134" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="133" />
+          <param name="right" value="135" />
+          <param name="up" value="114" />
+          <param name="down" value="154" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="135" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="134" />
+          <param name="right" value="136" />
+          <param name="up" value="115" />
+          <param name="down" value="155" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="136" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="135" />
+          <param name="right" value="137" />
+          <param name="up" value="116" />
+          <param name="down" value="156" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="137" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="136" />
+          <param name="right" value="138" />
+          <param name="up" value="117" />
+          <param name="down" value="157" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="138" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="137" />
+          <param name="right" value="139" />
+          <param name="up" value="118" />
+          <param name="down" value="158" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="139" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="138" />
+          <param name="right" value="120" />
+          <param name="up" value="119" />
+          <param name="down" value="159" />
+        </include>
+      </control>
+      <control type="grouplist" id="802">
+        <left>30</left>
+        <top>180</top>
+        <width>1584</width>
+        <height>66</height>
+        <orientation>horizontal</orientation>
+        <itemgap>10</itemgap>
+        <scrolltime>180</scrolltime>
+        <include content="KeyboardKey">
+          <param name="id" value="140" />
+          <param name="label" value="a" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="159" />
+          <param name="right" value="141" />
+          <param name="up" value="120" />
+          <param name="down" value="160" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="141" />
+          <param name="label" value="s" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="140" />
+          <param name="right" value="142" />
+          <param name="up" value="121" />
+          <param name="down" value="161" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="142" />
+          <param name="label" value="d" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="141" />
+          <param name="right" value="143" />
+          <param name="up" value="122" />
+          <param name="down" value="162" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="143" />
+          <param name="label" value="f" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="142" />
+          <param name="right" value="144" />
+          <param name="up" value="123" />
+          <param name="down" value="163" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="144" />
+          <param name="label" value="g" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="143" />
+          <param name="right" value="145" />
+          <param name="up" value="124" />
+          <param name="down" value="164" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="145" />
+          <param name="label" value="h" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="144" />
+          <param name="right" value="146" />
+          <param name="up" value="125" />
+          <param name="down" value="165" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="146" />
+          <param name="label" value="j" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="145" />
+          <param name="right" value="147" />
+          <param name="up" value="126" />
+          <param name="down" value="166" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="147" />
+          <param name="label" value="k" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="146" />
+          <param name="right" value="148" />
+          <param name="up" value="127" />
+          <param name="down" value="167" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="148" />
+          <param name="label" value="l" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="147" />
+          <param name="right" value="149" />
+          <param name="up" value="128" />
+          <param name="down" value="168" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="149" />
+          <param name="label" value=";" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="148" />
+          <param name="right" value="150" />
+          <param name="up" value="129" />
+          <param name="down" value="169" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="150" />
+          <param name="label" value="'" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="149" />
+          <param name="right" value="151" />
+          <param name="up" value="130" />
+          <param name="down" value="170" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="151" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="150" />
+          <param name="right" value="152" />
+          <param name="up" value="131" />
+          <param name="down" value="171" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="152" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="151" />
+          <param name="right" value="153" />
+          <param name="up" value="132" />
+          <param name="down" value="172" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="153" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="152" />
+          <param name="right" value="154" />
+          <param name="up" value="133" />
+          <param name="down" value="173" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="154" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="153" />
+          <param name="right" value="155" />
+          <param name="up" value="134" />
+          <param name="down" value="174" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="155" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="154" />
+          <param name="right" value="156" />
+          <param name="up" value="135" />
+          <param name="down" value="175" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="156" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="155" />
+          <param name="right" value="157" />
+          <param name="up" value="136" />
+          <param name="down" value="176" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="157" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="156" />
+          <param name="right" value="158" />
+          <param name="up" value="137" />
+          <param name="down" value="177" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="158" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="157" />
+          <param name="right" value="159" />
+          <param name="up" value="138" />
+          <param name="down" value="178" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="159" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="158" />
+          <param name="right" value="140" />
+          <param name="up" value="139" />
+          <param name="down" value="179" />
+        </include>
+      </control>
+      <control type="grouplist" id="803">
+        <left>30</left>
+        <top>256</top>
+        <width>1584</width>
+        <height>66</height>
+        <orientation>horizontal</orientation>
+        <itemgap>10</itemgap>
+        <scrolltime>180</scrolltime>
+        <include content="KeyboardKey">
+          <param name="id" value="160" />
+          <param name="label" value="z" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="179" />
+          <param name="right" value="161" />
+          <param name="up" value="140" />
+          <param name="down" value="32" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="161" />
+          <param name="label" value="x" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="160" />
+          <param name="right" value="162" />
+          <param name="up" value="141" />
+          <param name="down" value="32" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="162" />
+          <param name="label" value="c" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="161" />
+          <param name="right" value="163" />
+          <param name="up" value="142" />
+          <param name="down" value="32" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="163" />
+          <param name="label" value="v" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="162" />
+          <param name="right" value="164" />
+          <param name="up" value="143" />
+          <param name="down" value="32" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="164" />
+          <param name="label" value="b" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="163" />
+          <param name="right" value="165" />
+          <param name="up" value="144" />
+          <param name="down" value="32" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="165" />
+          <param name="label" value="n" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="164" />
+          <param name="right" value="166" />
+          <param name="up" value="145" />
+          <param name="down" value="32" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="166" />
+          <param name="label" value="m" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="165" />
+          <param name="right" value="167" />
+          <param name="up" value="146" />
+          <param name="down" value="32" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="167" />
+          <param name="label" value="," />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="166" />
+          <param name="right" value="168" />
+          <param name="up" value="147" />
+          <param name="down" value="32" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="168" />
+          <param name="label" value="." />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="167" />
+          <param name="right" value="169" />
+          <param name="up" value="148" />
+          <param name="down" value="32" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="169" />
+          <param name="label" value="/" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="168" />
+          <param name="right" value="170" />
+          <param name="up" value="149" />
+          <param name="down" value="32" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="170" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="169" />
+          <param name="right" value="171" />
+          <param name="up" value="150" />
+          <param name="down" value="32" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="171" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="170" />
+          <param name="right" value="172" />
+          <param name="up" value="151" />
+          <param name="down" value="32" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="172" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="171" />
+          <param name="right" value="173" />
+          <param name="up" value="152" />
+          <param name="down" value="32" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="173" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="172" />
+          <param name="right" value="174" />
+          <param name="up" value="153" />
+          <param name="down" value="32" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="174" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="173" />
+          <param name="right" value="175" />
+          <param name="up" value="154" />
+          <param name="down" value="32" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="175" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="174" />
+          <param name="right" value="176" />
+          <param name="up" value="155" />
+          <param name="down" value="32" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="176" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="175" />
+          <param name="right" value="177" />
+          <param name="up" value="156" />
+          <param name="down" value="32" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="177" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="176" />
+          <param name="right" value="178" />
+          <param name="up" value="157" />
+          <param name="down" value="32" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="178" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="177" />
+          <param name="right" value="179" />
+          <param name="up" value="158" />
+          <param name="down" value="32" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="179" />
+          <param name="label" value="" />
+          <param name="x" value="0" />
+          <param name="y" value="0" />
+          <param name="width" value="149" />
+          <param name="left" value="178" />
+          <param name="right" value="160" />
+          <param name="up" value="159" />
+          <param name="down" value="32" />
+        </include>
+      </control>
+      <control type="grouplist">
+        <left>30</left>
+        <top>332</top>
+        <width>1584</width>
+        <height>66</height>
+        <orientation>horizontal</orientation>
+        <itemgap>10</itemgap>
+        <include content="KeyboardKey">
+          <param name="id" value="304" />
+          <param name="label" value="#+=" />
+          <param name="width" value="149" />
+          <param name="up" value="165" />
+          <param name="down" value="312" />
+          <param name="done" value="false" />
+          <param name="left" value="300" />
+          <param name="right" value="303" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="303" />
+          <param name="label" value="Aa" />
+          <param name="width" value="149" />
+          <param name="up" value="165" />
+          <param name="down" value="312" />
+          <param name="done" value="false" />
+          <param name="left" value="304" />
+          <param name="right" value="32" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="32" />
+          <param name="label" value="$LOCALIZE[31059]" />
+          <param name="width" value="626" />
+          <param name="up" value="165" />
+          <param name="down" value="312" />
+          <param name="done" value="false" />
+          <param name="left" value="303" />
+          <param name="right" value="8" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="8" />
+          <param name="label" value="$LOCALIZE[31058]" />
+          <param name="width" value="308" />
+          <param name="up" value="165" />
+          <param name="down" value="312" />
+          <param name="done" value="false" />
+          <param name="left" value="32" />
+          <param name="right" value="300" />
+        </include>
+        <include content="KeyboardKey">
+          <param name="id" value="300" />
+          <param name="label" value="$LOCALIZE[31060]" />
+          <param name="width" value="308" />
+          <param name="up" value="165" />
+          <param name="down" value="312" />
+          <param name="done" value="true" />
+          <param name="color" value="void" />
+          <param name="left" value="8" />
+          <param name="right" value="304" />
+        </include>
+      </control>
+    </control>
+    <control type="grouplist">
+      <left>196</left>
+      <top>254</top>
+      <width>1644</width>
+      <height>54</height>
+      <orientation>horizontal</orientation>
+      <itemgap>16</itemgap>
+      <control type="button" id="302">
+        <left>0</left>
+        <top>0</top>
+        <width>180</width>
+        <height>48</height>
+        <label>$LOCALIZE[31076]</label>
+        <font>font_label</font>
+        <onup>312</onup>
+        <ondown>100</ondown>
+        <textcolor>mist</textcolor>
+      </control>
+      <control type="button" id="305">
+        <left>0</left>
+        <top>0</top>
+        <width>180</width>
+        <height>48</height>
+        <label>←</label>
+        <font>font_label</font>
+        <onup>312</onup>
+        <ondown>100</ondown>
+        <textcolor>mist</textcolor>
+      </control>
+      <control type="button" id="306">
+        <left>0</left>
+        <top>0</top>
+        <width>180</width>
+        <height>48</height>
+        <label>→</label>
+        <font>font_label</font>
+        <onup>312</onup>
+        <ondown>100</ondown>
+        <textcolor>mist</textcolor>
+      </control>
+      <control type="button" id="308">
+        <left>0</left>
+        <top>0</top>
+        <width>180</width>
+        <height>48</height>
+        <label>$LOCALIZE[31074]</label>
+        <font>font_label</font>
+        <onup>312</onup>
+        <ondown>100</ondown>
+        <textcolor>mist</textcolor>
+      </control>
+      <control type="button" id="309">
+        <left>0</left>
+        <top>0</top>
+        <width>180</width>
+        <height>48</height>
+        <label>$LOCALIZE[31075]</label>
+        <font>font_label</font>
+        <onup>312</onup>
+        <ondown>100</ondown>
+        <textcolor>mist</textcolor>
+      </control>
+      <control type="button" id="310">
+        <left>0</left>
+        <top>0</top>
+        <width>180</width>
+        <height>48</height>
+        <label>$LOCALIZE[31077]</label>
+        <font>font_label</font>
+        <onup>312</onup>
+        <ondown>100</ondown>
+        <textcolor>mist</textcolor>
+      </control>
+      <control type="button" id="301">
+        <left>0</left>
+        <top>0</top>
+        <width>180</width>
+        <height>48</height>
+        <label>$LOCALIZE[31057]</label>
+        <font>font_label</font>
+        <onup>312</onup>
+        <ondown>100</ondown>
+        <textcolor>mist</textcolor>
+      </control>
+      <visible>Control.HasFocus(312)</visible>
+    </control>
+  </controls>
+</window>

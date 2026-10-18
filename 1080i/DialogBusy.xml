@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <zorder>65</zorder>
+  <controls>
+    <include content="DialogDim">
+      <param name="soft" value="true" />
+    </include>
+    <control type="image">
+      <left>0</left>
+      <top>0</top>
+      <width>1920</width>
+      <height>3</height>
+      <texture border="progress_border">progress_track.png</texture>
+    </control>
+    <control type="image">
+      <left>-480</left>
+      <top>0</top>
+      <width>480</width>
+      <height>8</height>
+      <texture>sweep.png</texture>
+      <animation effect="slide" start="0,0" end="2400,0" time="1500" condition="true" loop="true">Conditional</animation>
+    </control>
+    <include content="BusyPill" />
+  </controls>
+</window>

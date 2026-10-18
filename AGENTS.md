@@ -62,6 +62,54 @@
 - Progress feedback remains visible when ambient effects are disabled.
 - Empty settings select the defaults. No first-run service writes settings.
 
+## Info and dialog contracts
+
+- `DialogVideoInfo.xml` keeps native play 8, resume 9, and plot 4. Restart 408 sends a native click to 8.
+- Native cast 50 remains bound offscreen. Provider-backed cast 250 opens the person page instead of Kodi's native actor search.
+- Omit optional native toggle 5. Kodi otherwise hides cast while the plot shows.
+- Source: `https://github.com/xbmc/xbmc/blob/21.3-Omega/xbmc/video/dialogs/GUIDialogVideoInfo.cpp#L474-L535`.
+- TV and season episode container 550 reads the skin provider. The provider queries `videodb://tvshows/titles/<showid>/<season>/` through `Files.GetDirectory`.
+- The provider adds the shared duration, resume, and next-up properties. Kodi's native cast binding cannot supply that row.
+- Landing focus chooses the most recently resumed regular episode, then the first unwatched regular episode, then the first regular episode.
+- Season 560 changes the database season path. Specials remain selectable. Empty rows show a static horizon and message.
+- `Window(home).Property(Starlight.Hub)` records the source hub. The info and person pages preserve that hub.
+- Kodi 21 loads `DialogConfirm.xml` for yes/no, OK, and modal progress. Both busy modes load `DialogBusy.xml`.
+- Source: `https://github.com/xbmc/xbmc/tree/21.3-Omega/xbmc/dialogs`.
+- Confirmation defaults to No, native 10. Native callers can explicitly request a different default.
+- Set `Window(home).Property(Starlight.Confirm.Destructive)` to `true` before a destructive confirmation. The dialog clears the flag on close.
+- Standard Delete and Remove labels also select red confirmation text. Kodi provides no general destructive-action flag.
+- Status order: volume, notification, background progress, busy. Each active predecessor reserves a slot below the hub bar.
+- Busy and background progress retain the event horizon and sparkles when Ambient effects are disabled.
+- `Starlight.Context.CardRect` on the underlying window accepts `left,top,width,height` in 1920x1080 screen coordinates.
+- Supply the rectangle before each native menu. The context adapter consumes and clears the rectangle.
+- The context dialog places the popover beside that rectangle. Home and person pages compute focused rectangles from the shared XML and native scroll metrics.
+- Without a rectangle, the context dialog uses the centred options sheet. Later library views must supply the actual focused card rectangle.
+- Home scrollbar 5500 exposes the widget scroll offset. Hidden buttons 5501 and 5502 expose native offset and cursor labels.
+- `resources/lib/skin_xml.py` shares include expansion between the native context adapter and both preview renderers.
+- Native metric sources: `GUIControlGroupList.cpp:62`, `GUIScrollBarControl.cpp:378`, and `GUIButtonControl.h:56` in Kodi 21.3.
+- Hidden native bounds 999 keep the context dim at screen origin. Group 997 contains the movable sheet and native grouplist 996.
+- Python cannot access native grouplist controls directly. The context adapter moves group 997 instead.
+- Native keyboard edit 312 stays above the bottom sheet, in the page-field position. No edit field appears inside the sheet.
+- Keyboard IDs 100–179 preserve all four native rows and twenty columns. Extra layout characters scroll horizontally.
+- The auxiliary keyboard controls appear when edit 312 holds focus. Native callbacks retain phone, hardware, and password input.
+- Search result callbacks and Up-to-results belong to step 5. The keyboard currently returns Up to native edit 312.
+- `tools/render_window.py` expands the actual XML with local sample records. The renderer does not execute Kodi actions or emulate native input.
+- Run `python3 tools/render_window.py --art /path/to/sample/art --output /tmp/starlight-step3` for all nine previews.
+
+## PKC person hook
+
+- Custom window 11103 owns every `Starlight.Person.*` property. No network metadata provider runs in the skin.
+- The cast action clears old enrichment before a new person opens. The action sets `Name`, `Thumb`, `Meta`, `Blurred`, `Hub`, and `Request`.
+- `Request` identifies the current person request. A future provider must compare `Request` before each asynchronous update.
+- The library tab reads native movie and TV actor filters. Credits merge by year, newest first. Labels show role and year.
+- The future PKC provider sets `Meta` to department, born date with age, and birthplace. `Biography` accepts plain text, clamped to three lines.
+- `ProviderKey` holds the Plex person identifier. `CreditsPath` and `ImagesPath` hold provider-owned Kodi directory URLs.
+- Leave unavailable values empty. Empty biography, credits, and images have visible fallback messages.
+- Credit records need native video tags and poster art. `Starlight.RoleYear` supplies the role and year label.
+- Image records need thumb art. Credit activation and image activation use the provider's normal Kodi directory actions.
+- The provider must restrict directory URLs to trusted PKC routes. Never embed credentials in a URL or window property.
+- `Tab` accepts `library`, `credits`, or `images`. The library tab is the default. Focus lands on the first library poster when available.
+
 ## Publish
 
 - Follow `https://github.com/primez-x/kodi.addons/blob/main/VERSIONING.md`.

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <includes>
   <variable name="HomeGreeting">
     <value condition="System.Time(05:00,12:00)">$LOCALIZE[31007]</value>
@@ -216,6 +216,7 @@
             <onright>912</onright>
             <onup>$PARAM[return]</onup>
             <ondown>$PARAM[return]</ondown>
+            <onclick>SetProperty(Starlight.Hub,search,home)</onclick>
             <onclick>ActivateWindow(11100)</onclick>
           </control>
           <control type="image">
@@ -244,6 +245,7 @@
             <onright>913</onright>
             <onup>$PARAM[return]</onup>
             <ondown>$PARAM[return]</ondown>
+            <onclick>SetProperty(Starlight.Hub,home,home)</onclick>
             <onclick>ActivateWindow(Home)</onclick>
           </control>
           <control type="image">
@@ -272,6 +274,7 @@
             <onright>914</onright>
             <onup>$PARAM[return]</onup>
             <ondown>$PARAM[return]</ondown>
+            <onclick>SetProperty(Starlight.Hub,movies,home)</onclick>
             <onclick>ActivateWindow(Videos,videodb://movies/titles/,return)</onclick>
           </control>
           <control type="image">
@@ -300,6 +303,7 @@
             <onright>915</onright>
             <onup>$PARAM[return]</onup>
             <ondown>$PARAM[return]</ondown>
+            <onclick>SetProperty(Starlight.Hub,tv,home)</onclick>
             <onclick>ActivateWindow(Videos,videodb://tvshows/titles/,return)</onclick>
           </control>
           <control type="image">
@@ -328,6 +332,7 @@
             <onright>916</onright>
             <onup>$PARAM[return]</onup>
             <ondown>$PARAM[return]</ondown>
+            <onclick>SetProperty(Starlight.Hub,music,home)</onclick>
             <onclick>ActivateWindow(Music,musicdb://,return)</onclick>
           </control>
           <control type="image">
@@ -356,6 +361,7 @@
             <onright>917</onright>
             <onup>$PARAM[return]</onup>
             <ondown>$PARAM[return]</ondown>
+            <onclick>SetProperty(Starlight.Hub,discover,home)</onclick>
             <onclick>ActivateWindow(11101)</onclick>
           </control>
           <control type="image">
@@ -384,6 +390,7 @@
             <onright>911</onright>
             <onup>$PARAM[return]</onup>
             <ondown>$PARAM[return]</ondown>
+            <onclick>SetProperty(Starlight.Hub,settings,home)</onclick>
             <onclick>ActivateWindow(11102)</onclick>
           </control>
           <defaultcontrol>$PARAM[topfocus]</defaultcontrol>
@@ -440,17 +447,31 @@
             <label>$INFO[ListItem.Property(Starlight.Action)]</label>
             <font>font_label_semibold</font>
           </control>
-          <control type="progress">
-            <top>22</top>
+          <control type="group">
+            <left>0</left>
+            <top>0</top>
             <width>64</width>
-            <height>5</height>
-            <info>ListItem.PercentPlayed</info>
+            <height>50</height>
             <visible>!String.IsEmpty(ListItem.Property(Starlight.Resume))</visible>
-            <texturebg border="progress_border">progress_track.png</texturebg>
-            <lefttexture />
-            <midtexture border="progress_border">progress_gold.png</midtexture>
-            <righttexture />
-            <overlaytexture />
+            <control type="progress">
+              <top>22</top>
+              <width>64</width>
+              <height>5</height>
+              <info>ListItem.PercentPlayed</info>
+              <visible>!String.IsEmpty(ListItem.Property(Starlight.Resume))</visible>
+              <texturebg border="progress_border">progress_track.png</texturebg>
+              <lefttexture />
+              <midtexture border="progress_border">progress_gold.png</midtexture>
+              <righttexture />
+              <overlaytexture />
+            </control>
+            <control type="image">
+              <left>$INFO[ListItem.Property(Starlight.Playhead)]</left>
+              <top>16</top>
+              <width>16</width>
+              <height>16</height>
+              <texture>playhead_glow.png</texture>
+            </control>
           </control>
           <control type="label">
             <width min="1" max="80">auto</width>
@@ -488,18 +509,32 @@
           <label>$INFO[ListItem.Property(Starlight.Action)]</label>
           <font>font_label_semibold</font>
         </control>
-        <control type="progress">
+        <control type="group">
           <left>10</left>
-          <top>76</top>
+          <top>70</top>
           <width>108</width>
-          <height>5</height>
-          <info>ListItem.PercentPlayed</info>
+          <height>16</height>
           <visible>!String.IsEmpty(ListItem.Property(Starlight.Resume))</visible>
-          <texturebg border="progress_border">progress_track.png</texturebg>
-          <lefttexture />
-          <midtexture border="progress_border">progress_gold.png</midtexture>
-          <righttexture />
-          <overlaytexture />
+          <control type="progress">
+            <left>0</left>
+            <top>6</top>
+            <width>108</width>
+            <height>5</height>
+            <info>ListItem.PercentPlayed</info>
+            <visible>!String.IsEmpty(ListItem.Property(Starlight.Resume))</visible>
+            <texturebg border="progress_border">progress_track.png</texturebg>
+            <lefttexture />
+            <midtexture border="progress_border">progress_gold.png</midtexture>
+            <righttexture />
+            <overlaytexture />
+          </control>
+          <control type="image">
+            <left>$INFO[ListItem.Property(Starlight.CompactPlayhead)]</left>
+            <top>0</top>
+            <width>16</width>
+            <height>16</height>
+            <texture>playhead_glow.png</texture>
+          </control>
         </control>
         <control type="label">
           <left>10</left>
@@ -514,11 +549,15 @@
     <param name="compact" default="false" />
   </include>
   <include name="HomeLibraryCard">
+    <param name="label" default="" />
     <param name="width" default="335" />
     <param name="height" default="189" />
     <param name="mask" default="home_landscape_mask.png" />
     <param name="art" default="$VAR[HomeCardArt]" />
     <param name="selected" default="false" />
+    <param name="playable" default="true" />
+    <param name="title" default="$INFO[ListItem.Label]" />
+    <param name="detail" default="$INFO[ListItem.Property(Starlight.Detail)]" />
     <param name="feature" default="false" />
     <param name="x" default="24" />
     <param name="capsule" default="305" />
@@ -629,7 +668,7 @@
             <top>42</top>
             <width>500</width>
             <height>96</height>
-            <aspectratio>keep</aspectratio>
+            <aspectratio align="left" aligny="center">keep</aspectratio>
             <texture>$VAR[HomeLogo]</texture>
             <visible>!String.IsEmpty(ListItem.Art(clearlogo)) | !String.IsEmpty(ListItem.Art(tvshow.clearlogo))</visible>
           </control>
@@ -638,7 +677,7 @@
             <top>42</top>
             <width>740</width>
             <height>96</height>
-            <label>$INFO[ListItem.Label]</label>
+            <label>$PARAM[title]</label>
             <font>font_heading_large</font>
             <visible>String.IsEmpty(ListItem.Art(clearlogo)) + String.IsEmpty(ListItem.Art(tvshow.clearlogo))</visible>
           </control>
@@ -699,7 +738,7 @@
           <animation effect="slide" start="0,0" end="732,0" time="650" delay="450" tween="sine">WindowOpen</animation>
           <animation effect="fade" start="100" end="0" time="100" delay="1000">WindowOpen</animation>
         </control>
-        <include content="HomePlayCapsule" condition="!$PARAM[feature]">
+        <include content="HomePlayCapsule" condition="!$PARAM[feature] + $PARAM[playable]">
           <param name="id" value="$PARAM[id]" />
           <param name="y" value="$PARAM[capsule_y]" />
           <param name="width" value="$PARAM[capsule]" />
@@ -719,23 +758,16 @@
           <righttexture />
           <overlaytexture />
         </control>
-        <control type="label">
-          <left>14</left>
-          <top>10</top>
-          <width>250</width>
-          <height>30</height>
-          <label>$LOCALIZE[31020]</label>
-          <font>font_label_small</font>
-          <textcolor>gold</textcolor>
-          <visible>!String.IsEmpty(ListItem.Property(Starlight.Next)) + !$PARAM[feature]</visible>
-        </control>
+        <include content="EpisodeStatusCorner">
+          <param name="feature" value="$PARAM[feature]" />
+        </include>
       </control>
       <control type="label">
         <left>$PARAM[x]</left>
         <top>$PARAM[label_y]</top>
         <width>$PARAM[width]</width>
         <height>28</height>
-        <label>$INFO[ListItem.Label]</label>
+        <label>$PARAM[title]</label>
         <font>font_label_semibold</font>
         <visible>!$PARAM[feature]</visible>
         <include content="InactiveRowFade">
@@ -748,7 +780,7 @@
         <top>$PARAM[detail_y]</top>
         <width>$PARAM[width]</width>
         <height>28</height>
-        <label>$INFO[ListItem.Property(Starlight.Detail)]</label>
+        <label>$PARAM[detail]</label>
         <font>font_label_small</font>
         <visible>!$PARAM[feature]</visible>
         <include content="InactiveRowFade">
@@ -1330,9 +1362,25 @@
           <ondown>$PARAM[ondown]</ondown>
           <onleft>$PARAM[id]</onleft>
           <onright>$PARAM[return]</onright>
+          <onclick>SetProperty(Starlight.Hub,$PARAM[icon],home)</onclick>
           <onclick>$PARAM[onclick]</onclick>
         </control>
       </control>
     </definition>
   </include>
+  <variable name="HomeContextPosition">
+    <value condition="String.IsEqual(Window(home).Property(Starlight.Container),510)">$INFO[Container(510).Position]</value>
+    <value condition="String.IsEqual(Window(home).Property(Starlight.Container),511)">$INFO[Container(511).Position]</value>
+    <value condition="String.IsEqual(Window(home).Property(Starlight.Container),512)">$INFO[Container(512).Position]</value>
+    <value condition="String.IsEqual(Window(home).Property(Starlight.Container),520)">$INFO[Container(520).Position]</value>
+    <value condition="String.IsEqual(Window(home).Property(Starlight.Container),521)">$INFO[Container(521).Position]</value>
+    <value condition="String.IsEqual(Window(home).Property(Starlight.Container),522)">$INFO[Container(522).Position]</value>
+    <value condition="String.IsEqual(Window(home).Property(Starlight.Container),530)">$INFO[Container(530).Position]</value>
+    <value condition="String.IsEqual(Window(home).Property(Starlight.Container),531)">$INFO[Container(531).Position]</value>
+    <value condition="String.IsEqual(Window(home).Property(Starlight.Container),532)">$INFO[Container(532).Position]</value>
+    <value condition="String.IsEqual(Window(home).Property(Starlight.Container),540)">$INFO[Container(540).Position]</value>
+    <value condition="String.IsEqual(Window(home).Property(Starlight.Container),541)">$INFO[Container(541).Position]</value>
+    <value condition="String.IsEqual(Window(home).Property(Starlight.Container),542)">$INFO[Container(542).Position]</value>
+    <value>0</value>
+  </variable>
 </includes>

@@ -21,4 +21,5 @@
   <color name="focus_rim">D9FFFFFF</color>
   <color name="focus_gold_rim">D9F5C27A</color>
   <color name="transparent">00000000</color>
+  <color name="danger">FFFFB4A8</color>
 </colors>

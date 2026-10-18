@@ -101,7 +101,7 @@ def point_sprite(twinkle=False):
     return canvas.resize((size, size), Image.Resampling.LANCZOS)
 
 
-def busy_frame(frame):
+def busy_frame(frame, orbit=True):
     size = 96
     canvas = Image.new('RGBA', (size * SCALE, size * SCALE))
     halo = Image.new('RGBA', canvas.size)
@@ -112,10 +112,11 @@ def busy_frame(frame):
     draw.ellipse((28 * SCALE, 25 * SCALE, 68 * SCALE, 71 * SCALE), fill=(1, 2, 4, 255),
                  outline=rgba(GOLD, .9), width=2 * SCALE)
     draw.ellipse((9 * SCALE, 43 * SCALE, 87 * SCALE, 54 * SCALE), outline=rgba(GOLD, .7), width=2 * SCALE)
-    angle = 2 * math.pi * frame / 24
-    x, y = 48 + 20 * math.cos(angle), 48 + 23 * math.sin(angle)
-    point = point_sprite().resize((40 * SCALE, 40 * SCALE), Image.Resampling.LANCZOS)
-    canvas.alpha_composite(point, (round((x - 20) * SCALE), round((y - 20) * SCALE)))
+    if orbit:
+        angle = 2 * math.pi * frame / 24
+        x, y = 48 + 20 * math.cos(angle), 48 + 23 * math.sin(angle)
+        point = point_sprite().resize((40 * SCALE, 40 * SCALE), Image.Resampling.LANCZOS)
+        canvas.alpha_composite(point, (round((x - 20) * SCALE), round((y - 20) * SCALE)))
     return canvas.resize((size, size), Image.Resampling.LANCZOS)
 
 
@@ -128,6 +129,16 @@ ICON_PATHS = {
     'discover': '<circle cx="12" cy="12" r="9"/><path d="m16 8-2.5 5.5L8 16l2.5-5.5Z"/>',
     'settings': '<circle cx="12" cy="12" r="3.3"/><path d="m10 2-.6 3-2 .9-2.7-1.1-2 3.5L5 10v3l-2.3 1.7 2 3.5 2.7-1.1 2 .9.6 3h4l.6-3 2-.9 2.7 1.1 2-3.5L19 13v-3l2.3-1.7-2-3.5-2.7 1.1-2-.9L14 2Z"/>',
     'play': '<path d="m7 4 13 8-13 8Z" fill="#f4f7fb" stroke="none"/>',
+    'restart': '<path d="M4 9a8 8 0 1 1 0 6M4 3v6h6"/>',
+    'watched': '<circle cx="12" cy="12" r="9"/><path d="m7 12 3 3 7-7"/>',
+    'check': '<path d="m5 12 4 4L19 6"/>',
+    'more': '<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>',
+    'shuffle': '<path d="m16 3 5 0v5M3 21 21 3M21 16v5h-5M14 14l7 7M3 3l6 6"/>',
+    'speaker': '<path d="M3 9v6h4l5 4V5L7 9ZM16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/>',
+    'muted': '<path d="M3 9v6h4l5 4V5L7 9ZM16 9l6 6M22 9l-6 6"/>',
+    'notification': '<path d="M6 8a6 6 0 0 1 12 0c0 6 3 9 3 9H3s3-3 3-9M10 21h4"/>',
+    'warning': '<path d="m12 3 10 18H2ZM12 9v5M12 17v.5"/>',
+    'error': '<circle cx="12" cy="12" r="9"/><path d="m8 8 8 8M16 8l-8 8"/>',
 }
 
 
@@ -181,6 +192,33 @@ def feature_shade():
     return canvas
 
 
+def person_art(rim=False):
+    size = 396 if rim else 300
+    canvas = Image.new('RGBA', (size * SCALE, size * SCALE))
+    draw = ImageDraw.Draw(canvas)
+    if rim:
+        halo = Image.new('RGBA', canvas.size)
+        ImageDraw.Draw(halo).ellipse((48*SCALE, 48*SCALE, 348*SCALE, 348*SCALE),
+                                     outline=rgba(GOLD, .5), width=8*SCALE)
+        canvas = halo.filter(ImageFilter.GaussianBlur(18*SCALE))
+        ImageDraw.Draw(canvas).ellipse((48*SCALE, 48*SCALE, 348*SCALE, 348*SCALE),
+                                        outline=rgba(GOLD, .55), width=2*SCALE)
+    else:
+        draw.ellipse((0, 0, size*SCALE-1, size*SCALE-1), fill=(15, 22, 34, 255))
+        draw.ellipse((105*SCALE, 60*SCALE, 195*SCALE, 150*SCALE), fill=rgba(FROST, .3))
+        draw.ellipse((55*SCALE, 170*SCALE, 245*SCALE, 360*SCALE), fill=rgba(FROST, .3))
+    return canvas.resize((size, size), Image.Resampling.LANCZOS)
+
+
+def corner_shade():
+    canvas = Image.new('RGBA', (200, 100))
+    for y in range(canvas.height):
+        for x in range(canvas.width):
+            alpha = max(0, 1-math.hypot(x/200, y/100)) * .8
+            canvas.putpixel((x,y), (3,5,10,round(255*alpha)))
+    return canvas
+
+
 def build(output):
     output.mkdir(parents=True, exist_ok=True)
     textures = {
@@ -208,14 +246,25 @@ def build(output):
         'landing_glint.png': point_sprite(twinkle=True).resize((96, 16)),
         'play_capsule.png': surface((132, 50), 25, focus=True),
         'glass_rail.png': surface((136, 136), 34),
+        'person_rim.png': person_art(rim=True),
+        'person_placeholder.png': person_art(),
+        'status_corner.png': corner_shade(),
+        'keyboard_fade.png': gradient((4, 270), [(0, (3,5,10,0)), (.4, (3,5,10,51)),
+                                                 (.62, (3,5,10,191)), (1, (3,5,10,220))]).resize((4,270)),
+        'sweep.png': point_sprite().resize((480, 8)),
+        'keyboard_done.png': Image.new('RGBA', (132, 68), (*FROST, 255)),
+        'busy_horizon.png': busy_frame(0, orbit=False),
     }
     textures['feature_mask.png'].putalpha(mask((880, 495), 26).resize((880, 495)))
+    textures['keyboard_done.png'].putalpha(mask((132, 68), 28).resize((132, 68)))
     for name, size in [('landscape', (335, 189)), ('poster', (160, 240)), ('wide', (410, 231)), ('square', (230, 230))]:
         shape = Image.new('RGBA', size, (255, 255, 255, 255))
         shape.putalpha(mask(size, 16).resize(size, Image.Resampling.LANCZOS))
         textures['home_' + name + '_mask.png'] = shape
     for name in ICON_PATHS:
         textures['icons/' + name + '.png'] = rasterize(icon_svg(name), 96, 96).resize((48, 48), Image.Resampling.LANCZOS)
+    for kind, icon in [('Info', 'notification'), ('Warning', 'warning'), ('Error', 'error')]:
+        textures['DefaultIcon' + kind + '.png'] = textures['icons/' + icon + '.png'].copy()
     for name, size, radius, color in [
             ('card_mask.png', (68, 68), CONSTANTS['card_border'], (255, 255, 255, 255)),
             ('circle_mask.png', (128, 128), 64, (255, 255, 255, 255)),

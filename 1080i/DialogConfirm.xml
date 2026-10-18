@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <zorder>10</zorder>
+  <defaultcontrol>10</defaultcontrol>
+  <controls>
+    <include content="DialogDim" />
+    <control type="group">
+      <left>600</left>
+      <top>380</top>
+      <width>720</width>
+      <height>320</height>
+      <include content="DialogSheet">
+        <param name="height" value="320" />
+        <param name="width" value="720" />
+      </include>
+      <control type="label" id="1">
+        <left>40</left>
+        <top>28</top>
+        <width>640</width>
+        <height>54</height>
+        <label />
+        <font>font_heading</font>
+      </control>
+      <control type="textbox" id="9">
+        <left>40</left>
+        <top>90</top>
+        <width>640</width>
+        <height>100</height>
+        <font>font_body</font>
+        <textcolor>mist</textcolor>
+        <autoscroll>false</autoscroll>
+      </control>
+      <control type="progress" id="20">
+        <left>40</left>
+        <top>204</top>
+        <width>640</width>
+        <height>6</height>
+        <texturebg border="progress_border">progress_track.png</texturebg>
+        <midtexture border="progress_border">progress_gold.png</midtexture>
+        <lefttexture />
+        <righttexture />
+        <overlaytexture />
+      </control>
+      <control type="grouplist">
+        <left>40</left>
+        <top>222</top>
+        <width>640</width>
+        <height>64</height>
+        <orientation>horizontal</orientation>
+        <itemgap>16</itemgap>
+        <include content="DialogButton">
+          <param name="id" value="10" />
+          <param name="label" value="$LOCALIZE[31072]" />
+          <param name="color" value="frost" />
+          <param name="width" value="202" />
+        </include>
+        <include content="DialogButton">
+          <param name="id" value="11" />
+          <param name="label" value="$LOCALIZE[31073]" />
+          <param name="color" value="$VAR[ConfirmYesColor]" />
+          <param name="width" value="202" />
+        </include>
+        <include content="DialogButton">
+          <param name="id" value="12" />
+          <param name="label" value="$LOCALIZE[31071]" />
+          <param name="color" value="frost" />
+          <param name="width" value="202" />
+        </include>
+        <align>center</align>
+      </control>
+    </control>
+  </controls>
+  <onunload>ClearProperty(Starlight.Confirm.Destructive,home)</onunload>
+</window>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window id="1103">
+  <defaultcontrol always="true">700</defaultcontrol>
+  <onload>SetProperty(Starlight.Person.Tab,library)</onload>
+  <controls>
+    <include content="InfoBackground">
+      <param name="art" value="special://skin/fanart.jpg" />
+      <param name="blur" value="$INFO[Window.Property(Starlight.Person.Blurred)]" />
+      <param name="bound" value="false" />
+    </include>
+    <include content="InfoClock" />
+    <control type="group">
+      <left>196</left>
+      <top>0</top>
+      <width>1644</width>
+      <height>1080</height>
+      <include content="InfoContentMotion" />
+      <control type="image">
+        <left>0</left>
+        <top>110</top>
+        <width>300</width>
+        <height>300</height>
+        <aspectratio>scale</aspectratio>
+        <texture diffuse="circle_mask.png">$VAR[PersonPortrait]</texture>
+      </control>
+      <control type="image">
+        <left>-48</left>
+        <top>62</top>
+        <width>396</width>
+        <height>396</height>
+        <texture>person_rim.png</texture>
+      </control>
+      <control type="label">
+        <left>356</left>
+        <top>118</top>
+        <width>1120</width>
+        <height>100</height>
+        <label>$INFO[Window.Property(Starlight.Person.Name)]</label>
+        <font>font_display</font>
+      </control>
+      <control type="label">
+        <left>356</left>
+        <top>226</top>
+        <width>1120</width>
+        <height>42</height>
+        <label>$INFO[Window.Property(Starlight.Person.Meta)]</label>
+        <font>font_body_large</font>
+        <textcolor>mist</textcolor>
+      </control>
+      <control type="textbox">
+        <left>356</left>
+        <top>288</top>
+        <width>1080</width>
+        <height>120</height>
+        <font>font_body_large</font>
+        <label>$VAR[PersonBiography]</label>
+        <textcolor>frost</textcolor>
+        <autoscroll>false</autoscroll>
+      </control>
+      <control type="image">
+        <left>-8</left>
+        <top>486</top>
+        <width>836</width>
+        <height>76</height>
+        <visible>ControlGroup(705).HasFocus</visible>
+        <texture border="capsule_border">glass_capsule.png</texture>
+      </control>
+      <control type="grouplist" id="705">
+        <left>0</left>
+        <top>492</top>
+        <width>1000</width>
+        <height>64</height>
+        <orientation>horizontal</orientation>
+        <itemgap>12</itemgap>
+        <onup>9000</onup>
+        <ondown>SetFocus($VAR[PersonRow])</ondown>
+        <include content="PersonTab">
+          <param name="id" value="701" />
+          <param name="key" value="library" />
+          <param name="label" value="$LOCALIZE[31043] [COLOR mist]$INFO[Container(700).NumItems][/COLOR]" />
+          <param name="width" value="320" />
+          <param name="left" value="703" />
+          <param name="right" value="702" />
+        </include>
+        <include content="PersonTab">
+          <param name="id" value="702" />
+          <param name="key" value="credits" />
+          <param name="label" value="$LOCALIZE[31044]" />
+          <param name="width" value="244" />
+          <param name="left" value="701" />
+          <param name="right" value="703" />
+        </include>
+        <include content="PersonTab">
+          <param name="id" value="703" />
+          <param name="key" value="images" />
+          <param name="label" value="$LOCALIZE[31045]" />
+          <param name="width" value="200" />
+          <param name="left" value="702" />
+          <param name="right" value="701" />
+        </include>
+      </control>
+      <control type="fixedlist" id="700">
+        <left>-24</left>
+        <top>608</top>
+        <width>1644</width>
+        <height>410</height>
+        <orientation>horizontal</orientation>
+        <focusposition>0</focusposition>
+        <onup>705</onup>
+        <ondown>705</ondown>
+        <onleft>9000</onleft>
+        <onright>700</onright>
+        <visible>String.IsEqual(Window.Property(Starlight.Person.Tab),library)</visible>
+        <content target="video" browse="never">plugin://skin.starlight/?source=person&amp;request=$INFO[Window.Property(Starlight.Person.Request)]</content>
+        <itemlayout width="229" height="410">
+          <include content="PersonCreditLayout">
+            <param name="id" value="700" />
+            <param name="selected" value="false" />
+            <param name="art" value="$VAR[HomePosterArt]" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="229" height="410">
+          <include content="PersonCreditLayout">
+            <param name="id" value="700" />
+            <param name="selected" value="true" />
+            <param name="art" value="$VAR[HomePosterArt]" />
+          </include>
+        </focusedlayout>
+        <onclick>RunScript(special://skin/resources/info.py,credit)</onclick>
+      </control>
+      <include content="EmptyInfoRow">
+        <param name="label" value="$LOCALIZE[31046]" />
+        <param name="visible" value="String.IsEqual(Window.Property(Starlight.Person.Tab),library) + Integer.IsEqual(Container(700).NumItems,0)" />
+        <param name="x" value="0" />
+        <param name="y" value="656" />
+      </include>
+      <control type="fixedlist" id="710">
+        <left>-24</left>
+        <top>608</top>
+        <width>1644</width>
+        <height>410</height>
+        <orientation>horizontal</orientation>
+        <focusposition>0</focusposition>
+        <onup>705</onup>
+        <ondown>705</ondown>
+        <onleft>9000</onleft>
+        <onright>710</onright>
+        <visible>String.IsEqual(Window.Property(Starlight.Person.Tab),credits)</visible>
+        <content target="video" browse="never">$INFO[Window.Property(Starlight.Person.CreditsPath)]</content>
+        <itemlayout width="229" height="410">
+          <include content="PersonCreditLayout">
+            <param name="id" value="710" />
+            <param name="selected" value="false" />
+            <param name="art" value="$VAR[HomePosterArt]" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="229" height="410">
+          <include content="PersonCreditLayout">
+            <param name="id" value="710" />
+            <param name="selected" value="true" />
+            <param name="art" value="$VAR[HomePosterArt]" />
+          </include>
+        </focusedlayout>
+      </control>
+      <include content="EmptyInfoRow">
+        <param name="label" value="$LOCALIZE[31049]" />
+        <param name="visible" value="String.IsEqual(Window.Property(Starlight.Person.Tab),credits) + Integer.IsEqual(Container(710).NumItems,0)" />
+        <param name="x" value="0" />
+        <param name="y" value="656" />
+      </include>
+      <control type="fixedlist" id="720">
+        <left>-24</left>
+        <top>608</top>
+        <width>1644</width>
+        <height>410</height>
+        <orientation>horizontal</orientation>
+        <focusposition>0</focusposition>
+        <onup>705</onup>
+        <ondown>705</ondown>
+        <onleft>9000</onleft>
+        <onright>720</onright>
+        <visible>String.IsEqual(Window.Property(Starlight.Person.Tab),images)</visible>
+        <content target="pictures" browse="never">$INFO[Window.Property(Starlight.Person.ImagesPath)]</content>
+        <itemlayout width="229" height="410">
+          <include content="PersonCreditLayout">
+            <param name="id" value="720" />
+            <param name="selected" value="false" />
+            <param name="art" value="$INFO[ListItem.Art(thumb)]" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="229" height="410">
+          <include content="PersonCreditLayout">
+            <param name="id" value="720" />
+            <param name="selected" value="true" />
+            <param name="art" value="$INFO[ListItem.Art(thumb)]" />
+          </include>
+        </focusedlayout>
+      </control>
+      <include content="EmptyInfoRow">
+        <param name="label" value="$LOCALIZE[31050]" />
+        <param name="visible" value="String.IsEqual(Window.Property(Starlight.Person.Tab),images) + Integer.IsEqual(Container(720).NumItems,0)" />
+        <param name="x" value="0" />
+        <param name="y" value="656" />
+      </include>
+    </control>
+    <include content="HubRail">
+      <param name="return" value="SetFocus($VAR[PersonRow])" />
+      <param name="current" value="$VAR[PersonHub]" />
+      <param name="sidefocus" value="903" />
+      <param name="topfocus" value="913" />
+    </include>
+  </controls>
+</window>

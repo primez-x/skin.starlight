@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <defaultcontrol always="true">8</defaultcontrol>
+  <onload>RunScript(special://skin/resources/info.py,initialize)</onload>
+  <onunload>ClearProperty(Starlight.Info.More)</onunload>
+  <controls>
+    <include content="InfoBackground" />
+    <include content="InfoClock" />
+    <control type="group">
+      <left>196</left>
+      <top>0</top>
+      <width>1644</width>
+      <height>1080</height>
+      <include content="InfoContentMotion" />
+      <control type="image">
+        <left>0</left>
+        <top>110</top>
+        <width>620</width>
+        <height>160</height>
+        <aspectratio align="left" aligny="center">keep</aspectratio>
+        <visible>!String.IsEmpty(ListItem.Art(clearlogo)) | !String.IsEmpty(ListItem.Art(tvshow.clearlogo))</visible>
+        <texture>$VAR[InfoLogo]</texture>
+      </control>
+      <control type="label">
+        <left>0</left>
+        <top>110</top>
+        <width>980</width>
+        <height>160</height>
+        <label>$INFO[ListItem.Title]</label>
+        <font>font_title_xl</font>
+        <visible>String.IsEmpty(ListItem.Art(clearlogo)) + String.IsEmpty(ListItem.Art(tvshow.clearlogo))</visible>
+      </control>
+      <control type="grouplist">
+        <left>0</left>
+        <top>300</top>
+        <width>1000</width>
+        <height>40</height>
+        <orientation>horizontal</orientation>
+        <itemgap>22</itemgap>
+        <control type="label">
+          <left>0</left>
+          <top>0</top>
+          <width max="180" min="1">auto</width>
+          <height>40</height>
+          <label>$VAR[InfoYear]</label>
+          <font>font_body</font>
+          <textcolor>frost</textcolor>
+          <visible>Integer.IsGreater(ListItem.Year,0)</visible>
+        </control>
+        <control type="label">
+          <left>0</left>
+          <top>0</top>
+          <width max="160" min="1">auto</width>
+          <height>40</height>
+          <label>$INFO[ListItem.Mpaa]</label>
+          <font>font_body</font>
+          <textcolor>mist</textcolor>
+          <visible>!String.IsEmpty(ListItem.Mpaa)</visible>
+        </control>
+        <control type="label">
+          <left>0</left>
+          <top>0</top>
+          <width max="160" min="1">auto</width>
+          <height>40</height>
+          <label>$INFO[Window.Property(Starlight.Info.Duration)]</label>
+          <font>font_body</font>
+          <textcolor>mist</textcolor>
+          <visible>![String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)]</visible>
+        </control>
+        <control type="label">
+          <left>0</left>
+          <top>0</top>
+          <width max="160" min="1">auto</width>
+          <height>40</height>
+          <label>$INFO[ListItem.Property(TotalSeasons)] $LOCALIZE[31081]</label>
+          <font>font_body</font>
+          <textcolor>mist</textcolor>
+          <visible>String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)</visible>
+        </control>
+        <control type="label">
+          <left>0</left>
+          <top>0</top>
+          <width max="560" min="1">auto</width>
+          <height>40</height>
+          <label>$INFO[ListItem.Genre]</label>
+          <font>font_body</font>
+          <textcolor>mist</textcolor>
+          <visible>!String.IsEmpty(ListItem.Genre)</visible>
+        </control>
+      </control>
+      <control type="grouplist">
+        <left>0</left>
+        <top>344</top>
+        <width>1000</width>
+        <height>36</height>
+        <orientation>horizontal</orientation>
+        <itemgap>22</itemgap>
+        <visible>![String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)]</visible>
+        <control type="label">
+          <left>0</left>
+          <top>0</top>
+          <width max="250" min="1">auto</width>
+          <height>36</height>
+          <label>$VAR[HomeVideoQuality]</label>
+          <font>font_body</font>
+          <textcolor>mist</textcolor>
+          <visible>!String.IsEmpty(ListItem.VideoResolution) | !String.IsEmpty(ListItem.HdrType)</visible>
+        </control>
+        <control type="label">
+          <left>0</left>
+          <top>0</top>
+          <width max="240" min="1">auto</width>
+          <height>36</height>
+          <label>$INFO[ListItem.AudioLanguage] $INFO[ListItem.AudioChannels]</label>
+          <font>font_body</font>
+          <textcolor>mist</textcolor>
+          <visible>!String.IsEmpty(ListItem.AudioLanguage)</visible>
+        </control>
+        <control type="label">
+          <left>0</left>
+          <top>0</top>
+          <width max="300" min="1">auto</width>
+          <height>36</height>
+          <label>$LOCALIZE[31082] $INFO[ListItem.SubtitleLanguage]</label>
+          <font>font_body</font>
+          <textcolor>mist</textcolor>
+          <visible>!String.IsEmpty(ListItem.SubtitleLanguage)</visible>
+        </control>
+      </control>
+      <control type="textbox" id="4">
+        <left>0</left>
+        <top>402</top>
+        <width>780</width>
+        <height>138</height>
+        <font>font_body_large</font>
+        <textcolor>frost</textcolor>
+        <label>$INFO[ListItem.Plot]</label>
+        <autoscroll>false</autoscroll>
+        <animation effect="slide" start="0,0" end="0,-42" time="0" condition="String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)">Conditional</animation>
+      </control>
+      <control type="label">
+        <left>0</left>
+        <top>560</top>
+        <width>900</width>
+        <height>36</height>
+        <label>$LOCALIZE[31067]  $INFO[ListItem.Director]</label>
+        <font>font_body</font>
+        <textcolor>mist</textcolor>
+        <visible>![String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)] + !String.IsEmpty(ListItem.Director)</visible>
+      </control>
+      <control type="image" id="3">
+        <left>0</left>
+        <top>0</top>
+        <width>1</width>
+        <height>1</height>
+        <visible>false</visible>
+        <texture />
+      </control>
+      <control type="grouplist" id="400">
+        <left>0</left>
+        <top>690</top>
+        <width>1500</width>
+        <height>64</height>
+        <orientation>horizontal</orientation>
+        <itemgap>16</itemgap>
+        <usecontrolcoords>true</usecontrolcoords>
+        <onup>9000</onup>
+        <ondown>250</ondown>
+        <animation effect="slide" start="0,0" end="0,-190" time="0" condition="String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)">Conditional</animation>
+        <control type="group">
+          <left>0</left>
+          <top>0</top>
+          <width>390</width>
+          <height>64</height>
+          <visible>![String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)] + ListItem.IsResumable</visible>
+          <control type="image">
+            <left>-48</left>
+            <top>-48</top>
+            <width>486</width>
+            <height>160</height>
+            <visible>Control.HasFocus(9)</visible>
+            <texture border="focus_glow_border">focus_glow.png</texture>
+          </control>
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>390</width>
+            <height>64</height>
+            <visible>ControlGroup(400).HasFocus + !Control.HasFocus(9)</visible>
+            <texture border="capsule_border">glass_capsule.png</texture>
+          </control>
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>390</width>
+            <height>64</height>
+            <visible>!ControlGroup(400).HasFocus</visible>
+            <texture border="capsule_border">frost_fill.png</texture>
+          </control>
+          <control type="button" id="9">
+            <left>0</left>
+            <top>0</top>
+            <width>390</width>
+            <height>64</height>
+            <label>$VAR[InfoPlayLabel]</label>
+            <textcolor>transparent</textcolor>
+            <focusedcolor>transparent</focusedcolor>
+            <onleft>9000</onleft>
+            <onright>408</onright>
+            <onup>9000</onup>
+            <ondown>250</ondown>
+          </control>
+          <control type="image">
+            <left>20</left>
+            <top>20</top>
+            <width>24</width>
+            <height>24</height>
+            <texture>icons/play.png</texture>
+          </control>
+          <control type="label">
+            <left>56</left>
+            <top>0</top>
+            <width>100</width>
+            <height>64</height>
+            <label>$VAR[InfoPlayLabel]</label>
+            <font>font_label_large</font>
+          </control>
+          <control type="progress">
+            <left>168</left>
+            <top>30</top>
+            <width>90</width>
+            <height>5</height>
+            <info>Window.Property(Starlight.Info.Progress)</info>
+            <visible>!String.IsEmpty(Window.Property(Starlight.Info.Resume))</visible>
+            <texturebg border="progress_border">progress_track.png</texturebg>
+            <midtexture border="progress_border">progress_gold.png</midtexture>
+            <lefttexture />
+            <righttexture />
+            <overlaytexture />
+          </control>
+          <control type="image">
+            <left>$INFO[Window.Property(Starlight.Info.Playhead)]</left>
+            <top>23</top>
+            <width>18</width>
+            <height>18</height>
+            <visible>!String.IsEmpty(Window.Property(Starlight.Info.Resume))</visible>
+            <texture>playhead_glow.png</texture>
+          </control>
+          <control type="label">
+            <left>274</left>
+            <top>0</top>
+            <width>100</width>
+            <height>64</height>
+            <label>$INFO[Window.Property(Starlight.Info.Time)]</label>
+            <font>font_label</font>
+          </control>
+          <control type="image">
+            <left>24</left>
+            <top>57</top>
+            <width>96</width>
+            <height>16</height>
+            <visible>Control.HasFocus(9) + !Skin.HasSetting(AmbientEffects.Disabled)</visible>
+            <texture>landing_glint.png</texture>
+            <animation effect="slide" start="0,0" end="260,0" time="650" delay="450">WindowOpen</animation>
+            <animation effect="fade" start="100" end="0" time="100" delay="1000">WindowOpen</animation>
+          </control>
+        </control>
+        <control type="group">
+          <left>0</left>
+          <top>0</top>
+          <width>390</width>
+          <height>64</height>
+          <visible>![String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)] + !ListItem.IsResumable</visible>
+          <control type="image">
+            <left>-48</left>
+            <top>-48</top>
+            <width>486</width>
+            <height>160</height>
+            <visible>Control.HasFocus(8)</visible>
+            <texture border="focus_glow_border">focus_glow.png</texture>
+          </control>
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>390</width>
+            <height>64</height>
+            <visible>ControlGroup(400).HasFocus + !Control.HasFocus(8)</visible>
+            <texture border="capsule_border">glass_capsule.png</texture>
+          </control>
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>390</width>
+            <height>64</height>
+            <visible>!ControlGroup(400).HasFocus</visible>
+            <texture border="capsule_border">frost_fill.png</texture>
+          </control>
+          <control type="button" id="8">
+            <left>0</left>
+            <top>0</top>
+            <width>390</width>
+            <height>64</height>
+            <label>$VAR[InfoPlayLabel]</label>
+            <textcolor>transparent</textcolor>
+            <focusedcolor>transparent</focusedcolor>
+            <onleft>9000</onleft>
+            <onright>401</onright>
+            <onup>9000</onup>
+            <ondown>250</ondown>
+          </control>
+          <control type="image">
+            <left>20</left>
+            <top>20</top>
+            <width>24</width>
+            <height>24</height>
+            <texture>icons/play.png</texture>
+          </control>
+          <control type="label">
+            <left>56</left>
+            <top>0</top>
+            <width>100</width>
+            <height>64</height>
+            <label>$VAR[InfoPlayLabel]</label>
+            <font>font_label_large</font>
+          </control>
+          <control type="progress">
+            <left>168</left>
+            <top>30</top>
+            <width>90</width>
+            <height>5</height>
+            <info>Window.Property(Starlight.Info.Progress)</info>
+            <visible>!String.IsEmpty(Window.Property(Starlight.Info.Resume))</visible>
+            <texturebg border="progress_border">progress_track.png</texturebg>
+            <midtexture border="progress_border">progress_gold.png</midtexture>
+            <lefttexture />
+            <righttexture />
+            <overlaytexture />
+          </control>
+          <control type="image">
+            <left>$INFO[Window.Property(Starlight.Info.Playhead)]</left>
+            <top>23</top>
+            <width>18</width>
+            <height>18</height>
+            <visible>!String.IsEmpty(Window.Property(Starlight.Info.Resume))</visible>
+            <texture>playhead_glow.png</texture>
+          </control>
+          <control type="label">
+            <left>274</left>
+            <top>0</top>
+            <width>100</width>
+            <height>64</height>
+            <label>$INFO[Window.Property(Starlight.Info.Time)]</label>
+            <font>font_label</font>
+          </control>
+          <control type="image">
+            <left>24</left>
+            <top>57</top>
+            <width>96</width>
+            <height>16</height>
+            <visible>Control.HasFocus(8) + !Skin.HasSetting(AmbientEffects.Disabled)</visible>
+            <texture>landing_glint.png</texture>
+            <animation effect="slide" start="0,0" end="260,0" time="650" delay="450">WindowOpen</animation>
+            <animation effect="fade" start="100" end="0" time="100" delay="1000">WindowOpen</animation>
+          </control>
+        </control>
+        <include content="InfoAction">
+          <param name="id" value="408" />
+          <param name="icon" value="restart" />
+          <param name="label" value="$LOCALIZE[31051]" />
+          <param name="visible" value="![String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)] + !String.IsEmpty(Window.Property(Starlight.Info.Resume))" />
+          <param name="left" value="9" />
+          <param name="right" value="401" />
+          <param name="down" value="250" />
+          <param name="onclick" value="SendClick(8)" />
+          <param name="expanded" value="320" />
+          <param name="expanded_text" value="254" />
+          <param name="expanded_glow" value="416" />
+        </include>
+        <include content="InfoAction">
+          <param name="id" value="402" />
+          <param name="icon" value="shuffle" />
+          <param name="label" value="$LOCALIZE[31054]" />
+          <param name="visible" value="String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)" />
+          <param name="onclick" value="RunScript(special://skin/resources/info.py,shuffle)" />
+          <param name="right" value="401" />
+          <param name="down" value="550" />
+        </include>
+        <include content="InfoAction">
+          <param name="id" value="401" />
+          <param name="icon" value="watched" />
+          <param name="label" value="$VAR[InfoWatchedLabel]" />
+          <param name="onclick" value="RunScript(special://skin/resources/info.py,watched)" />
+          <param name="left" value="SetFocus($VAR[InfoWatchedLeft])" />
+          <param name="right" value="403" />
+          <param name="down" value="SetFocus($VAR[InfoCastOrEpisodes])" />
+          <param name="shift" value="Control.HasFocus(402)" />
+          <param name="expanded" value="280" />
+          <param name="expanded_text" value="214" />
+          <param name="expanded_glow" value="376" />
+          <param name="shift_wide" value="Control.HasFocus(408)" />
+        </include>
+        <include content="InfoAction">
+          <param name="id" value="403" />
+          <param name="icon" value="more" />
+          <param name="label" value="$LOCALIZE[31053]" />
+          <param name="onclick" value="RunScript(special://skin/resources/info.py,more)" />
+          <param name="left" value="401" />
+          <param name="right" value="403" />
+          <param name="down" value="SetFocus($VAR[InfoCastOrEpisodes])" />
+          <param name="shift" value="Control.HasFocus(402)" />
+          <param name="onclick2" value="" />
+          <param name="shift_medium" value="Control.HasFocus(401)" />
+          <param name="shift_wide" value="Control.HasFocus(408)" />
+        </include>
+      </control>
+      <control type="list" id="50">
+        <left>0</left>
+        <top>0</top>
+        <width>1</width>
+        <height>1</height>
+        <visible>false</visible>
+      </control>
+      <control type="label">
+        <left>0</left>
+        <top>768</top>
+        <width>1200</width>
+        <height>40</height>
+        <label>$LOCALIZE[31041]</label>
+        <font>font_heading_small</font>
+        <visible>![String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)]</visible>
+      </control>
+      <control type="list" id="250">
+        <left>-24</left>
+        <top>824</top>
+        <width>1644</width>
+        <height>250</height>
+        <orientation>horizontal</orientation>
+        <focusposition>0</focusposition>
+        <onup>400</onup>
+        <ondown>400</ondown>
+        <onleft>9000</onleft>
+        <onright>250</onright>
+        <visible>[![String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)] | String.IsEqual(Window.Property(Starlight.Info.Cast),true)] + !String.IsEmpty(Window.Property(Starlight.Info.Ready))</visible>
+        <content target="video" browse="never">plugin://skin.starlight/?source=cast&amp;record=$INFO[Window.Property(Starlight.Info.DBID)]&amp;ready=$INFO[Window.Property(Starlight.Info.Ready)]</content>
+        <itemlayout width="180" height="250">
+          <include content="InfoCastLayout">
+            <param name="selected" value="false" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="180" height="250">
+          <include content="InfoCastLayout">
+            <param name="selected" value="true" />
+          </include>
+        </focusedlayout>
+        <onclick>RunScript(special://skin/resources/info.py,person)</onclick>
+        <onback>ClearProperty(Starlight.Info.Cast)</onback>
+        <onback>SetFocus(400)</onback>
+      </control>
+      <control type="fixedlist" id="550">
+        <left>-24</left>
+        <top>580</top>
+        <width>1644</width>
+        <height>340</height>
+        <orientation>horizontal</orientation>
+        <focusposition>0</focusposition>
+        <onup>400</onup>
+        <ondown>560</ondown>
+        <onleft>9000</onleft>
+        <onright>550</onright>
+        <visible>String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season) + !String.IsEmpty(Window.Property(Starlight.Info.Ready)) + !String.IsEqual(Window.Property(Starlight.Info.Cast),true)</visible>
+        <content target="video" browse="never">plugin://skin.starlight/?source=infoepisodes&amp;showid=$INFO[Window.Property(Starlight.Info.ShowID)]&amp;season=$INFO[Window.Property(Starlight.Info.Season)]&amp;revision=$INFO[Window.Property(Starlight.Info.Revision)]</content>
+        <itemlayout width="420" height="340">
+          <include content="InfoEpisodeLayout">
+            <param name="selected" value="false" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="420" height="340">
+          <include content="InfoEpisodeLayout">
+            <param name="selected" value="true" />
+          </include>
+        </focusedlayout>
+        <onclick>RunScript(special://skin/resources/info.py,play-episode)</onclick>
+      </control>
+      <include content="EmptyInfoRow">
+        <param name="label" value="$LOCALIZE[31061]" />
+        <param name="visible" value="[String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)] + String.IsEqual(Window.Property(Starlight.Info.Ready),true) + Integer.IsEqual(Container(550).NumItems,0)" />
+        <param name="x" value="0" />
+        <param name="y" value="620" />
+      </include>
+      <include content="EmptyInfoRow">
+        <param name="label" value="$LOCALIZE[31083]" />
+        <param name="visible" value="![String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)] + String.IsEqual(Window.Property(Starlight.Info.Ready),true) + Integer.IsEqual(Container(250).NumItems,0)" />
+        <param name="x" value="0" />
+        <param name="y" value="800" />
+      </include>
+      <control type="group">
+        <left>0</left>
+        <top>940</top>
+        <width>1500</width>
+        <height>64</height>
+        <visible>String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)</visible>
+        <control type="image">
+          <left>-8</left>
+          <top>-6</top>
+          <width>1000</width>
+          <height>76</height>
+          <visible>Control.HasFocus(560)</visible>
+          <texture border="capsule_border">glass_capsule.png</texture>
+        </control>
+        <control type="list" id="560">
+          <left>0</left>
+          <top>0</top>
+          <width>1500</width>
+          <height>64</height>
+          <orientation>horizontal</orientation>
+          <onup>550</onup>
+          <ondown>560</ondown>
+          <onleft>9000</onleft>
+          <onright>560</onright>
+          <content browse="never">plugin://skin.starlight/?source=seasons&amp;record=$INFO[Window.Property(Starlight.Info.DBID)]&amp;ready=$INFO[Window.Property(Starlight.Info.Ready)]</content>
+          <itemlayout width="180" height="64">
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>164</width>
+              <height>64</height>
+              <visible>!Control.HasFocus(560) + String.IsEqual(ListItem.Property(Starlight.Season),Window.Property(Starlight.Info.Season))</visible>
+              <texture border="capsule_border">frost_fill.png</texture>
+            </control>
+            <control type="label">
+              <left>0</left>
+              <top>0</top>
+              <width>164</width>
+              <height>64</height>
+              <label>$INFO[ListItem.Label]</label>
+              <font>font_label_large</font>
+              <align>center</align>
+            </control>
+          </itemlayout>
+          <focusedlayout width="180" height="64">
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>164</width>
+              <height>64</height>
+              <visible>!Control.HasFocus(560) + String.IsEqual(ListItem.Property(Starlight.Season),Window.Property(Starlight.Info.Season))</visible>
+              <texture border="capsule_border">frost_fill.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>164</width>
+              <height>64</height>
+              <visible>Control.HasFocus(560)</visible>
+              <texture border="focus_border">focus_button.png</texture>
+            </control>
+            <control type="label">
+              <left>0</left>
+              <top>0</top>
+              <width>164</width>
+              <height>64</height>
+              <label>$INFO[ListItem.Label]</label>
+              <font>font_label_large</font>
+              <align>center</align>
+            </control>
+          </focusedlayout>
+          <onclick>SetProperty(Starlight.Info.Season,$INFO[ListItem.Property(Starlight.Season)])</onclick>
+          <onclick>SetFocus(550)</onclick>
+        </control>
+      </control>
+    </control>
+    <control type="group" id="410">
+      <left>610</left>
+      <top>200</top>
+      <width>700</width>
+      <height>730</height>
+      <visible>!String.IsEmpty(Window.Property(Starlight.Info.More))</visible>
+      <include content="GlassPanel">
+        <param name="width" value="700" />
+        <param name="height" value="730" />
+      </include>
+      <control type="label">
+        <left>40</left>
+        <top>24</top>
+        <width>600</width>
+        <height>50</height>
+        <label>$LOCALIZE[31053]</label>
+        <font>font_heading</font>
+      </control>
+      <control type="grouplist">
+        <left>40</left>
+        <top>94</top>
+        <width>620</width>
+        <height>600</height>
+        <orientation>vertical</orientation>
+        <itemgap>4</itemgap>
+        <onup>410</onup>
+        <ondown>410</ondown>
+        <onback>ClearProperty(Starlight.Info.More)</onback>
+        <include content="InfoNativeOption">
+          <param name="id" value="6" />
+          <param name="label" value="$LOCALIZE[31064]" />
+          <param name="visible" value="true" />
+        </include>
+        <include content="InfoNativeOption">
+          <param name="id" value="7" />
+          <param name="label" value="$LOCALIZE[31070]" />
+          <param name="visible" value="true" />
+        </include>
+        <include content="InfoNativeOption">
+          <param name="id" value="10" />
+          <param name="label" value="$LOCALIZE[31065]" />
+          <param name="visible" value="true" />
+        </include>
+        <include content="InfoNativeOption">
+          <param name="id" value="11" />
+          <param name="label" value="$LOCALIZE[31066]" />
+          <param name="visible" value="!String.IsEmpty(ListItem.Trailer)" />
+        </include>
+        <include content="InfoNativeOption">
+          <param name="id" value="12" />
+          <param name="label" value="$LOCALIZE[31084]" />
+          <param name="visible" value="true" />
+        </include>
+        <include content="InfoNativeOption">
+          <param name="id" value="13" />
+          <param name="label" value="$LOCALIZE[31067]" />
+          <param name="visible" value="!String.IsEmpty(ListItem.Director)" />
+        </include>
+        <include content="InfoNativeOption">
+          <param name="id" value="14" />
+          <param name="label" value="$LOCALIZE[31068]" />
+          <param name="visible" value="String.IsEqual(ListItem.DBTYPE,movie)" />
+        </include>
+        <include content="InfoNativeOption">
+          <param name="id" value="15" />
+          <param name="label" value="$LOCALIZE[31069]" />
+          <param name="visible" value="String.IsEqual(ListItem.DBTYPE,movie)" />
+        </include>
+        <control type="button" id="411">
+          <left>0</left>
+          <top>0</top>
+          <width>620</width>
+          <height>56</height>
+          <label>$LOCALIZE[31057]</label>
+          <onclick>ClearProperty(Starlight.Info.More)</onclick>
+          <onclick>SetFocus(403)</onclick>
+        </control>
+        <control type="button" id="412">
+          <width>620</width>
+          <height>56</height>
+          <label>$LOCALIZE[31041]</label>
+          <onclick>RunScript(special://skin/resources/info.py,cast)</onclick>
+        </control>
+        <onback>SetFocus(403)</onback>
+      </control>
+    </control>
+    <include content="HubRail">
+      <param name="return" value="SetFocus($VAR[InfoReturn])" />
+      <param name="current" value="$VAR[InfoHub]" />
+      <param name="sidefocus" value="903" />
+      <param name="topfocus" value="913" />
+    </include>
+  </controls>
+  <onload>ClearProperty(Starlight.Info.Cast)</onload>
+</window>

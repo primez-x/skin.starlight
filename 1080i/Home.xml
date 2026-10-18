@@ -1,6 +1,7 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <window>
   <defaultcontrol always="true">510</defaultcontrol>
+  <onload>SetProperty(Starlight.Hub,home,home)</onload>
   <onload>SetProperty(Starlight.Container,510,home)</onload>
   <onload>ClearProperty(Starlight.Source.continue,home)</onload>
   <onload>ClearProperty(Starlight.Source.next,home)</onload>
@@ -149,6 +150,7 @@
           <param name="up" value="1530" />
           <param name="down" value="9000" />
         </include>
+        <pagecontrol>5500</pagecontrol>
       </control>
     </control>
     <control type="label">
@@ -177,5 +179,29 @@
       <param name="return" value="5000" />
       <param name="current" value="home" />
     </include>
+    <control type="scrollbar" id="5500">
+      <left>0</left>
+      <top>0</top>
+      <width>1</width>
+      <height>1</height>
+      <visible>false</visible>
+      <orientation>vertical</orientation>
+    </control>
+    <control type="button" id="5501">
+      <left>0</left>
+      <top>0</top>
+      <width>1</width>
+      <height>1</height>
+      <visible>false</visible>
+      <label>$INFO[Control.GetLabel(5500)]</label>
+    </control>
+    <control type="button" id="5502">
+      <left>0</left>
+      <top>0</top>
+      <width>1</width>
+      <height>1</height>
+      <visible>false</visible>
+      <label>$VAR[HomeContextPosition]</label>
+    </control>
   </controls>
 </window>

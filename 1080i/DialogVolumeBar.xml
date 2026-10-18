@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <zorder>60</zorder>
+  <controls>
+    <control type="group">
+      <left>716</left>
+      <top>40</top>
+      <width>488</width>
+      <height>72</height>
+      <include content="StatusSlot">
+        <param name="volume" value="true" />
+      </include>
+      <control type="image">
+        <left>0</left>
+        <top>0</top>
+        <width>488</width>
+        <height>72</height>
+        <texture border="capsule_border">glass_capsule.png</texture>
+      </control>
+      <control type="image">
+        <left>28</left>
+        <top>22</top>
+        <width>28</width>
+        <height>28</height>
+        <visible>!Player.Muted</visible>
+        <texture>icons/speaker.png</texture>
+      </control>
+      <control type="image">
+        <left>28</left>
+        <top>22</top>
+        <width>28</width>
+        <height>28</height>
+        <visible>Player.Muted</visible>
+        <texture>icons/muted.png</texture>
+      </control>
+      <control type="progress" id="20">
+        <left>72</left>
+        <top>32</top>
+        <width>340</width>
+        <height>8</height>
+        <info>Player.Volume</info>
+        <texturebg border="progress_border">progress_track.png</texturebg>
+        <midtexture border="progress_border">progress_frost.png</midtexture>
+        <lefttexture />
+        <righttexture />
+        <overlaytexture />
+      </control>
+      <control type="label">
+        <left>428</left>
+        <top>0</top>
+        <width>32</width>
+        <height>72</height>
+        <label>$INFO[Control.GetLabel(20)]</label>
+        <font>font_label_large</font>
+        <align>center</align>
+        <visible>!Player.Muted</visible>
+      </control>
+      <control type="label">
+        <left>414</left>
+        <top>0</top>
+        <width>56</width>
+        <height>72</height>
+        <label>$LOCALIZE[31079]</label>
+        <font>font_label_small</font>
+        <align>center</align>
+        <visible>Player.Muted</visible>
+      </control>
+    </control>
+  </controls>
+</window>

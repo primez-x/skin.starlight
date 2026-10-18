@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <zorder>10</zorder>
+  <defaultcontrol>60</defaultcontrol>
+  <controls>
+    <include content="DialogDim" />
+    <control type="group">
+      <left>380</left>
+      <top>150</top>
+      <width>1160</width>
+      <height>780</height>
+      <include content="DialogSheet">
+        <param name="width" value="1160" />
+        <param name="height" value="780" />
+      </include>
+      <control type="label" id="1">
+        <left>40</left>
+        <top>24</top>
+        <width>1080</width>
+        <height>60</height>
+        <label />
+        <font>font_heading</font>
+      </control>
+      <control type="textbox" id="5">
+        <left>40</left>
+        <top>110</top>
+        <width>1040</width>
+        <height>550</height>
+        <font>font_body</font>
+        <autoscroll>false</autoscroll>
+        <pagecontrol>60</pagecontrol>
+        <onup>5</onup>
+        <ondown>10</ondown>
+      </control>
+      <control type="button" id="10">
+        <left>440</left>
+        <top>684</top>
+        <width>280</width>
+        <height>64</height>
+        <label>$LOCALIZE[31060]</label>
+        <onclick>Dialog.Close(textviewer)</onclick>
+        <onup>60</onup>
+      </control>
+      <include content="DialogScrollbar" />
+    </control>
+  </controls>
+</window>

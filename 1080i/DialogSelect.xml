@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <zorder>10</zorder>
+  <defaultcontrol>3</defaultcontrol>
+  <controls>
+    <include content="DialogDim" />
+    <control type="group">
+      <left>580</left>
+      <top>190</top>
+      <width>760</width>
+      <height>700</height>
+      <include content="DialogSheet">
+        <param name="height" value="700" />
+        <param name="width" value="760" />
+      </include>
+      <control type="label" id="1">
+        <left>40</left>
+        <top>28</top>
+        <width>580</width>
+        <height>54</height>
+        <label />
+        <font>font_heading</font>
+      </control>
+      <control type="label" id="2">
+        <left>610</left>
+        <top>34</top>
+        <width>110</width>
+        <height>40</height>
+        <label />
+        <font>font_label</font>
+        <textcolor>mist</textcolor>
+        <align>right</align>
+      </control>
+      <control type="list" id="3">
+        <left>32</left>
+        <top>116</top>
+        <width>696</width>
+        <height>440</height>
+        <orientation>vertical</orientation>
+        <onup>3</onup>
+        <ondown>5</ondown>
+        <pagecontrol>60</pagecontrol>
+        <itemlayout width="696" height="68">
+          <include content="DialogListLayout">
+            <param name="selected" value="false" />
+            <param name="width" value="696" />
+            <param name="detailed" value="false" />
+            <param name="check_x" value="650" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="696" height="68">
+          <include content="DialogListLayout">
+            <param name="selected" value="true" />
+            <param name="width" value="696" />
+            <param name="detailed" value="false" />
+            <param name="check_x" value="650" />
+          </include>
+        </focusedlayout>
+      </control>
+      <control type="list" id="6">
+        <left>32</left>
+        <top>116</top>
+        <width>696</width>
+        <height>440</height>
+        <orientation>vertical</orientation>
+        <onup>6</onup>
+        <ondown>5</ondown>
+        <pagecontrol>60</pagecontrol>
+        <itemlayout width="696" height="68">
+          <include content="DialogListLayout">
+            <param name="selected" value="false" />
+            <param name="width" value="696" />
+            <param name="detailed" value="true" />
+            <param name="check_x" value="650" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="696" height="68">
+          <include content="DialogListLayout">
+            <param name="selected" value="true" />
+            <param name="width" value="696" />
+            <param name="detailed" value="true" />
+            <param name="check_x" value="650" />
+          </include>
+        </focusedlayout>
+      </control>
+      <control type="grouplist">
+        <left>40</left>
+        <top>604</top>
+        <width>680</width>
+        <height>64</height>
+        <orientation>horizontal</orientation>
+        <itemgap>16</itemgap>
+        <include content="DialogButton">
+          <param name="id" value="5" />
+          <param name="label" value="$LOCALIZE[31071]" />
+          <param name="width" value="216" />
+        </include>
+        <include content="DialogButton">
+          <param name="id" value="8" />
+          <param name="label" value="$LOCALIZE[31071]" />
+          <param name="width" value="216" />
+        </include>
+        <include content="DialogButton">
+          <param name="id" value="7" />
+          <param name="label" value="$LOCALIZE[31057]" />
+          <param name="width" value="216" />
+        </include>
+        <onup>SetFocus($VAR[SelectList])</onup>
+      </control>
+      <include content="DialogScrollbar">
+        <param name="x" value="738" />
+        <param name="y" value="116" />
+        <param name="height" value="440" />
+        <param name="return" value="SetFocus($VAR[SelectList])" />
+      </include>
+    </control>
+  </controls>
+</window>

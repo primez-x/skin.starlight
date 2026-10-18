@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+  <include name="DialogDim">
+    <param name="soft" default="false" />
+    <definition>
+      <control type="image">
+        <left>0</left>
+        <top>0</top>
+        <width>1920</width>
+        <height>1080</height>
+        <visible>!$PARAM[soft]</visible>
+        <texture>dim_modal.png</texture>
+      </control>
+      <control type="image">
+        <left>0</left>
+        <top>0</top>
+        <width>1920</width>
+        <height>1080</height>
+        <visible>$PARAM[soft]</visible>
+        <texture>dim_soft.png</texture>
+      </control>
+    </definition>
+  </include>
+  <include name="DialogSheet">
+    <param name="width" default="800" />
+    <param name="height" default="540" />
+    <definition>
+      <include content="GlassPanel">
+        <param name="width" value="$PARAM[width]" />
+        <param name="height" value="$PARAM[height]" />
+      </include>
+    </definition>
+  </include>
+  <include name="DialogButton">
+    <param name="id" default="0" />
+    <param name="label" default="" />
+    <param name="width" default="224" />
+    <param name="height" default="64" />
+    <param name="onclick" default="" />
+    <param name="color" default="frost" />
+    <definition>
+      <control type="button" id="$PARAM[id]">
+        <left>0</left>
+        <top>0</top>
+        <width>$PARAM[width]</width>
+        <height>$PARAM[height]</height>
+        <label>$PARAM[label]</label>
+        <onclick>$PARAM[onclick]</onclick>
+        <textcolor>$PARAM[color]</textcolor>
+        <focusedcolor>$PARAM[color]</focusedcolor>
+        <texturenofocus border="capsule_border">glass_capsule.png</texturenofocus>
+      </control>
+    </definition>
+  </include>
+  <include name="DialogListLayout">
+    <param name="selected" default="false" />
+    <param name="width" default="688" />
+    <param name="detailed" default="false" />
+    <definition>
+      <control type="group">
+        <left>0</left>
+        <top>0</top>
+        <width>$PARAM[width]</width>
+        <height>64</height>
+        <control type="image">
+          <left>-48</left>
+          <top>-48</top>
+          <width>$PARAM[width]</width>
+          <height>160</height>
+          <visible>$PARAM[selected]</visible>
+          <texture border="focus_glow_border">focus_glow.png</texture>
+        </control>
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>$PARAM[width]</width>
+          <height>64</height>
+          <visible>$PARAM[selected]</visible>
+          <texture border="focus_border">focus_button.png</texture>
+        </control>
+        <control type="image">
+          <left>16</left>
+          <top>8</top>
+          <width>48</width>
+          <height>48</height>
+          <aspectratio>keep</aspectratio>
+          <visible>$PARAM[detailed]</visible>
+          <texture>$INFO[ListItem.Icon]</texture>
+        </control>
+        <control type="label">
+          <left>24</left>
+          <top>0</top>
+          <width>620</width>
+          <height>64</height>
+          <label>$INFO[ListItem.Label]</label>
+          <font>font_label_large</font>
+          <visible>!$PARAM[detailed]</visible>
+        </control>
+        <control type="label">
+          <left>80</left>
+          <top>0</top>
+          <width>560</width>
+          <height>36</height>
+          <label>$INFO[ListItem.Label]</label>
+          <font>font_label_large</font>
+          <visible>$PARAM[detailed]</visible>
+        </control>
+        <control type="label">
+          <left>80</left>
+          <top>34</top>
+          <width>560</width>
+          <height>26</height>
+          <label>$INFO[ListItem.Label2]</label>
+          <font>font_label_small</font>
+          <textcolor>mist</textcolor>
+          <visible>$PARAM[detailed]</visible>
+        </control>
+        <control type="image">
+          <left>$PARAM[check_x]</left>
+          <top>20</top>
+          <width>24</width>
+          <height>24</height>
+          <visible>ListItem.IsSelected</visible>
+          <texture>icons/check.png</texture>
+        </control>
+      </control>
+    </definition>
+    <param name="check_x" default="640" />
+  </include>
+  <include name="StatusSlot">
+    <param name="volume" default="false" />
+    <param name="toast" default="false" />
+    <param name="background" default="false" />
+    <definition>
+      <animation effect="slide" start="0,0" end="0,196" time="180" condition="Skin.String(Hub.Navigation,top_centre) | Skin.String(Hub.Navigation,top_left)">Conditional</animation>
+      <animation effect="slide" start="0,0" end="0,88" time="180" condition="!$PARAM[volume] + Window.IsVisible(volumebar)">Conditional</animation>
+      <animation effect="slide" start="0,0" end="0,104" time="180" condition="!$PARAM[volume] + !$PARAM[toast] + Window.IsVisible(notification)">Conditional</animation>
+      <animation effect="slide" start="0,0" end="0,116" time="180" condition="!$PARAM[volume] + !$PARAM[toast] + !$PARAM[background] + Window.IsVisible(extendedprogressdialog)">Conditional</animation>
+    </definition>
+  </include>
+  <include name="BusyStars">
+    <param name="front" default="false" />
+    <definition>
+      <control type="image">
+        <left>-50</left>
+        <top>0</top>
+        <width>18</width>
+        <height>18</height>
+        <visible>String.IsEqual($PARAM[front],false)</visible>
+        <texture>star_soft.png</texture>
+        <animation effect="fade" start="15" end="65" time="900" condition="true" delay="0" pulse="true" loop="true">Conditional</animation>
+      </control>
+      <control type="image">
+        <left>-32</left>
+        <top>60</top>
+        <width>18</width>
+        <height>18</height>
+        <visible>String.IsEqual($PARAM[front],false)</visible>
+        <texture>star_soft.png</texture>
+        <animation effect="fade" start="15" end="65" time="990" condition="true" delay="170" pulse="true" loop="true">Conditional</animation>
+      </control>
+      <control type="image">
+        <left>30</left>
+        <top>-26</top>
+        <width>18</width>
+        <height>18</height>
+        <visible>String.IsEqual($PARAM[front],false)</visible>
+        <texture>star_soft.png</texture>
+        <animation effect="fade" start="15" end="65" time="1080" condition="true" delay="340" pulse="true" loop="true">Conditional</animation>
+      </control>
+      <control type="image">
+        <left>140</left>
+        <top>-32</top>
+        <width>18</width>
+        <height>18</height>
+        <visible>String.IsEqual($PARAM[front],false)</visible>
+        <texture>star_soft.png</texture>
+        <animation effect="fade" start="15" end="65" time="1170" condition="true" delay="510" pulse="true" loop="true">Conditional</animation>
+      </control>
+      <control type="image">
+        <left>240</left>
+        <top>68</top>
+        <width>18</width>
+        <height>18</height>
+        <visible>String.IsEqual($PARAM[front],false)</visible>
+        <texture>star_soft.png</texture>
+        <animation effect="fade" start="15" end="65" time="1260" condition="true" delay="680" pulse="true" loop="true">Conditional</animation>
+      </control>
+      <control type="image">
+        <left>290</left>
+        <top>-2</top>
+        <width>18</width>
+        <height>18</height>
+        <visible>String.IsEqual($PARAM[front],false)</visible>
+        <texture>star_soft.png</texture>
+        <animation effect="fade" start="15" end="65" time="1350" condition="true" delay="850" pulse="true" loop="true">Conditional</animation>
+      </control>
+      <control type="image">
+        <left>320</left>
+        <top>42</top>
+        <width>18</width>
+        <height>18</height>
+        <visible>String.IsEqual($PARAM[front],false)</visible>
+        <texture>star_soft.png</texture>
+        <animation effect="fade" start="15" end="65" time="1440" condition="true" delay="1020" pulse="true" loop="true">Conditional</animation>
+      </control>
+      <control type="image">
+        <left>190</left>
+        <top>-20</top>
+        <width>18</width>
+        <height>18</height>
+        <visible>String.IsEqual($PARAM[front],false)</visible>
+        <texture>star_soft.png</texture>
+        <animation effect="fade" start="15" end="65" time="1530" condition="true" delay="1190" pulse="true" loop="true">Conditional</animation>
+      </control>
+      <control type="image">
+        <left>80</left>
+        <top>76</top>
+        <width>18</width>
+        <height>18</height>
+        <visible>String.IsEqual($PARAM[front],false)</visible>
+        <texture>star_soft.png</texture>
+        <animation effect="fade" start="15" end="65" time="1620" condition="true" delay="1360" pulse="true" loop="true">Conditional</animation>
+      </control>
+      <control type="image">
+        <left>110</left>
+        <top>20</top>
+        <width>18</width>
+        <height>18</height>
+        <visible>String.IsEqual($PARAM[front],false)</visible>
+        <texture>star_soft.png</texture>
+        <animation effect="fade" start="15" end="65" time="1710" condition="true" delay="1530" pulse="true" loop="true">Conditional</animation>
+      </control>
+      <control type="image">
+        <left>220</left>
+        <top>30</top>
+        <width>18</width>
+        <height>18</height>
+        <visible>String.IsEqual($PARAM[front],false)</visible>
+        <texture>star_soft.png</texture>
+        <animation effect="fade" start="15" end="65" time="1800" condition="true" delay="1700" pulse="true" loop="true">Conditional</animation>
+      </control>
+      <control type="image">
+        <left>56</left>
+        <top>-6</top>
+        <width>22</width>
+        <height>22</height>
+        <visible>String.IsEqual($PARAM[front],true)</visible>
+        <texture>star_soft.png</texture>
+        <animation effect="fade" start="15" end="85" time="900" condition="true" delay="0" pulse="true" loop="true">Conditional</animation>
+      </control>
+      <control type="image">
+        <left>228</left>
+        <top>58</top>
+        <width>22</width>
+        <height>22</height>
+        <visible>String.IsEqual($PARAM[front],true)</visible>
+        <texture>star_soft.png</texture>
+        <animation effect="fade" start="15" end="85" time="990" condition="true" delay="170" pulse="true" loop="true">Conditional</animation>
+      </control>
+    </definition>
+  </include>
+  <include name="MiniHorizon">
+    <param name="x" default="14" />
+    <param name="y" default="0" />
+    <param name="size" default="80" />
+    <definition>
+      <control type="group">
+        <left>$PARAM[x]</left>
+        <top>$PARAM[y]</top>
+        <width>$PARAM[size]</width>
+        <height>$PARAM[size]</height>
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>$PARAM[size]</width>
+          <height>$PARAM[size]</height>
+          <texture>busy_horizon.png</texture>
+        </control>
+        <control type="group">
+          <width>80</width>
+          <height>80</height>
+          <animation effect="rotate" start="0" end="360" center="40,40" time="1000" loop="true" condition="true">Conditional</animation>
+          <control type="image">
+            <left>32</left>
+            <top>2</top>
+            <width>16</width>
+            <height>16</height>
+            <texture>star_soft.png</texture>
+          </control>
+        </control>
+      </control>
+    </definition>
+  </include>
+  <include name="BusyPill">
+    <definition>
+      <control type="group">
+        <left>810</left>
+        <top>40</top>
+        <width>300</width>
+        <height>80</height>
+        <include content="StatusSlot" />
+        <include content="BusyStars" />
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>300</width>
+          <height>80</height>
+          <texture border="capsule_border">glass_capsule.png</texture>
+        </control>
+        <include content="MiniHorizon" />
+        <control type="label">
+          <left>104</left>
+          <top>0</top>
+          <width>170</width>
+          <height>80</height>
+          <label>$LOCALIZE[31055]</label>
+          <font>font_label_large</font>
+        </control>
+        <include content="BusyStars">
+          <param name="front" value="true" />
+        </include>
+      </control>
+    </definition>
+  </include>
+  <include name="KeyboardKey">
+    <param name="id" default="100" />
+    <param name="x" default="0" />
+    <param name="y" default="0" />
+    <param name="width" default="142" />
+    <param name="label" default="" />
+    <param name="left" default="100" />
+    <param name="right" default="100" />
+    <param name="up" default="312" />
+    <param name="down" default="300" />
+    <param name="done" default="false" />
+    <definition>
+      <control type="group">
+        <left>$PARAM[x]</left>
+        <top>$PARAM[y]</top>
+        <width>$PARAM[width]</width>
+        <height>66</height>
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>$PARAM[width]</width>
+          <height>66</height>
+          <texture border="panel_border">glass_panel.png</texture>
+        </control>
+        <control type="image">
+          <left>-48</left>
+          <top>-48</top>
+          <width>$PARAM[width]</width>
+          <height>162</height>
+          <visible>Control.HasFocus($PARAM[id])</visible>
+          <texture border="focus_glow_border">focus_glow.png</texture>
+        </control>
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>$PARAM[width]</width>
+          <height>66</height>
+          <visible>$PARAM[done]</visible>
+          <texture border="panel_border">keyboard_done.png</texture>
+        </control>
+        <control type="button" id="$PARAM[id]">
+          <left>0</left>
+          <top>0</top>
+          <width>$PARAM[width]</width>
+          <height>66</height>
+          <label>$PARAM[label]</label>
+          <font>font_heading_small</font>
+          <onleft>$PARAM[left]</onleft>
+          <onright>$PARAM[right]</onright>
+          <onup>$PARAM[up]</onup>
+          <ondown>$PARAM[down]</ondown>
+          <textcolor>$PARAM[color]</textcolor>
+          <focusedcolor>$PARAM[color]</focusedcolor>
+          <texturefocus border="card_border">focus_card.png</texturefocus>
+          <texturenofocus />
+        </control>
+        <visible>!String.IsEmpty(Control.GetLabel($PARAM[id]))</visible>
+      </control>
+    </definition>
+    <param name="color" default="frost" />
+  </include>
+  <variable name="ConfirmYesColor">
+    <value condition="String.IsEqual(Window(home).Property(Starlight.Confirm.Destructive),true) | String.IsEqual(Control.GetLabel(11),$LOCALIZE[117]) | String.IsEqual(Control.GetLabel(11),Remove)">danger</value>
+    <value>frost</value>
+  </variable>
+  <include name="DialogScrollbar">
+    <param name="id" default="60" />
+    <param name="x" default="1120" />
+    <param name="y" default="110" />
+    <param name="height" default="550" />
+    <param name="return" default="10" />
+    <definition>
+      <control type="scrollbar" id="$PARAM[id]">
+        <left>$PARAM[x]</left>
+        <top>$PARAM[y]</top>
+        <width>8</width>
+        <height>$PARAM[height]</height>
+        <orientation>vertical</orientation>
+        <showonepage>false</showonepage>
+        <onup>$PARAM[id]</onup>
+        <ondown>$PARAM[id]</ondown>
+        <onright>$PARAM[return]</onright>
+        <onleft>$PARAM[return]</onleft>
+        <texturesliderbackground border="progress_border">progress_track.png</texturesliderbackground>
+        <texturesliderbar border="progress_border">progress_frost.png</texturesliderbar>
+        <texturesliderbarfocus border="progress_border">progress_gold.png</texturesliderbarfocus>
+        <textureslidernib />
+        <textureslidernibfocus />
+      </control>
+    </definition>
+  </include>
+  <variable name="SelectList">
+    <value condition="Control.IsVisible(6)">6</value>
+    <value>3</value>
+  </variable>
+</includes>

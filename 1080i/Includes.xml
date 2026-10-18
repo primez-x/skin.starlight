@@ -4,4 +4,6 @@
   <include file="Includes_Defaults.xml" />
   <include file="Includes_Controls.xml" />
   <include file="Includes_Home.xml" />
+  <include file="Includes_Info.xml" />
+  <include file="Includes_Dialogs.xml" />
 </includes>

@@ -14,6 +14,7 @@ from PIL import Image, ImageChops, ImageDraw, ImageFont, ImageOps
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'resources/lib'))
 from home_content import duration_label
+from skin_xml import expand
 
 
 def nine_slice(image, size, border):
@@ -88,27 +89,7 @@ class HomePreview:
         return {'continue': rows, 'movies': posters, 'next': rows[1:2], 'episodes': rows[1:2]}
 
     def expand(self, raw, parameters=None):
-        node = deepcopy(raw)
-        params = parameters or {}
-        for element in node.iter():
-            for key, value in element.attrib.items():
-                element.set(key, re.sub(r'\$PARAM\[([^]]+)\]', lambda m: params.get(m[1], m[0]), value))
-            if element.text:
-                element.text = re.sub(r'\$PARAM\[([^]]+)\]', lambda m: params.get(m[1], m[0]), element.text)
-        children = []
-        for child in node:
-            if child.tag != 'include':
-                children.append(self.expand(child))
-                continue
-            if not self.condition(child.get('condition', 'true')):
-                continue
-            definition = self.includes[child.get('content') or child.text]
-            local = {p.get('name'): p.get('default') for p in definition.findall('param')}
-            local.update({p.get('name'): p.get('value') for p in child.findall('param')})
-            body = definition.find('definition')
-            children.extend(self.expand(body if body is not None else definition, local))
-        node[:] = children
-        return node
+        return expand(raw, self.includes, self.condition, parameters)
 
     @staticmethod
     def split(value, delimiter):
@@ -122,6 +103,7 @@ class HomePreview:
 
     def info(self, text):
         text = text.strip()
+        if text.startswith('$'): return self.resolve(text)
         if text == 'System.Time': return '1:01 PM'
         if text == 'Weather.Temperature': return '64°'
         if text == 'Weather.Conditions': return 'Clear'
@@ -179,10 +161,10 @@ class HomePreview:
             return a == b if match[1] == 'Integer.IsEqual' else a > b
         raise ValueError('Unsupported preview condition: ' + expression)
 
-    def number(self, value): return round(float(self.resolve(self.constants.get(value, value))))
+    def number(self, value): return round(float(self.resolve(self.constants.get(value, value)) or 0))
 
     def label_style(self, node):
-        text = self.resolve(node.findtext('label', ''))
+        text = re.sub(r'\[/?(?:COLOR[^\]]*|B|I)\]', '', self.resolve(node.findtext('label', '')))
         spec = self.fonts[node.findtext('font', 'font_body')]
         if 'uppercase' in spec.findtext('style', '').split():
             text = text.upper()
@@ -198,6 +180,7 @@ class HomePreview:
         return self.number(node.findtext(key, str(fallback)))
 
     def color(self, value):
+        value = self.resolve(value)
         value = self.colors.get(value, value)
         a, r, g, b = (int(value[n:n + 2], 16) for n in (0, 2, 4, 6))
         return r, g, b, a
@@ -228,10 +211,16 @@ class HomePreview:
                 dx, dy = map(float, anim.get('end').split(',')); x += round(dx); y += round(dy)
             if anim.get('effect') == 'zoom': zooms.append(anim)
         background = self.canvas
-        if zooms: self.canvas = Image.new('RGBA', background.size)
+        # Retain edge pixels until the group transform places those pixels onscreen.
+        if zooms: self.canvas = Image.new('RGBA', (background.width + 256, background.height + 256))
         if kind in ('group', 'grouplist'):
             offset = 0
             horizontal = node.findtext('orientation') == 'horizontal'
+            if kind == 'grouplist' and horizontal and node.findtext('align') == 'center':
+                children = [child for child in node.findall('control') if self.condition(child.findtext('visible', 'true'))]
+                total = sum(self.extent(child,'width',0) for child in children)
+                total += max(0,len(children)-1) * self.number(node.findtext('itemgap','5'))
+                offset = max(0, (w-total)//2)
             for child in node.findall('control'):
                 self.draw(child, (x + offset if horizontal else x, y if horizontal else y + offset), (w, h), opacity)
                 if kind == 'grouplist' and self.condition(child.findtext('visible', 'true')):
@@ -241,15 +230,16 @@ class HomePreview:
             old = self.item; rows = self.containers[int(node.get('id'))]
             for index, item in enumerate(rows):
                 self.item = item
-                layout = node.find('focusedlayout' if index == 0 else 'itemlayout')
+                selected = getattr(self, 'selected', {}).get(int(node.get('id')), 0)
+                layout = node.find('focusedlayout' if index == selected else 'itemlayout')
                 lw, lh = self.number(layout.get('width')), self.number(layout.get('height'))
-                columns = max(1, w // lw) if kind == 'panel' else len(rows)
+                columns = max(1, w // lw) if kind == 'panel' else 1 if node.findtext('orientation') == 'vertical' else len(rows)
                 xx, yy = x + (index % columns) * lw, y + (index // columns) * lh
                 for child in layout.findall('control'): self.draw(child, (xx, yy), (lw, lh), opacity)
             self.item = old
         else:
             tex = node.find('texture')
-            if kind == 'button': tex = node.find('texturefocus' if self.focus == int(node.get('id', '0')) else 'texturenofocus')
+            if kind in ('button', 'edit'): tex = node.find('texturefocus' if self.focus == int(node.get('id', '0')) else 'texturenofocus')
             if kind == 'progress': tex = node.find('texturebg')
             name = self.resolve(tex.text) if tex is not None and tex.text else ''
             if name:
@@ -268,24 +258,36 @@ class HomePreview:
                     if value:
                         fill = self.texture(node.findtext('midtexture')).resize((max(1, round(w*value/100)), h))
                         self.canvas.alpha_composite(fill, (x,y))
-            if kind in ('label', 'button'):
+            if kind in ('label', 'button', 'edit', 'fadelabel', 'textbox'):
                 text, font, aspect = self.label_style(node)
                 color = self.color(node.findtext('textcolor', 'frost')); color = (*color[:3], round(color[3]*opacity))
                 align = node.findtext('align', 'left'); anchor = {'left':'lm','center':'mm','right':'rm'}[align]
-                if font.getlength(text) * aspect > w:
+                if kind != 'textbox' and font.getlength(text) * aspect > w:
                     while text and font.getlength(text + '…') * aspect > w:
                         text = text[:-1]
                     text += '…'
                 layer = Image.new('RGBA', (max(1, round(w / aspect)), h))
                 tx = {'left':0,'center':layer.width/2,'right':layer.width}[align]
-                ImageDraw.Draw(layer).text((tx,h/2),text,font=font,fill=color,anchor=anchor)
+                if kind == 'textbox':
+                    words = text.split(); lines = []; line = ''
+                    for word in words:
+                        candidate = (line + ' ' + word).strip()
+                        if line and font.getlength(candidate) * aspect > w:
+                            lines.append(line); line = word
+                        else: line = candidate
+                    if line: lines.append(line)
+                    spacing = round(font.size * 1.5)
+                    for index, line in enumerate(lines[:max(1, h // spacing)]):
+                        ImageDraw.Draw(layer).text((0,index*spacing),line,font=font,fill=color,anchor='lt')
+                else:
+                    ImageDraw.Draw(layer).text((tx,h/2),text,font=font,fill=color,anchor=anchor)
                 self.canvas.alpha_composite(layer.resize((w,h), Image.Resampling.BICUBIC), (x,y))
         for anim in zooms:
             end = [float(a)/100 for a in anim.get('end').split(',')]; zx,zy = end if len(end)==2 else end*2
             cx,cy = map(float,anim.get('center','0,0').split(',')); cx+=x;cy+=y
             self.canvas=self.canvas.transform(self.canvas.size,Image.Transform.AFFINE,
                 (1/zx,0,cx*(1-1/zx),0,1/zy,cy*(1-1/zy)),Image.Resampling.BICUBIC)
-        if zooms:self.canvas=Image.alpha_composite(background,self.canvas)
+        if zooms:self.canvas=Image.alpha_composite(background,self.canvas.crop((0,0,*background.size)))
 
     def save(self, output):
         for node in self.home.findall('controls/control'): self.draw(node)

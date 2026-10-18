@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <zorder>62</zorder>
+  <controls>
+    <control type="group">
+      <left>650</left>
+      <top>40</top>
+      <width>620</width>
+      <height>100</height>
+      <include content="StatusSlot">
+        <param name="background" value="true" />
+      </include>
+      <include content="BusyStars" />
+      <control type="image">
+        <left>0</left>
+        <top>0</top>
+        <width>620</width>
+        <height>100</height>
+        <texture border="capsule_border">glass_capsule.png</texture>
+      </control>
+      <include content="MiniHorizon">
+        <param name="y" value="10" />
+      </include>
+      <control type="label" id="30">
+        <left>102</left>
+        <top>10</top>
+        <width>490</width>
+        <height>36</height>
+        <label />
+        <font>font_label_large</font>
+      </control>
+      <control type="label" id="31">
+        <left>102</left>
+        <top>42</top>
+        <width>490</width>
+        <height>28</height>
+        <label />
+        <font>font_label_small</font>
+        <textcolor>mist</textcolor>
+      </control>
+      <control type="progress" id="32">
+        <left>102</left>
+        <top>80</top>
+        <width>490</width>
+        <height>5</height>
+        <texturebg border="progress_border">progress_track.png</texturebg>
+        <midtexture border="progress_border">progress_gold.png</midtexture>
+        <lefttexture />
+        <righttexture />
+        <overlaytexture />
+      </control>
+      <include content="BusyStars">
+        <param name="front" value="true" />
+      </include>
+    </control>
+  </controls>
+</window>
