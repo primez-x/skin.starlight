@@ -27,7 +27,7 @@
 - Do not add helper dependencies for the foundation.
 - Manrope source: `https://github.com/google/fonts/tree/b31870aff700ab7a1d74fa0c6887d95beb9e0037/ofl/manrope`.
 - The bundled static fonts use weight values 300, 400, 600, and 700 from the official variable font.
-- Preserve `fonts/OFL.txt`. The skin license remains a placeholder until the owner chooses the license.
+- License: GPL-2.0-or-later (`LICENSE.txt`). The Manrope fonts keep the OFL; preserve `fonts/OFL.txt`.
 - Kodi 21.3 GUI API: `https://github.com/xbmc/xbmc/blob/21.3-Omega/addons/xbmc.gui/addon.xml`.
 - Native image transforms: `https://github.com/xbmc/xbmc/blob/21.3-Omega/xbmc/TextureCacheJob.cpp`.
 - Library query fields: `https://github.com/xbmc/xbmc/blob/21.3-Omega/xbmc/interfaces/json-rpc/schema/types.json`.
