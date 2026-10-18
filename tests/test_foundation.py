@@ -175,11 +175,33 @@ class FoundationTests(unittest.TestCase):
 
     def test_home_replaces_foundation_board(self):
         home = ET.parse(ROOT / '1080i/Home.xml')
-        self.assertEqual(home.findtext('defaultcontrol'), '510')
         self.assertTrue(any(n.get('content') == 'HubRail' for n in home.iter('include')))
         self.assertTrue((ROOT / '1080i/Includes_Home.xml').is_file())
         for name in ('search', 'home', 'movies', 'tv', 'music', 'discover', 'settings', 'play'):
             self.assertTrue((ROOT / 'media/icons' / (name + '.png')).is_file(), name)
+
+    def test_home_default_focus_exists_in_every_layout(self):
+        from render_home import HomePreview
+        focusable = {'list', 'fixedlist', 'panel', 'button'}
+        for layout in ('', 'board', 'hero', 'landscape', 'poster', 'square'):
+            with self.subTest(layout=layout):
+                preview = HomePreview(ROOT, settings={'Home.Continue.Layout': layout})
+                home = preview.home
+                controls = {node.get('id'): node for node in home.iter('control') if node.get('id')}
+                target = home.findtext('defaultcontrol')
+                self.assertIn(target, controls)
+                control = controls[target]
+                while control.get('type') not in focusable:
+                    default = control.findtext('defaultcontrol')
+                    descendants = {node.get('id'): node for node in control.iter('control')
+                                   if node is not control and node.get('id')}
+                    if default:
+                        self.assertIn(default, descendants)
+                        control = descendants[default]
+                    else:
+                        control = next(node for node in descendants.values()
+                                       if node.get('type') in focusable)
+                self.assertIn(control.get('id'), ('510', '512'))
 
     def test_localized_labels_resolve(self):
         source = (ROOT / 'language/resource.language.en_gb/strings.po').read_text()

@@ -155,7 +155,7 @@
             <param name="return" value="$PARAM[return]" />
             <param name="onup" value="902" />
             <param name="ondown" value="904" />
-            <param name="onclick" value="ActivateWindow(Videos,videodb://movies/titles/,return)" />
+            <param name="onclick" value="ActivateWindow(Videos,videodb://movies/titles/)" />
           </include>
           <include content="HubRailItem">
             <param name="y" value="236" />
@@ -165,7 +165,7 @@
             <param name="return" value="$PARAM[return]" />
             <param name="onup" value="903" />
             <param name="ondown" value="905" />
-            <param name="onclick" value="ActivateWindow(Videos,videodb://tvshows/titles/,return)" />
+            <param name="onclick" value="ActivateWindow(Videos,videodb://tvshows/titles/)" />
           </include>
           <include content="HubRailItem">
             <param name="y" value="306" />
@@ -175,7 +175,7 @@
             <param name="return" value="$PARAM[return]" />
             <param name="onup" value="904" />
             <param name="ondown" value="906" />
-            <param name="onclick" value="ActivateWindow(Music,musicdb://,return)" />
+            <param name="onclick" value="ActivateWindow(Music,musicdb://)" />
           </include>
           <include content="HubRailItem">
             <param name="y" value="376" />
@@ -309,7 +309,7 @@
             <onup>$PARAM[return]</onup>
             <ondown>$PARAM[return]</ondown>
             <onclick>SetProperty(Starlight.Hub,movies,home)</onclick>
-            <onclick>ActivateWindow(Videos,videodb://movies/titles/,return)</onclick>
+            <onclick>ActivateWindow(Videos,videodb://movies/titles/)</onclick>
           </control>
           <control type="image">
             <left>612</left>
@@ -338,7 +338,7 @@
             <onup>$PARAM[return]</onup>
             <ondown>$PARAM[return]</ondown>
             <onclick>SetProperty(Starlight.Hub,tv,home)</onclick>
-            <onclick>ActivateWindow(Videos,videodb://tvshows/titles/,return)</onclick>
+            <onclick>ActivateWindow(Videos,videodb://tvshows/titles/)</onclick>
           </control>
           <control type="image">
             <left>816</left>
@@ -367,7 +367,7 @@
             <onup>$PARAM[return]</onup>
             <ondown>$PARAM[return]</ondown>
             <onclick>SetProperty(Starlight.Hub,music,home)</onclick>
-            <onclick>ActivateWindow(Music,musicdb://,return)</onclick>
+            <onclick>ActivateWindow(Music,musicdb://)</onclick>
           </control>
           <control type="image">
             <left>1020</left>

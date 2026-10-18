@@ -34,6 +34,43 @@ class LibraryTests(unittest.TestCase):
                     self.assertEqual(controls[identity].findtext('onleft'), '9000')
                 self.assertIn('resources/library.py,views', ET.tostring(tree, encoding='unicode'))
 
+    def test_hub_library_routes_open_the_requested_directory(self):
+        tree = ET.parse(ROOT / '1080i/Includes_Home.xml')
+        routes = [value for node in tree.iter()
+                  for value in [node.text or '', node.get('value', '')]
+                  if re.match(r'ActivateWindow\((Videos|Music),', value)]
+        self.assertEqual(len(routes), 6)
+        for route in routes:
+            with self.subTest(route=route):
+                self.assertNotRegex(route, r',\s*return\s*\)')
+
+    def test_genre_selection_uses_native_folder_paths_and_rejects_commands(self):
+        from types import SimpleNamespace
+        tree = ast.parse((ROOT / 'resources/library.py').read_text())
+        function = next(node for node in tree.body
+                        if isinstance(node, ast.FunctionDef) and node.name == 'category')
+        for window_id in (10025, 10502):
+            for control in (700, 701):
+                for path in ('videodb://movies/genres/2/', 'videodb://tvshows/genres/3/',
+                             'musicdb://genres/4/', '', 'https://example.com/',
+                             'videodb://movies/genres/2/),Quit()'):
+                    with self.subTest(window=window_id, control=control, path=path):
+                        actions, properties, focus = [], {}, []
+                        window = SimpleNamespace(setProperty=properties.__setitem__,
+                                                 getProperty=lambda key: '4212',
+                                                 setFocusId=focus.append)
+                        fields = {'FolderPath': path, 'FileNameAndPath': '', 'Label': 'Adventure'}
+                        namespace = {'re': re, 'selected': lambda identity, field: fields[field],
+                                     'xbmc': SimpleNamespace(executebuiltin=actions.append),
+                                     'xbmcgui': SimpleNamespace(Window=lambda identity: window,
+                                                               getCurrentWindowId=lambda: window_id)}
+                        exec(compile(ast.Module(body=[function], type_ignores=[]), '<category>', 'exec'), namespace)
+                        namespace['category'](control)
+                        valid = path.startswith(('videodb://', 'musicdb://')) and ')' not in path
+                        self.assertEqual(actions, ['Container.Update(' + path + ')'] if valid else [])
+                        self.assertEqual(focus, [4212] if valid else [])
+                        self.assertEqual(properties, {'Starlight.Library.Genre': 'Adventure'} if valid else {})
+
     def test_view_registry_matches_runtime_and_preview(self):
         from render_library import VIEW_IDS
         self.assertEqual(tuple(VIEW_IDS), tuple(sorted(VIEWS)))

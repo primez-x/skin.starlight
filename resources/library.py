@@ -291,7 +291,7 @@ def views():
 
 
 def category(control):
-    path = selected(control, 'FileNameAndPath')
+    path = selected(control, 'FolderPath')
     # Native directory URLs contain only database paths and numeric query values.
     if re.fullmatch(r'(?:videodb|musicdb)://[A-Za-z0-9_/?=&.%-]+', path):
         window = xbmcgui.Window(xbmcgui.getCurrentWindowId())

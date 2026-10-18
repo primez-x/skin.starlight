@@ -57,6 +57,12 @@ WINDOW_IDS = {
 
 
 class WindowTests(unittest.TestCase):
+    def test_shared_labels_keep_selected_rows_visible(self):
+        defaults = ET.parse(ROOT / '1080i/Includes_Defaults.xml')
+        label = defaults.find("default[@type='label']")
+        self.assertEqual(label.findtext('selectedcolor'), label.findtext('textcolor'))
+        self.assertIsNotNone(label.find('selectedcolor'))
+
     def test_cast_requests_person_data_after_the_page_opens(self):
         source = ast.parse((ROOT / 'resources/info.py').read_text())
         function = next(node for node in source.body if isinstance(node, ast.FunctionDef)

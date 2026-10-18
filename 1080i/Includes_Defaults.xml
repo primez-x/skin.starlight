@@ -3,6 +3,7 @@
   <default type="label">
     <font>font_body</font>
     <textcolor>frost</textcolor>
+    <selectedcolor>frost</selectedcolor>
     <aligny>center</aligny>
     <height>40</height>
     <scroll>false</scroll>

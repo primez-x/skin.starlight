@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window>
-  <defaultcontrol always="true">510</defaultcontrol>
+  <defaultcontrol always="true">1510</defaultcontrol>
   <onload>SetProperty(Starlight.Hub,home,home)</onload>
   <onload>SetProperty(Starlight.Container,510,home)</onload>
   <onload>ClearProperty(Starlight.Source.continue,home)</onload>
