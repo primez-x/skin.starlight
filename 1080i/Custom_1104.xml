@@ -32,7 +32,7 @@
       <top>144</top>
       <width>1100</width>
       <height>40</height>
-      <label>$INFO[MusicPlayer.Artist]$INFO[MusicPlayer.Album, · ,]</label>
+      <label>$VAR[PlayerMusicDetail]</label>
       <font>font_body_large</font>
       <textcolor>mist</textcolor>
     </control>
@@ -44,7 +44,7 @@
     </include>
     <control type="grouplist">
       <left>120</left>
-      <top>280</top>
+      <top>256</top>
       <width>1120</width>
       <height>40</height>
       <orientation>horizontal</orientation>
@@ -66,7 +66,7 @@
     </control>
     <control type="label">
       <left>120</left>
-      <top>692</top>
+      <top>722</top>
       <width>1120</width>
       <height>40</height>
       <label>$LOCALIZE[31210]</label>
@@ -85,6 +85,7 @@
       <onback>ActivateWindow(visualisation)</onback>
       <ondown>520</ondown>
       <onclick>RunScript(special://skin/resources/player.py,queue-play,510)</onclick>
+      <content target="music" browse="never">plugin://skin.starlight/?source=queueresults&amp;row=next&amp;revision=$INFO[Window.Property(Starlight.Queue.Revision)]</content>
       <itemlayout width="264" height="322">
         <include content="QueueCard">
           <param name="size" value="230" />
@@ -102,9 +103,9 @@
     </control>
     <control type="fixedlist" id="520">
       <left>120</left>
-      <top>772</top>
+      <top>819</top>
       <width>1800</width>
-      <height>246</height>
+      <height>261</height>
       <orientation>horizontal</orientation>
       <focusposition>0</focusposition>
       <scrolltime>220</scrolltime>
@@ -112,6 +113,7 @@
       <onback>ActivateWindow(visualisation)</onback>
       <ondown>510</ondown>
       <onclick>RunScript(special://skin/resources/player.py,queue-play,520)</onclick>
+      <content target="music" browse="never">plugin://skin.starlight/?source=queueresults&amp;row=played&amp;revision=$INFO[Window.Property(Starlight.Queue.Revision)]</content>
       <itemlayout width="204" height="246">
         <control type="group">
           <left>0</left>

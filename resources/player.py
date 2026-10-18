@@ -1,4 +1,5 @@
 """Skin-owned music presentation. Kodi and providers own playback."""
+import json
 from pathlib import Path
 import sys
 import time
@@ -35,7 +36,9 @@ def monitor_stage():
         if xbmc.getCondVisibility('Window.IsActive(visualisation)'):
             # Fresh wrappers read the native auto-width label after GUI text layout.
             window = xbmcgui.Window(VISUALISATION)
-            left, width = pill_geometry(window.getControl(601).getWidth())
+            title_width = min(1000, window.getControl(601).getWidth())
+            artist = window.getControl(604)
+            left, width = pill_geometry(title_width + artist.getWidth())
             if (left, width) != previous_geometry:
                 window.getControl(600).setPosition(left, 972)
                 window.getControl(602).setWidth(width)
@@ -48,32 +51,32 @@ def monitor_stage():
 
 
 def populate_queue(window, snapshot):
-    for identity, key in ((510, 'next'), (520, 'played')):
-        control = window.getControl(identity)
-        # These lists belong to Python. Keep focus on the same queue entry after refresh.
-        old = control.getSelectedItem() if control.size() else None
-        selected = old.getProperty('Starlight.Queue.Position') if old else ''
-        control.reset()
-        rows = snapshot[key] if snapshot else []
-        items = []
-        for row in rows:
-            item = xbmcgui.ListItem(label=row.get('title') or row.get('label', ''),
-                                   label2=' / '.join(row.get('artist', [])))
-            art = row.get('art', {})
-            item.setArt({'thumb': art.get('thumb') or art.get('poster') or 'special://skin/media/player/album_placeholder.png'})
-            item.setProperty('Starlight.Action', xbmc.getLocalizedString(31201))
-            if row.get('duration'):
-                item.setProperty('Starlight.Time', duration_label(row['duration'] / 60, xbmc.getLocalizedString(31039), xbmc.getLocalizedString(31019)))
-            item.setProperty('Starlight.Queue.Position', str(row['position']))
-            item.setProperty('Starlight.Queue.File', row.get('file', ''))
-            items.append(item)
-        control.addItems(items)
-        index = next((n for n, row in enumerate(rows) if str(row['position']) == selected), 0)
-        if rows:
-            control.selectItem(index)
+    window.setProperty('Starlight.Queue.Items', json.dumps(snapshot or {}))
+    window.setProperty('Starlight.Queue.Revision', str(time.monotonic_ns()))
     window.setProperty('Starlight.Queue.Count', str(snapshot['total']) if snapshot else '0')
     window.setProperty('Starlight.Queue.NextCount', str(len(snapshot['next'])) if snapshot else '0')
     window.setProperty('Starlight.Queue.Ready', 'true')
+
+
+def queue_listing(handle, args):
+    import xbmcplugin
+    key = args.get('row', ['next'])[0]
+    if key not in ('next', 'played'):
+        xbmcplugin.endOfDirectory(handle, succeeded=False)
+        return
+    snapshot = json.loads(xbmcgui.Window(QUEUE).getProperty('Starlight.Queue.Items') or '{}')
+    for row in snapshot.get(key, []):
+        item = xbmcgui.ListItem(label=row.get('title') or row.get('label', ''),
+                               label2=' / '.join(row.get('artist', [])), path=row.get('file', ''))
+        art = row.get('art', {})
+        item.setArt({'thumb': art.get('thumb') or art.get('poster') or 'special://skin/media/player/album_placeholder.png'})
+        item.setProperty('Starlight.Action', xbmc.getLocalizedString(31201))
+        if row.get('duration'):
+            item.setProperty('Starlight.Time', duration_label(row['duration'] / 60, xbmc.getLocalizedString(31039), xbmc.getLocalizedString(31019)))
+        item.setProperty('Starlight.Queue.Position', str(row['position']))
+        item.setProperty('Starlight.Queue.File', row.get('file', ''))
+        xbmcplugin.addDirectoryItem(handle, '', item, isFolder=False)
+    xbmcplugin.endOfDirectory(handle, cacheToDisc=False)
 
 
 class QueueMonitor(xbmc.Monitor):
@@ -98,7 +101,7 @@ def monitor_queue():
             current = state, monitor.revision
             if current != previous:
                 snapshot = queue_snapshot(rpc) if state else None
-                if window.getProperty('Starlight.Queue.Request') != token or not xbmc.getCondVisibility(f'Window.IsActive({QUEUE})'):
+                if not xbmc.getCondVisibility(f'Window.IsActive({QUEUE})') or window.getProperty('Starlight.Queue.Request') != token:
                     break
                 window.clearProperty('Starlight.Queue.Error')
                 populate_queue(window, snapshot)
@@ -107,7 +110,7 @@ def monitor_queue():
                     window.setFocusId(510 if snapshot and snapshot['next'] else 900)
                 first = False
         except (RuntimeError, ValueError, KeyError):
-            if window.getProperty('Starlight.Queue.Request') != token or not xbmc.getCondVisibility(f'Window.IsActive({QUEUE})'):
+            if not xbmc.getCondVisibility(f'Window.IsActive({QUEUE})') or window.getProperty('Starlight.Queue.Request') != token:
                 break
             populate_queue(window, None)
             window.setProperty('Starlight.Queue.Error', 'true')
@@ -120,11 +123,15 @@ def monitor_queue():
 def queue_play(identity):
     if identity not in ('510', '520') or not xbmc.getCondVisibility(f'Window.IsActive({QUEUE})'):
         return
+    window = xbmcgui.Window(QUEUE)
+    request = window.getProperty('Starlight.Queue.Request')
     prefix = f'Container({identity}).ListItem.Property(Starlight.Queue.'
     position = xbmc.getInfoLabel(prefix + 'Position)')
     path = xbmc.getInfoLabel(prefix + 'File)')
     if play_queue_item(position, path, rpc):
-        xbmc.executebuiltin('ActivateWindow(visualisation)')
+        if (xbmc.getCondVisibility(f'Window.IsActive({QUEUE})')
+                and window.getProperty('Starlight.Queue.Request') == request):
+            xbmc.executebuiltin('ActivateWindow(visualisation)')
     else:
         xbmcgui.Dialog().notification('Starlight', xbmc.getLocalizedString(31218))
 

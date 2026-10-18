@@ -27,10 +27,10 @@
       <width>760</width>
       <height>600</height>
       <orientation>vertical</orientation>
-      <onleft>9000</onleft>
-      <onup>9000</onup>
-      <ondown>9000</ondown>
-      <onright>9000</onright>
+      <onleft>414</onleft>
+      <onup>450</onup>
+      <ondown>413</ondown>
+      <onright>413</onright>
       <include content="SettingsDirectoryLayouts">
         <param name="width" value="760" />
         <param name="id" value="450" />
@@ -41,8 +41,9 @@
       <top>300</top>
       <width>760</width>
       <height>600</height>
-      <visible>false</visible>
-      <onup>413</onup>
+      <onup>451</onup>
+      <onleft>414</onleft>
+      <onright>413</onright>
       <ondown>413</ondown>
       <itemlayout width="250" height="180">
         <control type="image">

@@ -38,8 +38,8 @@
       <width>864</width>
       <height>24</height>
       <texturesliderbar>progress_track.png</texturesliderbar>
-      <textureslidernib>palette_frost.png</textureslidernib>
-      <textureslidernibfocus>palette_gold.png</textureslidernibfocus>
+      <textureslidernib>progress_playhead.png</textureslidernib>
+      <textureslidernibfocus>progress_playhead.png</textureslidernibfocus>
       <onup>11</onup>
       <ondown>11</ondown>
     </control>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <defaultcontrol always="true">10</defaultcontrol>
+  <controls>
+    <include content="DialogDim" />
+    <control type="group">
+      <left>420</left><top>180</top><width>1080</width><height>720</height>
+      <include content="DialogSheet"><param name="width" value="1080" /><param name="height" value="720" /></include>
+      <control type="label" id="2">
+        <left>40</left><top>28</top><width>1000</width><height>64</height><font>font_heading</font><label />
+      </control>
+      <control type="list" id="10">
+        <left>40</left><top>120</top><width>740</width><height>160</height>
+        <onright>11</onright><onup>19</onup><ondown>12</ondown>
+        <include content="SettingsDirectoryLayouts"><param name="width" value="740" /><param name="id" value="10" /></include>
+      </control>
+      <control type="button" id="11">
+        <left>820</left><top>120</top><width>220</width><height>64</height><font>font_label_large</font><label>$LOCALIZE[1024]</label>
+        <onleft>10</onleft><onup>19</onup><ondown>13</ondown>
+      </control>
+      <control type="button" id="13">
+        <left>820</left><top>200</top><width>220</width><height>64</height><font>font_label_large</font><label>$LOCALIZE[15019]</label>
+        <onleft>10</onleft><onup>11</onup><ondown>14</ondown>
+      </control>
+      <control type="button" id="14">
+        <left>820</left><top>280</top><width>220</width><height>64</height><font>font_label_large</font><label>$LOCALIZE[1210]</label>
+        <onleft>10</onleft><onup>13</onup><ondown>12</ondown>
+      </control>
+      <control type="label">
+        <left>40</left><top>372</top><width>1000</width><height>42</height><font>font_body</font><textcolor>mist</textcolor><label>$LOCALIZE[1022]</label>
+      </control>
+      <control type="edit" id="12">
+        <left>40</left><top>430</top><width>1000</width><height>64</height><font>font_body</font>
+        <textoffsetx>24</textoffsetx><label /><onup>10</onup><ondown>19</ondown><onleft>10</onleft><onright>19</onright>
+        <texturefocus border="focus_border">focus_button.png</texturefocus><texturenofocus border="capsule_border">frost_fill.png</texturenofocus>
+      </control>
+      <control type="button" id="18">
+        <left>560</left><top>610</top><width>220</width><height>64</height><font>font_label_large</font><label>$LOCALIZE[186]</label>
+        <onleft>19</onleft><onright>19</onright><onup>12</onup><ondown>10</ondown>
+      </control>
+      <control type="button" id="19">
+        <left>820</left><top>610</top><width>220</width><height>64</height><font>font_label_large</font><label>$LOCALIZE[222]</label>
+        <onleft>18</onleft><onright>18</onright><onup>12</onup><ondown>10</ondown>
+      </control>
+    </control>
+  </controls>
+</window>

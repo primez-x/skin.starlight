@@ -55,7 +55,7 @@
       <top>730</top>
       <width>1440</width>
       <height>40</height>
-      <label>$INFO[MusicPlayer.Artist]$INFO[MusicPlayer.Album, · ,]</label>
+      <label>$VAR[PlayerMusicDetail]</label>
       <font>font_body_large</font>
       <textcolor>mist</textcolor>
       <align>center</align>

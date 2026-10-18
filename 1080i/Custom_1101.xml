@@ -1,42 +1,199 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <window id="1101">
-  <defaultcontrol>901</defaultcontrol>
+  <defaultcontrol always="true">510</defaultcontrol>
   <onload>SetProperty(Starlight.Hub,discover,home)</onload>
+  <onload>SetProperty(Starlight.Discover.Hub,trending)</onload>
+  <onload>RunScript(special://skin/resources/library.py,discover-monitor)</onload>
   <controls>
-    <control type="image">
-      <left>0</left>
+    <include content="InfoBackground">
+      <param name="art" value="$INFO[Container(510).ListItem.Art(fanart)]" />
+      <param name="blur" value="$VAR[LibraryBlur]" />
+      <param name="bound" value="Skin.String(Home.Art.Mode,bound)" />
+    </include>
+    <include content="InfoClock" />
+    <control type="group">
+      <left>196</left>
       <top>0</top>
-      <width>1920</width>
+      <width>1644</width>
       <height>1080</height>
-      <texture>special://skin/fanart.jpg</texture>
-    </control>
-    <control type="image">
-      <left>0</left>
-      <top>0</top>
-      <width>1920</width>
-      <height>1080</height>
-      <texture>dim_modal.png</texture>
-    </control>
-    <control type="label">
-      <left>400</left>
-      <top>160</top>
-      <width>1200</width>
-      <height>80</height>
-      <label>$LOCALIZE[31006]</label>
-      <font>font_title</font>
-    </control>
-    <control type="label">
-      <left>400</left>
-      <top>260</top>
-      <width>1200</width>
-      <height>60</height>
-      <label>$LOCALIZE[31023]</label>
-      <font>font_body</font>
+      <include content="InfoContentMotion" />
+      <control type="label">
+        <left>0</left>
+        <top>48</top>
+        <width>1200</width>
+        <height>72</height>
+        <label>$LOCALIZE[31449]</label>
+        <font>font_heading</font>
+        <textcolor>frost</textcolor>
+      </control>
+      <control type="list" id="600">
+        <left>0</left>
+        <top>138</top>
+        <width>1644</width>
+        <height>72</height>
+        <orientation>horizontal</orientation>
+        <onup>9000</onup>
+        <ondown>510</ondown>
+        <onleft>9000</onleft>
+        <onright>600</onright>
+        <onclick>RunScript(special://skin/resources/library.py,discover-tab)</onclick>
+        <itemlayout width="240" height="72">
+          <include content="LibraryTab">
+            <param name="id" value="600" />
+            <param name="selected" value="false" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="240" height="72">
+          <include content="LibraryTab">
+            <param name="id" value="600" />
+            <param name="selected" value="true" />
+          </include>
+        </focusedlayout>
+        <content>
+          <item>
+            <label>$LOCALIZE[31450]</label>
+            <property name="Hub">trending</property>
+          </item>
+          <item>
+            <label>$LOCALIZE[31436]</label>
+            <property name="Hub">movies</property>
+          </item>
+          <item>
+            <label>$LOCALIZE[31437]</label>
+            <property name="Hub">tvshows</property>
+          </item>
+          <item>
+            <label>$LOCALIZE[31451]</label>
+            <property name="Hub">upcoming</property>
+          </item>
+          <item>
+            <label>$LOCALIZE[31452]</label>
+            <property name="Hub">top_rated</property>
+          </item>
+        </content>
+        <visible>System.HasAddon(plugin.video.plexkodiconnect)</visible>
+      </control>
+      <control type="grouplist" id="5000">
+        <left>-48</left>
+        <top>210</top>
+        <width>1740</width>
+        <height>870</height>
+        <orientation>vertical</orientation>
+        <itemgap>0</itemgap>
+        <scrolltime>220</scrolltime>
+        <usecontrolcoords>true</usecontrolcoords>
+        <pagecontrol>6500</pagecontrol>
+        <include content="HomeBoardWidget">
+          <param name="feature_top" value="52" />
+          <param name="feature_text_top" value="286" />
+          <param name="source" value="discover&amp;hub=$INFO[Window.Property(Starlight.Discover.Hub)]" />
+          <param name="label" value="$VAR[DiscoverKicker]" />
+          <param name="group" value="1510" />
+          <param name="feature" value="510" />
+          <param name="tiles" value="511" />
+          <param name="row" value="512" />
+          <param name="empty" value="513" />
+          <param name="up" value="600" />
+          <param name="down" value="1520" />
+          <param name="x" value="48" />
+          <param name="onclick" value="RunScript(special://skin/resources/library.py,discover-open)" />
+          <param name="playable" value="false" />
+          <param name="detail" value="$VAR[DiscoverDetail]" />
+          <param name="metadata" value="$INFO[ListItem.Year,,   ][COLOR mist]$INFO[ListItem.Property(Starlight.Duration),,   ]$INFO[ListItem.Genre][/COLOR]" />
+        </include>
+        <control type="group" id="1520">
+          <left>48</left>
+          <top>0</top>
+          <width>1644</width>
+          <height>435</height>
+          <control type="label">
+            <left>0</left>
+            <top>0</top>
+            <width>1500</width>
+            <height>40</height>
+            <label>$LOCALIZE[31453]</label>
+            <font>font_heading_small</font>
+            <textcolor>frost</textcolor>
+          </control>
+          <control type="fixedlist" id="512">
+            <left>-24</left>
+            <top>40</top>
+            <width>1692</width>
+            <height>395</height>
+            <orientation>horizontal</orientation>
+            <focusposition>0</focusposition>
+            <onup>1510</onup>
+            <ondown>600</ondown>
+            <onleft>9000</onleft>
+            <onright>512</onright>
+            <content target="videos" browse="never">plugin://skin.starlight/?source=discover&amp;hub=$INFO[Window.Property(Starlight.Discover.Hub)]&amp;part=row</content>
+            <onclick>RunScript(special://skin/resources/library.py,discover-open)</onclick>
+            <onfocus>SetProperty(Starlight.Container,512,home)</onfocus>
+            <onback>SetFocus(9000)</onback>
+            <itemlayout width="229" height="395">
+              <include content="LibraryCard">
+                <param name="id" value="512" />
+                <param name="selected" value="false" />
+                <param name="detail" value="$VAR[DiscoverDetail]" />
+                <param name="metadata" value="$INFO[ListItem.Year,,   ][COLOR mist]$INFO[ListItem.Property(Starlight.Duration),,   ]$INFO[ListItem.Genre][/COLOR]" />
+                <param name="active" value="Control.HasFocus(512)" />
+              </include>
+            </itemlayout>
+            <focusedlayout width="229" height="395">
+              <include content="LibraryCard">
+                <param name="id" value="512" />
+                <param name="selected" value="true" />
+                <param name="detail" value="$VAR[DiscoverDetail]" />
+                <param name="metadata" value="$INFO[ListItem.Year,,   ][COLOR mist]$INFO[ListItem.Property(Starlight.Duration),,   ]$INFO[ListItem.Genre][/COLOR]" />
+                <param name="active" value="Control.HasFocus(512)" />
+              </include>
+            </focusedlayout>
+          </control>
+          <include content="LibraryEmpty">
+            <param name="container" value="512" />
+            <param name="message" value="$LOCALIZE[31454]" />
+          </include>
+        </control>
+      </control>
+      <control type="label">
+        <left>0</left>
+        <top>140</top>
+        <width>1644</width>
+        <height>64</height>
+        <visible>!System.HasAddon(plugin.video.plexkodiconnect)</visible>
+        <label>$LOCALIZE[31455]</label>
+        <font>font_label</font>
+        <textcolor>mist</textcolor>
+      </control>
+      <control type="scrollbar" id="6500">
+        <left>0</left>
+        <top>0</top>
+        <width>1</width>
+        <height>1</height>
+        <visible>false</visible>
+        <orientation>vertical</orientation>
+      </control>
     </control>
     <include content="HubRail">
-      <param name="return" value="902" />
+      <param name="return" value="510" />
       <param name="sidefocus" value="906" />
       <param name="topfocus" value="916" />
     </include>
+    <control type="button" id="6501">
+      <left>0</left>
+      <top>0</top>
+      <width>1</width>
+      <height>1</height>
+      <visible>false</visible>
+      <label>$INFO[Control.GetLabel(6500)]</label>
+    </control>
+    <control type="button" id="6502">
+      <left>0</left>
+      <top>0</top>
+      <width>1</width>
+      <height>1</height>
+      <visible>false</visible>
+      <label>$VAR[DiscoverCursor]</label>
+    </control>
   </controls>
 </window>

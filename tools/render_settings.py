@@ -20,7 +20,7 @@ WINDOWS = ['SkinSettings','Settings','SettingsCategory','SettingsSystemInfo','Se
            'DialogSettings','DialogAddonSettings','FileBrowser','DialogButtonMenu','DialogAddonInfo',
            'AddonBrowser','MyPVRGuide','MyPVRChannels','MyPVRRecordings','MyPVRTimers',
            'DialogPVRInfo','DialogPVRChannelsOSD','DialogPVRChannelGuide','Startup','Pointer',
-           'Custom_1102','Custom_1106','Custom_1107','FileManager','DialogNumeric','DialogSlider']
+           'Custom_1102','Custom_1106','Custom_1107','FileManager','DialogMediaSource','DialogNumeric','DialogSlider']
 
 
 class SettingsPreview(HomePreview):
@@ -37,7 +37,7 @@ class SettingsPreview(HomePreview):
         super().__init__(art,settings=settings)
         self.focus={'SkinSettings':716,'Settings':510,'Custom_1102':510,'SettingsCategory':-178,
                     'DialogSettings':-180,'DialogAddonSettings':-180,'SettingsSystemInfo':95,
-                    'SettingsProfile':2,'FileBrowser':450,'DialogButtonMenu':910,
+                    'SettingsProfile':2,'DialogMediaSource':10,'FileBrowser':450,'DialogButtonMenu':910,
                     'DialogAddonInfo':9,'AddonBrowser':50,'MyPVRGuide':50,'MyPVRChannels':50,
                     'MyPVRRecordings':50,'MyPVRTimers':50,'DialogPVRInfo':5,
                     'DialogPVRChannelsOSD':11,'DialogPVRChannelGuide':11,
@@ -94,6 +94,11 @@ class SettingsPreview(HomePreview):
                                        8:'Network: connected',9:'PVR backend: connected'})
             for n in range(10,14):self.native_labels[n]=''
             node=self.home.find(".//control[@id='30']");ET.SubElement(node,'visible').text='false'
+        if self.name=='DialogMediaSource':
+            self.native_labels[2]='Add source'
+            self.strings.update({'1024':'Browse','1022':'Enter a name for this media source.',
+                                 '15019':'Add','1210':'Remove','186':'OK','222':'Cancel'})
+            self.containers[10]=[{'Label':'<None>'}]
         if self.name=='FileBrowser':
             self.native_labels.update({411:'Select a folder',412:'Home / Videos'})
             self.containers[450]=[{'Label':n,'Label2':'Folder','Icon':'DefaultFolder.png'} for n in ['..','Movies','TV shows','Recordings','Downloads']]
@@ -130,6 +135,9 @@ class SettingsPreview(HomePreview):
                 ET.SubElement(template,'label2').text=value
                 if kind==8:ET.SubElement(template,'selected').text='true' if value=='On' else 'false'
                 group.append(template)
+        for identity in range(7,16):
+            original=self.home.find(f".//control[@id='{identity}']")
+            ET.SubElement(original,'visible').text='false'
 
     def info(self,text):
         match=re.fullmatch(r'Window(?:\(home\))?\.Property\(([^)]+)\)',text.strip())

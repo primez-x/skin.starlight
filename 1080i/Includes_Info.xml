@@ -474,15 +474,17 @@
     </definition>
   </include>
   <variable name="PersonCreditYear">
+    <value condition="!Integer.IsGreater(ListItem.Year,0)" />
     <value condition="!String.IsEmpty(ListItem.Label2)"> · $INFO[ListItem.Year]</value>
     <value>$INFO[ListItem.Year]</value>
   </variable>
   <variable name="InfoProviderLabel">
-    <value condition="String.IsEqual(Window(home).Property(PKC.Watchlist.Detail.State),present)">$LOCALIZE[31813]</value>
+    <value condition="String.IsEqual(Window(home).Property(PKC.Watchlist.Detail.Identity),Window.Property(Starlight.Info.ProviderIdentity)) + !String.IsEmpty(Window(home).Property(PKC.Watchlist.Detail.Pending))">$LOCALIZE[31458]</value>
+    <value condition="String.IsEqual(Window(home).Property(PKC.Watchlist.Detail.Identity),Window.Property(Starlight.Info.ProviderIdentity)) + String.IsEqual(Window(home).Property(PKC.Watchlist.Detail.State),present)">$LOCALIZE[31813]</value>
     <value>$LOCALIZE[31812]</value>
   </variable>
   <variable name="InfoProviderAction">
-    <value condition="String.IsEqual(Window(home).Property(PKC.Watchlist.Detail.State),present)">remove</value>
+    <value condition="String.IsEqual(Window(home).Property(PKC.Watchlist.Detail.Identity),Window.Property(Starlight.Info.ProviderIdentity)) + String.IsEqual(Window(home).Property(PKC.Watchlist.Detail.State),present)">remove</value>
     <value>add</value>
   </variable>
   <variable name="InfoCastPath">

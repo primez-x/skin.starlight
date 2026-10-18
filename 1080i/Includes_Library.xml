@@ -1,0 +1,3729 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+  <include name="LibraryCard">
+    <param name="id" default="" />
+    <param name="selected" default="false" />
+    <param name="width" default="189" />
+    <param name="height" default="283" />
+    <param name="mask" default="library/poster_mask.png" />
+    <param name="art" default="$VAR[LibraryPoster]" />
+    <param name="detail" default="$VAR[LibraryDetail]" />
+    <param name="circle" default="false" />
+    <param name="playable" default="false" />
+    <param name="active" default="Control.HasFocus($PARAM[id])" />
+    <param name="title" default="$INFO[ListItem.Label]" />
+    <param name="label_y" default="340" />
+    <param name="detail_y" default="370" />
+    <definition>
+      <control type="group">
+        <left>24</left>
+        <top>$PARAM[art_top]</top>
+        <width>$PARAM[width]</width>
+        <height>$PARAM[height]</height>
+        <include content="InactiveRowFade">
+          <param name="active" value="$PARAM[active] | !$PARAM[selected]" />
+          <param name="opacity" value="80" />
+        </include>
+        <include content="InactiveRowFade">
+          <param name="active" value="$PARAM[active] | $PARAM[selected]" />
+          <param name="opacity" value="40" />
+        </include>
+        <animation effect="zoom" start="100" end="110" time="180" center="$PARAM[center]" condition="$PARAM[active] + $PARAM[selected]">Conditional</animation>
+        <control type="image">
+          <left>-48</left>
+          <top>-48</top>
+          <width>$PARAM[glow_width]</width>
+          <height>$PARAM[glow_height]</height>
+          <visible>$PARAM[circle] + $PARAM[active] + $PARAM[selected]</visible>
+          <texture>library/circle_glow.png</texture>
+        </control>
+        <control type="image">
+          <left>-48</left>
+          <top>-48</top>
+          <width>$PARAM[glow_width]</width>
+          <height>$PARAM[glow_height]</height>
+          <visible>!$PARAM[circle] + $PARAM[active] + $PARAM[selected]</visible>
+          <texture border="card_glow_border">focus_card_glow.png</texture>
+        </control>
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>$PARAM[width]</width>
+          <height>$PARAM[height]</height>
+          <texture diffuse="$PARAM[mask]">$PARAM[art]</texture>
+          <aspectratio>scale</aspectratio>
+        </control>
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>$PARAM[width]</width>
+          <height>$PARAM[height]</height>
+          <visible>$PARAM[active] + !$PARAM[circle]</visible>
+          <texture border="panel_border" diffuse="$PARAM[mask]">glass_panel.png</texture>
+        </control>
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>$PARAM[width]</width>
+          <height>$PARAM[height]</height>
+          <visible>$PARAM[active] + $PARAM[selected] + !$PARAM[circle]</visible>
+          <texture border="card_border">focus_card.png</texture>
+        </control>
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>$PARAM[width]</width>
+          <height>$PARAM[height]</height>
+          <visible>$PARAM[active] + $PARAM[selected] + $PARAM[circle]</visible>
+          <texture>library/circle_focus.png</texture>
+        </control>
+        <include content="HomePlayCapsule" condition="$PARAM[playable]">
+          <param name="id" value="$PARAM[id]" />
+          <param name="selected" value="$PARAM[selected]" />
+          <param name="width" value="$PARAM[capsule_width]" />
+          <param name="y" value="$PARAM[capsule_y]" />
+        </include>
+        <control type="group">
+          <left>12</left>
+          <top>$PARAM[native_capsule_y]</top>
+          <width>$PARAM[native_capsule_width]</width>
+          <height>50</height>
+          <visible>[String.IsEqual(ListItem.DBTYPE,episode) | String.IsEqual(ListItem.DBTYPE,song) | String.IsEqual(ListItem.Property(Starlight.Search.Type),song)] + $PARAM[active] + $PARAM[selected]</visible>
+          <control type="image">
+            <width>$PARAM[native_capsule_width]</width>
+            <height>50</height>
+            <texture border="play_capsule_border">play_capsule.png</texture>
+          </control>
+          <control type="image">
+            <left>12</left>
+            <top>14</top>
+            <width>22</width>
+            <height>22</height>
+            <texture>icons/play.png</texture>
+          </control>
+          <control type="label">
+            <left>44</left>
+            <width>100</width>
+            <height>50</height>
+            <label>$VAR[LibraryPlayLabel]</label>
+            <font>font_label_semibold</font>
+          </control>
+          <control type="label">
+            <left>144</left>
+            <width>150</width>
+            <height>50</height>
+            <visible>$PARAM[show_native_time]</visible>
+            <label>$INFO[Window.Property(Starlight.Library.Time)]</label>
+            <font>font_label_small</font>
+          </control>
+          <control type="progress">
+            <left>44</left>
+            <top>43</top>
+            <width>$PARAM[native_bar_width]</width>
+            <height>4</height>
+            <info>ListItem.PercentPlayed</info>
+            <texturebg>progress_track.png</texturebg>
+            <midtexture>progress_gold.png</midtexture>
+            <righttexture>progress_playhead.png</righttexture>
+          </control>
+        </control>
+      </control>
+      <control type="label">
+        <left>24</left>
+        <top>$PARAM[label_y]</top>
+        <width>$PARAM[width]</width>
+        <height>28</height>
+        <label>$PARAM[title]</label>
+        <font>font_label_semibold</font>
+        <textcolor>frost</textcolor>
+        <include content="InactiveRowFade">
+          <param name="active" value="$PARAM[active]" />
+          <param name="opacity" value="40" />
+        </include>
+      </control>
+      <control type="label">
+        <left>24</left>
+        <top>$PARAM[detail_y]</top>
+        <width>$PARAM[width]</width>
+        <height>28</height>
+        <label>$PARAM[detail]</label>
+        <font>font_label_small</font>
+        <textcolor>mist</textcolor>
+        <include content="InactiveRowFade">
+          <param name="active" value="$PARAM[active]" />
+          <param name="opacity" value="40" />
+        </include>
+      </control>
+    </definition>
+    <param name="glow_width" default="285" />
+    <param name="glow_height" default="379" />
+    <param name="capsule_width" default="160" />
+    <param name="capsule_y" default="210" />
+    <param name="center" default="94.5,283" />
+    <param name="art_top" default="40" />
+    <param name="native_capsule_y" default="220" />
+    <param name="native_capsule_width" default="160" />
+    <param name="native_bar_width" default="104" />
+    <param name="show_native_time" default="false" />
+  </include>
+  <variable name="LibraryPoster">
+    <value condition="!String.IsEmpty(ListItem.Art(poster))">$INFO[ListItem.Art(poster)]</value>
+    <value condition="!String.IsEmpty(ListItem.Art(thumb))">$INFO[ListItem.Art(thumb)]</value>
+    <value>card_demo.png</value>
+  </variable>
+  <variable name="LibraryLandscape">
+    <value condition="!String.IsEmpty(ListItem.Art(landscape))">$INFO[ListItem.Art(landscape)]</value>
+    <value condition="!String.IsEmpty(ListItem.Art(thumb))">$INFO[ListItem.Art(thumb)]</value>
+    <value condition="!String.IsEmpty(ListItem.Art(fanart))">$INFO[ListItem.Art(fanart)]</value>
+    <value>card_demo.png</value>
+  </variable>
+  <variable name="LibrarySquare">
+    <value condition="!String.IsEmpty(ListItem.Art(thumb))">$INFO[ListItem.Art(thumb)]</value>
+    <value condition="!String.IsEmpty(ListItem.Art(poster))">$INFO[ListItem.Art(poster)]</value>
+    <value>card_demo.png</value>
+  </variable>
+  <variable name="LibraryDetail">
+    <value condition="!String.IsEmpty(ListItem.Artist)">$INFO[ListItem.Artist]</value>
+    <value condition="Window.IsActive(musicnav)">$INFO[ListItem.Label2]</value>
+    <value condition="Integer.IsGreater(ListItem.Year,0)">$INFO[ListItem.Year]</value>
+    <value />
+  </variable>
+  <variable name="LibraryTitle">
+    <value condition="!String.IsEmpty(Container.FolderName)">$INFO[Container.FolderName]</value>
+    <value condition="Window.IsActive(musicnav)">$LOCALIZE[31400]</value>
+    <value>$LOCALIZE[31401]</value>
+  </variable>
+  <variable name="LibraryBlur">
+    <value condition="!String.IsEmpty(Window.Property(Starlight.Library.Blurred))">$INFO[Window.Property(Starlight.Library.Blurred)]</value>
+    <value>background_void.png</value>
+  </variable>
+  <variable name="LibraryCategoryPath">
+    <value condition="Window.IsActive(musicnav)">musicdb://genres/</value>
+    <value condition="String.IsEqual(Window(home).Property(Starlight.Hub),tv)">videodb://tvshows/genres/</value>
+    <value>videodb://movies/genres/</value>
+  </variable>
+  <variable name="DiscoverKicker">
+    <value condition="String.IsEqual(Window.Property(Starlight.Discover.Hub),trending)">$LOCALIZE[31402]</value>
+    <value>$LOCALIZE[31403]</value>
+  </variable>
+  <variable name="LibraryVideoMeta">
+    <value condition="Integer.IsGreater(ListItem.Year,0)">$INFO[ListItem.Year]$INFO[ListItem.Mpaa, · ,]$INFO[ListItem.Duration, · ,]</value>
+    <value condition="!String.IsEmpty(ListItem.Mpaa)">$INFO[ListItem.Mpaa]$INFO[ListItem.Duration, · ,]</value>
+    <value>$INFO[ListItem.Duration]</value>
+  </variable>
+  <variable name="DiscoverDetail">
+    <value condition="Integer.IsGreater(ListItem.Year,0)">$INFO[ListItem.Year]$INFO[ListItem.Genre, · ,]</value>
+    <value>$INFO[ListItem.Genre]</value>
+  </variable>
+  <include name="LibraryEmpty">
+    <param name="container" default="50" />
+    <param name="message" default="$LOCALIZE[31404]" />
+    <param name="visible" default="true" />
+    <definition>
+      <control type="group">
+        <left>400</left>
+        <top>400</top>
+        <width>1200</width>
+        <height>300</height>
+        <visible>$PARAM[visible] + Integer.IsEqual(Container($PARAM[container]).NumItems,0)</visible>
+        <control type="image">
+          <left>550</left>
+          <top>0</top>
+          <width>96</width>
+          <height>96</height>
+          <texture>busy/frame_00.png</texture>
+        </control>
+        <control type="label">
+          <left>0</left>
+          <top>130</top>
+          <width>1200</width>
+          <height>50</height>
+          <label>$PARAM[message]</label>
+          <font>font_heading</font>
+          <textcolor>frost</textcolor>
+          <align>center</align>
+        </control>
+      </control>
+    </definition>
+  </include>
+  <include name="LibraryDetails">
+    <param name="id" default="" />
+    <param name="x" default="0" />
+    <param name="y" default="170" />
+    <param name="width" default="900" />
+    <param name="poster" default="false" />
+    <param name="poster_x" default="1214" />
+    <param name="poster_y" default="200" />
+    <param name="square" default="false" />
+    <definition>
+      <control type="group">
+        <control type="image">
+          <left>0</left>
+          <top>0</top>
+          <width>500</width>
+          <height>110</height>
+          <aspectratio>keep</aspectratio>
+          <visible>!String.IsEmpty(Container($PARAM[id]).ListItem.Art(clearlogo))</visible>
+          <texture>$INFO[Container($PARAM[id]).ListItem.Art(clearlogo)]</texture>
+        </control>
+        <left>$PARAM[x]</left>
+        <top>$PARAM[y]</top>
+        <width>$PARAM[width]</width>
+        <height>320</height>
+        <visible>Control.IsVisible($PARAM[id])</visible>
+        <control type="label">
+          <left>0</left>
+          <top>0</top>
+          <width>$PARAM[width]</width>
+          <height>$PARAM[title_height]</height>
+          <label>$PARAM[title]</label>
+          <font>$PARAM[title_font]</font>
+          <textcolor>frost</textcolor>
+          <visible>String.IsEmpty(Container($PARAM[id]).ListItem.Art(clearlogo))</visible>
+        </control>
+        <control type="label">
+          <left>0</left>
+          <top>$PARAM[meta_y]</top>
+          <width>$PARAM[width]</width>
+          <height>40</height>
+          <label>$PARAM[metadata]</label>
+          <font>font_body</font>
+          <textcolor>mist</textcolor>
+        </control>
+        <control type="textbox">
+          <left>0</left>
+          <top>174</top>
+          <width>$PARAM[width]</width>
+          <height>150</height>
+          <label>$INFO[Container($PARAM[id]).ListItem.Plot]</label>
+          <font>font_body</font>
+          <textcolor>frost</textcolor>
+        </control>
+      </control>
+      <control type="image">
+        <left>$PARAM[poster_x]</left>
+        <top>$PARAM[poster_y]</top>
+        <width>430</width>
+        <height>645</height>
+        <visible>Control.IsVisible($PARAM[id]) + $PARAM[poster] + !$PARAM[square]</visible>
+        <texture diffuse="library/preview-poster_mask.png">$INFO[Container($PARAM[id]).ListItem.Art(poster)]</texture>
+        <aspectratio>scale</aspectratio>
+      </control>
+      <control type="image">
+        <left>$PARAM[poster_x]</left>
+        <top>$PARAM[poster_y]</top>
+        <width>430</width>
+        <height>430</height>
+        <visible>Control.IsVisible($PARAM[id]) + $PARAM[poster] + $PARAM[square]</visible>
+        <texture diffuse="library/preview-album_mask.png">$INFO[Container($PARAM[id]).ListItem.Art(thumb)]</texture>
+        <aspectratio>scale</aspectratio>
+      </control>
+    </definition>
+    <param name="title" default="$INFO[Container($PARAM[id]).ListItem.Label]" />
+    <param name="metadata" default="$INFO[Container($PARAM[id]).ListItem.Year,,   ]$INFO[Container($PARAM[id]).ListItem.Artist,,   ]$INFO[Container($PARAM[id]).ListItem.Duration]" />
+    <param name="title_height" default="110" />
+    <param name="meta_y" default="116" />
+    <param name="title_font" default="font_heading_large" />
+  </include>
+  <include name="LibraryViews">
+    <definition>
+      <control type="image">
+        <left>0</left>
+        <top>160</top>
+        <width>440</width>
+        <height>760</height>
+        <visible>Control.HasFocus(701)</visible>
+        <texture border="capsule_border">glass_capsule.png</texture>
+      </control>
+      <control type="image">
+        <left>0</left>
+        <top>460</top>
+        <width>1644</width>
+        <height>72</height>
+        <visible>Control.HasFocus(700)</visible>
+        <texture border="capsule_border">glass_capsule.png</texture>
+        <animation effect="slide" start="0,0" end="0,-310" time="0" condition="Control.IsVisible(528) | Control.IsVisible(529)">Conditional</animation>
+      </control>
+      <control type="fixedlist" id="500">
+        <left>-24</left>
+        <top>560</top>
+        <width>1680</width>
+        <height>520</height>
+        <orientation>horizontal</orientation>
+        <viewtype label="$LOCALIZE[31405]">wrap</viewtype>
+        <pagecontrol>60</pagecontrol>
+        <focusposition>0</focusposition>
+        <itemlayout width="266" height="352">
+          <include content="LibraryCard">
+            <param name="id" value="500" />
+            <param name="selected" value="false" />
+            <param name="width" value="230" />
+            <param name="height" value="230" />
+            <param name="mask" value="library/square_mask.png" />
+            <param name="art" value="$VAR[LibrarySquare]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="326" />
+            <param name="glow_height" value="326" />
+            <param name="label_y" value="286" />
+            <param name="detail_y" value="316" />
+            <param name="active" value="Control.HasFocus(500)" />
+            <param name="center" value="115,230" />
+            <param name="native_capsule_y" value="168" />
+            <param name="native_capsule_width" value="206" />
+            <param name="native_bar_width" value="150" />
+            <param name="show_native_time" value="false" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="266" height="352">
+          <include content="LibraryCard">
+            <param name="id" value="500" />
+            <param name="selected" value="true" />
+            <param name="width" value="230" />
+            <param name="height" value="230" />
+            <param name="mask" value="library/square_mask.png" />
+            <param name="art" value="$VAR[LibrarySquare]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="326" />
+            <param name="glow_height" value="326" />
+            <param name="label_y" value="286" />
+            <param name="detail_y" value="316" />
+            <param name="active" value="Control.HasFocus(500)" />
+            <param name="center" value="115,230" />
+            <param name="native_capsule_y" value="168" />
+            <param name="native_capsule_width" value="206" />
+            <param name="native_bar_width" value="150" />
+            <param name="show_native_time" value="false" />
+          </include>
+        </focusedlayout>
+        <scrolltime>220</scrolltime>
+        <onup>22</onup>
+        <ondown>500</ondown>
+        <onleft>9000</onleft>
+        <onright>500</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,500)</onfocus>
+      </control>
+      <include content="LibraryDetails">
+        <param name="id" value="500" />
+        <param name="x" value="0" />
+        <param name="y" value="165" />
+        <param name="width" value="900" />
+        <param name="title" value="$INFO[Container(500).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(500).ListItem.Year,,   ]$INFO[Container(500).ListItem.Artist,,   ]$INFO[Container(500).ListItem.Duration]" />
+      </include>
+      <include content="LibraryEmpty">
+        <param name="container" value="500" />
+        <param name="visible" value="Control.IsVisible(500)" />
+      </include>
+      <control type="fixedlist" id="501">
+        <left>-24</left>
+        <top>560</top>
+        <width>1680</width>
+        <height>520</height>
+        <orientation>horizontal</orientation>
+        <viewtype label="$LOCALIZE[31406]">wrap</viewtype>
+        <pagecontrol>60</pagecontrol>
+        <focusposition>0</focusposition>
+        <itemlayout width="450" height="353">
+          <include content="LibraryCard">
+            <param name="id" value="501" />
+            <param name="selected" value="false" />
+            <param name="width" value="410" />
+            <param name="height" value="231" />
+            <param name="mask" value="library/row-landscape_mask.png" />
+            <param name="art" value="$VAR[LibraryLandscape]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="506" />
+            <param name="glow_height" value="327" />
+            <param name="label_y" value="287" />
+            <param name="detail_y" value="317" />
+            <param name="active" value="Control.HasFocus(501)" />
+            <param name="center" value="205,231" />
+            <param name="native_capsule_y" value="169" />
+            <param name="native_capsule_width" value="386" />
+            <param name="native_bar_width" value="330" />
+            <param name="show_native_time" value="true" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="450" height="353">
+          <include content="LibraryCard">
+            <param name="id" value="501" />
+            <param name="selected" value="true" />
+            <param name="width" value="410" />
+            <param name="height" value="231" />
+            <param name="mask" value="library/row-landscape_mask.png" />
+            <param name="art" value="$VAR[LibraryLandscape]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="506" />
+            <param name="glow_height" value="327" />
+            <param name="label_y" value="287" />
+            <param name="detail_y" value="317" />
+            <param name="active" value="Control.HasFocus(501)" />
+            <param name="center" value="205,231" />
+            <param name="native_capsule_y" value="169" />
+            <param name="native_capsule_width" value="386" />
+            <param name="native_bar_width" value="330" />
+            <param name="show_native_time" value="true" />
+          </include>
+        </focusedlayout>
+        <scrolltime>220</scrolltime>
+        <onup>22</onup>
+        <ondown>501</ondown>
+        <onleft>9000</onleft>
+        <onright>501</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,501)</onfocus>
+      </control>
+      <include content="LibraryDetails">
+        <param name="id" value="501" />
+        <param name="x" value="0" />
+        <param name="y" value="165" />
+        <param name="width" value="900" />
+        <param name="title" value="$INFO[Container(501).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(501).ListItem.Year,,   ]$INFO[Container(501).ListItem.Artist,,   ]$INFO[Container(501).ListItem.Duration]" />
+      </include>
+      <include content="LibraryEmpty">
+        <param name="container" value="501" />
+        <param name="visible" value="Control.IsVisible(501)" />
+      </include>
+      <control type="fixedlist" id="502">
+        <left>-24</left>
+        <top>560</top>
+        <width>1680</width>
+        <height>520</height>
+        <orientation>horizontal</orientation>
+        <viewtype label="$LOCALIZE[31407]">wrap</viewtype>
+        <pagecontrol>60</pagecontrol>
+        <focusposition>0</focusposition>
+        <itemlayout width="229" height="405">
+          <include content="LibraryCard">
+            <param name="id" value="502" />
+            <param name="selected" value="false" />
+            <param name="width" value="189" />
+            <param name="height" value="283" />
+            <param name="mask" value="library/poster_mask.png" />
+            <param name="art" value="$VAR[LibraryPoster]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="285" />
+            <param name="glow_height" value="379" />
+            <param name="label_y" value="339" />
+            <param name="detail_y" value="369" />
+            <param name="active" value="Control.HasFocus(502)" />
+            <param name="center" value="94.5,283" />
+            <param name="native_capsule_y" value="221" />
+            <param name="native_capsule_width" value="165" />
+            <param name="native_bar_width" value="109" />
+            <param name="show_native_time" value="false" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="229" height="405">
+          <include content="LibraryCard">
+            <param name="id" value="502" />
+            <param name="selected" value="true" />
+            <param name="width" value="189" />
+            <param name="height" value="283" />
+            <param name="mask" value="library/poster_mask.png" />
+            <param name="art" value="$VAR[LibraryPoster]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="285" />
+            <param name="glow_height" value="379" />
+            <param name="label_y" value="339" />
+            <param name="detail_y" value="369" />
+            <param name="active" value="Control.HasFocus(502)" />
+            <param name="center" value="94.5,283" />
+            <param name="native_capsule_y" value="221" />
+            <param name="native_capsule_width" value="165" />
+            <param name="native_bar_width" value="109" />
+            <param name="show_native_time" value="false" />
+          </include>
+        </focusedlayout>
+        <scrolltime>220</scrolltime>
+        <onup>22</onup>
+        <ondown>502</ondown>
+        <onleft>9000</onleft>
+        <onright>502</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,502)</onfocus>
+      </control>
+      <include content="LibraryDetails">
+        <param name="id" value="502" />
+        <param name="x" value="0" />
+        <param name="y" value="165" />
+        <param name="width" value="900" />
+        <param name="title" value="$INFO[Container(502).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(502).ListItem.Year,,   ]$INFO[Container(502).ListItem.Artist,,   ]$INFO[Container(502).ListItem.Duration]" />
+      </include>
+      <include content="LibraryEmpty">
+        <param name="container" value="502" />
+        <param name="visible" value="Control.IsVisible(502)" />
+      </include>
+      <control type="fixedlist" id="503">
+        <left>-24</left>
+        <top>560</top>
+        <width>1680</width>
+        <height>520</height>
+        <orientation>horizontal</orientation>
+        <viewtype label="$LOCALIZE[31408]">wrap</viewtype>
+        <pagecontrol>60</pagecontrol>
+        <focusposition>0</focusposition>
+        <itemlayout width="274" height="332">
+          <include content="LibraryCard">
+            <param name="id" value="503" />
+            <param name="selected" value="false" />
+            <param name="width" value="210" />
+            <param name="height" value="210" />
+            <param name="mask" value="library/circle_mask.png" />
+            <param name="art" value="$VAR[LibrarySquare]" />
+            <param name="circle" value="true" />
+            <param name="glow_width" value="306" />
+            <param name="glow_height" value="306" />
+            <param name="label_y" value="266" />
+            <param name="detail_y" value="296" />
+            <param name="active" value="Control.HasFocus(503)" />
+            <param name="center" value="105,210" />
+            <param name="native_capsule_y" value="148" />
+            <param name="native_capsule_width" value="186" />
+            <param name="native_bar_width" value="130" />
+            <param name="show_native_time" value="false" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="274" height="332">
+          <include content="LibraryCard">
+            <param name="id" value="503" />
+            <param name="selected" value="true" />
+            <param name="width" value="210" />
+            <param name="height" value="210" />
+            <param name="mask" value="library/circle_mask.png" />
+            <param name="art" value="$VAR[LibrarySquare]" />
+            <param name="circle" value="true" />
+            <param name="glow_width" value="306" />
+            <param name="glow_height" value="306" />
+            <param name="label_y" value="266" />
+            <param name="detail_y" value="296" />
+            <param name="active" value="Control.HasFocus(503)" />
+            <param name="center" value="105,210" />
+            <param name="native_capsule_y" value="148" />
+            <param name="native_capsule_width" value="186" />
+            <param name="native_bar_width" value="130" />
+            <param name="show_native_time" value="false" />
+          </include>
+        </focusedlayout>
+        <scrolltime>220</scrolltime>
+        <onup>22</onup>
+        <ondown>503</ondown>
+        <onleft>9000</onleft>
+        <onright>503</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,503)</onfocus>
+      </control>
+      <include content="LibraryDetails">
+        <param name="id" value="503" />
+        <param name="x" value="0" />
+        <param name="y" value="165" />
+        <param name="width" value="900" />
+        <param name="title" value="$INFO[Container(503).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(503).ListItem.Year,,   ]$INFO[Container(503).ListItem.Artist,,   ]$INFO[Container(503).ListItem.Duration]" />
+      </include>
+      <include content="LibraryEmpty">
+        <param name="container" value="503" />
+        <param name="visible" value="Control.IsVisible(503)" />
+      </include>
+      <control type="fixedlist" id="504">
+        <left>-24</left>
+        <top>560</top>
+        <width>1680</width>
+        <height>520</height>
+        <orientation>horizontal</orientation>
+        <viewtype label="$LOCALIZE[31409]">wrap</viewtype>
+        <pagecontrol>60</pagecontrol>
+        <focusposition>0</focusposition>
+        <itemlayout width="528" height="397">
+          <include content="LibraryCard">
+            <param name="id" value="504" />
+            <param name="selected" value="false" />
+            <param name="width" value="488" />
+            <param name="height" value="275" />
+            <param name="mask" value="library/row-board_mask.png" />
+            <param name="art" value="$VAR[LibraryLandscape]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="584" />
+            <param name="glow_height" value="371" />
+            <param name="label_y" value="331" />
+            <param name="detail_y" value="361" />
+            <param name="active" value="Control.HasFocus(504)" />
+            <param name="center" value="244,275" />
+            <param name="native_capsule_y" value="213" />
+            <param name="native_capsule_width" value="464" />
+            <param name="native_bar_width" value="408" />
+            <param name="show_native_time" value="true" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="528" height="397">
+          <include content="LibraryCard">
+            <param name="id" value="504" />
+            <param name="selected" value="true" />
+            <param name="width" value="488" />
+            <param name="height" value="275" />
+            <param name="mask" value="library/row-board_mask.png" />
+            <param name="art" value="$VAR[LibraryLandscape]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="584" />
+            <param name="glow_height" value="371" />
+            <param name="label_y" value="331" />
+            <param name="detail_y" value="361" />
+            <param name="active" value="Control.HasFocus(504)" />
+            <param name="center" value="244,275" />
+            <param name="native_capsule_y" value="213" />
+            <param name="native_capsule_width" value="464" />
+            <param name="native_bar_width" value="408" />
+            <param name="show_native_time" value="true" />
+          </include>
+        </focusedlayout>
+        <scrolltime>220</scrolltime>
+        <onup>22</onup>
+        <ondown>504</ondown>
+        <onleft>9000</onleft>
+        <onright>504</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,504)</onfocus>
+      </control>
+      <include content="LibraryDetails">
+        <param name="id" value="504" />
+        <param name="x" value="0" />
+        <param name="y" value="165" />
+        <param name="width" value="900" />
+        <param name="title" value="$INFO[Container(504).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(504).ListItem.Year,,   ]$INFO[Container(504).ListItem.Artist,,   ]$INFO[Container(504).ListItem.Duration]" />
+      </include>
+      <include content="LibraryEmpty">
+        <param name="container" value="504" />
+        <param name="visible" value="Control.IsVisible(504)" />
+      </include>
+      <control type="fixedlist" id="505">
+        <left>-24</left>
+        <top>560</top>
+        <width>1680</width>
+        <height>520</height>
+        <orientation>horizontal</orientation>
+        <viewtype label="$LOCALIZE[31410]">wrap</viewtype>
+        <pagecontrol>60</pagecontrol>
+        <focusposition>0</focusposition>
+        <itemlayout width="247" height="432">
+          <include content="LibraryCard">
+            <param name="id" value="505" />
+            <param name="selected" value="false" />
+            <param name="width" value="217" />
+            <param name="height" value="310" />
+            <param name="mask" value="library/row-poster_mask.png" />
+            <param name="art" value="$VAR[LibraryPoster]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="313" />
+            <param name="glow_height" value="406" />
+            <param name="label_y" value="366" />
+            <param name="detail_y" value="396" />
+            <param name="active" value="Control.HasFocus(505)" />
+            <param name="center" value="108.5,310" />
+            <param name="native_capsule_y" value="248" />
+            <param name="native_capsule_width" value="193" />
+            <param name="native_bar_width" value="137" />
+            <param name="show_native_time" value="false" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="771" height="432">
+          <include content="LibraryCard">
+            <param name="id" value="505" />
+            <param name="selected" value="true" />
+            <param name="width" value="731" />
+            <param name="height" value="310" />
+            <param name="mask" value="library/expanded_mask.png" />
+            <param name="art" value="$VAR[LibraryLandscape]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="827" />
+            <param name="glow_height" value="406" />
+            <param name="label_y" value="366" />
+            <param name="detail_y" value="396" />
+            <param name="active" value="Control.HasFocus(505)" />
+            <param name="center" value="365.5,310" />
+            <param name="native_capsule_y" value="248" />
+            <param name="native_capsule_width" value="707" />
+            <param name="native_bar_width" value="651" />
+            <param name="show_native_time" value="true" />
+          </include>
+        </focusedlayout>
+        <scrolltime>220</scrolltime>
+        <onup>22</onup>
+        <ondown>505</ondown>
+        <onleft>9000</onleft>
+        <onright>505</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,505)</onfocus>
+      </control>
+      <include content="LibraryDetails">
+        <param name="id" value="505" />
+        <param name="x" value="0" />
+        <param name="y" value="165" />
+        <param name="width" value="900" />
+        <param name="title" value="$INFO[Container(505).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(505).ListItem.Year,,   ]$INFO[Container(505).ListItem.Artist,,   ]$INFO[Container(505).ListItem.Duration]" />
+      </include>
+      <include content="LibraryEmpty">
+        <param name="container" value="505" />
+        <param name="visible" value="Control.IsVisible(505)" />
+      </include>
+      <control type="list" id="506">
+        <left>-16</left>
+        <top>150</top>
+        <width>670</width>
+        <height>824</height>
+        <orientation>vertical</orientation>
+        <viewtype label="$LOCALIZE[31411]">list</viewtype>
+        <pagecontrol>60</pagecontrol>
+        <itemlayout width="670" height="74">
+          <control type="group">
+            <left>0</left>
+            <top>4</top>
+            <width>670</width>
+            <height>70</height>
+            <control type="image">
+              <left>-48</left>
+              <top>-48</top>
+              <width>766</width>
+              <height>166</height>
+              <visible>false</visible>
+              <texture border="focus_glow_border">focus_glow.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>670</width>
+              <height>70</height>
+              <visible>Control.HasFocus(506)</visible>
+              <texture border="capsule_border">glass_capsule.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>670</width>
+              <height>70</height>
+              <visible>false</visible>
+              <texture border="capsule_border">frost_fill.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>670</width>
+              <height>70</height>
+              <visible>false</visible>
+              <texture border="focus_border">focus_button.png</texture>
+            </control>
+            <control type="image">
+              <left>16</left>
+              <top>8</top>
+              <width>96</width>
+              <height>54</height>
+              <texture diffuse="library/list-thumb_mask.png">$VAR[LibraryLandscape]</texture>
+              <aspectratio>scale</aspectratio>
+            </control>
+            <control type="label">
+              <left>126</left>
+              <top>0</top>
+              <width>420</width>
+              <height>70</height>
+              <label>$INFO[ListItem.Label]</label>
+              <font>font_label_large</font>
+              <textcolor>frost</textcolor>
+            </control>
+            <control type="label">
+              <left>560</left>
+              <top>0</top>
+              <width>90</width>
+              <height>70</height>
+              <label>$INFO[ListItem.Year]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+            </control>
+          </control>
+        </itemlayout>
+        <focusedlayout width="670" height="74">
+          <control type="group">
+            <left>0</left>
+            <top>4</top>
+            <width>670</width>
+            <height>70</height>
+            <control type="image">
+              <left>-48</left>
+              <top>-48</top>
+              <width>766</width>
+              <height>166</height>
+              <visible>Control.HasFocus(506)</visible>
+              <texture border="focus_glow_border">focus_glow.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>670</width>
+              <height>70</height>
+              <visible>Control.HasFocus(506)</visible>
+              <texture border="capsule_border">glass_capsule.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>670</width>
+              <height>70</height>
+              <visible>!Control.HasFocus(506)</visible>
+              <texture border="capsule_border">frost_fill.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>670</width>
+              <height>70</height>
+              <visible>Control.HasFocus(506)</visible>
+              <texture border="focus_border">focus_button.png</texture>
+            </control>
+            <control type="image">
+              <left>16</left>
+              <top>8</top>
+              <width>96</width>
+              <height>54</height>
+              <texture diffuse="library/list-thumb_mask.png">$VAR[LibraryLandscape]</texture>
+              <aspectratio>scale</aspectratio>
+            </control>
+            <control type="label">
+              <left>126</left>
+              <top>0</top>
+              <width>420</width>
+              <height>70</height>
+              <label>$INFO[ListItem.Label]</label>
+              <font>font_label_large</font>
+              <textcolor>frost</textcolor>
+            </control>
+            <control type="label">
+              <left>560</left>
+              <top>0</top>
+              <width>90</width>
+              <height>70</height>
+              <label>$INFO[ListItem.Year]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+            </control>
+          </control>
+        </focusedlayout>
+        <scrolltime>220</scrolltime>
+        <onup>22</onup>
+        <ondown>506</ondown>
+        <onleft>9000</onleft>
+        <onright>506</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,506)</onfocus>
+      </control>
+      <include content="LibraryDetails">
+        <param name="id" value="506" />
+        <param name="x" value="784" />
+        <param name="y" value="640" />
+        <param name="width" value="860" />
+        <param name="title" value="$INFO[Container(506).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(506).ListItem.Year,,   ]$INFO[Container(506).ListItem.Artist,,   ]$INFO[Container(506).ListItem.Duration]" />
+      </include>
+      <include content="LibraryEmpty">
+        <param name="container" value="506" />
+        <param name="visible" value="Control.IsVisible(506)" />
+      </include>
+      <control type="list" id="507">
+        <left>-16</left>
+        <top>150</top>
+        <width>1160</width>
+        <height>824</height>
+        <orientation>vertical</orientation>
+        <viewtype label="$LOCALIZE[31412]">list</viewtype>
+        <pagecontrol>60</pagecontrol>
+        <itemlayout width="1160" height="80">
+          <control type="group">
+            <left>0</left>
+            <top>4</top>
+            <width>1160</width>
+            <height>76</height>
+            <control type="image">
+              <left>-48</left>
+              <top>-48</top>
+              <width>1256</width>
+              <height>172</height>
+              <visible>false</visible>
+              <texture border="focus_glow_border">focus_glow.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1160</width>
+              <height>76</height>
+              <visible>Control.HasFocus(507)</visible>
+              <texture border="capsule_border">glass_capsule.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1160</width>
+              <height>76</height>
+              <visible>false</visible>
+              <texture border="capsule_border">frost_fill.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1160</width>
+              <height>76</height>
+              <visible>false</visible>
+              <texture border="focus_border">focus_button.png</texture>
+            </control>
+            <control type="image">
+              <left>16</left>
+              <top>10</top>
+              <width>56</width>
+              <height>56</height>
+              <texture diffuse="library/list-album_mask.png">$VAR[LibrarySquare]</texture>
+              <aspectratio>scale</aspectratio>
+            </control>
+            <control type="label">
+              <left>90</left>
+              <top>4</top>
+              <width>500</width>
+              <height>34</height>
+              <label>$INFO[ListItem.Label]</label>
+              <font>font_label_large</font>
+              <textcolor>frost</textcolor>
+            </control>
+            <control type="label">
+              <left>90</left>
+              <top>38</top>
+              <width>500</width>
+              <height>30</height>
+              <label>$INFO[ListItem.Artist]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+            </control>
+            <control type="label">
+              <left>700</left>
+              <top>0</top>
+              <width>340</width>
+              <height>76</height>
+              <label>$INFO[ListItem.Album]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+            </control>
+            <control type="label">
+              <left>1054</left>
+              <top>0</top>
+              <width>105</width>
+              <height>76</height>
+              <label>$INFO[ListItem.Duration]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+            </control>
+          </control>
+        </itemlayout>
+        <focusedlayout width="1160" height="80">
+          <control type="group">
+            <left>0</left>
+            <top>4</top>
+            <width>1160</width>
+            <height>76</height>
+            <control type="image">
+              <left>-48</left>
+              <top>-48</top>
+              <width>1256</width>
+              <height>172</height>
+              <visible>Control.HasFocus(507)</visible>
+              <texture border="focus_glow_border">focus_glow.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1160</width>
+              <height>76</height>
+              <visible>Control.HasFocus(507)</visible>
+              <texture border="capsule_border">glass_capsule.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1160</width>
+              <height>76</height>
+              <visible>!Control.HasFocus(507)</visible>
+              <texture border="capsule_border">frost_fill.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1160</width>
+              <height>76</height>
+              <visible>Control.HasFocus(507)</visible>
+              <texture border="focus_border">focus_button.png</texture>
+            </control>
+            <control type="image">
+              <left>16</left>
+              <top>10</top>
+              <width>56</width>
+              <height>56</height>
+              <texture diffuse="library/list-album_mask.png">$VAR[LibrarySquare]</texture>
+              <aspectratio>scale</aspectratio>
+            </control>
+            <control type="label">
+              <left>90</left>
+              <top>4</top>
+              <width>500</width>
+              <height>34</height>
+              <label>$INFO[ListItem.Label]</label>
+              <font>font_label_large</font>
+              <textcolor>frost</textcolor>
+            </control>
+            <control type="label">
+              <left>90</left>
+              <top>38</top>
+              <width>500</width>
+              <height>30</height>
+              <label>$INFO[ListItem.Artist]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+            </control>
+            <control type="label">
+              <left>700</left>
+              <top>0</top>
+              <width>340</width>
+              <height>76</height>
+              <label>$INFO[ListItem.Album]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+            </control>
+            <control type="label">
+              <left>1054</left>
+              <top>0</top>
+              <width>105</width>
+              <height>76</height>
+              <label>$INFO[ListItem.Duration]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+            </control>
+          </control>
+        </focusedlayout>
+        <scrolltime>220</scrolltime>
+        <onup>22</onup>
+        <ondown>507</ondown>
+        <onleft>9000</onleft>
+        <onright>507</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,507)</onfocus>
+      </control>
+      <include content="LibraryDetails">
+        <param name="id" value="507" />
+        <param name="x" value="1214" />
+        <param name="y" value="610" />
+        <param name="width" value="430" />
+        <param name="poster" value="true" />
+        <param name="square" value="true" />
+        <param name="poster_y" value="150" />
+        <param name="title" value="$INFO[Container(507).ListItem.Album]" />
+        <param name="metadata" value="$INFO[Container(507).ListItem.Artist]" />
+        <param name="title_height" value="50" />
+        <param name="meta_y" value="56" />
+        <param name="title_font" value="font_heading_small" />
+      </include>
+      <include content="LibraryEmpty">
+        <param name="container" value="507" />
+        <param name="visible" value="Control.IsVisible(507)" />
+      </include>
+      <control type="list" id="508">
+        <left>-16</left>
+        <top>150</top>
+        <width>1160</width>
+        <height>824</height>
+        <orientation>vertical</orientation>
+        <viewtype label="$LOCALIZE[31413]">list</viewtype>
+        <pagecontrol>60</pagecontrol>
+        <itemlayout width="1160" height="200">
+          <control type="group">
+            <left>0</left>
+            <top>4</top>
+            <width>1160</width>
+            <height>196</height>
+            <control type="image">
+              <left>-48</left>
+              <top>-48</top>
+              <width>1256</width>
+              <height>292</height>
+              <visible>false</visible>
+              <texture border="focus_glow_border">focus_glow.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1160</width>
+              <height>196</height>
+              <visible>Control.HasFocus(508)</visible>
+              <texture border="capsule_border">glass_capsule.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1160</width>
+              <height>196</height>
+              <visible>false</visible>
+              <texture border="capsule_border">frost_fill.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1160</width>
+              <height>196</height>
+              <visible>false</visible>
+              <texture border="focus_border">focus_button.png</texture>
+            </control>
+            <control type="image">
+              <left>18</left>
+              <top>20</top>
+              <width>284</width>
+              <height>160</height>
+              <texture diffuse="library/list-expanded_mask.png">$VAR[LibraryLandscape]</texture>
+              <aspectratio>scale</aspectratio>
+            </control>
+            <control type="label">
+              <left>332</left>
+              <top>16</top>
+              <width>822</width>
+              <height>48</height>
+              <label>$INFO[ListItem.Label]</label>
+              <font>font_heading_small</font>
+              <textcolor>frost</textcolor>
+            </control>
+            <control type="label">
+              <left>332</left>
+              <top>65</top>
+              <width>822</width>
+              <height>36</height>
+              <label>$VAR[LibraryVideoMeta]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+            </control>
+            <control type="textbox">
+              <left>332</left>
+              <top>110</top>
+              <width>822</width>
+              <height>90</height>
+              <label>$INFO[ListItem.Plot]</label>
+              <font>font_body_small</font>
+              <textcolor>frost</textcolor>
+            </control>
+          </control>
+        </itemlayout>
+        <focusedlayout width="1160" height="200">
+          <control type="group">
+            <left>0</left>
+            <top>4</top>
+            <width>1160</width>
+            <height>196</height>
+            <control type="image">
+              <left>-48</left>
+              <top>-48</top>
+              <width>1256</width>
+              <height>292</height>
+              <visible>Control.HasFocus(508)</visible>
+              <texture border="focus_glow_border">focus_glow.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1160</width>
+              <height>196</height>
+              <visible>Control.HasFocus(508)</visible>
+              <texture border="capsule_border">glass_capsule.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1160</width>
+              <height>196</height>
+              <visible>!Control.HasFocus(508)</visible>
+              <texture border="capsule_border">frost_fill.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1160</width>
+              <height>196</height>
+              <visible>Control.HasFocus(508)</visible>
+              <texture border="focus_border">focus_button.png</texture>
+            </control>
+            <control type="image">
+              <left>18</left>
+              <top>20</top>
+              <width>284</width>
+              <height>160</height>
+              <texture diffuse="library/list-expanded_mask.png">$VAR[LibraryLandscape]</texture>
+              <aspectratio>scale</aspectratio>
+            </control>
+            <control type="label">
+              <left>332</left>
+              <top>16</top>
+              <width>822</width>
+              <height>48</height>
+              <label>$INFO[ListItem.Label]</label>
+              <font>font_heading_small</font>
+              <textcolor>frost</textcolor>
+            </control>
+            <control type="label">
+              <left>332</left>
+              <top>65</top>
+              <width>822</width>
+              <height>36</height>
+              <label>$VAR[LibraryVideoMeta]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+            </control>
+            <control type="textbox">
+              <left>332</left>
+              <top>110</top>
+              <width>822</width>
+              <height>90</height>
+              <label>$INFO[ListItem.Plot]</label>
+              <font>font_body_small</font>
+              <textcolor>frost</textcolor>
+            </control>
+          </control>
+        </focusedlayout>
+        <scrolltime>220</scrolltime>
+        <onup>22</onup>
+        <ondown>508</ondown>
+        <onleft>9000</onleft>
+        <onright>508</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,508)</onfocus>
+      </control>
+      <include content="LibraryDetails">
+        <param name="id" value="508" />
+        <param name="x" value="1214" />
+        <param name="y" value="780" />
+        <param name="width" value="430" />
+        <param name="poster" value="true" />
+        <param name="square" value="false" />
+        <param name="poster_y" value="150" />
+        <param name="title" value="$INFO[Container(508).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(508).ListItem.Year,,   ]$INFO[Container(508).ListItem.Artist,,   ]$INFO[Container(508).ListItem.Duration]" />
+      </include>
+      <include content="LibraryEmpty">
+        <param name="container" value="508" />
+        <param name="visible" value="Control.IsVisible(508)" />
+      </include>
+      <control type="panel" id="510">
+        <left>-24</left>
+        <top>110</top>
+        <width>1680</width>
+        <height>970</height>
+        <orientation>vertical</orientation>
+        <viewtype label="$LOCALIZE[31414]">icon</viewtype>
+        <pagecontrol>60</pagecontrol>
+        <itemlayout width="266" height="352">
+          <include content="LibraryCard">
+            <param name="id" value="510" />
+            <param name="selected" value="false" />
+            <param name="width" value="230" />
+            <param name="height" value="230" />
+            <param name="mask" value="library/square_mask.png" />
+            <param name="art" value="$VAR[LibrarySquare]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="326" />
+            <param name="glow_height" value="326" />
+            <param name="label_y" value="286" />
+            <param name="detail_y" value="316" />
+            <param name="active" value="Control.HasFocus(510)" />
+            <param name="center" value="115,230" />
+            <param name="native_capsule_y" value="168" />
+            <param name="native_capsule_width" value="206" />
+            <param name="native_bar_width" value="150" />
+            <param name="show_native_time" value="false" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="266" height="352">
+          <include content="LibraryCard">
+            <param name="id" value="510" />
+            <param name="selected" value="true" />
+            <param name="width" value="230" />
+            <param name="height" value="230" />
+            <param name="mask" value="library/square_mask.png" />
+            <param name="art" value="$VAR[LibrarySquare]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="326" />
+            <param name="glow_height" value="326" />
+            <param name="label_y" value="286" />
+            <param name="detail_y" value="316" />
+            <param name="active" value="Control.HasFocus(510)" />
+            <param name="center" value="115,230" />
+            <param name="native_capsule_y" value="168" />
+            <param name="native_capsule_width" value="206" />
+            <param name="native_bar_width" value="150" />
+            <param name="show_native_time" value="false" />
+          </include>
+        </focusedlayout>
+        <scrolltime>220</scrolltime>
+        <onup>22</onup>
+        <ondown>510</ondown>
+        <onleft>9000</onleft>
+        <onright>510</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,510)</onfocus>
+      </control>
+      <include content="LibraryEmpty">
+        <param name="container" value="510" />
+        <param name="visible" value="Control.IsVisible(510)" />
+      </include>
+      <control type="panel" id="511">
+        <left>-24</left>
+        <top>110</top>
+        <width>1680</width>
+        <height>970</height>
+        <orientation>vertical</orientation>
+        <viewtype label="$LOCALIZE[31415]">icon</viewtype>
+        <pagecontrol>60</pagecontrol>
+        <itemlayout width="420" height="336">
+          <include content="LibraryCard">
+            <param name="id" value="511" />
+            <param name="selected" value="false" />
+            <param name="width" value="380" />
+            <param name="height" value="214" />
+            <param name="mask" value="library/landscape_mask.png" />
+            <param name="art" value="$VAR[LibraryLandscape]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="476" />
+            <param name="glow_height" value="310" />
+            <param name="label_y" value="270" />
+            <param name="detail_y" value="300" />
+            <param name="active" value="Control.HasFocus(511)" />
+            <param name="center" value="190,214" />
+            <param name="native_capsule_y" value="152" />
+            <param name="native_capsule_width" value="356" />
+            <param name="native_bar_width" value="300" />
+            <param name="show_native_time" value="true" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="420" height="336">
+          <include content="LibraryCard">
+            <param name="id" value="511" />
+            <param name="selected" value="true" />
+            <param name="width" value="380" />
+            <param name="height" value="214" />
+            <param name="mask" value="library/landscape_mask.png" />
+            <param name="art" value="$VAR[LibraryLandscape]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="476" />
+            <param name="glow_height" value="310" />
+            <param name="label_y" value="270" />
+            <param name="detail_y" value="300" />
+            <param name="active" value="Control.HasFocus(511)" />
+            <param name="center" value="190,214" />
+            <param name="native_capsule_y" value="152" />
+            <param name="native_capsule_width" value="356" />
+            <param name="native_bar_width" value="300" />
+            <param name="show_native_time" value="true" />
+          </include>
+        </focusedlayout>
+        <scrolltime>220</scrolltime>
+        <onup>22</onup>
+        <ondown>511</ondown>
+        <onleft>9000</onleft>
+        <onright>511</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,511)</onfocus>
+      </control>
+      <include content="LibraryEmpty">
+        <param name="container" value="511" />
+        <param name="visible" value="Control.IsVisible(511)" />
+      </include>
+      <control type="panel" id="512">
+        <left>-24</left>
+        <top>110</top>
+        <width>1680</width>
+        <height>970</height>
+        <orientation>vertical</orientation>
+        <viewtype label="$LOCALIZE[31416]">icon</viewtype>
+        <pagecontrol>60</pagecontrol>
+        <itemlayout width="229" height="405">
+          <include content="LibraryCard">
+            <param name="id" value="512" />
+            <param name="selected" value="false" />
+            <param name="width" value="189" />
+            <param name="height" value="283" />
+            <param name="mask" value="library/poster_mask.png" />
+            <param name="art" value="$VAR[LibraryPoster]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="285" />
+            <param name="glow_height" value="379" />
+            <param name="label_y" value="339" />
+            <param name="detail_y" value="369" />
+            <param name="active" value="Control.HasFocus(512)" />
+            <param name="center" value="94.5,283" />
+            <param name="native_capsule_y" value="221" />
+            <param name="native_capsule_width" value="165" />
+            <param name="native_bar_width" value="109" />
+            <param name="show_native_time" value="false" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="229" height="405">
+          <include content="LibraryCard">
+            <param name="id" value="512" />
+            <param name="selected" value="true" />
+            <param name="width" value="189" />
+            <param name="height" value="283" />
+            <param name="mask" value="library/poster_mask.png" />
+            <param name="art" value="$VAR[LibraryPoster]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="285" />
+            <param name="glow_height" value="379" />
+            <param name="label_y" value="339" />
+            <param name="detail_y" value="369" />
+            <param name="active" value="Control.HasFocus(512)" />
+            <param name="center" value="94.5,283" />
+            <param name="native_capsule_y" value="221" />
+            <param name="native_capsule_width" value="165" />
+            <param name="native_bar_width" value="109" />
+            <param name="show_native_time" value="false" />
+          </include>
+        </focusedlayout>
+        <scrolltime>220</scrolltime>
+        <onup>22</onup>
+        <ondown>512</ondown>
+        <onleft>9000</onleft>
+        <onright>512</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,512)</onfocus>
+      </control>
+      <include content="LibraryEmpty">
+        <param name="container" value="512" />
+        <param name="visible" value="Control.IsVisible(512)" />
+      </include>
+      <control type="panel" id="513">
+        <left>-24</left>
+        <top>110</top>
+        <width>1680</width>
+        <height>970</height>
+        <orientation>vertical</orientation>
+        <viewtype label="$LOCALIZE[31417]">icon</viewtype>
+        <pagecontrol>60</pagecontrol>
+        <itemlayout width="274" height="332">
+          <include content="LibraryCard">
+            <param name="id" value="513" />
+            <param name="selected" value="false" />
+            <param name="width" value="210" />
+            <param name="height" value="210" />
+            <param name="mask" value="library/circle_mask.png" />
+            <param name="art" value="$VAR[LibrarySquare]" />
+            <param name="circle" value="true" />
+            <param name="glow_width" value="306" />
+            <param name="glow_height" value="306" />
+            <param name="label_y" value="266" />
+            <param name="detail_y" value="296" />
+            <param name="active" value="Control.HasFocus(513)" />
+            <param name="center" value="105,210" />
+            <param name="native_capsule_y" value="148" />
+            <param name="native_capsule_width" value="186" />
+            <param name="native_bar_width" value="130" />
+            <param name="show_native_time" value="false" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="274" height="332">
+          <include content="LibraryCard">
+            <param name="id" value="513" />
+            <param name="selected" value="true" />
+            <param name="width" value="210" />
+            <param name="height" value="210" />
+            <param name="mask" value="library/circle_mask.png" />
+            <param name="art" value="$VAR[LibrarySquare]" />
+            <param name="circle" value="true" />
+            <param name="glow_width" value="306" />
+            <param name="glow_height" value="306" />
+            <param name="label_y" value="266" />
+            <param name="detail_y" value="296" />
+            <param name="active" value="Control.HasFocus(513)" />
+            <param name="center" value="105,210" />
+            <param name="native_capsule_y" value="148" />
+            <param name="native_capsule_width" value="186" />
+            <param name="native_bar_width" value="130" />
+            <param name="show_native_time" value="false" />
+          </include>
+        </focusedlayout>
+        <scrolltime>220</scrolltime>
+        <onup>22</onup>
+        <ondown>513</ondown>
+        <onleft>9000</onleft>
+        <onright>513</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,513)</onfocus>
+      </control>
+      <include content="LibraryEmpty">
+        <param name="container" value="513" />
+        <param name="visible" value="Control.IsVisible(513)" />
+      </include>
+      <control type="panel" id="514">
+        <left>-24</left>
+        <top>110</top>
+        <width>1680</width>
+        <height>970</height>
+        <orientation>vertical</orientation>
+        <viewtype label="$LOCALIZE[31418]">icon</viewtype>
+        <pagecontrol>60</pagecontrol>
+        <itemlayout width="560" height="415">
+          <include content="LibraryCard">
+            <param name="id" value="514" />
+            <param name="selected" value="false" />
+            <param name="width" value="520" />
+            <param name="height" value="293" />
+            <param name="mask" value="library/board_mask.png" />
+            <param name="art" value="$VAR[LibraryLandscape]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="616" />
+            <param name="glow_height" value="389" />
+            <param name="label_y" value="349" />
+            <param name="detail_y" value="379" />
+            <param name="active" value="Control.HasFocus(514)" />
+            <param name="center" value="260,293" />
+            <param name="native_capsule_y" value="231" />
+            <param name="native_capsule_width" value="496" />
+            <param name="native_bar_width" value="440" />
+            <param name="show_native_time" value="true" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="560" height="415">
+          <include content="LibraryCard">
+            <param name="id" value="514" />
+            <param name="selected" value="true" />
+            <param name="width" value="520" />
+            <param name="height" value="293" />
+            <param name="mask" value="library/board_mask.png" />
+            <param name="art" value="$VAR[LibraryLandscape]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="616" />
+            <param name="glow_height" value="389" />
+            <param name="label_y" value="349" />
+            <param name="detail_y" value="379" />
+            <param name="active" value="Control.HasFocus(514)" />
+            <param name="center" value="260,293" />
+            <param name="native_capsule_y" value="231" />
+            <param name="native_capsule_width" value="496" />
+            <param name="native_bar_width" value="440" />
+            <param name="show_native_time" value="true" />
+          </include>
+        </focusedlayout>
+        <scrolltime>220</scrolltime>
+        <onup>22</onup>
+        <ondown>514</ondown>
+        <onleft>9000</onleft>
+        <onright>514</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,514)</onfocus>
+      </control>
+      <include content="LibraryEmpty">
+        <param name="container" value="514" />
+        <param name="visible" value="Control.IsVisible(514)" />
+      </include>
+      <control type="panel" id="515">
+        <left>480</left>
+        <top>110</top>
+        <width>1176</width>
+        <height>970</height>
+        <orientation>vertical</orientation>
+        <viewtype label="$LOCALIZE[31419]">icon</viewtype>
+        <pagecontrol>60</pagecontrol>
+        <itemlayout width="232" height="422">
+          <include content="LibraryCard">
+            <param name="id" value="515" />
+            <param name="selected" value="false" />
+            <param name="width" value="200" />
+            <param name="height" value="300" />
+            <param name="mask" value="library/row-poster_mask.png" />
+            <param name="art" value="$VAR[LibraryPoster]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="296" />
+            <param name="glow_height" value="396" />
+            <param name="label_y" value="356" />
+            <param name="detail_y" value="386" />
+            <param name="active" value="Control.HasFocus(515)" />
+            <param name="center" value="100,300" />
+            <param name="native_capsule_y" value="238" />
+            <param name="native_capsule_width" value="176" />
+            <param name="native_bar_width" value="120" />
+            <param name="show_native_time" value="false" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="232" height="422">
+          <include content="LibraryCard">
+            <param name="id" value="515" />
+            <param name="selected" value="true" />
+            <param name="width" value="200" />
+            <param name="height" value="300" />
+            <param name="mask" value="library/row-poster_mask.png" />
+            <param name="art" value="$VAR[LibraryPoster]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="296" />
+            <param name="glow_height" value="396" />
+            <param name="label_y" value="356" />
+            <param name="detail_y" value="386" />
+            <param name="active" value="Control.HasFocus(515)" />
+            <param name="center" value="100,300" />
+            <param name="native_capsule_y" value="238" />
+            <param name="native_capsule_width" value="176" />
+            <param name="native_bar_width" value="120" />
+            <param name="show_native_time" value="false" />
+          </include>
+        </focusedlayout>
+        <scrolltime>220</scrolltime>
+        <onup>22</onup>
+        <ondown>515</ondown>
+        <onleft>9000</onleft>
+        <onright>515</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,515)</onfocus>
+      </control>
+      <include content="LibraryDetails">
+        <param name="id" value="515" />
+        <param name="x" value="0" />
+        <param name="y" value="150" />
+        <param name="width" value="450" />
+        <param name="title" value="$INFO[Container(515).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(515).ListItem.Year,,   ]$INFO[Container(515).ListItem.Artist,,   ]$INFO[Container(515).ListItem.Duration]" />
+      </include>
+      <include content="LibraryEmpty">
+        <param name="container" value="515" />
+        <param name="visible" value="Control.IsVisible(515)" />
+      </include>
+      <control type="list" id="517">
+        <left>-16</left>
+        <top>150</top>
+        <width>1660</width>
+        <height>824</height>
+        <orientation>vertical</orientation>
+        <viewtype label="$LOCALIZE[31420]">list</viewtype>
+        <pagecontrol>60</pagecontrol>
+        <itemlayout width="1660" height="80">
+          <control type="group">
+            <left>0</left>
+            <top>4</top>
+            <width>1660</width>
+            <height>76</height>
+            <control type="image">
+              <left>-48</left>
+              <top>-48</top>
+              <width>1756</width>
+              <height>172</height>
+              <visible>false</visible>
+              <texture border="focus_glow_border">focus_glow.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1660</width>
+              <height>76</height>
+              <visible>Control.HasFocus(517)</visible>
+              <texture border="capsule_border">glass_capsule.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1660</width>
+              <height>76</height>
+              <visible>false</visible>
+              <texture border="capsule_border">frost_fill.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1660</width>
+              <height>76</height>
+              <visible>false</visible>
+              <texture border="focus_border">focus_button.png</texture>
+            </control>
+            <control type="image">
+              <left>16</left>
+              <top>10</top>
+              <width>56</width>
+              <height>56</height>
+              <texture diffuse="library/list-album_mask.png">$VAR[LibrarySquare]</texture>
+              <aspectratio>scale</aspectratio>
+              <visible>Window.IsActive(musicnav)</visible>
+            </control>
+            <control type="label">
+              <left>90</left>
+              <top>4</top>
+              <width>720</width>
+              <height>34</height>
+              <label>$INFO[ListItem.Label]</label>
+              <font>font_label_large</font>
+              <textcolor>frost</textcolor>
+              <animation effect="slide" start="0,0" end="-74,0" time="0" condition="!Window.IsActive(musicnav)">Conditional</animation>
+            </control>
+            <control type="label">
+              <left>90</left>
+              <top>38</top>
+              <width>720</width>
+              <height>30</height>
+              <label>$INFO[ListItem.Artist]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+              <visible>Window.IsActive(musicnav)</visible>
+            </control>
+            <control type="label">
+              <left>1200</left>
+              <top>0</top>
+              <width>340</width>
+              <height>76</height>
+              <label>$INFO[ListItem.Album]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+              <visible>Window.IsActive(musicnav)</visible>
+            </control>
+            <control type="label">
+              <left>1554</left>
+              <top>0</top>
+              <width>105</width>
+              <height>76</height>
+              <label>$INFO[ListItem.Duration]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+            </control>
+            <control type="label">
+              <left>1000</left>
+              <top>0</top>
+              <width>140</width>
+              <height>76</height>
+              <label>$INFO[ListItem.Year]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+              <visible>!Window.IsActive(musicnav)</visible>
+            </control>
+            <control type="label">
+              <left>1160</left>
+              <top>0</top>
+              <width>140</width>
+              <height>76</height>
+              <label>$INFO[ListItem.Mpaa]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+              <visible>!Window.IsActive(musicnav)</visible>
+            </control>
+            <control type="label">
+              <left>1320</left>
+              <top>0</top>
+              <width>160</width>
+              <height>76</height>
+              <label>$VAR[HomeVideoQuality]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+              <visible>!Window.IsActive(musicnav)</visible>
+            </control>
+          </control>
+        </itemlayout>
+        <focusedlayout width="1660" height="80">
+          <control type="group">
+            <left>0</left>
+            <top>4</top>
+            <width>1660</width>
+            <height>76</height>
+            <control type="image">
+              <left>-48</left>
+              <top>-48</top>
+              <width>1756</width>
+              <height>172</height>
+              <visible>Control.HasFocus(517)</visible>
+              <texture border="focus_glow_border">focus_glow.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1660</width>
+              <height>76</height>
+              <visible>Control.HasFocus(517)</visible>
+              <texture border="capsule_border">glass_capsule.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1660</width>
+              <height>76</height>
+              <visible>!Control.HasFocus(517)</visible>
+              <texture border="capsule_border">frost_fill.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1660</width>
+              <height>76</height>
+              <visible>Control.HasFocus(517)</visible>
+              <texture border="focus_border">focus_button.png</texture>
+            </control>
+            <control type="image">
+              <left>16</left>
+              <top>10</top>
+              <width>56</width>
+              <height>56</height>
+              <texture diffuse="library/list-album_mask.png">$VAR[LibrarySquare]</texture>
+              <aspectratio>scale</aspectratio>
+              <visible>Window.IsActive(musicnav)</visible>
+            </control>
+            <control type="label">
+              <left>90</left>
+              <top>4</top>
+              <width>720</width>
+              <height>34</height>
+              <label>$INFO[ListItem.Label]</label>
+              <font>font_label_large</font>
+              <textcolor>frost</textcolor>
+              <animation effect="slide" start="0,0" end="-74,0" time="0" condition="!Window.IsActive(musicnav)">Conditional</animation>
+            </control>
+            <control type="label">
+              <left>90</left>
+              <top>38</top>
+              <width>720</width>
+              <height>30</height>
+              <label>$INFO[ListItem.Artist]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+              <visible>Window.IsActive(musicnav)</visible>
+            </control>
+            <control type="label">
+              <left>1200</left>
+              <top>0</top>
+              <width>340</width>
+              <height>76</height>
+              <label>$INFO[ListItem.Album]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+              <visible>Window.IsActive(musicnav)</visible>
+            </control>
+            <control type="label">
+              <left>1554</left>
+              <top>0</top>
+              <width>105</width>
+              <height>76</height>
+              <label>$INFO[ListItem.Duration]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+            </control>
+            <control type="label">
+              <left>1000</left>
+              <top>0</top>
+              <width>140</width>
+              <height>76</height>
+              <label>$INFO[ListItem.Year]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+              <visible>!Window.IsActive(musicnav)</visible>
+            </control>
+            <control type="label">
+              <left>1160</left>
+              <top>0</top>
+              <width>140</width>
+              <height>76</height>
+              <label>$INFO[ListItem.Mpaa]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+              <visible>!Window.IsActive(musicnav)</visible>
+            </control>
+            <control type="label">
+              <left>1320</left>
+              <top>0</top>
+              <width>160</width>
+              <height>76</height>
+              <label>$VAR[HomeVideoQuality]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+              <visible>!Window.IsActive(musicnav)</visible>
+            </control>
+          </control>
+        </focusedlayout>
+        <scrolltime>220</scrolltime>
+        <onup>22</onup>
+        <ondown>517</ondown>
+        <onleft>9000</onleft>
+        <onright>517</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,517)</onfocus>
+      </control>
+      <control type="textbox">
+        <left>8</left>
+        <top>950</top>
+        <width>1600</width>
+        <height>80</height>
+        <visible>Control.IsVisible(517)</visible>
+        <label>$INFO[Container(517).ListItem.Comment]</label>
+        <font>font_body</font>
+        <textcolor>mist</textcolor>
+      </control>
+      <include content="LibraryEmpty">
+        <param name="container" value="517" />
+        <param name="visible" value="Control.IsVisible(517)" />
+      </include>
+      <control type="list" id="518">
+        <left>-16</left>
+        <top>150</top>
+        <width>1660</width>
+        <height>824</height>
+        <orientation>vertical</orientation>
+        <viewtype label="$LOCALIZE[31421]">list</viewtype>
+        <pagecontrol>60</pagecontrol>
+        <itemlayout width="1660" height="224">
+          <control type="group">
+            <left>0</left>
+            <top>4</top>
+            <width>1660</width>
+            <height>220</height>
+            <control type="image">
+              <left>-48</left>
+              <top>-48</top>
+              <width>1756</width>
+              <height>316</height>
+              <visible>false</visible>
+              <texture border="focus_glow_border">focus_glow.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1660</width>
+              <height>220</height>
+              <visible>Control.HasFocus(518)</visible>
+              <texture border="capsule_border">glass_capsule.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1660</width>
+              <height>220</height>
+              <visible>false</visible>
+              <texture border="capsule_border">frost_fill.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1660</width>
+              <height>220</height>
+              <visible>false</visible>
+              <texture border="focus_border">focus_button.png</texture>
+            </control>
+            <control type="image">
+              <left>18</left>
+              <top>16</top>
+              <width>336</width>
+              <height>189</height>
+              <texture diffuse="library/list-large_mask.png">$VAR[LibraryLandscape]</texture>
+              <aspectratio>scale</aspectratio>
+            </control>
+            <control type="label">
+              <left>384</left>
+              <top>16</top>
+              <width>1254</width>
+              <height>48</height>
+              <label>$INFO[ListItem.Label]</label>
+              <font>font_heading_small</font>
+              <textcolor>frost</textcolor>
+            </control>
+            <control type="label">
+              <left>384</left>
+              <top>65</top>
+              <width>1254</width>
+              <height>36</height>
+              <label>$VAR[LibraryVideoMeta]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+            </control>
+            <control type="textbox">
+              <left>384</left>
+              <top>110</top>
+              <width>1254</width>
+              <height>90</height>
+              <label>$INFO[ListItem.Plot]</label>
+              <font>font_body_small</font>
+              <textcolor>frost</textcolor>
+            </control>
+          </control>
+        </itemlayout>
+        <focusedlayout width="1660" height="224">
+          <control type="group">
+            <left>0</left>
+            <top>4</top>
+            <width>1660</width>
+            <height>220</height>
+            <control type="image">
+              <left>-48</left>
+              <top>-48</top>
+              <width>1756</width>
+              <height>316</height>
+              <visible>Control.HasFocus(518)</visible>
+              <texture border="focus_glow_border">focus_glow.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1660</width>
+              <height>220</height>
+              <visible>Control.HasFocus(518)</visible>
+              <texture border="capsule_border">glass_capsule.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1660</width>
+              <height>220</height>
+              <visible>!Control.HasFocus(518)</visible>
+              <texture border="capsule_border">frost_fill.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1660</width>
+              <height>220</height>
+              <visible>Control.HasFocus(518)</visible>
+              <texture border="focus_border">focus_button.png</texture>
+            </control>
+            <control type="image">
+              <left>18</left>
+              <top>16</top>
+              <width>336</width>
+              <height>189</height>
+              <texture diffuse="library/list-large_mask.png">$VAR[LibraryLandscape]</texture>
+              <aspectratio>scale</aspectratio>
+            </control>
+            <control type="label">
+              <left>384</left>
+              <top>16</top>
+              <width>1254</width>
+              <height>48</height>
+              <label>$INFO[ListItem.Label]</label>
+              <font>font_heading_small</font>
+              <textcolor>frost</textcolor>
+            </control>
+            <control type="label">
+              <left>384</left>
+              <top>65</top>
+              <width>1254</width>
+              <height>36</height>
+              <label>$VAR[LibraryVideoMeta]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+            </control>
+            <control type="textbox">
+              <left>384</left>
+              <top>110</top>
+              <width>1254</width>
+              <height>90</height>
+              <label>$INFO[ListItem.Plot]</label>
+              <font>font_body_small</font>
+              <textcolor>frost</textcolor>
+            </control>
+          </control>
+        </focusedlayout>
+        <scrolltime>220</scrolltime>
+        <onup>22</onup>
+        <ondown>518</ondown>
+        <onleft>9000</onleft>
+        <onright>518</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,518)</onfocus>
+      </control>
+      <include content="LibraryEmpty">
+        <param name="container" value="518" />
+        <param name="visible" value="Control.IsVisible(518)" />
+      </include>
+      <control type="fixedlist" id="520">
+        <left>-24</left>
+        <top>550</top>
+        <width>1680</width>
+        <height>330</height>
+        <orientation>horizontal</orientation>
+        <viewtype label="$LOCALIZE[31422]">wrap</viewtype>
+        <pagecontrol>60</pagecontrol>
+        <focusposition>0</focusposition>
+        <itemlayout width="266" height="352">
+          <include content="LibraryCard">
+            <param name="id" value="520" />
+            <param name="selected" value="false" />
+            <param name="width" value="230" />
+            <param name="height" value="230" />
+            <param name="mask" value="library/square_mask.png" />
+            <param name="art" value="$VAR[LibrarySquare]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="326" />
+            <param name="glow_height" value="326" />
+            <param name="label_y" value="286" />
+            <param name="detail_y" value="316" />
+            <param name="active" value="Control.HasFocus(520)" />
+            <param name="center" value="115,230" />
+            <param name="native_capsule_y" value="168" />
+            <param name="native_capsule_width" value="206" />
+            <param name="native_bar_width" value="150" />
+            <param name="show_native_time" value="false" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="266" height="352">
+          <include content="LibraryCard">
+            <param name="id" value="520" />
+            <param name="selected" value="true" />
+            <param name="width" value="230" />
+            <param name="height" value="230" />
+            <param name="mask" value="library/square_mask.png" />
+            <param name="art" value="$VAR[LibrarySquare]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="326" />
+            <param name="glow_height" value="326" />
+            <param name="label_y" value="286" />
+            <param name="detail_y" value="316" />
+            <param name="active" value="Control.HasFocus(520)" />
+            <param name="center" value="115,230" />
+            <param name="native_capsule_y" value="168" />
+            <param name="native_capsule_width" value="206" />
+            <param name="native_bar_width" value="150" />
+            <param name="show_native_time" value="false" />
+          </include>
+        </focusedlayout>
+        <scrolltime>220</scrolltime>
+        <onup>700</onup>
+        <ondown>520</ondown>
+        <onleft>9000</onleft>
+        <onright>520</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,520)</onfocus>
+      </control>
+      <include content="LibraryDetails">
+        <param name="id" value="520" />
+        <param name="x" value="0" />
+        <param name="y" value="165" />
+        <param name="width" value="900" />
+        <param name="title" value="$INFO[Container(520).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(520).ListItem.Year,,   ]$INFO[Container(520).ListItem.Artist,,   ]$INFO[Container(520).ListItem.Duration]" />
+      </include>
+      <include content="LibraryEmpty">
+        <param name="container" value="520" />
+        <param name="visible" value="Control.IsVisible(520)" />
+      </include>
+      <control type="fixedlist" id="521">
+        <left>-24</left>
+        <top>550</top>
+        <width>1680</width>
+        <height>330</height>
+        <orientation>horizontal</orientation>
+        <viewtype label="$LOCALIZE[31423]">wrap</viewtype>
+        <pagecontrol>60</pagecontrol>
+        <focusposition>0</focusposition>
+        <itemlayout width="450" height="353">
+          <include content="LibraryCard">
+            <param name="id" value="521" />
+            <param name="selected" value="false" />
+            <param name="width" value="410" />
+            <param name="height" value="231" />
+            <param name="mask" value="library/row-landscape_mask.png" />
+            <param name="art" value="$VAR[LibraryLandscape]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="506" />
+            <param name="glow_height" value="327" />
+            <param name="label_y" value="287" />
+            <param name="detail_y" value="317" />
+            <param name="active" value="Control.HasFocus(521)" />
+            <param name="center" value="205,231" />
+            <param name="native_capsule_y" value="169" />
+            <param name="native_capsule_width" value="386" />
+            <param name="native_bar_width" value="330" />
+            <param name="show_native_time" value="true" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="450" height="353">
+          <include content="LibraryCard">
+            <param name="id" value="521" />
+            <param name="selected" value="true" />
+            <param name="width" value="410" />
+            <param name="height" value="231" />
+            <param name="mask" value="library/row-landscape_mask.png" />
+            <param name="art" value="$VAR[LibraryLandscape]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="506" />
+            <param name="glow_height" value="327" />
+            <param name="label_y" value="287" />
+            <param name="detail_y" value="317" />
+            <param name="active" value="Control.HasFocus(521)" />
+            <param name="center" value="205,231" />
+            <param name="native_capsule_y" value="169" />
+            <param name="native_capsule_width" value="386" />
+            <param name="native_bar_width" value="330" />
+            <param name="show_native_time" value="true" />
+          </include>
+        </focusedlayout>
+        <scrolltime>220</scrolltime>
+        <onup>700</onup>
+        <ondown>521</ondown>
+        <onleft>9000</onleft>
+        <onright>521</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,521)</onfocus>
+      </control>
+      <include content="LibraryDetails">
+        <param name="id" value="521" />
+        <param name="x" value="0" />
+        <param name="y" value="165" />
+        <param name="width" value="900" />
+        <param name="title" value="$INFO[Container(521).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(521).ListItem.Year,,   ]$INFO[Container(521).ListItem.Artist,,   ]$INFO[Container(521).ListItem.Duration]" />
+      </include>
+      <include content="LibraryEmpty">
+        <param name="container" value="521" />
+        <param name="visible" value="Control.IsVisible(521)" />
+      </include>
+      <control type="fixedlist" id="522">
+        <left>-24</left>
+        <top>550</top>
+        <width>1680</width>
+        <height>330</height>
+        <orientation>horizontal</orientation>
+        <viewtype label="$LOCALIZE[31424]">wrap</viewtype>
+        <pagecontrol>60</pagecontrol>
+        <focusposition>0</focusposition>
+        <itemlayout width="229" height="405">
+          <include content="LibraryCard">
+            <param name="id" value="522" />
+            <param name="selected" value="false" />
+            <param name="width" value="189" />
+            <param name="height" value="283" />
+            <param name="mask" value="library/poster_mask.png" />
+            <param name="art" value="$VAR[LibraryPoster]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="285" />
+            <param name="glow_height" value="379" />
+            <param name="label_y" value="339" />
+            <param name="detail_y" value="369" />
+            <param name="active" value="Control.HasFocus(522)" />
+            <param name="center" value="94.5,283" />
+            <param name="native_capsule_y" value="221" />
+            <param name="native_capsule_width" value="165" />
+            <param name="native_bar_width" value="109" />
+            <param name="show_native_time" value="false" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="229" height="405">
+          <include content="LibraryCard">
+            <param name="id" value="522" />
+            <param name="selected" value="true" />
+            <param name="width" value="189" />
+            <param name="height" value="283" />
+            <param name="mask" value="library/poster_mask.png" />
+            <param name="art" value="$VAR[LibraryPoster]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="285" />
+            <param name="glow_height" value="379" />
+            <param name="label_y" value="339" />
+            <param name="detail_y" value="369" />
+            <param name="active" value="Control.HasFocus(522)" />
+            <param name="center" value="94.5,283" />
+            <param name="native_capsule_y" value="221" />
+            <param name="native_capsule_width" value="165" />
+            <param name="native_bar_width" value="109" />
+            <param name="show_native_time" value="false" />
+          </include>
+        </focusedlayout>
+        <scrolltime>220</scrolltime>
+        <onup>700</onup>
+        <ondown>522</ondown>
+        <onleft>9000</onleft>
+        <onright>522</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,522)</onfocus>
+      </control>
+      <include content="LibraryDetails">
+        <param name="id" value="522" />
+        <param name="x" value="0" />
+        <param name="y" value="165" />
+        <param name="width" value="900" />
+        <param name="title" value="$INFO[Container(522).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(522).ListItem.Year,,   ]$INFO[Container(522).ListItem.Artist,,   ]$INFO[Container(522).ListItem.Duration]" />
+      </include>
+      <include content="LibraryEmpty">
+        <param name="container" value="522" />
+        <param name="visible" value="Control.IsVisible(522)" />
+      </include>
+      <control type="fixedlist" id="523">
+        <left>-24</left>
+        <top>550</top>
+        <width>1680</width>
+        <height>330</height>
+        <orientation>horizontal</orientation>
+        <viewtype label="$LOCALIZE[31425]">wrap</viewtype>
+        <pagecontrol>60</pagecontrol>
+        <focusposition>0</focusposition>
+        <itemlayout width="274" height="332">
+          <include content="LibraryCard">
+            <param name="id" value="523" />
+            <param name="selected" value="false" />
+            <param name="width" value="210" />
+            <param name="height" value="210" />
+            <param name="mask" value="library/circle_mask.png" />
+            <param name="art" value="$VAR[LibrarySquare]" />
+            <param name="circle" value="true" />
+            <param name="glow_width" value="306" />
+            <param name="glow_height" value="306" />
+            <param name="label_y" value="266" />
+            <param name="detail_y" value="296" />
+            <param name="active" value="Control.HasFocus(523)" />
+            <param name="center" value="105,210" />
+            <param name="native_capsule_y" value="148" />
+            <param name="native_capsule_width" value="186" />
+            <param name="native_bar_width" value="130" />
+            <param name="show_native_time" value="false" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="274" height="332">
+          <include content="LibraryCard">
+            <param name="id" value="523" />
+            <param name="selected" value="true" />
+            <param name="width" value="210" />
+            <param name="height" value="210" />
+            <param name="mask" value="library/circle_mask.png" />
+            <param name="art" value="$VAR[LibrarySquare]" />
+            <param name="circle" value="true" />
+            <param name="glow_width" value="306" />
+            <param name="glow_height" value="306" />
+            <param name="label_y" value="266" />
+            <param name="detail_y" value="296" />
+            <param name="active" value="Control.HasFocus(523)" />
+            <param name="center" value="105,210" />
+            <param name="native_capsule_y" value="148" />
+            <param name="native_capsule_width" value="186" />
+            <param name="native_bar_width" value="130" />
+            <param name="show_native_time" value="false" />
+          </include>
+        </focusedlayout>
+        <scrolltime>220</scrolltime>
+        <onup>700</onup>
+        <ondown>523</ondown>
+        <onleft>9000</onleft>
+        <onright>523</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,523)</onfocus>
+      </control>
+      <include content="LibraryDetails">
+        <param name="id" value="523" />
+        <param name="x" value="0" />
+        <param name="y" value="165" />
+        <param name="width" value="900" />
+        <param name="title" value="$INFO[Container(523).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(523).ListItem.Year,,   ]$INFO[Container(523).ListItem.Artist,,   ]$INFO[Container(523).ListItem.Duration]" />
+      </include>
+      <include content="LibraryEmpty">
+        <param name="container" value="523" />
+        <param name="visible" value="Control.IsVisible(523)" />
+      </include>
+      <control type="fixedlist" id="524">
+        <left>-24</left>
+        <top>550</top>
+        <width>1680</width>
+        <height>330</height>
+        <orientation>horizontal</orientation>
+        <viewtype label="$LOCALIZE[31426]">wrap</viewtype>
+        <pagecontrol>60</pagecontrol>
+        <focusposition>0</focusposition>
+        <itemlayout width="528" height="397">
+          <include content="LibraryCard">
+            <param name="id" value="524" />
+            <param name="selected" value="false" />
+            <param name="width" value="488" />
+            <param name="height" value="275" />
+            <param name="mask" value="library/row-board_mask.png" />
+            <param name="art" value="$VAR[LibraryLandscape]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="584" />
+            <param name="glow_height" value="371" />
+            <param name="label_y" value="331" />
+            <param name="detail_y" value="361" />
+            <param name="active" value="Control.HasFocus(524)" />
+            <param name="center" value="244,275" />
+            <param name="native_capsule_y" value="213" />
+            <param name="native_capsule_width" value="464" />
+            <param name="native_bar_width" value="408" />
+            <param name="show_native_time" value="true" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="528" height="397">
+          <include content="LibraryCard">
+            <param name="id" value="524" />
+            <param name="selected" value="true" />
+            <param name="width" value="488" />
+            <param name="height" value="275" />
+            <param name="mask" value="library/row-board_mask.png" />
+            <param name="art" value="$VAR[LibraryLandscape]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="584" />
+            <param name="glow_height" value="371" />
+            <param name="label_y" value="331" />
+            <param name="detail_y" value="361" />
+            <param name="active" value="Control.HasFocus(524)" />
+            <param name="center" value="244,275" />
+            <param name="native_capsule_y" value="213" />
+            <param name="native_capsule_width" value="464" />
+            <param name="native_bar_width" value="408" />
+            <param name="show_native_time" value="true" />
+          </include>
+        </focusedlayout>
+        <scrolltime>220</scrolltime>
+        <onup>700</onup>
+        <ondown>524</ondown>
+        <onleft>9000</onleft>
+        <onright>524</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,524)</onfocus>
+      </control>
+      <include content="LibraryDetails">
+        <param name="id" value="524" />
+        <param name="x" value="0" />
+        <param name="y" value="165" />
+        <param name="width" value="900" />
+        <param name="title" value="$INFO[Container(524).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(524).ListItem.Year,,   ]$INFO[Container(524).ListItem.Artist,,   ]$INFO[Container(524).ListItem.Duration]" />
+      </include>
+      <include content="LibraryEmpty">
+        <param name="container" value="524" />
+        <param name="visible" value="Control.IsVisible(524)" />
+      </include>
+      <control type="list" id="526">
+        <left>488</left>
+        <top>200</top>
+        <width>1134</width>
+        <height>824</height>
+        <orientation>vertical</orientation>
+        <viewtype label="$LOCALIZE[31427]">list</viewtype>
+        <pagecontrol>60</pagecontrol>
+        <itemlayout width="1134" height="200">
+          <control type="group">
+            <left>0</left>
+            <top>4</top>
+            <width>1134</width>
+            <height>196</height>
+            <control type="image">
+              <left>-48</left>
+              <top>-48</top>
+              <width>1230</width>
+              <height>292</height>
+              <visible>false</visible>
+              <texture border="focus_glow_border">focus_glow.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1134</width>
+              <height>196</height>
+              <visible>Control.HasFocus(526)</visible>
+              <texture border="capsule_border">glass_capsule.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1134</width>
+              <height>196</height>
+              <visible>false</visible>
+              <texture border="capsule_border">frost_fill.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1134</width>
+              <height>196</height>
+              <visible>false</visible>
+              <texture border="focus_border">focus_button.png</texture>
+            </control>
+            <control type="image">
+              <left>18</left>
+              <top>20</top>
+              <width>284</width>
+              <height>160</height>
+              <texture diffuse="library/list-expanded_mask.png">$VAR[LibraryLandscape]</texture>
+              <aspectratio>scale</aspectratio>
+            </control>
+            <control type="label">
+              <left>332</left>
+              <top>16</top>
+              <width>780</width>
+              <height>48</height>
+              <label>$INFO[ListItem.Label]</label>
+              <font>font_heading_small</font>
+              <textcolor>frost</textcolor>
+            </control>
+            <control type="label">
+              <left>332</left>
+              <top>65</top>
+              <width>780</width>
+              <height>36</height>
+              <label>$VAR[LibraryVideoMeta]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+            </control>
+            <control type="textbox">
+              <left>332</left>
+              <top>110</top>
+              <width>780</width>
+              <height>90</height>
+              <label>$INFO[ListItem.Plot]</label>
+              <font>font_body_small</font>
+              <textcolor>frost</textcolor>
+            </control>
+          </control>
+        </itemlayout>
+        <focusedlayout width="1134" height="200">
+          <control type="group">
+            <left>0</left>
+            <top>4</top>
+            <width>1134</width>
+            <height>196</height>
+            <control type="image">
+              <left>-48</left>
+              <top>-48</top>
+              <width>1230</width>
+              <height>292</height>
+              <visible>Control.HasFocus(526)</visible>
+              <texture border="focus_glow_border">focus_glow.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1134</width>
+              <height>196</height>
+              <visible>Control.HasFocus(526)</visible>
+              <texture border="capsule_border">glass_capsule.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1134</width>
+              <height>196</height>
+              <visible>!Control.HasFocus(526)</visible>
+              <texture border="capsule_border">frost_fill.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1134</width>
+              <height>196</height>
+              <visible>Control.HasFocus(526)</visible>
+              <texture border="focus_border">focus_button.png</texture>
+            </control>
+            <control type="image">
+              <left>18</left>
+              <top>20</top>
+              <width>284</width>
+              <height>160</height>
+              <texture diffuse="library/list-expanded_mask.png">$VAR[LibraryLandscape]</texture>
+              <aspectratio>scale</aspectratio>
+            </control>
+            <control type="label">
+              <left>332</left>
+              <top>16</top>
+              <width>780</width>
+              <height>48</height>
+              <label>$INFO[ListItem.Label]</label>
+              <font>font_heading_small</font>
+              <textcolor>frost</textcolor>
+            </control>
+            <control type="label">
+              <left>332</left>
+              <top>65</top>
+              <width>780</width>
+              <height>36</height>
+              <label>$VAR[LibraryVideoMeta]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+            </control>
+            <control type="textbox">
+              <left>332</left>
+              <top>110</top>
+              <width>780</width>
+              <height>90</height>
+              <label>$INFO[ListItem.Plot]</label>
+              <font>font_body_small</font>
+              <textcolor>frost</textcolor>
+            </control>
+          </control>
+        </focusedlayout>
+        <scrolltime>220</scrolltime>
+        <onup>701</onup>
+        <ondown>526</ondown>
+        <onleft>9000</onleft>
+        <onright>526</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,526)</onfocus>
+      </control>
+      <include content="LibraryEmpty">
+        <param name="container" value="526" />
+        <param name="visible" value="Control.IsVisible(526)" />
+      </include>
+      <control type="panel" id="527">
+        <left>480</left>
+        <top>160</top>
+        <width>1176</width>
+        <height>920</height>
+        <orientation>vertical</orientation>
+        <viewtype label="$LOCALIZE[31428]">icon</viewtype>
+        <pagecontrol>60</pagecontrol>
+        <itemlayout width="232" height="422">
+          <include content="LibraryCard">
+            <param name="id" value="527" />
+            <param name="selected" value="false" />
+            <param name="width" value="200" />
+            <param name="height" value="300" />
+            <param name="mask" value="library/poster_mask.png" />
+            <param name="art" value="$VAR[LibraryPoster]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="296" />
+            <param name="glow_height" value="396" />
+            <param name="label_y" value="356" />
+            <param name="detail_y" value="386" />
+            <param name="active" value="Control.HasFocus(527)" />
+            <param name="center" value="100,300" />
+            <param name="native_capsule_y" value="238" />
+            <param name="native_capsule_width" value="176" />
+            <param name="native_bar_width" value="120" />
+            <param name="show_native_time" value="false" />
+          </include>
+        </itemlayout>
+        <focusedlayout width="232" height="422">
+          <include content="LibraryCard">
+            <param name="id" value="527" />
+            <param name="selected" value="true" />
+            <param name="width" value="200" />
+            <param name="height" value="300" />
+            <param name="mask" value="library/poster_mask.png" />
+            <param name="art" value="$VAR[LibraryPoster]" />
+            <param name="circle" value="false" />
+            <param name="glow_width" value="296" />
+            <param name="glow_height" value="396" />
+            <param name="label_y" value="356" />
+            <param name="detail_y" value="386" />
+            <param name="active" value="Control.HasFocus(527)" />
+            <param name="center" value="100,300" />
+            <param name="native_capsule_y" value="238" />
+            <param name="native_capsule_width" value="176" />
+            <param name="native_bar_width" value="120" />
+            <param name="show_native_time" value="false" />
+          </include>
+        </focusedlayout>
+        <scrolltime>220</scrolltime>
+        <onup>701</onup>
+        <ondown>527</ondown>
+        <onleft>9000</onleft>
+        <onright>527</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,527)</onfocus>
+      </control>
+      <include content="LibraryEmpty">
+        <param name="container" value="527" />
+        <param name="visible" value="Control.IsVisible(527)" />
+      </include>
+      <control type="list" id="528">
+        <left>-16</left>
+        <top>220</top>
+        <width>1160</width>
+        <height>824</height>
+        <orientation>vertical</orientation>
+        <viewtype label="$LOCALIZE[31429]">list</viewtype>
+        <pagecontrol>60</pagecontrol>
+        <itemlayout width="1160" height="200">
+          <control type="group">
+            <left>0</left>
+            <top>4</top>
+            <width>1160</width>
+            <height>196</height>
+            <control type="image">
+              <left>-48</left>
+              <top>-48</top>
+              <width>1256</width>
+              <height>292</height>
+              <visible>false</visible>
+              <texture border="focus_glow_border">focus_glow.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1160</width>
+              <height>196</height>
+              <visible>Control.HasFocus(528)</visible>
+              <texture border="capsule_border">glass_capsule.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1160</width>
+              <height>196</height>
+              <visible>false</visible>
+              <texture border="capsule_border">frost_fill.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1160</width>
+              <height>196</height>
+              <visible>false</visible>
+              <texture border="focus_border">focus_button.png</texture>
+            </control>
+            <control type="image">
+              <left>18</left>
+              <top>20</top>
+              <width>284</width>
+              <height>160</height>
+              <texture diffuse="library/list-expanded_mask.png">$VAR[LibraryLandscape]</texture>
+              <aspectratio>scale</aspectratio>
+            </control>
+            <control type="label">
+              <left>332</left>
+              <top>16</top>
+              <width>822</width>
+              <height>48</height>
+              <label>$INFO[ListItem.Label]</label>
+              <font>font_heading_small</font>
+              <textcolor>frost</textcolor>
+            </control>
+            <control type="label">
+              <left>332</left>
+              <top>65</top>
+              <width>822</width>
+              <height>36</height>
+              <label>$VAR[LibraryVideoMeta]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+            </control>
+            <control type="textbox">
+              <left>332</left>
+              <top>110</top>
+              <width>822</width>
+              <height>90</height>
+              <label>$INFO[ListItem.Plot]</label>
+              <font>font_body_small</font>
+              <textcolor>frost</textcolor>
+            </control>
+          </control>
+        </itemlayout>
+        <focusedlayout width="1160" height="200">
+          <control type="group">
+            <left>0</left>
+            <top>4</top>
+            <width>1160</width>
+            <height>196</height>
+            <control type="image">
+              <left>-48</left>
+              <top>-48</top>
+              <width>1256</width>
+              <height>292</height>
+              <visible>Control.HasFocus(528)</visible>
+              <texture border="focus_glow_border">focus_glow.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1160</width>
+              <height>196</height>
+              <visible>Control.HasFocus(528)</visible>
+              <texture border="capsule_border">glass_capsule.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1160</width>
+              <height>196</height>
+              <visible>!Control.HasFocus(528)</visible>
+              <texture border="capsule_border">frost_fill.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1160</width>
+              <height>196</height>
+              <visible>Control.HasFocus(528)</visible>
+              <texture border="focus_border">focus_button.png</texture>
+            </control>
+            <control type="image">
+              <left>18</left>
+              <top>20</top>
+              <width>284</width>
+              <height>160</height>
+              <texture diffuse="library/list-expanded_mask.png">$VAR[LibraryLandscape]</texture>
+              <aspectratio>scale</aspectratio>
+            </control>
+            <control type="label">
+              <left>332</left>
+              <top>16</top>
+              <width>822</width>
+              <height>48</height>
+              <label>$INFO[ListItem.Label]</label>
+              <font>font_heading_small</font>
+              <textcolor>frost</textcolor>
+            </control>
+            <control type="label">
+              <left>332</left>
+              <top>65</top>
+              <width>822</width>
+              <height>36</height>
+              <label>$VAR[LibraryVideoMeta]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+            </control>
+            <control type="textbox">
+              <left>332</left>
+              <top>110</top>
+              <width>822</width>
+              <height>90</height>
+              <label>$INFO[ListItem.Plot]</label>
+              <font>font_body_small</font>
+              <textcolor>frost</textcolor>
+            </control>
+          </control>
+        </focusedlayout>
+        <scrolltime>220</scrolltime>
+        <onup>700</onup>
+        <ondown>528</ondown>
+        <onleft>9000</onleft>
+        <onright>528</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,528)</onfocus>
+      </control>
+      <include content="LibraryDetails">
+        <param name="id" value="528" />
+        <param name="x" value="1214" />
+        <param name="y" value="780" />
+        <param name="width" value="430" />
+        <param name="poster" value="true" />
+        <param name="square" value="false" />
+        <param name="poster_y" value="220" />
+        <param name="title" value="$INFO[Container(528).ListItem.Label]" />
+        <param name="metadata" value="$INFO[Container(528).ListItem.Year,,   ]$INFO[Container(528).ListItem.Artist,,   ]$INFO[Container(528).ListItem.Duration]" />
+      </include>
+      <include content="LibraryEmpty">
+        <param name="container" value="528" />
+        <param name="visible" value="Control.IsVisible(528)" />
+      </include>
+      <control type="list" id="529">
+        <left>-16</left>
+        <top>220</top>
+        <width>1660</width>
+        <height>824</height>
+        <orientation>vertical</orientation>
+        <viewtype label="$LOCALIZE[31430]">list</viewtype>
+        <pagecontrol>60</pagecontrol>
+        <itemlayout width="1660" height="224">
+          <control type="group">
+            <left>0</left>
+            <top>4</top>
+            <width>1660</width>
+            <height>220</height>
+            <control type="image">
+              <left>-48</left>
+              <top>-48</top>
+              <width>1756</width>
+              <height>316</height>
+              <visible>false</visible>
+              <texture border="focus_glow_border">focus_glow.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1660</width>
+              <height>220</height>
+              <visible>Control.HasFocus(529)</visible>
+              <texture border="capsule_border">glass_capsule.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1660</width>
+              <height>220</height>
+              <visible>false</visible>
+              <texture border="capsule_border">frost_fill.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1660</width>
+              <height>220</height>
+              <visible>false</visible>
+              <texture border="focus_border">focus_button.png</texture>
+            </control>
+            <control type="image">
+              <left>18</left>
+              <top>16</top>
+              <width>336</width>
+              <height>189</height>
+              <texture diffuse="library/list-large_mask.png">$VAR[LibraryLandscape]</texture>
+              <aspectratio>scale</aspectratio>
+            </control>
+            <control type="label">
+              <left>384</left>
+              <top>16</top>
+              <width>1254</width>
+              <height>48</height>
+              <label>$INFO[ListItem.Label]</label>
+              <font>font_heading_small</font>
+              <textcolor>frost</textcolor>
+            </control>
+            <control type="label">
+              <left>384</left>
+              <top>65</top>
+              <width>1254</width>
+              <height>36</height>
+              <label>$VAR[LibraryVideoMeta]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+            </control>
+            <control type="textbox">
+              <left>384</left>
+              <top>110</top>
+              <width>1254</width>
+              <height>90</height>
+              <label>$INFO[ListItem.Plot]</label>
+              <font>font_body_small</font>
+              <textcolor>frost</textcolor>
+            </control>
+          </control>
+        </itemlayout>
+        <focusedlayout width="1660" height="224">
+          <control type="group">
+            <left>0</left>
+            <top>4</top>
+            <width>1660</width>
+            <height>220</height>
+            <control type="image">
+              <left>-48</left>
+              <top>-48</top>
+              <width>1756</width>
+              <height>316</height>
+              <visible>Control.HasFocus(529)</visible>
+              <texture border="focus_glow_border">focus_glow.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1660</width>
+              <height>220</height>
+              <visible>Control.HasFocus(529)</visible>
+              <texture border="capsule_border">glass_capsule.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1660</width>
+              <height>220</height>
+              <visible>!Control.HasFocus(529)</visible>
+              <texture border="capsule_border">frost_fill.png</texture>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>0</top>
+              <width>1660</width>
+              <height>220</height>
+              <visible>Control.HasFocus(529)</visible>
+              <texture border="focus_border">focus_button.png</texture>
+            </control>
+            <control type="image">
+              <left>18</left>
+              <top>16</top>
+              <width>336</width>
+              <height>189</height>
+              <texture diffuse="library/list-large_mask.png">$VAR[LibraryLandscape]</texture>
+              <aspectratio>scale</aspectratio>
+            </control>
+            <control type="label">
+              <left>384</left>
+              <top>16</top>
+              <width>1254</width>
+              <height>48</height>
+              <label>$INFO[ListItem.Label]</label>
+              <font>font_heading_small</font>
+              <textcolor>frost</textcolor>
+            </control>
+            <control type="label">
+              <left>384</left>
+              <top>65</top>
+              <width>1254</width>
+              <height>36</height>
+              <label>$VAR[LibraryVideoMeta]</label>
+              <font>font_label</font>
+              <textcolor>mist</textcolor>
+            </control>
+            <control type="textbox">
+              <left>384</left>
+              <top>110</top>
+              <width>1254</width>
+              <height>90</height>
+              <label>$INFO[ListItem.Plot]</label>
+              <font>font_body_small</font>
+              <textcolor>frost</textcolor>
+            </control>
+          </control>
+        </focusedlayout>
+        <scrolltime>220</scrolltime>
+        <onup>700</onup>
+        <ondown>529</ondown>
+        <onleft>9000</onleft>
+        <onright>529</onright>
+        <onfocus>SetProperty(Starlight.Library.Container,529)</onfocus>
+      </control>
+      <include content="LibraryEmpty">
+        <param name="container" value="529" />
+        <param name="visible" value="Control.IsVisible(529)" />
+      </include>
+      <control type="fixedlist" id="700">
+        <left>0</left>
+        <top>460</top>
+        <width>1644</width>
+        <height>72</height>
+        <visible>Control.IsVisible(520) | Control.IsVisible(521) | Control.IsVisible(522) | Control.IsVisible(523) | Control.IsVisible(524) | Control.IsVisible(528) | Control.IsVisible(529)</visible>
+        <animation effect="slide" start="0,0" end="0,-310" time="0" condition="Control.IsVisible(528) | Control.IsVisible(529)">Conditional</animation>
+        <orientation>horizontal</orientation>
+        <focusposition>0</focusposition>
+        <content target="videos" browse="never">$VAR[LibraryCategoryPath]</content>
+        <itemlayout width="230" height="72">
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>230</width>
+            <height>64</height>
+            <visible>Control.HasFocus(700)</visible>
+            <texture border="capsule_border">glass_capsule.png</texture>
+          </control>
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>230</width>
+            <height>64</height>
+            <visible>false</visible>
+            <texture border="focus_border">focus_button.png</texture>
+          </control>
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>230</width>
+            <height>64</height>
+            <visible>false</visible>
+            <texture border="capsule_border">frost_fill.png</texture>
+          </control>
+          <control type="label">
+            <left>22</left>
+            <top>0</top>
+            <width>186</width>
+            <height>64</height>
+            <label>$INFO[ListItem.Label]</label>
+            <font>font_label_large</font>
+            <textcolor>frost</textcolor>
+          </control>
+        </itemlayout>
+        <focusedlayout width="230" height="72">
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>230</width>
+            <height>64</height>
+            <visible>Control.HasFocus(700)</visible>
+            <texture border="capsule_border">glass_capsule.png</texture>
+          </control>
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>230</width>
+            <height>64</height>
+            <visible>Control.HasFocus(700)</visible>
+            <texture border="focus_border">focus_button.png</texture>
+          </control>
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>230</width>
+            <height>64</height>
+            <visible>!Control.HasFocus(700)</visible>
+            <texture border="capsule_border">frost_fill.png</texture>
+          </control>
+          <control type="label">
+            <left>22</left>
+            <top>0</top>
+            <width>186</width>
+            <height>64</height>
+            <label>$INFO[ListItem.Label]</label>
+            <font>font_label_large</font>
+            <textcolor>frost</textcolor>
+          </control>
+        </focusedlayout>
+        <onup>22</onup>
+        <ondown>SetFocus($INFO[Window.Property(Starlight.Library.Container)])</ondown>
+        <onleft>9000</onleft>
+        <onright>SetFocus($INFO[Window.Property(Starlight.Library.Container)])</onright>
+        <onclick>RunScript(special://skin/resources/library.py,category,700)</onclick>
+      </control>
+      <control type="list" id="701">
+        <left>0</left>
+        <top>160</top>
+        <width>440</width>
+        <height>760</height>
+        <visible>Control.IsVisible(526) | Control.IsVisible(527)</visible>
+        <orientation>vertical</orientation>
+        <content target="videos" browse="never">$VAR[LibraryCategoryPath]</content>
+        <itemlayout width="440" height="72">
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>440</width>
+            <height>64</height>
+            <visible>Control.HasFocus(701)</visible>
+            <texture border="capsule_border">glass_capsule.png</texture>
+          </control>
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>440</width>
+            <height>64</height>
+            <visible>false</visible>
+            <texture border="focus_border">focus_button.png</texture>
+          </control>
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>440</width>
+            <height>64</height>
+            <visible>false</visible>
+            <texture border="capsule_border">frost_fill.png</texture>
+          </control>
+          <control type="label">
+            <left>22</left>
+            <top>0</top>
+            <width>390</width>
+            <height>64</height>
+            <label>$INFO[ListItem.Label]</label>
+            <font>font_label_large</font>
+            <textcolor>frost</textcolor>
+          </control>
+        </itemlayout>
+        <focusedlayout width="440" height="72">
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>440</width>
+            <height>64</height>
+            <visible>Control.HasFocus(701)</visible>
+            <texture border="capsule_border">glass_capsule.png</texture>
+          </control>
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>440</width>
+            <height>64</height>
+            <visible>Control.HasFocus(701)</visible>
+            <texture border="focus_border">focus_button.png</texture>
+          </control>
+          <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>440</width>
+            <height>64</height>
+            <visible>!Control.HasFocus(701)</visible>
+            <texture border="capsule_border">frost_fill.png</texture>
+          </control>
+          <control type="label">
+            <left>22</left>
+            <top>0</top>
+            <width>390</width>
+            <height>64</height>
+            <label>$INFO[ListItem.Label]</label>
+            <font>font_label_large</font>
+            <textcolor>frost</textcolor>
+          </control>
+        </focusedlayout>
+        <onup>22</onup>
+        <ondown>SetFocus($INFO[Window.Property(Starlight.Library.Container)])</ondown>
+        <onleft>9000</onleft>
+        <onright>SetFocus($INFO[Window.Property(Starlight.Library.Container)])</onright>
+        <onclick>RunScript(special://skin/resources/library.py,category,701)</onclick>
+      </control>
+    </definition>
+  </include>
+  <include name="SearchResultCard">
+    <param name="id" default="" />
+    <param name="selected" default="false" />
+    <definition>
+      <control type="group">
+        <left>0</left>
+        <top>0</top>
+        <width>280</width>
+        <height>360</height>
+        <visible>String.IsEqual(ListItem.Property(Starlight.Search.Shape),poster)</visible>
+        <include content="LibraryCard">
+          <param name="id" value="$PARAM[id]" />
+          <param name="selected" value="$PARAM[selected]" />
+          <param name="width" value="189" />
+          <param name="height" value="283" />
+          <param name="mask" value="library/search-poster_mask.png" />
+          <param name="art" value="$VAR[LibraryPoster]" />
+          <param name="circle" value="false" />
+          <param name="detail" value="$INFO[ListItem.Label2]" />
+          <param name="label_y" value="339" />
+          <param name="detail_y" value="369" />
+          <param name="glow_width" value="285" />
+          <param name="glow_height" value="379" />
+          <param name="active" value="Control.HasFocus($PARAM[id])" />
+          <param name="center" value="94.5,283" />
+          <param name="art_top" value="40" />
+          <param name="native_capsule_y" value="221" />
+          <param name="native_capsule_width" value="165" />
+          <param name="native_bar_width" value="109" />
+          <param name="show_native_time" value="false" />
+        </include>
+      </control>
+      <control type="group">
+        <left>0</left>
+        <top>0</top>
+        <width>280</width>
+        <height>360</height>
+        <visible>String.IsEqual(ListItem.Property(Starlight.Search.Shape),landscape)</visible>
+        <include content="LibraryCard">
+          <param name="id" value="$PARAM[id]" />
+          <param name="selected" value="$PARAM[selected]" />
+          <param name="width" value="189" />
+          <param name="height" value="106" />
+          <param name="mask" value="library/landscape_mask.png" />
+          <param name="art" value="$VAR[LibraryLandscape]" />
+          <param name="circle" value="false" />
+          <param name="detail" value="$INFO[ListItem.Label2]" />
+          <param name="label_y" value="339" />
+          <param name="detail_y" value="369" />
+          <param name="glow_width" value="285" />
+          <param name="glow_height" value="202" />
+          <param name="active" value="Control.HasFocus($PARAM[id])" />
+          <param name="center" value="94.5,106" />
+          <param name="art_top" value="217" />
+          <param name="native_capsule_y" value="44" />
+          <param name="native_capsule_width" value="165" />
+          <param name="native_bar_width" value="109" />
+          <param name="show_native_time" value="false" />
+        </include>
+      </control>
+      <control type="group">
+        <left>0</left>
+        <top>0</top>
+        <width>280</width>
+        <height>360</height>
+        <visible>String.IsEqual(ListItem.Property(Starlight.Search.Shape),square)</visible>
+        <include content="LibraryCard">
+          <param name="id" value="$PARAM[id]" />
+          <param name="selected" value="$PARAM[selected]" />
+          <param name="width" value="189" />
+          <param name="height" value="189" />
+          <param name="mask" value="library/search_mask.png" />
+          <param name="art" value="$VAR[LibrarySquare]" />
+          <param name="circle" value="false" />
+          <param name="detail" value="$INFO[ListItem.Label2]" />
+          <param name="label_y" value="339" />
+          <param name="detail_y" value="369" />
+          <param name="glow_width" value="285" />
+          <param name="glow_height" value="285" />
+          <param name="active" value="Control.HasFocus($PARAM[id])" />
+          <param name="center" value="94.5,189" />
+          <param name="art_top" value="134" />
+          <param name="native_capsule_y" value="127" />
+          <param name="native_capsule_width" value="165" />
+          <param name="native_bar_width" value="109" />
+          <param name="show_native_time" value="false" />
+        </include>
+      </control>
+      <control type="group">
+        <left>0</left>
+        <top>0</top>
+        <width>280</width>
+        <height>360</height>
+        <visible>String.IsEqual(ListItem.Property(Starlight.Search.Shape),circle)</visible>
+        <include content="LibraryCard">
+          <param name="id" value="$PARAM[id]" />
+          <param name="selected" value="$PARAM[selected]" />
+          <param name="width" value="189" />
+          <param name="height" value="189" />
+          <param name="mask" value="library/circle_mask.png" />
+          <param name="art" value="$VAR[LibrarySquare]" />
+          <param name="circle" value="true" />
+          <param name="detail" value="$INFO[ListItem.Label2]" />
+          <param name="label_y" value="339" />
+          <param name="detail_y" value="369" />
+          <param name="glow_width" value="285" />
+          <param name="glow_height" value="285" />
+          <param name="active" value="Control.HasFocus($PARAM[id])" />
+          <param name="center" value="94.5,189" />
+          <param name="art_top" value="134" />
+          <param name="native_capsule_y" value="127" />
+          <param name="native_capsule_width" value="165" />
+          <param name="native_bar_width" value="109" />
+          <param name="show_native_time" value="false" />
+        </include>
+      </control>
+    </definition>
+  </include>
+  <include name="LibraryTab">
+    <param name="id" default="" />
+    <param name="selected" default="false" />
+    <param name="label" default="$INFO[ListItem.Label]" />
+    <param name="width" default="230" />
+    <definition>
+      <control type="image">
+        <left>0</left>
+        <top>0</top>
+        <width>$PARAM[width]</width>
+        <height>64</height>
+        <visible>Control.HasFocus($PARAM[id])</visible>
+        <texture border="capsule_border">glass_capsule.png</texture>
+      </control>
+      <control type="image">
+        <left>0</left>
+        <top>0</top>
+        <width>$PARAM[width]</width>
+        <height>64</height>
+        <visible>Control.HasFocus($PARAM[id]) + $PARAM[selected]</visible>
+        <texture border="focus_border">focus_button.png</texture>
+      </control>
+      <control type="image">
+        <left>0</left>
+        <top>0</top>
+        <width>$PARAM[width]</width>
+        <height>64</height>
+        <visible>!Control.HasFocus($PARAM[id]) + $PARAM[selected]</visible>
+        <texture border="capsule_border">frost_fill.png</texture>
+      </control>
+      <control type="label">
+        <left>20</left>
+        <top>0</top>
+        <width>$PARAM[label_width]</width>
+        <height>64</height>
+        <label>$PARAM[label]</label>
+        <font>font_label_large</font>
+        <textcolor>frost</textcolor>
+      </control>
+    </definition>
+    <param name="label_width" default="190" />
+  </include>
+  <variable name="SearchField">
+    <value condition="!String.IsEmpty(Window(home).Property(Starlight.Search.Query))">$INFO[Window(home).Property(Starlight.Search.Query)]</value>
+    <value>$LOCALIZE[31434]</value>
+  </variable>
+  <variable name="SearchEmptyMessage">
+    <value condition="String.IsEmpty(Window(home).Property(Starlight.Search.Query))">$LOCALIZE[31445]</value>
+    <value>$LOCALIZE[31446]</value>
+  </variable>
+  <variable name="SearchStatus">
+    <value condition="String.IsEqual(Window(home).Property(Starlight.Search.Busy),true)">$LOCALIZE[31447]</value>
+    <value condition="!String.IsEmpty(Window(home).Property(Starlight.Search.Errors))">$LOCALIZE[31448]</value>
+    <value />
+  </variable>
+  <variable name="LibraryCursor">
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),500)">$INFO[Container(500).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),501)">$INFO[Container(501).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),502)">$INFO[Container(502).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),503)">$INFO[Container(503).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),504)">$INFO[Container(504).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),505)">$INFO[Container(505).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),506)">$INFO[Container(506).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),507)">$INFO[Container(507).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),508)">$INFO[Container(508).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),510)">$INFO[Container(510).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),511)">$INFO[Container(511).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),512)">$INFO[Container(512).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),513)">$INFO[Container(513).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),514)">$INFO[Container(514).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),515)">$INFO[Container(515).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),517)">$INFO[Container(517).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),518)">$INFO[Container(518).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),520)">$INFO[Container(520).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),521)">$INFO[Container(521).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),522)">$INFO[Container(522).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),523)">$INFO[Container(523).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),524)">$INFO[Container(524).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),526)">$INFO[Container(526).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),527)">$INFO[Container(527).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),528)">$INFO[Container(528).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Library.Container),529)">$INFO[Container(529).Position]</value>
+    <value>0</value>
+  </variable>
+  <variable name="SearchCursor">
+    <value condition="String.IsEqual(Window.Property(Starlight.Search.Container),610)">$INFO[Container(610).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Search.Container),611)">$INFO[Container(611).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Search.Container),612)">$INFO[Container(612).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Search.Container),613)">$INFO[Container(613).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Search.Container),614)">$INFO[Container(614).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Search.Container),615)">$INFO[Container(615).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Search.Container),616)">$INFO[Container(616).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Search.Container),617)">$INFO[Container(617).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Search.Container),618)">$INFO[Container(618).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Search.Container),619)">$INFO[Container(619).Position]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Search.Container),620)">$INFO[Container(620).Position]</value>
+    <value>0</value>
+  </variable>
+  <variable name="SearchShape">
+    <value condition="String.IsEqual(Window.Property(Starlight.Search.Container),610)">$INFO[Container(610).ListItem.Property(Starlight.Search.Shape)]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Search.Container),611)">$INFO[Container(611).ListItem.Property(Starlight.Search.Shape)]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Search.Container),612)">$INFO[Container(612).ListItem.Property(Starlight.Search.Shape)]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Search.Container),613)">$INFO[Container(613).ListItem.Property(Starlight.Search.Shape)]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Search.Container),614)">$INFO[Container(614).ListItem.Property(Starlight.Search.Shape)]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Search.Container),615)">$INFO[Container(615).ListItem.Property(Starlight.Search.Shape)]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Search.Container),616)">$INFO[Container(616).ListItem.Property(Starlight.Search.Shape)]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Search.Container),617)">$INFO[Container(617).ListItem.Property(Starlight.Search.Shape)]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Search.Container),618)">$INFO[Container(618).ListItem.Property(Starlight.Search.Shape)]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Search.Container),619)">$INFO[Container(619).ListItem.Property(Starlight.Search.Shape)]</value>
+    <value condition="String.IsEqual(Window.Property(Starlight.Search.Container),620)">$INFO[Container(620).ListItem.Property(Starlight.Search.Shape)]</value>
+    <value>poster</value>
+  </variable>
+  <variable name="DiscoverCursor">
+    <value condition="String.IsEqual(Window(home).Property(Starlight.Container),510)">$INFO[Container(510).Position]</value>
+    <value condition="String.IsEqual(Window(home).Property(Starlight.Container),511)">$INFO[Container(511).Position]</value>
+    <value condition="String.IsEqual(Window(home).Property(Starlight.Container),512)">$INFO[Container(512).Position]</value>
+    <value>0</value>
+  </variable>
+  <variable name="LibraryPlayLabel">
+    <value condition="ListItem.IsResumable">$LOCALIZE[31016]</value>
+    <value>$LOCALIZE[31017]</value>
+  </variable>
+  <include name="LibraryWindowControls">
+    <param name="bound" default="true" />
+    <param name="sidefocus" default="903" />
+    <param name="topfocus" default="913" />
+    <definition>
+      <include content="InfoBackground">
+        <param name="art" value="$INFO[ListItem.Art(fanart)]" />
+        <param name="blur" value="$VAR[LibraryBlur]" />
+        <param name="bound" value="$PARAM[bound]" />
+      </include>
+      <include content="InfoClock" />
+      <control type="group">
+        <left>196</left>
+        <top>0</top>
+        <width>1644</width>
+        <height>1080</height>
+        <include content="InfoContentMotion" />
+        <control type="label">
+          <left>0</left>
+          <top>48</top>
+          <width>640</width>
+          <height>72</height>
+          <label>$VAR[LibraryTitle]</label>
+          <font>font_heading</font>
+          <textcolor>frost</textcolor>
+        </control>
+        <control type="label">
+          <left>650</left>
+          <top>58</top>
+          <width>130</width>
+          <height>52</height>
+          <label>$INFO[Container.NumItems]</label>
+          <font>font_label</font>
+          <textcolor>mist</textcolor>
+        </control>
+        <control type="button" id="2">
+          <left>800</left>
+          <top>52</top>
+          <width>160</width>
+          <height>64</height>
+          <label>$LOCALIZE[31431]</label>
+          <onup>9000</onup>
+          <ondown>SetFocus($INFO[Window.Property(Starlight.Library.Container)])</ondown>
+          <onleft>9000</onleft>
+          <onright>3</onright>
+          <onclick>RunScript(special://skin/resources/library.py,views)</onclick>
+          <visible>false</visible>
+        </control>
+        <control type="button" id="3">
+          <left>980</left>
+          <top>52</top>
+          <width>160</width>
+          <height>64</height>
+          <label>$LOCALIZE[31432]</label>
+          <onup>9000</onup>
+          <ondown>SetFocus($INFO[Window.Property(Starlight.Library.Container)])</ondown>
+          <onleft>22</onleft>
+          <onright>4</onright>
+        </control>
+        <control type="button" id="4">
+          <left>1160</left>
+          <top>52</top>
+          <width>160</width>
+          <height>64</height>
+          <label>$LOCALIZE[31433]</label>
+          <onup>9000</onup>
+          <ondown>SetFocus($INFO[Window.Property(Starlight.Library.Container)])</ondown>
+          <onleft>3</onleft>
+          <onright>9000</onright>
+        </control>
+        <control type="button" id="22">
+          <left>800</left>
+          <top>52</top>
+          <width>160</width>
+          <height>64</height>
+          <label>$LOCALIZE[31431]</label>
+          <onclick>RunScript(special://skin/resources/library.py,views)</onclick>
+          <onup>9000</onup>
+          <ondown>SetFocus($INFO[Window.Property(Starlight.Library.Container)])</ondown>
+          <onleft>9000</onleft>
+          <onright>3</onright>
+        </control>
+        <include content="LibraryViews" />
+        <control type="scrollbar" id="60">
+          <left>1660</left>
+          <top>150</top>
+          <width>6</width>
+          <height>820</height>
+          <orientation>vertical</orientation>
+          <visible>false</visible>
+        </control>
+      </control>
+      <include content="HubRail">
+        <param name="return" value="SetFocus($INFO[Window.Property(Starlight.Library.Container)])" />
+        <param name="sidefocus" value="$PARAM[sidefocus]" />
+        <param name="topfocus" value="$PARAM[topfocus]" />
+      </include>
+      <control type="button" id="6501">
+        <left>0</left>
+        <top>0</top>
+        <width>1</width>
+        <height>1</height>
+        <visible>false</visible>
+        <label>0</label>
+      </control>
+      <control type="button" id="6502">
+        <left>0</left>
+        <top>0</top>
+        <width>1</width>
+        <height>1</height>
+        <visible>false</visible>
+        <label>$VAR[LibraryCursor]</label>
+      </control>
+    </definition>
+  </include>
+  <variable name="LibraryColumnsPlot">
+    <value condition="!String.IsEmpty(Container(517).ListItem.Plot)">$INFO[Container(517).ListItem.Plot]</value>
+    <value>$INFO[Container(517).ListItem.Comment]</value>
+  </variable>
+  <include name="SearchStripKey">
+    <param name="selected" default="false" />
+    <definition>
+      <control type="image">
+        <left>-48</left>
+        <top>-48</top>
+        <width>134</width>
+        <height>160</height>
+        <texture>library/key_glow.png</texture>
+        <visible>Control.HasFocus(40) + $PARAM[selected]</visible>
+      </control>
+      <control type="image">
+        <left>0</left>
+        <top>0</top>
+        <width>38</width>
+        <height>64</height>
+        <texture>library/key_focus.png</texture>
+        <visible>Control.HasFocus(40) + $PARAM[selected]</visible>
+      </control>
+      <control type="image">
+        <left>0</left>
+        <top>0</top>
+        <width>38</width>
+        <height>64</height>
+        <texture>library/key_fill.png</texture>
+        <visible>!Control.HasFocus(40) + $PARAM[selected]</visible>
+      </control>
+      <control type="label">
+        <width>38</width>
+        <height>64</height>
+        <align>center</align>
+        <font>font_label_large</font>
+        <label>$INFO[ListItem.Label]</label>
+      </control>
+    </definition>
+  </include>
+  <include name="SearchCompactCard">
+    <param name="id" default="" />
+    <param name="selected" default="false" />
+    <definition>
+      <control type="group">
+        <left>0</left>
+        <top>0</top>
+        <width>280</width>
+        <height>360</height>
+        <visible>String.IsEqual(ListItem.Property(Starlight.Search.Shape),poster)</visible>
+        <include content="LibraryCard">
+          <param name="id" value="$PARAM[id]" />
+          <param name="selected" value="$PARAM[selected]" />
+          <param name="width" value="133" />
+          <param name="height" value="200" />
+          <param name="mask" value="library/search-poster_mask.png" />
+          <param name="art" value="$VAR[LibraryPoster]" />
+          <param name="circle" value="false" />
+          <param name="detail" value="$INFO[ListItem.Label2]" />
+          <param name="label_y" value="246" />
+          <param name="detail_y" value="274" />
+          <param name="glow_width" value="229" />
+          <param name="glow_height" value="296" />
+          <param name="active" value="Control.HasFocus($PARAM[id])" />
+          <param name="center" value="66.5,200" />
+          <param name="art_top" value="40" />
+          <param name="native_capsule_y" value="138" />
+          <param name="native_capsule_width" value="109" />
+          <param name="native_bar_width" value="53" />
+          <param name="show_native_time" value="false" />
+        </include>
+      </control>
+      <control type="group">
+        <left>0</left>
+        <top>0</top>
+        <width>280</width>
+        <height>360</height>
+        <visible>String.IsEqual(ListItem.Property(Starlight.Search.Shape),landscape)</visible>
+        <include content="LibraryCard">
+          <param name="id" value="$PARAM[id]" />
+          <param name="selected" value="$PARAM[selected]" />
+          <param name="width" value="133" />
+          <param name="height" value="75" />
+          <param name="mask" value="library/landscape_mask.png" />
+          <param name="art" value="$VAR[LibraryLandscape]" />
+          <param name="circle" value="false" />
+          <param name="detail" value="$INFO[ListItem.Label2]" />
+          <param name="label_y" value="246" />
+          <param name="detail_y" value="274" />
+          <param name="glow_width" value="229" />
+          <param name="glow_height" value="171" />
+          <param name="active" value="Control.HasFocus($PARAM[id])" />
+          <param name="center" value="66.5,75" />
+          <param name="art_top" value="165" />
+          <param name="native_capsule_y" value="13" />
+          <param name="native_capsule_width" value="109" />
+          <param name="native_bar_width" value="53" />
+          <param name="show_native_time" value="false" />
+        </include>
+      </control>
+      <control type="group">
+        <left>0</left>
+        <top>0</top>
+        <width>280</width>
+        <height>360</height>
+        <visible>String.IsEqual(ListItem.Property(Starlight.Search.Shape),square)</visible>
+        <include content="LibraryCard">
+          <param name="id" value="$PARAM[id]" />
+          <param name="selected" value="$PARAM[selected]" />
+          <param name="width" value="133" />
+          <param name="height" value="133" />
+          <param name="mask" value="library/search_mask.png" />
+          <param name="art" value="$VAR[LibrarySquare]" />
+          <param name="circle" value="false" />
+          <param name="detail" value="$INFO[ListItem.Label2]" />
+          <param name="label_y" value="246" />
+          <param name="detail_y" value="274" />
+          <param name="glow_width" value="229" />
+          <param name="glow_height" value="229" />
+          <param name="active" value="Control.HasFocus($PARAM[id])" />
+          <param name="center" value="66.5,133" />
+          <param name="art_top" value="107" />
+          <param name="native_capsule_y" value="71" />
+          <param name="native_capsule_width" value="109" />
+          <param name="native_bar_width" value="53" />
+          <param name="show_native_time" value="false" />
+        </include>
+      </control>
+      <control type="group">
+        <left>0</left>
+        <top>0</top>
+        <width>280</width>
+        <height>360</height>
+        <visible>String.IsEqual(ListItem.Property(Starlight.Search.Shape),circle)</visible>
+        <include content="LibraryCard">
+          <param name="id" value="$PARAM[id]" />
+          <param name="selected" value="$PARAM[selected]" />
+          <param name="width" value="133" />
+          <param name="height" value="133" />
+          <param name="mask" value="library/circle_mask.png" />
+          <param name="art" value="$VAR[LibrarySquare]" />
+          <param name="circle" value="true" />
+          <param name="detail" value="$INFO[ListItem.Label2]" />
+          <param name="label_y" value="246" />
+          <param name="detail_y" value="274" />
+          <param name="glow_width" value="229" />
+          <param name="glow_height" value="229" />
+          <param name="active" value="Control.HasFocus($PARAM[id])" />
+          <param name="center" value="66.5,133" />
+          <param name="art_top" value="107" />
+          <param name="native_capsule_y" value="71" />
+          <param name="native_capsule_width" value="109" />
+          <param name="native_bar_width" value="53" />
+          <param name="show_native_time" value="false" />
+        </include>
+      </control>
+    </definition>
+  </include>
+</includes>

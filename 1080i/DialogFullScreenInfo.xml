@@ -23,7 +23,7 @@
       <top>778</top>
       <width>1400</width>
       <height>42</height>
-      <label>$INFO[VideoPlayer.Genre]$INFO[VideoPlayer.Director, · ,]</label>
+      <label>$VAR[PlayerVideoPeople]</label>
       <font>font_body_large</font>
       <textcolor>mist</textcolor>
     </control>

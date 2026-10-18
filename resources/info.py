@@ -5,7 +5,7 @@ import re
 import sys
 import time
 import xml.etree.ElementTree as ET
-from urllib.parse import urlencode
+from urllib.parse import parse_qs, urlencode, urlsplit
 
 import xbmc
 import xbmcgui
@@ -30,7 +30,7 @@ def initialize():
     rawid = xbmc.getInfoLabel('ListItem.DBID')
     for key in ('Ready', 'Error', 'More', 'cast', 'seasons', 'ShowID', 'Season', 'NextID',
                 'Resume', 'Time', 'Duration', 'Progress', 'Media', 'DBID', 'Watched', 'SeasonCount',
-                'Provider', 'ProviderKey', 'ProviderType'):
+                'Provider', 'ProviderKey', 'ProviderType', 'ProviderIdentity'):
         window.clearProperty('Starlight.Info.' + key)
     window.setProperty('Starlight.Info.Blurred', cached_blurred_art(xbmc.getInfoLabel('ListItem.Art(fanart)')))
     window.setProperty('Starlight.Info.Hub', xbmcgui.Window(10000).getProperty('Starlight.Hub') or
@@ -39,7 +39,9 @@ def initialize():
         window.setProperty('Starlight.Info.Provider', 'true')
         key = xbmc.getInfoLabel('ListItem.Property(Starlight.ProviderKey)')
         if re.fullmatch(r'[A-Za-z0-9_-]{1,128}', key) and media in ('movie', 'tvshow'):
+            window.setProperty('Starlight.Info.Duration', xbmc.getInfoLabel('ListItem.Duration'))
             window.setProperty('Starlight.Info.ProviderKey', key)
+            window.setProperty('Starlight.Info.ProviderIdentity', 'plex.' + key)
             window.setProperty('Starlight.Info.ProviderType', 'show' if media == 'tvshow' else 'movie')
             window.setProperty('Starlight.Info.Ready', 'true')
             land(window, 418, request=request)
@@ -144,6 +146,22 @@ def open_person():
     name = xbmc.getInfoLabel('Container(250).ListItem.Label')
     if not name:
         return
+    identity = {'name': name}
+    if info.getProperty('Starlight.Info.Provider') == 'true':
+        path = urlsplit(xbmc.getInfoLabel('Container(250).ListItem.FileNameAndPath'))
+        args = parse_qs(path.query)
+        if (path.scheme != 'plugin' or path.netloc != 'plugin.video.plexkodiconnect'
+                or path.path != '/starlight/person' or path.fragment
+                or any(len(values) != 1 for values in args.values())):
+            return
+        if ('person_key' in args and set(args) <= {'person_key', 'name'}
+                and re.fullmatch(r'[0-9a-f]{24}', args['person_key'][0])
+                and ('name' not in args or args['name'][0] == name)):
+            identity = {'person_key': args['person_key'][0]}
+        elif set(args) == {'name'} and args['name'][0] == name and len(name) <= 256:
+            identity = {'name': name}
+        else:
+            return
     for key in ('Name', 'Thumb', 'Meta', 'Biography', 'CreditsPath', 'ImagesPath', 'ProviderKey'):
         person.clearProperty('Starlight.Person.' + key)
     person.setProperty('Starlight.Person.Name', name)
@@ -158,7 +176,7 @@ def open_person():
     xbmc.executebuiltin('ActivateWindow(11103)')
     if xbmc.getCondVisibility('System.HasAddon(plugin.video.plexkodiconnect)'):
         path = 'plugin://plugin.video.plexkodiconnect/starlight/person?' + urlencode({
-            'name': name, 'request': person.getProperty('Starlight.Person.Request')})
+            **identity, 'request': person.getProperty('Starlight.Person.Request')})
         xbmc.executebuiltin('RunPlugin(' + path + ')')
 
 
@@ -290,7 +308,8 @@ def context_anchor(window):
     person = window_id == PERSON and focused in {700, 710, 720}
     live = window_id == 11107 and focused in {610, 620}
     if not (home or person or live):
-        return None
+        from library import library_context_anchor
+        return library_context_anchor(window, window_id, focused)
     directory = Path(__file__).resolve().parents[1] / '1080i'
     includes, constants = {}, {}
     for path in directory.glob('Includes*.xml'):

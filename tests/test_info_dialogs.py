@@ -31,6 +31,8 @@ sys.path.insert(0, str(ROOT / 'resources/lib'))
 # dialogs/GUIDialogBusy.cpp:110-114; GUIDialogBusyNoCancel.cpp:15-20;
 # dialogs/GUIDialogVolumeBar.cpp:22-25. No native control IDs for busy/volume.
 WINDOW_IDS = {
+    'DialogMediaSource.xml': {2: 'label', 10: 'list', 11: 'button', 12: 'edit',
+                              13: 'button', 14: 'button', 18: 'button', 19: 'button'},
     'DialogVideoInfo.xml': {3: 'image', 4: 'textbox', 6: 'button', 7: 'button',
                             8: 'button', 9: 'button', 10: 'button', 11: 'button',
                             12: 'button', 13: 'button', 14: 'button', 15: 'button', 50: 'list'},

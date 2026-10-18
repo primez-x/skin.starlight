@@ -124,17 +124,14 @@
       </control>
       <control type="button" id="7">
         <include>SettingsRowStyle</include>
-        <visible>false</visible>
       </control>
       <control type="radiobutton" id="8">
         <include content="SettingsToggleStyle" />
         <include>SettingsRowStyle</include>
-        <visible>false</visible>
       </control>
       <control type="spincontrolex" id="9">
         <include content="SettingsSpinStyle" />
         <include>SettingsRowStyle</include>
-        <visible>false</visible>
       </control>
       <control type="togglebutton" id="10">
         <alttexturenofocus border="capsule_border">frost_fill.png</alttexturenofocus>
@@ -147,26 +144,22 @@
         <textoffsetx>0</textoffsetx>
         <ondown>5</ondown>
         <include>SettingsRowStyle</include>
-        <visible>false</visible>
       </control>
       <control type="edit" id="12">
         <include>SettingsRowStyle</include>
-        <visible>false</visible>
       </control>
       <control type="sliderex" id="13">
         <sliderwidth>260</sliderwidth>
         <sliderheight>8</sliderheight>
         <texturesliderbar>progress_track.png</texturesliderbar>
-        <textureslidernib>palette_frost.png</textureslidernib>
-        <textureslidernibfocus>palette_gold.png</textureslidernibfocus>
+        <textureslidernib>progress_playhead.png</textureslidernib>
+        <textureslidernibfocus>progress_playhead.png</textureslidernibfocus>
         <include>SettingsRowStyle</include>
-        <visible>false</visible>
       </control>
       <control type="colorbutton" id="15">
         <colorboxwidth>60</colorboxwidth>
         <colorboxheight>36</colorboxheight>
         <include>SettingsRowStyle</include>
-        <visible>false</visible>
       </control>
       <control type="image" id="11">
         <left>0</left>
@@ -174,7 +167,6 @@
         <width>1644</width>
         <height>2</height>
         <texture>progress_track.png</texture>
-        <visible>false</visible>
       </control>
       <control type="label" id="14">
         <left>24</left>
@@ -184,7 +176,6 @@
         <font>font_label_semibold</font>
         <textcolor>mist</textcolor>
         <label />
-        <visible>false</visible>
       </control>
       <control type="button" id="20">
         <left>1540</left>

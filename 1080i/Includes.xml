@@ -8,4 +8,5 @@
   <include file="Includes_Dialogs.xml" />
   <include file="Includes_Player.xml" />
   <include file="Includes_Settings.xml" />
+  <include file="Includes_Library.xml" />
 </includes>

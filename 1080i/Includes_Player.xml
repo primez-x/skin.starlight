@@ -49,12 +49,24 @@
     <value>$INFO[Player.Art(tvshow.clearlogo)]</value>
   </variable>
   <variable name="PlayerVideoTitle">
-    <value condition="!String.IsEmpty(VideoPlayer.TVShowTitle)">$INFO[VideoPlayer.TVShowTitle] · $INFO[VideoPlayer.Title]</value>
+    <value condition="!String.IsEmpty(VideoPlayer.TVShowTitle)">$INFO[VideoPlayer.TVShowTitle]$INFO[VideoPlayer.Title, · ,]</value>
     <value>$INFO[VideoPlayer.Title]</value>
   </variable>
   <variable name="PlayerTime">
     <value condition="Player.Seeking">$INFO[Player.SeekTime]</value>
     <value>$INFO[Player.Time]</value>
+  </variable>
+  <variable name="PlayerMusicDetail">
+    <value condition="!String.IsEmpty(MusicPlayer.Artist)">$INFO[MusicPlayer.Artist]$INFO[MusicPlayer.Album, · ,]</value>
+    <value>$INFO[MusicPlayer.Album]</value>
+  </variable>
+  <variable name="PlayerVideoEdition">
+    <value condition="Integer.IsGreater(VideoPlayer.Year,0)">$INFO[VideoPlayer.Year]$INFO[VideoPlayer.VideoVersionName, · ,]</value>
+    <value>$INFO[VideoPlayer.VideoVersionName]</value>
+  </variable>
+  <variable name="PlayerVideoPeople">
+    <value condition="!String.IsEmpty(VideoPlayer.Genre)">$INFO[VideoPlayer.Genre]$INFO[VideoPlayer.Director, · ,]</value>
+    <value>$INFO[VideoPlayer.Director]</value>
   </variable>
   <include name="PlayerBackground">
     <definition>
@@ -399,14 +411,27 @@
           <font>font_player_kicker</font>
           <textcolor>gold</textcolor>
         </control>
-        <control type="label" id="601">
-          <left>86</left>
-          <top>25</top>
-          <width min="300" max="1000">auto</width>
-          <height>31</height>
-          <label>[B]$INFO[Window(home).Property(Starlight.NextTrack.Title)][/B][COLOR mist]$INFO[Window(home).Property(Starlight.NextTrack.Artist), · ,][/COLOR]</label>
-          <font>font_body</font>
-          <textcolor>frost</textcolor>
+        <control type="grouplist">
+          <left>86</left><top>25</top><width>1000</width><height>31</height>
+          <orientation>horizontal</orientation><itemgap>0</itemgap>
+          <control type="label" id="601">
+            <left>0</left>
+            <top>0</top>
+            <width min="1" max="1000">auto</width>
+            <height>31</height>
+            <label>$INFO[Window(home).Property(Starlight.NextTrack.Title)]</label>
+            <font>font_label_large</font>
+            <textcolor>frost</textcolor>
+          </control>
+          <control type="label" id="604">
+            <left>0</left>
+            <top>0</top>
+            <width min="1" max="1000">auto</width>
+            <height>31</height>
+            <label>$INFO[Window(home).Property(Starlight.NextTrack.Artist), · ,]</label>
+            <font>font_body</font>
+            <textcolor>mist</textcolor>
+          </control>
         </control>
         <control type="progress" id="603">
           <left>86</left>
@@ -474,7 +499,7 @@
         <top>56</top>
         <width>700</width>
         <height>70</height>
-        <label>$INFO[VideoPlayer.Year]$INFO[VideoPlayer.VideoVersionName, · ,]</label>
+        <label>$VAR[PlayerVideoEdition]</label>
         <font>font_body</font>
         <textcolor>mist</textcolor>
       </control>

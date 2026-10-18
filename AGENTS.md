@@ -124,16 +124,16 @@
 - `MusicVisualisation.xml` owns the fixed music stage. Back opens Music. Down opens queue window 11104.
 - MusicOSD keeps native transport controls in one capsule. More opens modal window 11105 above a 35% dim.
 - `MyPlaylist.xml` redirects Kodi's MusicPlaylist entry to window 11104. Up and Back return to the music stage.
-- Queue rows 510 and 520 belong to the skin's Python adapter. No XML content source competes for either row.
+- Queue rows 510 and 520 read one skin-owned snapshot through native directory bindings. Kodi dispatches the row actions.
 - Queue reads use 200-record pages. Notifications refresh metadata. A one-second player-state check detects track and shuffle changes.
 - Queue activation checks the selected native position against the current file before `Player.Open`. The adapter never rebuilds a playlist.
 - Repeat all wraps the Up next row. Played shows preceding queue records, newest first, rather than a separate playback history.
 - Queue properties belong to window 11104: `Starlight.Queue.Request`, `Ready`, `Error`, `Count`, and `NextCount`.
 - `resources/player.py` owns `Window(home).Property(Starlight.Player.Blurred)` and `Starlight.Player.Monitor`.
 - The passive next-track pill reads only the documented `Starlight.NextTrack.*` properties from `script.starlight`.
-- The pill pads countdown seconds, measures native auto-width label 601, and resizes group 600, background 602, and progress 603.
+- The pill pads countdown seconds, measures native labels 601 and 604, and resizes group 600, background 602, and progress 603.
 - The capsule stays at y=832, height 90. The pill starts at y=972. The gap is 50 pixels.
-- Optional `script.starlight` supplies next-track data and music provider actions. No dependency entry is required.
+- `script.starlight` supplies next-track data and music provider actions. Search requires the helper dependency.
 - Without that helper, the pill, heart, and More hide. Native transport, the music stage, and the skin-owned queue remain available.
 - Spotify heart state reads `Spotify.CurrentTrackLiked`. `RunScript(script.starlight,spotify.like)` sends the contract's toggle notification.
 - Spotify More commands: `spotify.playlist`, `spotify.radio`, `music.artist`, `music.album`, and `spotify.follow`.
@@ -176,13 +176,43 @@
 - Recent channels use the native last-played directory, sorted by last play time.
 - SmartTube supplies `plugin://plugin.video.smarttube/live_now`. Cards read `Starlight.Source` and show no invented schedule or progress.
 - `MyPVRGuide.xml` uses native grid 50. A ruler unit of 6 shows half-hour labels.
-- Kodi EPG grid clicks bypass XML click actions. A failed native setting change produces a notification.
+- Kodi EPG grid clicks retain the current Kodi select action. The native context menu exposes programme options.
 - Recent-channel and YouTube cards supply the shared context adapter with native cursor metrics and actual lifted bounds.
 - Full pages reuse `InfoContentMotion` for the rail and top navigation layouts.
 - The native Guide currently uses the existing centred context sheet. Exact programme-cell anchoring needs a native grid geometry source.
-- Startup uses an asynchronous one-second alarm, short native animations, and cancellation on exit. No helper service delays startup.
+- Startup uses an asynchronous two-second alarm, short native animations, and cancellation on exit. No helper service delays startup.
 - `Pointer.xml` provides the four native pointer states. `tools/textures_settings.py` generates every step 6 texture.
 - Render each new window with `python3 tools/render_settings.py --art /path/to/sample/art --output /tmp/starlight-step6`.
 - Previews expand shipped XML and supply native-control fixtures. YouTube preview cards are explicit synthetic fixtures without schedule fields.
 - Verify remote navigation, native setting persistence, add-on settings, file selection, PVR actions, and startup on the integration box.
 - Verify PVR programme art, native progress, variable-width EPG cells, pointer motion, and guide scrolling on the integration box.
+
+## Step 5: libraries, Search and Discover
+
+- `Includes_Library.xml` owns the 26 locked library views and the named View menu.
+- Native IDs 500–508 and 510–515 retain the locked shapes. Dropped IDs 509, 549 and 550 stay absent.
+- Variant IDs: 517 = 507B; 518 = 508B; 526/527 = 526A/B; 528/529 = 528A/B.
+- Movies and TV use `MyVideoNav.xml`. Music uses `MyMusicNav.xml`. The spec defines no separate hub pages.
+- Kodi owns native folders, sort order, selected-item actions, queues and context menus.
+- Combined selectors read native genre directories. The current library path remains a native database path.
+- Search keeps custom window 11100. Discover keeps custom window 11101. Rail return paths reach page controls.
+- Search requires `script.starlight` 1.0.0. Every search command passes `window=11100` explicitly.
+- Search controls 610–619 hold native cached source rows. Control 620 holds the source wall. Hidden control 699 receives helper output.
+- Search text travels through the Home query property. Never interpolate query text into Kodi command strings.
+- The page controller reads native keyboard edit 312 during Search. Generic keyboard callers keep their original field position.
+- Up from the keyboard top row confirms text and returns focus to Top results. The native sheet remains the sole keyboard.
+- Discover uses `HomeBoardWidget`. New Board parameters preserve the Home defaults.
+- The skin reads PKC directories through `Files.GetDirectory`, including native `customproperties`.
+- Every Discover card opens the exact provider `Starlight.InfoPath`. No title or year match creates a library identity.
+- A 30-second ordered snapshot supplies Board record 1, grid records 2–5, and remaining records below.
+- A temporary exclusive file lock prevents concurrent Board loads from fetching separate snapshots.
+- Provider-only titles reuse `DialogVideoInfo.xml`. Control 418 owns the provider watchlist action.
+- Provider-only shows expose cast and hide native episode rows, season tabs and library actions.
+- Watchlist feedback reads matching `PKC.Watchlist.Detail.Identity`, `Pending`, `State` and `Error` properties.
+- The PKC contract names that property namespace but omits the exact state fields. Confirm the fields during integration.
+- `script.starlight` reads the selected native record property. The skin retains the documented selection command.
+- Kodi dispatches container XML click actions only for native providers. Search and queue directories read cached data.
+- Search song records lack capsule runtime fields in the helper contract. Search shows Play without a fabricated runtime.
+- Library context anchors use retained native cursor labels and the shared XML geometry. Search anchors retain the result shape.
+- Render previews with `python3 tools/render_library.py --art /path/to/design/art --output /tmp/starlight-step5`.
+- Preview images use sample records. Verify input, native focus, provider mutations and playback in the parent Kodi integration round.

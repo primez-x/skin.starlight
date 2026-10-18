@@ -7,6 +7,7 @@ import xml.etree.ElementTree as ET
 
 from PIL import Image, ImageChops, ImageDraw, ImageFilter
 from build_branding import rasterize
+from textures_library import build_library_textures
 
 ROOT = Path(__file__).resolve().parents[1]
 SCALE = 4
@@ -293,6 +294,7 @@ def build(output):
     for frame in range(24):
         textures[f'busy/frame_{frame:02d}.png'] = busy_frame(frame)
     textures.update(__import__('textures_player').player_textures())
+    build_library_textures(textures, mask, surface, glow)
     for name, texture in sorted(textures.items()):
         target = output / name
         target.parent.mkdir(parents=True, exist_ok=True)

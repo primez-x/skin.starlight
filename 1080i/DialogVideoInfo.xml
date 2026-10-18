@@ -347,7 +347,7 @@
           <texturefocus border="focus_border">focus_button.png</texturefocus>
           <texturenofocus border="capsule_border">frost_fill.png</texturenofocus>
           <visible>String.IsEqual(Window.Property(Starlight.Info.Provider),true) + !String.IsEmpty(Window.Property(Starlight.Info.ProviderKey))</visible>
-          <enable>String.IsEmpty(Window(home).Property(PKC.Watchlist.Detail.Pending))</enable>
+          <enable>!String.IsEqual(Window(home).Property(PKC.Watchlist.Detail.Identity),Window.Property(Starlight.Info.ProviderIdentity)) | String.IsEmpty(Window(home).Property(PKC.Watchlist.Detail.Pending))</enable>
           <onclick>RunPlugin(plugin://plugin.video.plexkodiconnect/starlight/watchlist?rating_key=$INFO[Window.Property(Starlight.Info.ProviderKey)]&amp;action=$VAR[InfoProviderAction]&amp;type=$INFO[Window.Property(Starlight.Info.ProviderType)])</onclick>
           <onleft>9000</onleft>
           <onright>419</onright>
@@ -420,6 +420,11 @@
           <param name="shift_medium" value="Control.HasFocus(401)" />
           <param name="shift_wide" value="Control.HasFocus(408)" />
         </include>
+      </control>
+      <control type="label">
+        <left>662</left><top>704</top><width>900</width><height>36</height>
+        <font>font_label</font><textcolor>danger</textcolor><label>$LOCALIZE[31459]</label>
+        <visible>String.IsEqual(Window.Property(Starlight.Info.Provider),true) + String.IsEqual(Window(home).Property(PKC.Watchlist.Detail.Identity),Window.Property(Starlight.Info.ProviderIdentity)) + !String.IsEmpty(Window(home).Property(PKC.Watchlist.Detail.Error))</visible>
       </control>
       <control type="list" id="50">
         <left>0</left>

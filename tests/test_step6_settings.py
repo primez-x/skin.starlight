@@ -121,7 +121,7 @@ class Step6Tests(unittest.TestCase):
     def test_splash_is_nonblocking_and_pointer_states_exist(self):
         tree=expanded('Startup')
         text=ET.tostring(tree,encoding='unicode')
-        self.assertIn('AlarmClock(StarlightStartup,ReplaceWindow(Home),00:00:01,silent)',text)
+        self.assertIn('AlarmClock(StarlightStartup,ReplaceWindow(Home),00:00:02,silent)',text)
         self.assertNotIn('Sleep(',text)
         self.assertNotIn('RunScript(',text)
         self.assertIn('CancelAlarm(StarlightStartup,true)',text)

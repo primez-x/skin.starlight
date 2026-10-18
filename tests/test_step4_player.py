@@ -3,6 +3,7 @@ empty queues, repeat wrap, invalid selection, absent helper, paused spectrum,
 unpadded countdowns, moved stage slots, and malformed player navigation.
 Kodi input, spectrum rendering, auto-width labels and account actions need a box.
 """
+import ast
 import importlib.util
 from pathlib import Path
 import sys
@@ -52,9 +53,9 @@ class PlayerWindowTests(unittest.TestCase):
         self.assertIn('Spotify.CurrentTrackLiked', source)
         self.assertIn('Starlight.NextTrack.Progress', source)
         addon = ET.parse(ROOT / 'addon.xml')
-        self.assertNotIn('script.starlight', [n.get('addon') for n in addon.iter('import')])
+        self.assertIn('script.starlight', [n.get('addon') for n in addon.iter('import')])
 
-    def test_queue_has_two_script_owned_rows_and_safe_return(self):
+    def test_queue_has_two_native_cached_rows_and_safe_return(self):
         path = ROOT / '1080i/Custom_1104.xml'
         self.assertTrue(path.exists(), 'Queue view is missing')
         from render_home import HomePreview
@@ -62,7 +63,7 @@ class PlayerWindowTests(unittest.TestCase):
         for identity in (510, 520):
             row = tree.find(f".//control[@id='{identity}']")
             self.assertIsNotNone(row)
-            self.assertIsNone(row.find('content'))
+            self.assertIn('source=queueresults', row.findtext('content'))
             self.assertEqual(row.findtext('onup'), 'ActivateWindow(visualisation)')
             self.assertEqual(row.findtext('onback'), 'ActivateWindow(visualisation)')
             self.assertIn('queue-play', row.findtext('onclick'))
@@ -144,31 +145,42 @@ class QueueTests(unittest.TestCase):
 
     def test_closed_queue_request_cannot_replace_a_newer_queue(self):
         properties = {}
-        resets = []
-        control = SimpleNamespace(size=lambda:0, reset=lambda:resets.append(True),
-                                  addItems=lambda rows:None, selectItem=lambda index:None)
         window = SimpleNamespace(setProperty=lambda key,value:properties.__setitem__(key,value),
                                  getProperty=lambda key:properties.get(key,''),
                                  clearProperty=lambda key:properties.pop(key,None),
-                                 getControl=lambda identity:control, setFocusId=lambda identity:None)
+                                 setFocusId=lambda identity:None)
         def rpc(method, params):
             if method == 'Playlist.GetItems': properties['Starlight.Queue.Request'] = 'newer-request'
             return self.snapshot_rpc(method, params)
         class Monitor:
             def waitForAbort(self, seconds): return True
-        class Item:
-            def __init__(self, **kwargs): pass
-            def setArt(self, art): pass
-            def setProperty(self, key, value): pass
         xbmc = SimpleNamespace(Monitor=Monitor, getCondVisibility=lambda expression:True,
                                getLocalizedString=lambda identity:'Play')
         fake_home = SimpleNamespace(rpc=rpc, cached_blurred_art=lambda art:art)
         spec = importlib.util.spec_from_file_location('step4_adapter', ROOT / 'resources/player.py')
         adapter = importlib.util.module_from_spec(spec)
-        with patch.dict(sys.modules, {'xbmc':xbmc, 'xbmcgui':SimpleNamespace(Window=lambda identity:window,ListItem=Item), 'home':fake_home}):
+        with patch.dict(sys.modules, {'xbmc':xbmc, 'xbmcgui':SimpleNamespace(Window=lambda identity:window), 'home':fake_home}):
             spec.loader.exec_module(adapter)
             adapter.monitor_queue()
-        self.assertEqual(resets, [])
+        self.assertNotIn('Starlight.Queue.Ready', properties)
+
+    def test_old_play_action_cannot_close_a_reopened_queue(self):
+        properties = {'Starlight.Queue.Request': 'old'}
+        calls = []
+        window = SimpleNamespace(getProperty=lambda key: properties.get(key, ''))
+        def play(*args):
+            properties['Starlight.Queue.Request'] = 'new'
+            return True
+        xbmc = SimpleNamespace(getCondVisibility=lambda value: True,
+                               getInfoLabel=lambda value: '1' if value.endswith('Position)') else 'file',
+                               executebuiltin=calls.append)
+        node = next(n for n in ast.parse((ROOT / 'resources/player.py').read_text()).body
+                    if isinstance(n, ast.FunctionDef) and n.name == 'queue_play')
+        namespace = {'xbmc': xbmc, 'xbmcgui': SimpleNamespace(Window=lambda identity: window),
+                     'QUEUE': 11104, 'rpc': None, 'play_queue_item': play}
+        exec(compile(ast.Module(body=[node], type_ignores=[]), '<queue>', 'exec'), namespace)
+        namespace['queue_play']('510')
+        self.assertEqual(calls, [])
 
     def test_pill_grows_and_remains_centred_with_a_width_cap(self):
         self.assertEqual(self.module.pill_geometry(300), (738, 444))

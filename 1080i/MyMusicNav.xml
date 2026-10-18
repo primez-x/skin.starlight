@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <defaultcontrol always="true">507</defaultcontrol>
+  <views>500,501,502,503,504,505,506,507,508,510,511,512,513,514,515,517,518,520,521,522,523,524,526,527,528,529</views>
+  <onload>SetProperty(Starlight.Library.Container,507)</onload>
+  <onload>SetProperty(Starlight.Hub,music,home)</onload>
+  <onload>RunScript(special://skin/resources/library.py,library-monitor)</onload>
+  <controls>
+    <include content="LibraryWindowControls">
+      <param name="bound" value="false" />
+      <param name="sidefocus" value="905" />
+      <param name="topfocus" value="915" />
+    </include>
+  </controls>
+</window>

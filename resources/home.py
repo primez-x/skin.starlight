@@ -39,6 +39,18 @@ def listing():
     args = parse_qs(sys.argv[2].lstrip('?'))
     source = args.get('source', ['continue'])[0]
     part = args.get('part', ['row'])[0]
+    if source == 'queueresults':
+        from player import queue_listing
+        queue_listing(handle, args)
+        return
+    if source == 'searchresults':
+        from library import search_listing
+        search_listing(handle, args)
+        return
+    if source == 'discover':
+        from library import discover_listing
+        discover_listing(handle, args)
+        return
     if source in ('infoepisodes', 'person', 'cast', 'seasons'):
         info_listing(handle, source, args)
         return

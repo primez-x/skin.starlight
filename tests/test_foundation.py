@@ -74,7 +74,15 @@ class FoundationTests(unittest.TestCase):
         for path in (ROOT / '1080i').glob('*.xml'):
             for node in ET.parse(path).iter('font'):
                 if not list(node):
-                    self.assertIn(node.text, names)
+                    if (node.text or '').startswith('$PARAM['):
+                        parameter = node.text[7:-1]
+                        defaults = [n.get('default') for n in ET.parse(path).iter('param')
+                                    if n.get('name') == parameter and n.get('default')]
+                        self.assertTrue(defaults, parameter)
+                        for value in defaults:
+                            self.assertIn(value, names)
+                    else:
+                        self.assertIn(node.text, names)
 
     def test_clean_room_guard(self):
         forbidden = re.compile(rb'arctic|(?<![a-z])fuse(?![a-z])|jurial|skinvariables|texturemaker|themoviedb', re.I)
@@ -91,7 +99,7 @@ class FoundationTests(unittest.TestCase):
         for path in (ROOT / '1080i').glob('*.xml'):
             for match in pattern.finditer(path.read_text()):
                 with self.subTest(path=path.name, argument=match[1]):
-                    self.assertRegex(match[1], r'^(?:ListItem\.|Container\(|Window(?:\(|\.)|Skin\.String\(|Control\.|System\.|Player\.|MusicPlayer\.|VideoPlayer\.|Weather\.)')
+                    self.assertRegex(match[1], r'^(?:ListItem\.|Container(?:\(|\.)|Window(?:\(|\.)|Skin\.String\(|Control\.|System\.|Player\.|MusicPlayer\.|VideoPlayer\.|Weather\.)')
 
     def test_item_layouts_use_fixed_controls(self):
         import sys
@@ -177,7 +185,7 @@ class FoundationTests(unittest.TestCase):
         addon = ET.parse(ROOT / 'addon.xml').getroot()
         self.assertEqual(addon.get('id'), 'skin.starlight')
         self.assertEqual({n.get('addon'): n.get('version') for n in addon.findall('requires/import')},
-                         {'xbmc.gui': '5.17.0', 'xbmc.python': '3.0.0'})
+                         {'xbmc.gui': '5.17.0', 'xbmc.python': '3.0.0', 'script.starlight': '1.0.0'})
         resolution = addon.find("extension[@point='xbmc.gui.skin']/res")
         self.assertEqual((resolution.get('width'), resolution.get('height')), ('1920', '1080'))
         metadata = addon.find("extension[@point='xbmc.addon.metadata']")

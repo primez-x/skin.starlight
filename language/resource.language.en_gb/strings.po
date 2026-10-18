@@ -966,4 +966,235 @@ msgstr ""
 
 msgctxt "#31710"
 msgid "Next field"
+
+msgctxt "#31400"
+msgid "Music"
+msgstr ""
+
+msgctxt "#31401"
+msgid "Library"
+msgstr ""
+
+msgctxt "#31402"
+msgid "#1 trending this week"
+msgstr ""
+
+msgctxt "#31403"
+msgid "Featured on Plex"
+msgstr ""
+
+msgctxt "#31404"
+msgid "No items"
+msgstr ""
+
+msgctxt "#31405"
+msgid "Square row"
+msgstr ""
+
+msgctxt "#31406"
+msgid "Landscape row"
+msgstr ""
+
+msgctxt "#31407"
+msgid "Poster row"
+msgstr ""
+
+msgctxt "#31408"
+msgid "Circle row"
+msgstr ""
+
+msgctxt "#31409"
+msgid "Board row"
+msgstr ""
+
+msgctxt "#31410"
+msgid "Expanding poster row"
+msgstr ""
+
+msgctxt "#31411"
+msgid "Landscape list"
+msgstr ""
+
+msgctxt "#31412"
+msgid "Music columns"
+msgstr ""
+
+msgctxt "#31413"
+msgid "Details list"
+msgstr ""
+
+msgctxt "#31414"
+msgid "Square wall"
+msgstr ""
+
+msgctxt "#31415"
+msgid "Landscape wall"
+msgstr ""
+
+msgctxt "#31416"
+msgid "Poster wall"
+msgstr ""
+
+msgctxt "#31417"
+msgid "Circle wall"
+msgstr ""
+
+msgctxt "#31418"
+msgid "Board wall"
+msgstr ""
+
+msgctxt "#31419"
+msgid "Poster wall with details"
+msgstr ""
+
+msgctxt "#31420"
+msgid "Full-width columns"
+msgstr ""
+
+msgctxt "#31421"
+msgid "Full-width details"
+msgstr ""
+
+msgctxt "#31422"
+msgid "Square with tabs"
+msgstr ""
+
+msgctxt "#31423"
+msgid "Landscape with tabs"
+msgstr ""
+
+msgctxt "#31424"
+msgid "Poster with tabs"
+msgstr ""
+
+msgctxt "#31425"
+msgid "Circle with tabs"
+msgstr ""
+
+msgctxt "#31426"
+msgid "Board with tabs"
+msgstr ""
+
+msgctxt "#31427"
+msgid "Genres with details"
+msgstr ""
+
+msgctxt "#31428"
+msgid "Genres with posters"
+msgstr ""
+
+msgctxt "#31429"
+msgid "Tabs with details and poster"
+msgstr ""
+
+msgctxt "#31430"
+msgid "Tabs with full-width details"
+msgstr ""
+
+msgctxt "#31431"
+msgid "View"
+msgstr ""
+
+msgctxt "#31432"
+msgid "Sort"
+msgstr ""
+
+msgctxt "#31433"
+msgid "Order"
+msgstr ""
+
+msgctxt "#31434"
+msgid "Movies, shows, music, people"
+msgstr ""
+
+msgctxt "#31435"
+msgid "All"
+msgstr ""
+
+msgctxt "#31436"
+msgid "Movies"
+msgstr ""
+
+msgctxt "#31437"
+msgid "TV shows"
+msgstr ""
+
+msgctxt "#31438"
+msgid "Episodes"
+msgstr ""
+
+msgctxt "#31439"
+msgid "Spotify"
+msgstr ""
+
+msgctxt "#31440"
+msgid "People"
+msgstr ""
+
+msgctxt "#31441"
+msgid "Collections"
+msgstr ""
+
+msgctxt "#31442"
+msgid "Genres"
+msgstr ""
+
+msgctxt "#31443"
+msgid "More from Plex"
+msgstr ""
+
+msgctxt "#31444"
+msgid "Top results"
+msgstr ""
+
+msgctxt "#31445"
+msgid "Search across your library and services"
+msgstr ""
+
+msgctxt "#31446"
+msgid "No results"
+msgstr ""
+
+msgctxt "#31447"
+msgid "Searching…"
+msgstr ""
+
+msgctxt "#31448"
+msgid "Some sources are unavailable"
+msgstr ""
+
+msgctxt "#31449"
+msgid "Discover"
+msgstr ""
+
+msgctxt "#31450"
+msgid "Trending"
+msgstr ""
+
+msgctxt "#31451"
+msgid "Coming soon"
+msgstr ""
+
+msgctxt "#31452"
+msgid "Top rated"
+msgstr ""
+
+msgctxt "#31453"
+msgid "More to discover"
+msgstr ""
+
+msgctxt "#31454"
+msgid "No more titles in this source"
+msgstr ""
+
+msgctxt "#31455"
+msgid "PlexKodiConnect is required for Discover"
+msgstr ""
+
+msgctxt "#31458"
+msgid "Update watchlist…"
+msgstr ""
+
+msgctxt "#31459"
+msgid "Watchlist update failed"
 msgstr ""
