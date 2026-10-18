@@ -231,15 +231,15 @@
   <include name="MusicActions">
     <definition>
       <control type="group" id="400">
-        <left>668</left>
+        <left>630</left>
         <top>832</top>
-        <width>584</width>
+        <width>660</width>
         <height>90</height>
         <animation effect="fade" start="0" end="100" time="180">WindowOpen</animation>
         <control type="image">
           <left>0</left>
           <top>0</top>
-          <width>584</width>
+          <width>660</width>
           <height>90</height>
           <texture border="capsule_border">glass_capsule.png</texture>
           <visible>System.HasAddon(script.starlight) + !String.IsEmpty(Window(home).Property(Spotify.CurrentTrackId))</visible>
@@ -247,7 +247,7 @@
         <control type="image">
           <left>51</left>
           <top>0</top>
-          <width>482</width>
+          <width>558</width>
           <height>90</height>
           <texture border="capsule_border">glass_capsule.png</texture>
           <visible>System.HasAddon(script.starlight) + String.IsEmpty(Window(home).Property(Spotify.CurrentTrackId))</visible>
@@ -255,7 +255,7 @@
         <control type="image">
           <left>94</left>
           <top>0</top>
-          <width>396</width>
+          <width>472</width>
           <height>90</height>
           <texture border="capsule_border">glass_capsule.png</texture>
           <visible>!System.HasAddon(script.starlight)</visible>
@@ -263,7 +263,7 @@
         <control type="grouplist">
           <left>8</left>
           <top>7</top>
-          <width>568</width>
+          <width>644</width>
           <height>76</height>
           <orientation>horizontal</orientation>
           <itemgap>10</itemgap>
@@ -333,17 +333,28 @@
             <param name="icon" value="player/next.png" />
             <param name="label" value="$LOCALIZE[31205]" />
             <param name="left" value="413" />
-            <param name="right" value="415" />
+            <param name="right" value="417" />
             <param name="up" value="401" />
             <param name="down" value="RunScript(special://skin/resources/player.py,open-queue)" />
             <param name="action" value="PlayerControl(Next)" />
             <param name="color" value="frost" />
           </include>
           <include content="PlayerButton">
+            <param name="id" value="417" />
+            <param name="icon" value="player/stop.png" />
+            <param name="label" value="$LOCALIZE[31234]" />
+            <param name="left" value="414" />
+            <param name="right" value="415" />
+            <param name="up" value="401" />
+            <param name="down" value="RunScript(special://skin/resources/player.py,open-queue)" />
+            <param name="action" value="PlayerControl(Stop)" />
+            <param name="color" value="frost" />
+          </include>
+          <include content="PlayerButton">
             <param name="id" value="415" />
             <param name="icon" value="$VAR[PlayerRepeatIcon]" />
             <param name="label" value="$LOCALIZE[31206]" />
-            <param name="left" value="414" />
+            <param name="left" value="417" />
             <param name="right" value="416" />
             <param name="up" value="401" />
             <param name="down" value="RunScript(special://skin/resources/player.py,open-queue)" />

@@ -392,6 +392,7 @@ msgstr ""
 
 msgctxt "#31814"
 msgid "Trailer"
+msgstr ""
 
 msgctxt "#31200"
 msgid "Player"
@@ -527,6 +528,11 @@ msgstr ""
 
 msgctxt "#31233"
 msgid "No bookmarks or chapters"
+msgstr ""
+
+msgctxt "#31234"
+msgid "Stop"
+msgstr ""
 
 msgctxt "#31600"
 msgid "Done"
@@ -966,6 +972,7 @@ msgstr ""
 
 msgctxt "#31710"
 msgid "Next field"
+msgstr ""
 
 msgctxt "#31400"
 msgid "Music"

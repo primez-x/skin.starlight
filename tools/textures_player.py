@@ -27,6 +27,7 @@ def player_textures():
     textures['player/video_shade.png'] = shade
     paths = {
         'pause':'<path d="M8 5v14M16 5v14" stroke-width="4"/>',
+        'stop':'<rect x="5" y="5" width="14" height="14" rx="3"/>',
         'previous':'<path d="M19 20 9 12l10-8ZM5 19V5"/>',
         'next':'<path d="m5 4 10 8-10 8ZM19 5v14"/>',
         'repeat':'<path d="m17 2 4 4-4 4M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 0 1-3 3H3"/>',

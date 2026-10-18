@@ -26,14 +26,14 @@
       <param name="endlabel" value="$INFO[Player.TimeRemaining,−,]" />
     </include>
     <control type="group" id="400">
-      <left>722</left>
+      <left>683</left>
       <top>932</top>
-      <width>476</width>
+      <width>554</width>
       <height>92</height>
       <control type="image">
         <left>0</left>
         <top>0</top>
-        <width>476</width>
+        <width>554</width>
         <height>92</height>
         <texture border="capsule_border">glass_capsule.png</texture>
       </control>
@@ -79,7 +79,7 @@
           <param name="icon" value="$VAR[PlayerPlayIcon]" />
           <param name="label" value="$VAR[PlayerPlayLabel]" />
           <param name="left" value="411" />
-          <param name="right" value="414" />
+          <param name="right" value="412" />
           <param name="up" value="401" />
           <param name="down" value="413" />
           <param name="action" value="PlayerControl(Play)" />
@@ -91,10 +91,26 @@
         <width>66</width>
         <height>76</height>
         <include content="PlayerButton">
+          <param name="id" value="412" />
+          <param name="icon" value="player/stop.png" />
+          <param name="label" value="$LOCALIZE[31234]" />
+          <param name="left" value="413" />
+          <param name="right" value="414" />
+          <param name="up" value="401" />
+          <param name="down" value="412" />
+          <param name="action" value="PlayerControl(Stop)" />
+        </include>
+      </control>
+      <control type="group">
+        <left>320</left>
+        <top>8</top>
+        <width>66</width>
+        <height>76</height>
+        <include content="PlayerButton">
           <param name="id" value="414" />
           <param name="icon" value="player/forward.png" />
           <param name="label" value="$LOCALIZE[31222]" />
-          <param name="left" value="413" />
+          <param name="left" value="412" />
           <param name="right" value="415" />
           <param name="up" value="401" />
           <param name="down" value="414" />
@@ -102,7 +118,7 @@
         </include>
       </control>
       <control type="group">
-        <left>320</left>
+        <left>398</left>
         <top>8</top>
         <width>66</width>
         <height>76</height>
@@ -118,7 +134,7 @@
         </include>
       </control>
       <control type="group">
-        <left>398</left>
+        <left>476</left>
         <top>8</top>
         <width>66</width>
         <height>76</height>
