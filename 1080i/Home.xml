@@ -101,7 +101,8 @@
         <include content="HomeWidget">
           <param name="source" value="continue" />
           <param name="setting" value="Home.Continue.Layout" />
-          <param name="layout" value="board" />
+          <param name="default_board" value="true" />
+          <param name="default_landscape" value="false" />
           <param name="label" value="$LOCALIZE[31011]" />
           <param name="group" value="1510" />
           <param name="feature" value="510" />
@@ -114,7 +115,8 @@
         <include content="HomeWidget">
           <param name="source" value="movies" />
           <param name="setting" value="Home.Movies.Layout" />
-          <param name="layout" value="poster" />
+          <param name="default_poster" value="true" />
+          <param name="default_landscape" value="false" />
           <param name="label" value="$LOCALIZE[31012]" />
           <param name="group" value="1520" />
           <param name="feature" value="520" />
@@ -127,7 +129,7 @@
         <include content="HomeWidget">
           <param name="source" value="next" />
           <param name="setting" value="Home.Next.Layout" />
-          <param name="layout" value="landscape" />
+          <param name="default_landscape" value="true" />
           <param name="label" value="$LOCALIZE[31013]" />
           <param name="group" value="1530" />
           <param name="feature" value="530" />
@@ -140,7 +142,7 @@
         <include content="HomeWidget">
           <param name="source" value="episodes" />
           <param name="setting" value="Home.Episodes.Layout" />
-          <param name="layout" value="landscape" />
+          <param name="default_landscape" value="true" />
           <param name="label" value="$LOCALIZE[31014]" />
           <param name="group" value="1540" />
           <param name="feature" value="540" />
@@ -177,7 +179,6 @@
     </control>
     <include content="HubRail">
       <param name="return" value="5000" />
-      <param name="current" value="home" />
     </include>
     <control type="scrollbar" id="5500">
       <left>0</left>

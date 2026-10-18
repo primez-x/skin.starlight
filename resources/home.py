@@ -6,9 +6,9 @@ import time
 from urllib.parse import parse_qs
 
 import xbmc
-import xbmcaddon
 import xbmcgui
 import xbmcplugin
+import xbmcvfs
 
 sys.path.insert(0, str(Path(__file__).resolve().parent / 'lib'))
 from home_content import blurred_art, duration_label, library_items, partition, playback, rpc_result
@@ -18,6 +18,20 @@ from info_content import episode_items, person_items
 def rpc(method, params):
     return rpc_result(json.loads(xbmc.executeJSONRPC(json.dumps(
         {'jsonrpc': '2.0', 'id': 1, 'method': method, 'params': params}))))
+
+
+def cached_blurred_art(art):
+    # Kodi's first large-image load returns the decoded source before disk resize.
+    # Bind the resized cache file so the first backdrop also uses 16x9 pixels.
+    url = blurred_art(art)
+    query = {'properties': ['cachedurl'],
+             'filter': {'field': 'url', 'operator': 'is', 'value': url}}
+    rows = rpc('Textures.GetTextures', query).get('textures', [])
+    if not rows:
+        image = xbmcvfs.File(url)
+        image.close()
+        rows = rpc('Textures.GetTextures', query).get('textures', [])
+    return 'special://masterprofile/Thumbnails/' + rows[0]['cachedurl'] if rows else 'special://skin/media/background_void.png'
 
 
 def listing():
@@ -51,7 +65,6 @@ def listing():
 
 
 def add_videos(handle, rows, source):
-    addon = xbmcaddon.Addon('skin.starlight')
     for row in rows:
         state = playback(row)
         title = row.get('title') or row.get('label', '')
@@ -82,20 +95,18 @@ def add_videos(handle, rows, source):
             tag.setTvShowTitle(row.get('showtitle', ''))
             tag.setSeason(row.get('season', 0))
             tag.setEpisode(row.get('episode', 0))
-        item.setProperty('Starlight.Blurred', blurred_art(art.get('fanart') or art.get('tvshow.fanart', '')))
+        item.setProperty('Starlight.Blurred', cached_blurred_art(art.get('fanart') or art.get('tvshow.fanart', '')))
         item.setProperty('Starlight.Progress', str(state['progress']))
-        item.setProperty('Starlight.Playhead', str(round(.64 * state['progress']) - 8))
-        item.setProperty('Starlight.CompactPlayhead', str(round(1.08 * state['progress']) - 8))
         item.setProperty('Starlight.Resume', 'true' if state['resume'] else '')
-        item.setProperty('Starlight.Action', addon.getLocalizedString(31016 if state['resume'] else 31017))
-        templates = (addon.getLocalizedString(31039), addon.getLocalizedString(31019))
+        item.setProperty('Starlight.Action', xbmc.getLocalizedString(31016 if state['resume'] else 31017))
+        templates = (xbmc.getLocalizedString(31039), xbmc.getLocalizedString(31019))
         duration = duration_label(state['minutes'], *templates)
         if source == 'infoepisodes' and not state['resume']:
             duration = duration_label(row.get('runtime', 0) // 60, *templates)
         item.setProperty('Starlight.Duration', duration_label(row.get('runtime', 0) / 60, *templates))
         item.setProperty('Starlight.Time', duration)
-        detail = addon.getLocalizedString(31018) % duration if state['resume'] else duration
-        detail = addon.getLocalizedString(31038) % (row['season'], row['episode'], detail) if row['media'] == 'episode' else detail
+        detail = xbmc.getLocalizedString(31018) % duration if state['resume'] else duration
+        detail = xbmc.getLocalizedString(31038) % (row['season'], row['episode'], detail) if row['media'] == 'episode' else detail
         item.setProperty('Starlight.Detail', detail)
         item.setProperty('Starlight.Next', 'true' if row.get('next') else '')
         role_year = ' · '.join(str(value) for value in (row.get('role'), row.get('year')) if value)
@@ -112,7 +123,9 @@ def info_listing(handle, source, args):
             rows = person_items(xbmcgui.Window(11103).getProperty('Starlight.Person.Name'), rpc)
             add_videos(handle, rows, source)
         elif source == 'infoepisodes':
-            rows = episode_items(args.get('showid', [''])[0], args.get('season', [''])[0], rpc)
+            showid = args.get('showid', [''])[0]
+            season = args.get('season', [''])[0]
+            rows = episode_items(showid, season, rpc) if showid and season else []
             nextid = xbmcgui.Window(12003).getProperty('Starlight.Info.NextID')
             add_videos(handle, [dict(row, next=str(row['episodeid']) == nextid) for row in rows], source)
         else:

@@ -52,6 +52,11 @@ WINDOW_IDS = {
 
 
 class WindowTests(unittest.TestCase):
+    def test_native_lists_use_info_labels(self):
+        # Python ControlList reads only records added through the Python wrapper.
+        source = (ROOT / 'resources/info.py').read_text()
+        self.assertNotRegex(source, r'\.(?:size|getListItem|getSelectedItem)\(')
+
     def test_native_window_names_resolve(self):
         # xbmc/input/WindowTranslator.cpp:79,82,121,126,162 (21.3-Omega).
         names = {'volumebar','notification','movieinformation','textviewer','extendedprogressdialog'}

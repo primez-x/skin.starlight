@@ -72,7 +72,7 @@
           <top>0</top>
           <width max="160" min="1">auto</width>
           <height>40</height>
-          <label>$INFO[ListItem.Property(TotalSeasons)] $LOCALIZE[31081]</label>
+          <label>$VAR[InfoSeasons]</label>
           <font>font_body</font>
           <textcolor>mist</textcolor>
           <visible>String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)</visible>
@@ -131,7 +131,7 @@
         <left>0</left>
         <top>402</top>
         <width>780</width>
-        <height>138</height>
+        <height>114</height>
         <font>font_body_large</font>
         <textcolor>frost</textcolor>
         <label>$INFO[ListItem.Plot]</label>
@@ -225,26 +225,17 @@
             <label>$VAR[InfoPlayLabel]</label>
             <font>font_label_large</font>
           </control>
-          <control type="progress">
+          <control type="progress" id="9018">
             <left>168</left>
             <top>30</top>
             <width>90</width>
             <height>5</height>
-            <info>Window.Property(Starlight.Info.Progress)</info>
             <visible>!String.IsEmpty(Window.Property(Starlight.Info.Resume))</visible>
             <texturebg border="progress_border">progress_track.png</texturebg>
             <midtexture border="progress_border">progress_gold.png</midtexture>
             <lefttexture />
-            <righttexture />
+            <righttexture>progress_playhead.png</righttexture>
             <overlaytexture />
-          </control>
-          <control type="image">
-            <left>$INFO[Window.Property(Starlight.Info.Playhead)]</left>
-            <top>23</top>
-            <width>18</width>
-            <height>18</height>
-            <visible>!String.IsEmpty(Window.Property(Starlight.Info.Resume))</visible>
-            <texture>playhead_glow.png</texture>
           </control>
           <control type="label">
             <left>274</left>
@@ -323,26 +314,17 @@
             <label>$VAR[InfoPlayLabel]</label>
             <font>font_label_large</font>
           </control>
-          <control type="progress">
+          <control type="progress" id="9019">
             <left>168</left>
             <top>30</top>
             <width>90</width>
             <height>5</height>
-            <info>Window.Property(Starlight.Info.Progress)</info>
             <visible>!String.IsEmpty(Window.Property(Starlight.Info.Resume))</visible>
             <texturebg border="progress_border">progress_track.png</texturebg>
             <midtexture border="progress_border">progress_gold.png</midtexture>
             <lefttexture />
-            <righttexture />
+            <righttexture>progress_playhead.png</righttexture>
             <overlaytexture />
-          </control>
-          <control type="image">
-            <left>$INFO[Window.Property(Starlight.Info.Playhead)]</left>
-            <top>23</top>
-            <width>18</width>
-            <height>18</height>
-            <visible>!String.IsEmpty(Window.Property(Starlight.Info.Resume))</visible>
-            <texture>playhead_glow.png</texture>
           </control>
           <control type="label">
             <left>274</left>
@@ -441,7 +423,7 @@
         <onleft>9000</onleft>
         <onright>250</onright>
         <visible>[![String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)] | String.IsEqual(Window.Property(Starlight.Info.Cast),true)] + !String.IsEmpty(Window.Property(Starlight.Info.Ready))</visible>
-        <content target="video" browse="never">plugin://skin.starlight/?source=cast&amp;record=$INFO[Window.Property(Starlight.Info.DBID)]&amp;ready=$INFO[Window.Property(Starlight.Info.Ready)]</content>
+        <content target="videos" browse="never">plugin://skin.starlight/?source=cast&amp;record=$INFO[Window.Property(Starlight.Info.DBID)]&amp;ready=$INFO[Window.Property(Starlight.Info.Ready)]</content>
         <itemlayout width="180" height="250">
           <include content="InfoCastLayout">
             <param name="selected" value="false" />
@@ -468,7 +450,7 @@
         <onleft>9000</onleft>
         <onright>550</onright>
         <visible>String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season) + !String.IsEmpty(Window.Property(Starlight.Info.Ready)) + !String.IsEqual(Window.Property(Starlight.Info.Cast),true)</visible>
-        <content target="video" browse="never">plugin://skin.starlight/?source=infoepisodes&amp;showid=$INFO[Window.Property(Starlight.Info.ShowID)]&amp;season=$INFO[Window.Property(Starlight.Info.Season)]&amp;revision=$INFO[Window.Property(Starlight.Info.Revision)]</content>
+        <content target="videos" browse="never">plugin://skin.starlight/?source=infoepisodes&amp;showid=$INFO[Window.Property(Starlight.Info.ShowID)]&amp;season=$INFO[Window.Property(Starlight.Info.Season)]&amp;revision=$INFO[Window.Property(Starlight.Info.Revision)]</content>
         <itemlayout width="420" height="340">
           <include content="InfoEpisodeLayout">
             <param name="selected" value="false" />
@@ -657,7 +639,6 @@
     </control>
     <include content="HubRail">
       <param name="return" value="SetFocus($VAR[InfoReturn])" />
-      <param name="current" value="$VAR[InfoHub]" />
       <param name="sidefocus" value="903" />
       <param name="topfocus" value="913" />
     </include>

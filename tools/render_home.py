@@ -102,12 +102,17 @@ class HomePreview:
         return parts + [value[start:]]
 
     def info(self, text):
+        parts = self.split(text, ',')
+        if len(parts) == 3:
+            value = self.info(parts[0])
+            return parts[1] + value + parts[2] if value else ''
         text = text.strip()
         if text.startswith('$'): return self.resolve(text)
         if text == 'System.Time': return '1:01 PM'
         if text == 'Weather.Temperature': return '64°'
         if text == 'Weather.Conditions': return 'Clear'
         if text == 'Window(home).Property(Starlight.Container)': return '510'
+        if text == 'Window(home).Property(Starlight.Hub)': return 'home'
         match = re.fullmatch(r'Skin.String\(([^,)]+)\)', text)
         if match: return self.settings.get(match[1], '')
         match = re.fullmatch(r'Container\((\d+)\)\.(.*)', text)

@@ -24,6 +24,8 @@
       <width>1644</width>
       <height>76</height>
       <font>font_heading</font>
+      <textcolor>frost</textcolor>
+      <focusedcolor>frost</focusedcolor>
       <label />
       <onup>100</onup>
       <ondown>100</ondown>

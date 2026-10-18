@@ -1,4 +1,5 @@
 """Foundation contracts: parse, resolve assets, enforce provenance, reproduce pixels."""
+import ast
 import hashlib
 from pathlib import Path
 import re
@@ -84,6 +85,41 @@ class FoundationTests(unittest.TestCase):
             with self.subTest(path=str(path.relative_to(ROOT))):
                 self.assertIsNone(forbidden.search(path.read_bytes()))
 
+    def test_conditions_require_info_labels(self):
+        # Kodi resolves the first argument as an info label, never plain text.
+        pattern = re.compile(r'(?:String\.(?:IsEqual|IsEmpty)|Integer\.\w+)\(\s*([^,)<\n]+)')
+        for path in (ROOT / '1080i').glob('*.xml'):
+            for match in pattern.finditer(path.read_text()):
+                with self.subTest(path=path.name, argument=match[1]):
+                    self.assertRegex(match[1], r'^(?:ListItem\.|Container\(|Window(?:\(|\.)|Skin\.String\(|Control\.|System\.|Player\.|Weather\.)')
+
+    def test_item_layouts_use_fixed_controls(self):
+        import sys
+        sys.path.insert(0, str(ROOT / 'resources/lib'))
+        from skin_xml import expand
+        includes = {node.get('name'): node
+                    for path in (ROOT / '1080i').glob('Includes*.xml')
+                    for node in ET.parse(path).iter('include') if node.get('name')}
+        for path in (ROOT / '1080i').glob('*.xml'):
+            if path.name.startswith('Includes'):
+                continue
+            # Expand every choice, including inactive layouts and optional dialogs.
+            tree = expand(ET.parse(path).getroot(), includes, lambda _: True)
+            for layout in tree.iter():
+                if layout.tag not in ('itemlayout', 'focusedlayout'):
+                    continue
+                with self.subTest(path=path.name, layout=layout.tag):
+                    self.assertFalse(any(node.get('type') == 'grouplist' for node in layout.iter('control')))
+                    self.assertFalse(any(node.text == 'auto' for node in layout.iter('width')))
+
+    def test_skin_strings_use_kodi_localization(self):
+        for path in (ROOT / 'resources').rglob('*.py'):
+            for node in ast.walk(ast.parse(path.read_text())):
+                if isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute) and node.func.attr == 'getLocalizedString':
+                    with self.subTest(path=path.name, line=node.lineno):
+                        self.assertIsInstance(node.func.value, ast.Name)
+                        self.assertEqual(node.func.value.id, 'xbmc')
+
     def test_texture_build_is_deterministic_and_current(self):
         with tempfile.TemporaryDirectory(prefix='starlight-textures-') as scratch:
             outputs = [Path(scratch) / name for name in ('first', 'second')]
@@ -140,13 +176,12 @@ class FoundationTests(unittest.TestCase):
     def test_addon_contract(self):
         addon = ET.parse(ROOT / 'addon.xml').getroot()
         self.assertEqual(addon.get('id'), 'skin.starlight')
-        self.assertEqual(addon.get('version'), '2.0.0')
         self.assertEqual({n.get('addon'): n.get('version') for n in addon.findall('requires/import')},
                          {'xbmc.gui': '5.17.0', 'xbmc.python': '3.0.0'})
         resolution = addon.find("extension[@point='xbmc.gui.skin']/res")
         self.assertEqual((resolution.get('width'), resolution.get('height')), ('1920', '1080'))
         metadata = addon.find("extension[@point='xbmc.addon.metadata']")
-        self.assertTrue(metadata.findtext('news').splitlines()[0].startswith('v2.0.0'))
+        self.assertTrue(metadata.findtext('news').splitlines()[0].startswith('v' + addon.get('version')))
         for asset in metadata.findall('assets/*'):
             self.assertTrue((ROOT / asset.text).is_file())
 

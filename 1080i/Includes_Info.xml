@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
+  <variable name="InfoSeasons">
+    <value condition="Integer.IsEqual(Window.Property(Starlight.Info.SeasonCount),1)">$INFO[Window.Property(Starlight.Info.SeasonCount)] $LOCALIZE[31085]</value>
+    <value>$INFO[Window.Property(Starlight.Info.SeasonCount)] $LOCALIZE[31081]</value>
+  </variable>
   <variable name="InfoPrimary">
     <value condition="ListItem.IsResumable">9</value>
     <value>8</value>
@@ -7,11 +11,6 @@
   <variable name="InfoReturn">
     <value condition="String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)">550</value>
     <value>$VAR[InfoPrimary]</value>
-  </variable>
-  <variable name="InfoHub">
-    <value condition="!String.IsEmpty(Window.Property(Starlight.Info.Hub))">$INFO[Window.Property(Starlight.Info.Hub)]</value>
-    <value condition="String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season) | String.IsEqual(ListItem.DBTYPE,episode)">tv</value>
-    <value>movies</value>
   </variable>
   <variable name="InfoLogo">
     <value condition="!String.IsEmpty(ListItem.Art(clearlogo))">$INFO[ListItem.Art(clearlogo)]</value>
@@ -33,10 +32,6 @@
   <variable name="PersonBiography">
     <value condition="!String.IsEmpty(Window.Property(Starlight.Person.Biography))">$INFO[Window.Property(Starlight.Person.Biography)]</value>
     <value>$LOCALIZE[31047]</value>
-  </variable>
-  <variable name="PersonHub">
-    <value condition="!String.IsEmpty(Window.Property(Starlight.Person.Hub))">$INFO[Window.Property(Starlight.Person.Hub)]</value>
-    <value>movies</value>
   </variable>
   <variable name="InfoEpisodeArt">
     <value condition="!String.IsEmpty(ListItem.Art(thumb))">$INFO[ListItem.Art(thumb)]</value>

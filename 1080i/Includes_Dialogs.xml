@@ -65,7 +65,7 @@
         <control type="image">
           <left>-48</left>
           <top>-48</top>
-          <width>$PARAM[width]</width>
+          <right>-48</right>
           <height>160</height>
           <visible>$PARAM[selected]</visible>
           <texture border="focus_glow_border">focus_glow.png</texture>
@@ -146,7 +146,7 @@
         <top>0</top>
         <width>18</width>
         <height>18</height>
-        <visible>String.IsEqual($PARAM[front],false)</visible>
+        <visible>!$PARAM[front]</visible>
         <texture>star_soft.png</texture>
         <animation effect="fade" start="15" end="65" time="900" condition="true" delay="0" pulse="true" loop="true">Conditional</animation>
       </control>
@@ -155,7 +155,7 @@
         <top>60</top>
         <width>18</width>
         <height>18</height>
-        <visible>String.IsEqual($PARAM[front],false)</visible>
+        <visible>!$PARAM[front]</visible>
         <texture>star_soft.png</texture>
         <animation effect="fade" start="15" end="65" time="990" condition="true" delay="170" pulse="true" loop="true">Conditional</animation>
       </control>
@@ -164,7 +164,7 @@
         <top>-26</top>
         <width>18</width>
         <height>18</height>
-        <visible>String.IsEqual($PARAM[front],false)</visible>
+        <visible>!$PARAM[front]</visible>
         <texture>star_soft.png</texture>
         <animation effect="fade" start="15" end="65" time="1080" condition="true" delay="340" pulse="true" loop="true">Conditional</animation>
       </control>
@@ -173,7 +173,7 @@
         <top>-32</top>
         <width>18</width>
         <height>18</height>
-        <visible>String.IsEqual($PARAM[front],false)</visible>
+        <visible>!$PARAM[front]</visible>
         <texture>star_soft.png</texture>
         <animation effect="fade" start="15" end="65" time="1170" condition="true" delay="510" pulse="true" loop="true">Conditional</animation>
       </control>
@@ -182,7 +182,7 @@
         <top>68</top>
         <width>18</width>
         <height>18</height>
-        <visible>String.IsEqual($PARAM[front],false)</visible>
+        <visible>!$PARAM[front]</visible>
         <texture>star_soft.png</texture>
         <animation effect="fade" start="15" end="65" time="1260" condition="true" delay="680" pulse="true" loop="true">Conditional</animation>
       </control>
@@ -191,7 +191,7 @@
         <top>-2</top>
         <width>18</width>
         <height>18</height>
-        <visible>String.IsEqual($PARAM[front],false)</visible>
+        <visible>!$PARAM[front]</visible>
         <texture>star_soft.png</texture>
         <animation effect="fade" start="15" end="65" time="1350" condition="true" delay="850" pulse="true" loop="true">Conditional</animation>
       </control>
@@ -200,7 +200,7 @@
         <top>42</top>
         <width>18</width>
         <height>18</height>
-        <visible>String.IsEqual($PARAM[front],false)</visible>
+        <visible>!$PARAM[front]</visible>
         <texture>star_soft.png</texture>
         <animation effect="fade" start="15" end="65" time="1440" condition="true" delay="1020" pulse="true" loop="true">Conditional</animation>
       </control>
@@ -209,7 +209,7 @@
         <top>-20</top>
         <width>18</width>
         <height>18</height>
-        <visible>String.IsEqual($PARAM[front],false)</visible>
+        <visible>!$PARAM[front]</visible>
         <texture>star_soft.png</texture>
         <animation effect="fade" start="15" end="65" time="1530" condition="true" delay="1190" pulse="true" loop="true">Conditional</animation>
       </control>
@@ -218,7 +218,7 @@
         <top>76</top>
         <width>18</width>
         <height>18</height>
-        <visible>String.IsEqual($PARAM[front],false)</visible>
+        <visible>!$PARAM[front]</visible>
         <texture>star_soft.png</texture>
         <animation effect="fade" start="15" end="65" time="1620" condition="true" delay="1360" pulse="true" loop="true">Conditional</animation>
       </control>
@@ -227,7 +227,7 @@
         <top>20</top>
         <width>18</width>
         <height>18</height>
-        <visible>String.IsEqual($PARAM[front],false)</visible>
+        <visible>!$PARAM[front]</visible>
         <texture>star_soft.png</texture>
         <animation effect="fade" start="15" end="65" time="1710" condition="true" delay="1530" pulse="true" loop="true">Conditional</animation>
       </control>
@@ -236,7 +236,7 @@
         <top>30</top>
         <width>18</width>
         <height>18</height>
-        <visible>String.IsEqual($PARAM[front],false)</visible>
+        <visible>!$PARAM[front]</visible>
         <texture>star_soft.png</texture>
         <animation effect="fade" start="15" end="65" time="1800" condition="true" delay="1700" pulse="true" loop="true">Conditional</animation>
       </control>
@@ -245,7 +245,7 @@
         <top>-6</top>
         <width>22</width>
         <height>22</height>
-        <visible>String.IsEqual($PARAM[front],true)</visible>
+        <visible>$PARAM[front]</visible>
         <texture>star_soft.png</texture>
         <animation effect="fade" start="15" end="85" time="900" condition="true" delay="0" pulse="true" loop="true">Conditional</animation>
       </control>
@@ -254,7 +254,7 @@
         <top>58</top>
         <width>22</width>
         <height>22</height>
-        <visible>String.IsEqual($PARAM[front],true)</visible>
+        <visible>$PARAM[front]</visible>
         <texture>star_soft.png</texture>
         <animation effect="fade" start="15" end="85" time="990" condition="true" delay="170" pulse="true" loop="true">Conditional</animation>
       </control>
@@ -350,7 +350,7 @@
         <control type="image">
           <left>-48</left>
           <top>-48</top>
-          <width>$PARAM[width]</width>
+          <right>-48</right>
           <height>162</height>
           <visible>Control.HasFocus($PARAM[id])</visible>
           <texture border="focus_glow_border">focus_glow.png</texture>

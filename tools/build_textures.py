@@ -230,6 +230,7 @@ def build(output):
         'focus_card_glow.png': glow((68, 68), CONSTANTS['card_border']),
         'frost_fill.png': surface((132, 68), CONSTANTS['capsule_border'], selected=True),
         'playhead_glow.png': point_sprite(),
+        'progress_playhead.png': point_sprite().crop((16, 16, 48, 48)).resize((8, 8), Image.Resampling.LANCZOS),
         'star_soft.png': point_sprite(),
         'star_twinkle.png': point_sprite(twinkle=True),
         'background_void.png': Image.new('RGBA', (1, 1), (3, 5, 10, 255)),

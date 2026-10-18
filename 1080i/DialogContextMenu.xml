@@ -16,24 +16,23 @@
       <top>0</top>
       <width>1920</width>
       <height>1080</height>
-      <visible>!String.IsEqual(Window.Property(Starlight.Context.Card),true)</visible>
+      <visible>!String.IsEqual(Window.Property(Starlight.Context.Card),true) + String.IsEqual(Window.Property(Starlight.Context.Ready),true)</visible>
       <texture>dim_modal.png</texture>
-      <animation effect="fade" start="100" end="0" time="0" condition="!String.IsEqual(Window.Property(Starlight.Context.Ready),true)">Conditional</animation>
     </control>
     <control type="image">
       <left>0</left>
       <top>0</top>
       <width>1920</width>
       <height>1080</height>
-      <visible>String.IsEqual(Window.Property(Starlight.Context.Card),true)</visible>
+      <visible>String.IsEqual(Window.Property(Starlight.Context.Card),true) + String.IsEqual(Window.Property(Starlight.Context.Ready),true)</visible>
       <texture>dim_soft.png</texture>
-      <animation effect="fade" start="100" end="0" time="0" condition="!String.IsEqual(Window.Property(Starlight.Context.Ready),true)">Conditional</animation>
     </control>
     <control type="group" id="997">
       <left>580</left>
       <top>230</top>
       <width>760</width>
       <height>760</height>
+      <visible>String.IsEqual(Window.Property(Starlight.Context.Ready),true)</visible>
       <control type="image" id="998">
         <left>0</left>
         <top>0</top>
@@ -64,7 +63,6 @@
           <texturenofocus />
         </control>
       </control>
-      <animation effect="fade" start="100" end="0" time="0" condition="!String.IsEqual(Window.Property(Starlight.Context.Ready),true)">Conditional</animation>
     </control>
   </controls>
   <onload>RunScript(special://skin/resources/info.py,context)</onload>

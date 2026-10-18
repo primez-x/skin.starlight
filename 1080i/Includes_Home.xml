@@ -68,7 +68,6 @@
   </variable>
   <include name="HubRail">
     <param name="return" default="510" />
-    <param name="current" default="home" />
     <definition>
       <control type="group" id="9000">
         <left>0</left>
@@ -101,7 +100,6 @@
             <param name="id" value="901" />
             <param name="label" value="$LOCALIZE[31001]" />
             <param name="icon" value="search" />
-            <param name="current" value="$PARAM[current]" />
             <param name="return" value="$PARAM[return]" />
             <param name="onup" value="907" />
             <param name="ondown" value="902" />
@@ -112,7 +110,6 @@
             <param name="id" value="902" />
             <param name="label" value="$LOCALIZE[31002]" />
             <param name="icon" value="home" />
-            <param name="current" value="$PARAM[current]" />
             <param name="return" value="$PARAM[return]" />
             <param name="onup" value="901" />
             <param name="ondown" value="903" />
@@ -123,7 +120,6 @@
             <param name="id" value="903" />
             <param name="label" value="$LOCALIZE[31003]" />
             <param name="icon" value="movies" />
-            <param name="current" value="$PARAM[current]" />
             <param name="return" value="$PARAM[return]" />
             <param name="onup" value="902" />
             <param name="ondown" value="904" />
@@ -134,7 +130,6 @@
             <param name="id" value="904" />
             <param name="label" value="$LOCALIZE[31004]" />
             <param name="icon" value="tv" />
-            <param name="current" value="$PARAM[current]" />
             <param name="return" value="$PARAM[return]" />
             <param name="onup" value="903" />
             <param name="ondown" value="905" />
@@ -145,7 +140,6 @@
             <param name="id" value="905" />
             <param name="label" value="$LOCALIZE[31005]" />
             <param name="icon" value="music" />
-            <param name="current" value="$PARAM[current]" />
             <param name="return" value="$PARAM[return]" />
             <param name="onup" value="904" />
             <param name="ondown" value="906" />
@@ -156,7 +150,6 @@
             <param name="id" value="906" />
             <param name="label" value="$LOCALIZE[31006]" />
             <param name="icon" value="discover" />
-            <param name="current" value="$PARAM[current]" />
             <param name="return" value="$PARAM[return]" />
             <param name="onup" value="905" />
             <param name="ondown" value="907" />
@@ -167,7 +160,6 @@
             <param name="id" value="907" />
             <param name="label" value="$LOCALIZE[31010]" />
             <param name="icon" value="settings" />
-            <param name="current" value="$PARAM[current]" />
             <param name="return" value="$PARAM[return]" />
             <param name="onup" value="906" />
             <param name="ondown" value="901" />
@@ -196,7 +188,7 @@
             <width>196</width>
             <height>64</height>
             <texture border="capsule_border">frost_fill.png</texture>
-            <visible>String.IsEqual($PARAM[current],search)</visible>
+            <visible>String.IsEqual(Window(home).Property(Starlight.Hub),search)</visible>
           </control>
           <control type="image">
             <left>-48</left>
@@ -225,7 +217,7 @@
             <width>196</width>
             <height>64</height>
             <texture border="capsule_border">frost_fill.png</texture>
-            <visible>String.IsEqual($PARAM[current],home)</visible>
+            <visible>String.IsEqual(Window(home).Property(Starlight.Hub),home)</visible>
           </control>
           <control type="image">
             <left>156</left>
@@ -254,7 +246,7 @@
             <width>196</width>
             <height>64</height>
             <texture border="capsule_border">frost_fill.png</texture>
-            <visible>String.IsEqual($PARAM[current],movies)</visible>
+            <visible>String.IsEqual(Window(home).Property(Starlight.Hub),movies)</visible>
           </control>
           <control type="image">
             <left>360</left>
@@ -283,7 +275,7 @@
             <width>196</width>
             <height>64</height>
             <texture border="capsule_border">frost_fill.png</texture>
-            <visible>String.IsEqual($PARAM[current],tv)</visible>
+            <visible>String.IsEqual(Window(home).Property(Starlight.Hub),tv)</visible>
           </control>
           <control type="image">
             <left>564</left>
@@ -312,7 +304,7 @@
             <width>196</width>
             <height>64</height>
             <texture border="capsule_border">frost_fill.png</texture>
-            <visible>String.IsEqual($PARAM[current],music)</visible>
+            <visible>String.IsEqual(Window(home).Property(Starlight.Hub),music)</visible>
           </control>
           <control type="image">
             <left>768</left>
@@ -341,7 +333,7 @@
             <width>196</width>
             <height>64</height>
             <texture border="capsule_border">frost_fill.png</texture>
-            <visible>String.IsEqual($PARAM[current],discover)</visible>
+            <visible>String.IsEqual(Window(home).Property(Starlight.Hub),discover)</visible>
           </control>
           <control type="image">
             <left>972</left>
@@ -370,7 +362,7 @@
             <width>196</width>
             <height>64</height>
             <texture border="capsule_border">frost_fill.png</texture>
-            <visible>String.IsEqual($PARAM[current],settings)</visible>
+            <visible>String.IsEqual(Window(home).Property(Starlight.Hub),settings)</visible>
           </control>
           <control type="image">
             <left>1176</left>
@@ -427,58 +419,40 @@
           <texture border="play_capsule_border">play_capsule.png</texture>
           <visible>String.IsEmpty(ListItem.Property(Starlight.Resume))</visible>
         </control>
-        <control type="grouplist">
+        <control type="image">
           <left>16</left>
-          <top>0</top>
-          <right>20</right>
+          <top>14</top>
+          <width>22</width>
+          <height>22</height>
+          <texture>icons/play.png</texture>
+        </control>
+        <control type="label">
+          <left>48</left>
+          <width>80</width>
           <height>50</height>
-          <orientation>horizontal</orientation>
-          <itemgap>10</itemgap>
-          <usecontrolcoords>true</usecontrolcoords>
-          <control type="image">
-            <top>14</top>
-            <width>22</width>
-            <height>22</height>
-            <texture>icons/play.png</texture>
-          </control>
-          <control type="label">
-            <width min="1" max="80">auto</width>
-            <height>50</height>
-            <label>$INFO[ListItem.Property(Starlight.Action)]</label>
-            <font>font_label_semibold</font>
-          </control>
-          <control type="group">
-            <left>0</left>
-            <top>0</top>
-            <width>64</width>
-            <height>50</height>
-            <visible>!String.IsEmpty(ListItem.Property(Starlight.Resume))</visible>
-            <control type="progress">
-              <top>22</top>
-              <width>64</width>
-              <height>5</height>
-              <info>ListItem.PercentPlayed</info>
-              <visible>!String.IsEmpty(ListItem.Property(Starlight.Resume))</visible>
-              <texturebg border="progress_border">progress_track.png</texturebg>
-              <lefttexture />
-              <midtexture border="progress_border">progress_gold.png</midtexture>
-              <righttexture />
-              <overlaytexture />
-            </control>
-            <control type="image">
-              <left>$INFO[ListItem.Property(Starlight.Playhead)]</left>
-              <top>16</top>
-              <width>16</width>
-              <height>16</height>
-              <texture>playhead_glow.png</texture>
-            </control>
-          </control>
-          <control type="label">
-            <width min="1" max="80">auto</width>
-            <height>50</height>
-            <label>$INFO[ListItem.Property(Starlight.Time)]</label>
-            <font>font_label_semibold</font>
-          </control>
+          <label>$INFO[ListItem.Property(Starlight.Action)]</label>
+          <font>font_label_semibold</font>
+        </control>
+        <control type="progress">
+          <left>138</left>
+          <top>22</top>
+          <width>64</width>
+          <height>5</height>
+          <info>ListItem.Property(Starlight.Progress)</info>
+          <visible>!String.IsEmpty(ListItem.Property(Starlight.Resume))</visible>
+          <texturebg border="progress_border">progress_track.png</texturebg>
+          <lefttexture />
+          <midtexture border="progress_border">progress_gold.png</midtexture>
+          <righttexture>progress_playhead.png</righttexture>
+          <overlaytexture />
+        </control>
+        <control type="label">
+          <left>216</left>
+          <width>80</width>
+          <height>50</height>
+          <label>$INFO[ListItem.Property(Starlight.Time)]</label>
+          <font>font_label_semibold</font>
+          <visible>!String.IsEmpty(ListItem.Property(Starlight.Resume))</visible>
         </control>
       </control>
       <control type="group">
@@ -520,20 +494,13 @@
             <top>6</top>
             <width>108</width>
             <height>5</height>
-            <info>ListItem.PercentPlayed</info>
+            <info>ListItem.Property(Starlight.Progress)</info>
             <visible>!String.IsEmpty(ListItem.Property(Starlight.Resume))</visible>
             <texturebg border="progress_border">progress_track.png</texturebg>
             <lefttexture />
             <midtexture border="progress_border">progress_gold.png</midtexture>
-            <righttexture />
+            <righttexture>progress_playhead.png</righttexture>
             <overlaytexture />
-          </control>
-          <control type="image">
-            <left>$INFO[ListItem.Property(Starlight.CompactPlayhead)]</left>
-            <top>0</top>
-            <width>16</width>
-            <height>16</height>
-            <texture>playhead_glow.png</texture>
           </control>
         </control>
         <control type="label">
@@ -681,44 +648,14 @@
             <font>font_heading_large</font>
             <visible>String.IsEmpty(ListItem.Art(clearlogo)) + String.IsEmpty(ListItem.Art(tvshow.clearlogo))</visible>
           </control>
-          <control type="grouplist">
+          <control type="label">
             <left>0</left>
             <top>152</top>
             <width>740</width>
             <height>36</height>
-            <orientation>horizontal</orientation>
-            <itemgap>24</itemgap>
-            <control type="label">
-              <width min="1" max="80">auto</width>
-              <height>36</height>
-              <label>$INFO[ListItem.Year]</label>
-              <font>font_body</font>
-              <textcolor>frost</textcolor>
-              <visible>Integer.IsGreater(ListItem.Year,0)</visible>
-            </control>
-            <control type="label">
-              <width min="1" max="180">auto</width>
-              <height>36</height>
-              <label>$INFO[ListItem.Mpaa]</label>
-              <font>font_body</font>
-              <textcolor>mist</textcolor>
-              <visible>!String.IsEmpty(ListItem.Mpaa)</visible>
-            </control>
-            <control type="label">
-              <width min="1" max="160">auto</width>
-              <height>36</height>
-              <label>$INFO[ListItem.Property(Starlight.Duration)]</label>
-              <font>font_body</font>
-              <textcolor>mist</textcolor>
-            </control>
-            <control type="label">
-              <width min="1" max="240">auto</width>
-              <height>36</height>
-              <label>$VAR[HomeVideoQuality]</label>
-              <font>font_body</font>
-              <textcolor>mist</textcolor>
-              <visible>!String.IsEmpty(ListItem.VideoResolution) | !String.IsEmpty(ListItem.HdrType)</visible>
-            </control>
+            <label>$INFO[ListItem.Year,,   ][COLOR mist]$INFO[ListItem.Mpaa,,   ]$INFO[ListItem.Property(Starlight.Duration),,   ]$VAR[HomeVideoQuality][/COLOR]</label>
+            <font>font_body</font>
+            <textcolor>frost</textcolor>
           </control>
         </control>
         <include content="HomePlayCapsule" condition="$PARAM[feature]">
@@ -750,7 +687,7 @@
           <top>$PARAM[progress_y]</top>
           <width>$PARAM[capsule]</width>
           <height>5</height>
-          <info>ListItem.PercentPlayed</info>
+          <info>ListItem.Property(Starlight.Progress)</info>
           <visible>Integer.IsGreater(ListItem.Property(Starlight.Progress),0) + ![Control.HasFocus($PARAM[id]) + $PARAM[selected]] + !$PARAM[feature]</visible>
           <texturebg border="progress_border">progress_track.png</texturebg>
           <lefttexture />
@@ -794,12 +731,14 @@
     <param name="progress_y" default="171" />
   </include>
   <include name="HomeWidget">
-    <param name="layout" default="landscape" />
+    <param name="default_board" default="false" />
+    <param name="default_poster" default="false" />
+    <param name="default_landscape" default="true" />
+    <param name="default_square" default="false" />
     <definition>
-      <include content="HomeBoardWidget" condition="Skin.String($PARAM[setting],board) | [String.IsEmpty(Skin.String($PARAM[setting])) + String.IsEqual($PARAM[layout],board)]">
+      <include content="HomeBoardWidget" condition="Skin.String($PARAM[setting],board) | [String.IsEmpty(Skin.String($PARAM[setting])) + $PARAM[default_board]]">
         <param name="source" value="$PARAM[source]" />
         <param name="setting" value="$PARAM[setting]" />
-        <param name="layout" value="$PARAM[layout]" />
         <param name="label" value="$PARAM[label]" />
         <param name="group" value="$PARAM[group]" />
         <param name="feature" value="$PARAM[feature]" />
@@ -813,7 +752,6 @@
       <include content="HomeHeroWidget" condition="Skin.String($PARAM[setting],hero)">
         <param name="source" value="$PARAM[source]" />
         <param name="setting" value="$PARAM[setting]" />
-        <param name="layout" value="$PARAM[layout]" />
         <param name="label" value="$PARAM[label]" />
         <param name="group" value="$PARAM[group]" />
         <param name="feature" value="$PARAM[feature]" />
@@ -824,10 +762,9 @@
         <param name="down" value="$PARAM[down]" />
         <param name="x" value="$PARAM[x]" />
       </include>
-      <include content="HomeRowWidget" condition="![Skin.String($PARAM[setting],board) | [String.IsEmpty(Skin.String($PARAM[setting])) + String.IsEqual($PARAM[layout],board)]] + ![Skin.String($PARAM[setting],hero)] + [Skin.String($PARAM[setting],poster) | [String.IsEmpty(Skin.String($PARAM[setting])) + String.IsEqual($PARAM[layout],poster)]]">
+      <include content="HomeRowWidget" condition="![Skin.String($PARAM[setting],board) | [String.IsEmpty(Skin.String($PARAM[setting])) + $PARAM[default_board]]] + ![Skin.String($PARAM[setting],hero)] + [Skin.String($PARAM[setting],poster) | [String.IsEmpty(Skin.String($PARAM[setting])) + $PARAM[default_poster]]]">
         <param name="source" value="$PARAM[source]" />
         <param name="setting" value="$PARAM[setting]" />
-        <param name="layout" value="$PARAM[layout]" />
         <param name="label" value="$PARAM[label]" />
         <param name="group" value="$PARAM[group]" />
         <param name="feature" value="$PARAM[feature]" />
@@ -840,7 +777,7 @@
         <param name="width" value="160" />
         <param name="height" value="240" />
         <param name="stride" value="192" />
-        <param name="row_height" value="390" />
+        <param name="row_height" value="420" />
         <param name="container_height" value="360" />
         <param name="mask" value="home_poster_mask.png" />
         <param name="art" value="$VAR[HomePosterArt]" />
@@ -854,10 +791,9 @@
         <param name="compact" value="true" />
         <param name="progress_y" value="222" />
       </include>
-      <include content="HomeRowWidget" condition="![Skin.String($PARAM[setting],board) | [String.IsEmpty(Skin.String($PARAM[setting])) + String.IsEqual($PARAM[layout],board)]] + ![Skin.String($PARAM[setting],hero)] + [Skin.String($PARAM[setting],landscape) | [String.IsEmpty(Skin.String($PARAM[setting])) + String.IsEqual($PARAM[layout],landscape)] | [!String.IsEmpty(Skin.String($PARAM[setting])) + !Skin.String($PARAM[setting],board) + !Skin.String($PARAM[setting],hero) + !Skin.String($PARAM[setting],poster) + !Skin.String($PARAM[setting],square)]]">
+      <include content="HomeRowWidget" condition="![Skin.String($PARAM[setting],board) | [String.IsEmpty(Skin.String($PARAM[setting])) + $PARAM[default_board]]] + ![Skin.String($PARAM[setting],hero)] + [Skin.String($PARAM[setting],landscape) | [String.IsEmpty(Skin.String($PARAM[setting])) + $PARAM[default_landscape]] | [!String.IsEmpty(Skin.String($PARAM[setting])) + !Skin.String($PARAM[setting],board) + !Skin.String($PARAM[setting],hero) + !Skin.String($PARAM[setting],poster) + !Skin.String($PARAM[setting],square)]]">
         <param name="source" value="$PARAM[source]" />
         <param name="setting" value="$PARAM[setting]" />
-        <param name="layout" value="$PARAM[layout]" />
         <param name="label" value="$PARAM[label]" />
         <param name="group" value="$PARAM[group]" />
         <param name="feature" value="$PARAM[feature]" />
@@ -870,7 +806,7 @@
         <param name="width" value="410" />
         <param name="height" value="231" />
         <param name="stride" value="450" />
-        <param name="row_height" value="381" />
+        <param name="row_height" value="411" />
         <param name="container_height" value="351" />
         <param name="mask" value="home_wide_mask.png" />
         <param name="art" value="$VAR[HomeCardArt]" />
@@ -884,10 +820,9 @@
         <param name="compact" value="false" />
         <param name="progress_y" value="213" />
       </include>
-      <include content="HomeRowWidget" condition="![Skin.String($PARAM[setting],board) | [String.IsEmpty(Skin.String($PARAM[setting])) + String.IsEqual($PARAM[layout],board)]] + ![Skin.String($PARAM[setting],hero)] + [Skin.String($PARAM[setting],square) | [String.IsEmpty(Skin.String($PARAM[setting])) + String.IsEqual($PARAM[layout],square)]]">
+      <include content="HomeRowWidget" condition="![Skin.String($PARAM[setting],board) | [String.IsEmpty(Skin.String($PARAM[setting])) + $PARAM[default_board]]] + ![Skin.String($PARAM[setting],hero)] + [Skin.String($PARAM[setting],square) | [String.IsEmpty(Skin.String($PARAM[setting])) + $PARAM[default_square]]]">
         <param name="source" value="$PARAM[source]" />
         <param name="setting" value="$PARAM[setting]" />
-        <param name="layout" value="$PARAM[layout]" />
         <param name="label" value="$PARAM[label]" />
         <param name="group" value="$PARAM[group]" />
         <param name="feature" value="$PARAM[feature]" />
@@ -938,7 +873,7 @@
           <scrolltime>220</scrolltime>
           <onfocus>SetProperty(Starlight.Container,$PARAM[feature],home)</onfocus>
           <onback>SetFocus(9000)</onback>
-          <content target="video" browse="never">plugin://skin.starlight/?source=$PARAM[source]&amp;part=feature</content>
+          <content target="videos" browse="never">plugin://skin.starlight/?source=$PARAM[source]&amp;part=feature</content>
           <itemlayout width="968" height="575">
             <include content="HomeLibraryCard">
               <param name="id" value="$PARAM[feature]" />
@@ -981,7 +916,7 @@
           <left>920</left>
           <top>12</top>
           <width>730</width>
-          <height>550</height>
+          <height>580</height>
           <orientation>vertical</orientation>
           <onleft>$PARAM[feature]</onleft>
           <onright>$PARAM[tiles]</onright>
@@ -990,7 +925,7 @@
           <scrolltime>220</scrolltime>
           <onfocus>SetProperty(Starlight.Container,$PARAM[tiles],home)</onfocus>
           <onback>SetFocus(9000)</onback>
-          <content target="video" browse="never">plugin://skin.starlight/?source=$PARAM[source]&amp;part=tiles</content>
+          <content target="videos" browse="never">plugin://skin.starlight/?source=$PARAM[source]&amp;part=tiles</content>
           <itemlayout width="365" height="268">
             <include content="HomeLibraryCard">
               <param name="id" value="$PARAM[tiles]" />
@@ -1097,7 +1032,7 @@
           <scrolltime>220</scrolltime>
           <onfocus>SetProperty(Starlight.Container,$PARAM[row],home)</onfocus>
           <onback>SetFocus(9000)</onback>
-          <content target="video" browse="never">plugin://skin.starlight/?source=$PARAM[source]&amp;part=row</content>
+          <content target="videos" browse="never">plugin://skin.starlight/?source=$PARAM[source]&amp;part=row</content>
           <itemlayout width="450" height="351">
             <include content="HomeLibraryCard">
               <param name="id" value="$PARAM[row]" />
@@ -1172,7 +1107,7 @@
           <scrolltime>220</scrolltime>
           <onfocus>SetProperty(Starlight.Container,$PARAM[row],home)</onfocus>
           <onback>SetFocus(9000)</onback>
-          <content target="video" browse="never">plugin://skin.starlight/?source=$PARAM[source]&amp;part=row</content>
+          <content target="videos" browse="never">plugin://skin.starlight/?source=$PARAM[source]&amp;part=row</content>
           <itemlayout width="$PARAM[stride]" height="$PARAM[container_height]">
             <include content="HomeLibraryCard">
               <param name="id" value="$PARAM[row]" />
@@ -1243,7 +1178,7 @@
     <param name="width" default="410" />
     <param name="height" default="231" />
     <param name="stride" default="450" />
-    <param name="row_height" default="381" />
+    <param name="row_height" default="411" />
     <param name="container_height" default="351" />
     <param name="mask" default="home_wide_mask.png" />
     <param name="art" default="$VAR[HomeCardArt]" />
@@ -1286,7 +1221,7 @@
           <width>68</width>
           <height>64</height>
           <texture border="capsule_border">frost_fill.png</texture>
-          <visible>[String.IsEqual($PARAM[current],$PARAM[icon])] + ![ControlGroup(9000).HasFocus + !Skin.String(Hub.Navigation,icons) + !Skin.String(Hub.Navigation,top_left) + !Skin.String(Hub.Navigation,top_centre)]</visible>
+          <visible>[String.IsEqual(Window(home).Property(Starlight.Hub),$PARAM[icon])] + ![ControlGroup(9000).HasFocus + !Skin.String(Hub.Navigation,icons) + !Skin.String(Hub.Navigation,top_left) + !Skin.String(Hub.Navigation,top_centre)]</visible>
         </control>
         <control type="image">
           <left>0</left>
@@ -1294,7 +1229,7 @@
           <width>272</width>
           <height>64</height>
           <texture border="capsule_border">frost_fill.png</texture>
-          <visible>[String.IsEqual($PARAM[current],$PARAM[icon])] + [ControlGroup(9000).HasFocus + !Skin.String(Hub.Navigation,icons) + !Skin.String(Hub.Navigation,top_left) + !Skin.String(Hub.Navigation,top_centre)]</visible>
+          <visible>[String.IsEqual(Window(home).Property(Starlight.Hub),$PARAM[icon])] + [ControlGroup(9000).HasFocus + !Skin.String(Hub.Navigation,icons) + !Skin.String(Hub.Navigation,top_left) + !Skin.String(Hub.Navigation,top_centre)]</visible>
           <animation effect="fade" start="0" end="100" time="160">Visible</animation>
         </control>
         <control type="image">

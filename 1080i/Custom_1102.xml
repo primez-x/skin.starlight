@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <window id="1102">
   <defaultcontrol>907</defaultcontrol>
+  <onload>SetProperty(Starlight.Hub,settings,home)</onload>
   <controls>
     <control type="image">
       <left>0</left>
@@ -34,7 +35,6 @@
     </control>
     <include content="HubRail">
       <param name="return" value="902" />
-      <param name="current" value="settings" />
       <param name="sidefocus" value="907" />
       <param name="topfocus" value="917" />
     </include>

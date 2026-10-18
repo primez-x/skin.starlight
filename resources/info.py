@@ -7,13 +7,12 @@ import time
 import xml.etree.ElementTree as ET
 
 import xbmc
-import xbmcaddon
 import xbmcgui
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent / 'lib'))
-from home import rpc, play, clear_home_cache
-from home_content import blurred_art, duration_label, playback
+from home import rpc, play, clear_home_cache, cached_blurred_art
+from home_content import duration_label, playback
 from info_content import landing_episode, library_id
 from skin_xml import expand, card_rect
 
@@ -29,9 +28,9 @@ def initialize():
     media = xbmc.getInfoLabel('ListItem.DBTYPE')
     rawid = xbmc.getInfoLabel('ListItem.DBID')
     for key in ('Ready', 'Error', 'More', 'cast', 'seasons', 'ShowID', 'Season', 'NextID',
-                'Resume', 'Time', 'Duration', 'Progress', 'Media', 'DBID', 'Watched', 'Playhead'):
+                'Resume', 'Time', 'Duration', 'Progress', 'Media', 'DBID', 'Watched', 'SeasonCount'):
         window.clearProperty('Starlight.Info.' + key)
-    window.setProperty('Starlight.Info.Blurred', blurred_art(xbmc.getInfoLabel('ListItem.Art(fanart)')))
+    window.setProperty('Starlight.Info.Blurred', cached_blurred_art(xbmc.getInfoLabel('ListItem.Art(fanart)')))
     window.setProperty('Starlight.Info.Hub', xbmcgui.Window(10000).getProperty('Starlight.Hub') or
                        ('tv' if media in ('tvshow', 'season', 'episode') else 'movies'))
     if media not in ('movie', 'episode', 'tvshow', 'season'):
@@ -60,14 +59,14 @@ def initialize():
             dict(actor, label=actor['name']) for actor in detail.get('cast', [])]))
         window.setProperty('Starlight.Info.Watched', 'true' if detail.get('playcount') else '')
         state = playback(detail)
-        addon = xbmcaddon.Addon('skin.starlight')
-        templates = addon.getLocalizedString(31039), addon.getLocalizedString(31019)
+        templates = xbmc.getLocalizedString(31039), xbmc.getLocalizedString(31019)
         for key, value in {'Resume': 'true' if state['resume'] else '',
                            'Progress': str(state['progress']),
-                           'Playhead': str(160 + round(.9 * state['progress'])),
                            'Time': duration_label(state['minutes'], *templates),
                            'Duration': duration_label(detail.get('runtime', 0) / 60, *templates)}.items():
             window.setProperty('Starlight.Info.' + key, value)
+        for control in (9018, 9019):
+            window.getControl(control).setPercent(state['progress'])
         if media in ('tvshow', 'season'):
             showid = showid if media == 'season' else dbid
             episodes = rpc('VideoLibrary.GetEpisodes', {'tvshowid': showid,
@@ -79,8 +78,9 @@ def initialize():
                                      [row for row in episodes if row['season'] == season])
             season = target['season'] if target else season if media == 'season' else 1
             seasons = sorted({row['season'] for row in episodes})
+            window.setProperty('Starlight.Info.SeasonCount', str(sum(number > 0 for number in seasons)))
             window.setProperty('Starlight.Info.seasons', json.dumps([
-                {'label': addon.getLocalizedString(31040) % number, 'season': number} for number in seasons]))
+                {'label': xbmc.getLocalizedString(31040) % number, 'season': number} for number in seasons]))
             window.setProperty('Starlight.Info.ShowID', str(showid))
             window.setProperty('Starlight.Info.Season', str(season))
             window.setProperty('Starlight.Info.NextID', str(target['episodeid']) if target else '')
@@ -108,15 +108,16 @@ def land(window, control, target=None, request=None):
             window.setFocusId(control)
             return
         listing = window.getControl(control)
-        if listing.size():
+        count = int(xbmc.getInfoLabel(f'Container({control}).NumItems') or 0)
+        if count:
             tabs = window.getControl(560)
             season = window.getProperty('Starlight.Info.Season')
-            for index in range(tabs.size()):
-                if tabs.getListItem(index).getProperty('Starlight.Season') == season:
+            for index in range(int(xbmc.getInfoLabel('Container(560).NumItems') or 0)):
+                if xbmc.getInfoLabel(f'Container(560).ListItemAbsolute({index}).Property(Starlight.Season)') == season:
                     tabs.selectItem(index)
                     break
-            index = next((n for n in range(listing.size())
-                          if listing.getListItem(n).getVideoInfoTag().getDbId() == target), 0)
+            index = next((n for n in range(count)
+                          if xbmc.getInfoLabel(f'Container({control}).ListItemAbsolute({n}).DBID') == str(target)), 0)
             listing.selectItem(index)
             window.setFocusId(control)
             return
@@ -129,15 +130,14 @@ def land(window, control, target=None, request=None):
 def open_person():
     person = xbmcgui.Window(PERSON)
     info = xbmcgui.Window(INFO)
-    listing = info.getControl(250)
-    if not listing.size():
+    name = xbmc.getInfoLabel('Container(250).ListItem.Label')
+    if not name:
         return
-    selected = listing.getSelectedItem()
     for key in ('Name', 'Thumb', 'Meta', 'Biography', 'CreditsPath', 'ImagesPath', 'ProviderKey'):
         person.clearProperty('Starlight.Person.' + key)
-    person.setProperty('Starlight.Person.Name', selected.getLabel())
-    person.setProperty('Starlight.Person.Thumb', selected.getArt('thumb'))
-    person.setProperty('Starlight.Person.Meta', xbmcaddon.Addon('skin.starlight').getLocalizedString(31042))
+    person.setProperty('Starlight.Person.Name', name)
+    person.setProperty('Starlight.Person.Thumb', xbmc.getInfoLabel('Container(250).ListItem.Art(thumb)'))
+    person.setProperty('Starlight.Person.Meta', xbmc.getLocalizedString(31042))
     person.setProperty('Starlight.Person.Blurred', info.getProperty('Starlight.Info.Blurred'))
     person.setProperty('Starlight.Person.Tab', 'library')
     person.setProperty('Starlight.Person.Request', str(time.monotonic_ns()))
@@ -148,16 +148,18 @@ def open_person():
 
 
 def open_credit():
-    window = xbmcgui.Window(PERSON)
-    listing = window.getControl(700)
-    if not listing.size():
-        return
-    selected = listing.getSelectedItem()
-    tag = selected.getVideoInfoTag()
-    media = tag.getMediaType()
+    media = xbmc.getInfoLabel('Container(700).ListItem.DBTYPE')
     if media not in ('movie', 'tvshow'):
         return
-    library_id(tag.getDbId())
+    dbid = library_id(xbmc.getInfoLabel('Container(700).ListItem.DBID'))
+    detail = rpc('VideoLibrary.Get' + ('Movie' if media == 'movie' else 'TVShow') + 'Details',
+                 {media + 'id': dbid, 'properties': ['title', 'file', 'art']})[media + 'details']
+    path = f'videodb://tvshows/titles/{dbid}/' if media == 'tvshow' else detail['file']
+    selected = xbmcgui.ListItem(label=detail['title'], path=path)
+    selected.setArt(detail.get('art', {}))
+    tag = selected.getVideoInfoTag()
+    tag.setMediaType(media)
+    tag.setDbId(dbid)
     xbmcgui.Dialog().info(selected)
 
 
@@ -182,10 +184,7 @@ def watched():
 
 
 def play_episode():
-    listing = xbmcgui.Window(INFO).getControl(550)
-    if not listing.size():
-        return
-    dbid = library_id(listing.getSelectedItem().getVideoInfoTag().getDbId())
+    dbid = library_id(xbmc.getInfoLabel('Container(550).ListItem.DBID'))
     xbmc.executebuiltin('Dialog.Close(movieinformation)', wait=True)
     play('episode', str(dbid))
 
@@ -221,7 +220,7 @@ def show_cast():
     deadline = time.monotonic() + 3
     while xbmc.getCondVisibility('Window.IsVisible(movieinformation)') and time.monotonic() < deadline:
         if xbmc.getCondVisibility('Control.IsVisible(250)'):
-            window.setFocusId(250 if window.getControl(250).size() else 400)
+            window.setFocusId(250 if int(xbmc.getInfoLabel('Container(250).NumItems') or 0) else 400)
             return
         if monitor.waitForAbort(.05):
             return
@@ -236,11 +235,7 @@ def context():
     raw = underlying.getProperty('Starlight.Context.CardRect')
     underlying.clearProperty('Starlight.Context.CardRect')
     count = 0
-    while count < 100:
-        try:
-            dialog.getControl(1001 + count)
-        except RuntimeError:
-            break
+    while count < 100 and xbmc.getInfoLabel(f'Control.GetLabel({1001 + count})'):
         count += 1
     height = min(704, max(62, count * 64)) + 28
     width = 760
@@ -310,4 +305,4 @@ if __name__ == '__main__':
             actions[sys.argv[1]]()
     except (RuntimeError, ValueError) as error:
         xbmc.log('Starlight info action: ' + str(error), xbmc.LOGERROR)
-        xbmcgui.Dialog().notification('Starlight', xbmcaddon.Addon('skin.starlight').getLocalizedString(31063))
+        xbmcgui.Dialog().notification('Starlight', xbmc.getLocalizedString(31063))

@@ -329,3 +329,7 @@ msgstr ""
 msgctxt "#31084"
 msgid "Choose fanart"
 msgstr ""
+
+msgctxt "#31085"
+msgid "season"
+msgstr ""
