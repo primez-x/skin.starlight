@@ -6,6 +6,7 @@ from pathlib import Path
 import xml.etree.ElementTree as ET
 
 from PIL import Image, ImageChops, ImageDraw, ImageFilter
+from build_branding import rasterize
 
 ROOT = Path(__file__).resolve().parents[1]
 SCALE = 4
@@ -118,6 +119,68 @@ def busy_frame(frame):
     return canvas.resize((size, size), Image.Resampling.LANCZOS)
 
 
+ICON_PATHS = {
+    'search': '<circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/>',
+    'home': '<path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/>',
+    'movies': '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v16M17 4v16M3 9h4m-4 6h4m10-6h4m-4 6h4"/>',
+    'tv': '<rect x="3" y="5" width="18" height="13" rx="2"/><path d="M8 22h8m-4-4v4"/>',
+    'music': '<path d="M9 18V5l11-2v13M9 9l11-2"/><ellipse cx="6" cy="18" rx="3" ry="2.5"/><ellipse cx="17" cy="16" rx="3" ry="2.5"/>',
+    'discover': '<circle cx="12" cy="12" r="9"/><path d="m16 8-2.5 5.5L8 16l2.5-5.5Z"/>',
+    'settings': '<circle cx="12" cy="12" r="3.3"/><path d="m10 2-.6 3-2 .9-2.7-1.1-2 3.5L5 10v3l-2.3 1.7 2 3.5 2.7-1.1 2 .9.6 3h4l.6-3 2-.9 2.7 1.1 2-3.5L19 13v-3l2.3-1.7-2-3.5-2.7 1.1-2-.9L14 2Z"/>',
+    'play': '<path d="m7 4 13 8-13 8Z" fill="#f4f7fb" stroke="none"/>',
+}
+
+
+def icon_svg(name):
+    return ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" '
+            'width="48" height="48" fill="none" stroke="#f4f7fb" stroke-width="1.7" '
+            'stroke-linecap="round" stroke-linejoin="round">' + ICON_PATHS[name] + '</svg>')
+
+
+def backdrop_shade():
+    canvas = Image.new('RGBA', (480, 270))
+    pixels = canvas.load()
+    for y in range(270):
+        for x in range(480):
+            left = .55 * max(0, 1 - x / 336)
+            bottom = .85 * max(0, (y / 269 - .55) / .45)
+            pixels[x, y] = (3, 5, 10, round((1 - (1 - left) * (1 - bottom)) * 255))
+    return canvas
+
+
+def art_falloff():
+    canvas = Image.new('RGBA', (500, 300), (255, 255, 255, 0))
+    pixels = canvas.load()
+    for y in range(300):
+        for x in range(500):
+            radius = math.hypot((x / 500 - .72) / .62, (y / 300 - .28) / .70)
+            pixels[x, y] = (255, 255, 255, round(255 * min(1, max(0, (1 - radius) / .55))))
+    return canvas
+
+
+def feature_focus():
+    canvas = surface((104, 104), 26, focus=True)
+    inner = mask((104, 104), 26, 2).resize(canvas.size)
+    alpha = canvas.getchannel('A')
+    canvas.putalpha(Image.composite(alpha.point(lambda a: round(a * .3)), alpha, inner))
+    return canvas
+
+
+def feature_shade():
+    size = (880, 495)
+    canvas = Image.new('RGBA', size)
+    pixels = canvas.load()
+    for y in range(size[1]):
+        pos = y / (size[1] - 1)
+        bottom = .9 - .35 * pos / .35 if pos <= .35 else .55 * max(0, (.62 - pos) / .27)
+        for x in range(size[0]):
+            left = .5 * max(0, 1 - x / ((size[0] - 1) * .55))
+            pixels[x, size[1] - 1 - y] = (3, 5, 10, round((1 - (1 - left) * (1 - bottom)) * 255))
+    shape = mask(size, 26).resize(size, Image.Resampling.LANCZOS)
+    canvas.putalpha(ImageChops.multiply(canvas.getchannel('A'), shape))
+    return canvas
+
+
 def build(output):
     output.mkdir(parents=True, exist_ok=True)
     textures = {
@@ -134,11 +197,30 @@ def build(output):
         'background_void.png': Image.new('RGBA', (1, 1), (3, 5, 10, 255)),
         'dim_soft.png': Image.new('RGBA', (1, 1), (0, 0, 0, 89)),
         'dim_modal.png': Image.new('RGBA', (1, 1), (0, 0, 0, 153)),
+        'home_shade.png': backdrop_shade(),
+        'art_falloff.png': art_falloff(),
+        'card_shade.png': gradient((220, 124), [(0, (3, 5, 10, 0)), (.38, (3, 5, 10, 0)),
+                                               (.65, (3, 5, 10, 140)), (1, (3, 5, 10, 230))]).resize((220, 124)),
+        'focus_feature.png': feature_focus(),
+        'feature_shade.png': feature_shade(),
+        'focus_feature_glow.png': glow((104, 104), 26),
+        'feature_mask.png': Image.new('RGBA', (880, 495), (255, 255, 255, 255)),
+        'landing_glint.png': point_sprite(twinkle=True).resize((96, 16)),
+        'play_capsule.png': surface((132, 50), 25, focus=True),
+        'glass_rail.png': surface((136, 136), 34),
     }
+    textures['feature_mask.png'].putalpha(mask((880, 495), 26).resize((880, 495)))
+    for name, size in [('landscape', (335, 189)), ('poster', (160, 240)), ('wide', (410, 231)), ('square', (230, 230))]:
+        shape = Image.new('RGBA', size, (255, 255, 255, 255))
+        shape.putalpha(mask(size, 16).resize(size, Image.Resampling.LANCZOS))
+        textures['home_' + name + '_mask.png'] = shape
+    for name in ICON_PATHS:
+        textures['icons/' + name + '.png'] = rasterize(icon_svg(name), 96, 96).resize((48, 48), Image.Resampling.LANCZOS)
     for name, size, radius, color in [
             ('card_mask.png', (68, 68), CONSTANTS['card_border'], (255, 255, 255, 255)),
             ('circle_mask.png', (128, 128), 64, (255, 255, 255, 255)),
             ('progress_track.png', (132, 8), CONSTANTS['progress_border'], rgba(FROST, .16)),
+            ('progress_frost.png', (132, 8), CONSTANTS['progress_border'], (*FROST, 255)),
             ('progress_gold.png', (132, 8), CONSTANTS['progress_border'], (*GOLD, 255))]:
         canvas = Image.new('RGBA', (size[0] * SCALE, size[1] * SCALE), color)
         canvas.putalpha(ImageChops.multiply(canvas.getchannel('A'), mask(size, radius)))

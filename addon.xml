@@ -7,9 +7,12 @@
   <extension point="xbmc.gui.skin" effectslowdown="1.0" debugging="false">
     <res width="1920" height="1080" aspect="16:9" default="true" folder="1080i"/>
   </extension>
+  <extension point="xbmc.python.pluginsource" library="resources/home.py">
+    <provides>video</provides>
+  </extension>
   <extension point="xbmc.addon.metadata">
     <summary lang="en_GB">Starlight: calm cinema, clear focus.</summary>
-    <description lang="en_GB">Starlight brings smoked glass, warm gold focus, and Manrope type to Kodi. This foundation preview presents the new visual system.</description>
+    <description lang="en_GB">Starlight brings smoked glass, warm gold focus, and Manrope type to Kodi. Home presents a library board and a shared hub rail.</description>
     <platform>all</platform>
     <license>All rights reserved</license>
     <news>v2.0.0

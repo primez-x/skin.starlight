@@ -43,11 +43,15 @@ class FoundationTests(unittest.TestCase):
             for node in ET.parse(path).iter():
                 if 'texture' in node.tag and node.text and node.text.strip():
                     name = node.text.strip()
-                    if name.startswith('$'):
+                    if '$' in name:
                         continue
                     with self.subTest(path=path.name, texture=name):
-                        self.assertTrue((ROOT / 'media' / name).is_file())
+                        target = ROOT / name.removeprefix('special://skin/') if name.startswith('special://skin/') else ROOT / 'media' / name
+                        self.assertTrue(target.is_file())
                     count += 1
+                diffuse = node.get('diffuse', '')
+                if diffuse and not diffuse.startswith('$'):
+                    self.assertTrue((ROOT / 'media' / diffuse).is_file(), diffuse)
                 if node.tag == 'imagepath' and node.text:
                     frames = sorted((ROOT / 'media' / node.text).glob('*.png'))
                     self.assertEqual(len(frames), 24)
@@ -108,13 +112,30 @@ class FoundationTests(unittest.TestCase):
                     self.assertIn(node.get('border'), constants)
                     self.assertTrue(all(int(v) >= 0 for v in constants[node.get('border')].split(',')))
 
+    def test_variable_references_resolve(self):
+        paths = list((ROOT / '1080i').glob('*.xml'))
+        names = {node.get('name') for path in paths
+                 for node in ET.parse(path).iter('variable')}
+        for path in paths:
+            for name in re.findall(r'\$VAR\[([^],]+)', path.read_text()):
+                with self.subTest(path=path.name, variable=name):
+                    self.assertIn(name, names)
+
+    def test_home_replaces_foundation_board(self):
+        home = ET.parse(ROOT / '1080i/Home.xml')
+        self.assertEqual(home.findtext('defaultcontrol'), '510')
+        self.assertTrue(any(n.get('content') == 'HubRail' for n in home.iter('include')))
+        self.assertTrue((ROOT / '1080i/Includes_Home.xml').is_file())
+        for name in ('search', 'home', 'movies', 'tv', 'music', 'discover', 'settings', 'play'):
+            self.assertTrue((ROOT / 'media/icons' / (name + '.png')).is_file(), name)
+
     def test_localized_labels_resolve(self):
         source = (ROOT / 'language/resource.language.en_gb/strings.po').read_text()
         ids = set(re.findall(r'msgctxt "#(\d+)"', source))
         used = set()
         for path in (ROOT / '1080i').glob('*.xml'):
             used.update(re.findall(r'\$LOCALIZE\[(31\d+)\]', path.read_text()))
-        self.assertEqual(used, ids)
+        self.assertLessEqual(used, ids)
 
     def test_addon_contract(self):
         addon = ET.parse(ROOT / 'addon.xml').getroot()

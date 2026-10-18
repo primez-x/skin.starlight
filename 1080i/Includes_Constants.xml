@@ -13,4 +13,18 @@
   <constant name="glow_padding">48</constant>
   <constant name="card_headroom">40</constant>
   <constant name="control_height">64</constant>
+  <constant name="feature_border">26</constant>
+  <constant name="feature_glow_border">74</constant>
+  <constant name="rail_left">40</constant>
+  <constant name="rail_top">40</constant>
+  <constant name="rail_width">96</constant>
+  <constant name="sidebar_width">300</constant>
+  <constant name="content_left">196</constant>
+  <constant name="feature_width">880</constant>
+  <constant name="feature_height">495</constant>
+  <constant name="board_left">944</constant>
+  <constant name="board_card_width">335</constant>
+  <constant name="board_card_height">189</constant>
+  <constant name="play_capsule_border">25</constant>
+  <constant name="rail_border">34</constant>
 </includes>

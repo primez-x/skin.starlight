@@ -1,6 +1,20 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <fonts>
   <fontset id="Default" unicode="true">
+    <font>
+      <name>font_kicker</name>
+      <filename>manrope-semibold.ttf</filename>
+      <size>18</size>
+      <style>uppercase</style>
+      <aspect>1.08</aspect>
+      <linespacing>1.15</linespacing>
+    </font>
+    <font>
+      <name>font_label_semibold</name>
+      <filename>manrope-semibold.ttf</filename>
+      <size>19</size>
+      <linespacing>1.15</linespacing>
+    </font>
     <font>
       <name>font_label_small</name>
       <filename>manrope-regular.ttf</filename>
@@ -76,6 +90,12 @@
     <font>
       <name>font_clock</name>
       <filename>manrope-light.ttf</filename>
+      <size>36</size>
+      <linespacing>1.15</linespacing>
+    </font>
+    <font>
+      <name>font_hub_title</name>
+      <filename>manrope-semibold.ttf</filename>
       <size>36</size>
       <linespacing>1.15</linespacing>
     </font>
