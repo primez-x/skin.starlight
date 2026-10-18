@@ -870,22 +870,22 @@
         <param name="up" value="$PARAM[up]" />
         <param name="down" value="$PARAM[down]" />
         <param name="x" value="$PARAM[x]" />
-        <param name="width" value="410" />
-        <param name="height" value="231" />
-        <param name="stride" value="450" />
-        <param name="row_height" value="411" />
-        <param name="container_height" value="351" />
+        <param name="width" value="416" />
+        <param name="height" value="232" />
+        <param name="stride" value="456" />
+        <param name="row_height" value="412" />
+        <param name="container_height" value="352" />
         <param name="mask" value="home_wide_mask.png" />
         <param name="art" value="$VAR[HomeCardArt]" />
-        <param name="capsule" value="380" />
-        <param name="capsule_y" value="167" />
-        <param name="label_y" value="285" />
-        <param name="detail_y" value="313" />
-        <param name="center" value="205.0,231" />
-        <param name="glow_width" value="506" />
-        <param name="glow_height" value="327" />
+        <param name="capsule" value="386" />
+        <param name="capsule_y" value="168" />
+        <param name="label_y" value="286" />
+        <param name="detail_y" value="314" />
+        <param name="center" value="208,232" />
+        <param name="glow_width" value="512" />
+        <param name="glow_height" value="328" />
         <param name="compact" value="false" />
-        <param name="progress_y" value="213" />
+        <param name="progress_y" value="214" />
       </include>
       <include content="HomeRowWidget" condition="![Skin.String($PARAM[setting],board) | [String.IsEmpty(Skin.String($PARAM[setting])) + $PARAM[default_board]]] + ![Skin.String($PARAM[setting],hero)] + [Skin.String($PARAM[setting],square) | [String.IsEmpty(Skin.String($PARAM[setting])) + $PARAM[default_square]]]">
         <param name="source" value="$PARAM[source]" />
@@ -1112,7 +1112,7 @@
           <left>-24</left>
           <top>330</top>
           <width>1692</width>
-          <height>351</height>
+          <height>352</height>
           <orientation>horizontal</orientation>
           <focusposition>0</focusposition>
           <onleft>9000</onleft>
@@ -1123,44 +1123,44 @@
           <onfocus>SetProperty(Starlight.Container,$PARAM[row],home)</onfocus>
           <onback>SetFocus(9000)</onback>
           <content target="videos" browse="never">plugin://skin.starlight/?source=$PARAM[source]&amp;part=row</content>
-          <itemlayout width="450" height="351">
+          <itemlayout width="456" height="352">
             <include content="HomeLibraryCard">
               <param name="id" value="$PARAM[row]" />
               <param name="active" value="Control.HasFocus($PARAM[row])" />
               <param name="selected" value="false" />
-              <param name="width" value="410" />
-              <param name="height" value="231" />
+              <param name="width" value="416" />
+              <param name="height" value="232" />
               <param name="mask" value="home_wide_mask.png" />
               <param name="art" value="$VAR[HomeCardArt]" />
-              <param name="capsule" value="380" />
-              <param name="capsule_y" value="167" />
-              <param name="label_y" value="285" />
-              <param name="detail_y" value="313" />
-              <param name="center" value="205.0,231" />
-              <param name="glow_width" value="506" />
-              <param name="glow_height" value="327" />
+              <param name="capsule" value="386" />
+              <param name="capsule_y" value="168" />
+              <param name="label_y" value="286" />
+              <param name="detail_y" value="314" />
+              <param name="center" value="208,232" />
+              <param name="glow_width" value="512" />
+              <param name="glow_height" value="328" />
               <param name="label" value="$PARAM[label]" />
-              <param name="progress_y" value="213" />
+              <param name="progress_y" value="214" />
             </include>
           </itemlayout>
-          <focusedlayout width="450" height="351">
+          <focusedlayout width="456" height="352">
             <include content="HomeLibraryCard">
               <param name="id" value="$PARAM[row]" />
               <param name="active" value="Control.HasFocus($PARAM[row])" />
               <param name="selected" value="true" />
-              <param name="width" value="410" />
-              <param name="height" value="231" />
+              <param name="width" value="416" />
+              <param name="height" value="232" />
               <param name="mask" value="home_wide_mask.png" />
               <param name="art" value="$VAR[HomeCardArt]" />
-              <param name="capsule" value="380" />
-              <param name="capsule_y" value="167" />
-              <param name="label_y" value="285" />
-              <param name="detail_y" value="313" />
-              <param name="center" value="205.0,231" />
-              <param name="glow_width" value="506" />
-              <param name="glow_height" value="327" />
+              <param name="capsule" value="386" />
+              <param name="capsule_y" value="168" />
+              <param name="label_y" value="286" />
+              <param name="detail_y" value="314" />
+              <param name="center" value="208,232" />
+              <param name="glow_width" value="512" />
+              <param name="glow_height" value="328" />
               <param name="label" value="$PARAM[label]" />
-              <param name="progress_y" value="213" />
+              <param name="progress_y" value="214" />
             </include>
           </focusedlayout>
           <onclick>RunScript(special://skin/resources/home.py,play,$INFO[ListItem.Property(Starlight.Media)],$INFO[ListItem.DBID])</onclick>
@@ -1265,22 +1265,22 @@
         </control>
       </control>
     </definition>
-    <param name="width" default="410" />
-    <param name="height" default="231" />
-    <param name="stride" default="450" />
-    <param name="row_height" default="411" />
-    <param name="container_height" default="351" />
+    <param name="width" default="416" />
+    <param name="height" default="232" />
+    <param name="stride" default="456" />
+    <param name="row_height" default="412" />
+    <param name="container_height" default="352" />
     <param name="mask" default="home_wide_mask.png" />
     <param name="art" default="$VAR[HomeCardArt]" />
-    <param name="capsule" default="380" />
-    <param name="capsule_y" default="167" />
-    <param name="label_y" default="285" />
-    <param name="detail_y" default="313" />
-    <param name="center" default="205,231" />
-    <param name="glow_width" default="506" />
-    <param name="glow_height" default="327" />
+    <param name="capsule" default="386" />
+    <param name="capsule_y" default="168" />
+    <param name="label_y" default="286" />
+    <param name="detail_y" default="314" />
+    <param name="center" default="208,232" />
+    <param name="glow_width" default="512" />
+    <param name="glow_height" default="328" />
     <param name="compact" default="false" />
-    <param name="progress_y" default="213" />
+    <param name="progress_y" default="214" />
   </include>
   <include name="HubRailItem">
     <definition>

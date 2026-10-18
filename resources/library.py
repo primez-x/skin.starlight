@@ -24,7 +24,7 @@ SEARCH = 11100
 DISCOVER = 11101
 SOURCES = ('top', 'movies', 'tvshows', 'episodes', 'music', 'spotify',
            'people', 'collections', 'genres', 'plex')
-VIEW_IDS = tuple(range(500, 509)) + tuple(range(510, 516)) + (517, 518) + tuple(range(520, 525)) + (526, 527, 528, 529)
+VIEW_IDS = tuple(range(4200, 4226))
 
 
 def selected(control, field):
@@ -297,7 +297,7 @@ def category(control):
         window = xbmcgui.Window(xbmcgui.getCurrentWindowId())
         window.setProperty('Starlight.Library.Genre', selected(control, 'Label'))
         xbmc.executebuiltin('Container.Update(' + path + ')')
-        window.setFocusId(int(window.getProperty('Starlight.Library.Container') or 506))
+        window.setFocusId(int(window.getProperty('Starlight.Library.Container') or 4212))
 
 
 def page_monitor(kind):
@@ -313,7 +313,7 @@ def page_monitor(kind):
         focused = window.getFocusId()
         if focused in VIEW_IDS and kind != 'discover':
             window.setProperty('Starlight.Library.Container', str(focused))
-        control = focused if kind == 'discover' and focused in (510, 511, 512) else 510 if kind == 'discover' else int(window.getProperty('Starlight.Library.Container') or 506)
+        control = focused if kind == 'discover' and focused in (510, 511, 512) else 510 if kind == 'discover' else int(window.getProperty('Starlight.Library.Container') or 4212)
         art = selected(control, 'Art(fanart)') or selected(control, 'Art(thumb)')
         if art != previous:
             previous = art

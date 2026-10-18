@@ -190,8 +190,46 @@
 ## Step 5: libraries, Search and Discover
 
 - `Includes_Library.xml` owns the 26 locked library views and the named View menu.
-- Native IDs 500–508 and 510–515 retain the locked shapes. Dropped IDs 509, 549 and 550 stay absent.
-- Variant IDs: 517 = 507B; 518 = 508B; 526/527 = 526A/B; 528/529 = 528A/B.
+- Library view IDs use the Starlight block 4200–4225, grouped by family. Design names remain vocabulary only.
+- Walls use 4200–4205. Rows use 4206–4211. Lists use 4212–4216. Category views use 4217–4225.
+- Home, Discover, queue, settings, and Kodi-mandated controls keep their window-local IDs.
+- Native view state stores the new IDs. Old saved views use Kodi's fallback. Select the preferred view again when needed.
+- Kodi 21.3 accepts container IDs from the window's explicit `<views>` list. IDs must fit the low 16 bits of the view mode.
+- Source: `https://github.com/xbmc/xbmc/blob/21.3-Omega/xbmc/windows/GUIMediaWindow.cpp#L126-L149`.
+- Stored-view fallback: `https://github.com/xbmc/xbmc/blob/21.3-Omega/xbmc/view/GUIViewControl.cpp#L53-L75`.
+
+| Family | Design name | View ID |
+| --- | --- | --- |
+| Wall | 510B square | 4200 |
+| Wall | 511B landscape | 4201 |
+| Wall | 512A poster | 4202 |
+| Wall | 513B circle | 4203 |
+| Wall | 514A board | 4204 |
+| Wall | 515A poster details | 4205 |
+| Row | 500B square | 4206 |
+| Row | 501B landscape | 4207 |
+| Row | 502A poster | 4208 |
+| Row | 503B circle | 4209 |
+| Row | 504A board | 4210 |
+| Row | 505B expanding poster | 4211 |
+| List | 506B video | 4212 |
+| List | 507A music | 4213 |
+| List | 507B music columns | 4214 |
+| List | 508A expanded with poster | 4215 |
+| List | 508B expanded full width | 4216 |
+| Category | 520 square row | 4217 |
+| Category | 521 landscape row | 4218 |
+| Category | 522 poster row | 4219 |
+| Category | 523 circle row | 4220 |
+| Category | 524 board row | 4221 |
+| Category | 526A genre list | 4222 |
+| Category | 526B genre poster wall | 4223 |
+| Category | 528A tabs with poster | 4224 |
+| Category | 528B tabs full width | 4225 |
+
+- Card dimensions use a 4-pixel grid: 736×312 wide, 416×232 landscape, and 216×312 poster.
+- Wide ratio: 2.359:1. Landscape ratio: 1.793:1, within 0.9% of 16:9. Poster ratio: 0.692:1.
+- Preserve card gaps, label offsets, capsule insets, bottom-edge zoom centres, and 48-pixel glow padding when dimensions change.
 - Movies and TV use `MyVideoNav.xml`. Music uses `MyMusicNav.xml`. The spec defines no separate hub pages.
 - Kodi owns native folders, sort order, selected-item actions, queues and context menus.
 - Combined selectors read native genre directories. The current library path remains a native database path.

@@ -13,11 +13,11 @@ from render_home import HomePreview, ROOT
 from render_window import WindowPreview
 from home_content import blurred_art
 
-VIEW_IDS = tuple(range(500, 509)) + tuple(range(510, 516)) + (517, 518) + tuple(range(520, 525)) + (526, 527, 528, 529)
+VIEW_IDS = tuple(range(4200, 4226))
 
 
 class LibraryPreview(WindowPreview):
-    def __init__(self, art, name, view=506, rail=False, empty=False):
+    def __init__(self, art, name, view=4212, rail=False, empty=False):
         super().__init__(art, 'movie-info')
         self.name, self.view, self.empty = name, view, empty
         self.native_labels = {}
@@ -43,7 +43,7 @@ class LibraryPreview(WindowPreview):
         for identity in VIEW_IDS:
             self.containers[identity] = [] if empty else deepcopy(albums if name=='music' else movies)
         if name in ('video','music'):
-            self.selected[view] = 4 if view in (506,507,517) else 0
+            self.selected[view] = 4 if view in (4212,4213,4214) else 0
         categories = [{'Label':label,'properties':{}} for label in ['Action','Animation','Comedy','Drama','Horror','Science fiction','Thriller']]
         self.containers[700] = self.containers[701] = categories
         top = [deepcopy(movies[7]), deepcopy(movies[1]), deepcopy(albums[5]), deepcopy(movies[6]), deepcopy(albums[12]), deepcopy(movies[2]), deepcopy(albums[4])]
@@ -157,7 +157,10 @@ def render_info_and_menu(art, output):
         preview.save(output/f'provider-{media}-info.png')
     preview=WindowPreview(art,'options')
     source=ET.parse(ROOT/'1080i/Includes_Library.xml')
-    names=[node.get('label') for node in source.iter('viewtype')]
+    labels={int(node.get('id')):node.find('viewtype').get('label')
+            for node in source.findall("include[@name='LibraryViews']/definition/control")
+            if node.find('viewtype') is not None}
+    names=[labels[identity] for identity in VIEW_IDS]
     preview.containers[3]=[{'Label':preview.resolve(name)} for name in names]
     preview.native_labels[1]='View';preview.native_labels[2]=str(len(names))
     preview.save(output/'view-menu.png')
@@ -168,7 +171,7 @@ if __name__=='__main__':
     parser.add_argument('--art',type=Path,required=True)
     parser.add_argument('--output',type=Path,default=Path('/tmp/starlight-step5'))
     parser.add_argument('--window',choices=('video','music','search','search-wall','search-keyboard','discover'))
-    parser.add_argument('--view',type=int,choices=VIEW_IDS,default=506)
+    parser.add_argument('--view',type=int,choices=VIEW_IDS,default=4212)
     parser.add_argument('--rail-open',action='store_true')
     parser.add_argument('--empty',action='store_true')
     args=parser.parse_args()
@@ -176,7 +179,7 @@ if __name__=='__main__':
         LibraryPreview(args.art,args.window,args.view,rail=args.rail_open,empty=args.empty).save(args.output/f'{args.window}-{args.view}.png')
         raise SystemExit(0)
     for identity in VIEW_IDS:
-        name='music' if identity in (500,507,510,517,520) else 'video'
+        name='music' if identity in (4206,4213,4200,4214,4217) else 'video'
         LibraryPreview(args.art,name,identity).save(args.output/f'view-{identity}.png')
     for name in ('search','search-wall','search-keyboard','discover'):
         LibraryPreview(args.art,name).save(args.output/f'{name}.png')

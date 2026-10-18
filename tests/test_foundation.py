@@ -31,6 +31,14 @@ def digest_tree(path):
 
 
 class FoundationTests(unittest.TestCase):
+    def test_preview_native_resolution_comparison(self):
+        from render_home import HomePreview
+        preview = HomePreview(ROOT)
+        for resolution, expected in (('2160', True), ('1080', False), ('', False)):
+            preview.item = {'VideoResolution': resolution}
+            self.assertEqual(preview.condition(
+                'Integer.IsGreaterOrEqual(ListItem.VideoResolution,2160)'), expected)
+
     def test_xml_parses(self):
         paths = list(ROOT.rglob('*.xml'))
         self.assertGreaterEqual(len(paths), 7)
